@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <uses-permission android:name="com.google.android.gms.version" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.AD_ID" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.codigoprocesalcivilpe"
+        tools:targetApi="31" >
+        <activity
+            android:name=".home.Codigos.CodigosMain"
+            android:exported="false" />
+        <activity
+            android:name=".home.Quizzes.QuizzCPCResult"
+            android:exported="false" />
+        <activity
+            android:name=".home.Quizzes.QuizzCPCQuestions"
+            android:exported="false" />
+        <activity
+            android:name=".home.Quizzes.QuizzCPCStartScreen"
+            android:exported="false" />
+        <activity
+            android:name=".home.Quizzes.QuizzesMain"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main2" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6018202881039088~3900604606" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6018202881039088~3900604606" />
+
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap12"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap11"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap10"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap9"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap8"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap7"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap6"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2Subcap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionSexta.SeccionSextaTit1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap5Subcap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap5Subcap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap5Subcap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap5Subcap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap2SubCap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap2SubCap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap2SubCap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap2SubCap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap2SubCap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap2Subcap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap2Subcap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap2Subcap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap2Subcap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap1Subcap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap1Subcap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap2Subcap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap2Subcap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap2Subcap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap2Subcap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap2Subcap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2Subcap6"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2Subcap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2Subcap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2Subcap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2Subcap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2Subcap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit1Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit1Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit12Cap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit12Cap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit12Cap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit12Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit12Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit11Cap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit11Cap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit11Cap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit11Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit11Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap10"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap9"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap8"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap7"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap6"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap5"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap4"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap3"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap2"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8Cap1"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".home.Codigos.CodigoProcesalCivilMain"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionPrimera.SeccionPrimera"
+            android:exported="false" />
+        <activity
+            android:name=".SeccionPrimera.SeccionPrimeraTit1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionPrimera.SeccionPrimeraTit2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionPrimera.SeccionPrimeraTit2Cap1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionPrimera.SeccionPrimeraTit2Cap2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionPrimera.SeccionPrimeraTit2Cap3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegunda"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap8"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap7"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap6"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap5"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap4"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit2Cap1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit1Cap3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit1Cap2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit1Cap1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSegunda.SeccionSegundaTit3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTercera"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit1Cap1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit1Cap2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit4"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit5"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit6"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit7"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit8"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit9"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit10"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit11"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit12"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit13"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit14"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit15"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionTercera.SeccionTerceraTit16"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuarta"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit4"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit5"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit6"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit7"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit7Cap1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionCuarta.SeccionCuartaTit7Cap2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuinta"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit1"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit2"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit3"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit4"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionQuinta.SeccionQuintaTit5"
+            android:exported="true" />
+        <activity
+            android:name=".SeccionSexta.SeccionSexta"
+            android:exported="true" />
+    </application>
+
+</manifest>

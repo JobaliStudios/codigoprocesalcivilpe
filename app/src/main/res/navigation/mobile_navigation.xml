@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.jobalistudios.codigoprocesalcivilpe.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+
+    <action
+        android:id="@+id/action_homeFragment_to_codigoProcesalCivilMain"
+        app:destination="@id/codigosmain"/>
+    </fragment>
+
+    <activity
+        android:id="@+id/codigosmain"
+        android:name="com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigosMain"
+        android:label="Código Main"/>
+
+    <fragment
+        android:id="@+id/navigation_busqueda"
+        android:name="com.jobalistudios.codigoprocesalcivilpe.busqueda.BusquedaFragment"
+        android:label="@string/title_busqueda"
+        tools:layout="@layout/fragment_busqueda" />
+
+    <fragment
+        android:id="@+id/navigation_favoritos"
+        android:name="com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritosFragment"
+        android:label="@string/title_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+
+    <fragment
+        android:id="@+id/navigation_configuracion"
+        android:name="com.jobalistudios.codigoprocesalcivilpe.configuracion.ConfiguracionFragment"
+        android:label="@string/title_configuracion"
+        tools:layout="@layout/fragment_configuracion" />
+</navigation>

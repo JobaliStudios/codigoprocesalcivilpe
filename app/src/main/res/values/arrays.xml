@@ -1,0 +1,28 @@
+<resources>
+    <!-- Arrays para Configuración -->
+    <string-array name="tamano_texto_entries">
+        <item>Pequeño</item>
+        <item>Normal</item>
+        <item>Grande</item>
+        <item>Muy grande</item>
+    </string-array>
+
+    <string-array name="tamano_texto_values">
+        <item>pequeno</item>
+        <item>normal</item>
+        <item>grande</item>
+        <item>muy_grande</item>
+    </string-array>
+
+    <string-array name="tema_entries">
+        <item>Seguir sistema</item>
+        <item>Modo claro</item>
+        <item>Modo oscuro</item>
+    </string-array>
+
+    <string-array name="tema_values">
+        <item>sistema</item>
+        <item>claro</item>
+        <item>oscuro</item>
+    </string-array>
+</resources>

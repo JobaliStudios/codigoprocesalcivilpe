@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SeccionQuinta.SeccionQuintaTit3Cap2Subcap1">
+
+    <!-- CardView fijo en la parte superior -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fixedCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Contenido del CardView fijo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Título -->
+            <TextView
+                style="@style/TEXT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/subcapitulo1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Subtítulo -->
+            <TextView
+                style="@style/TEXT2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/sec5tit3cap2subcap1sub"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- ScrollView para el contenido desplazable -->
+    <ScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/searchBarContainer"
+        app:layout_constraintTop_toBottomOf="@id/fixedCardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <!-- Texto del contenido -->
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/TEXT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                android:lineSpacingExtra="2dp"
+                tools:ignore="VisualLintLongText"
+                android:textIsSelectable="true"
+                android:text="@string/seccionquintatit3cap2subcap1"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Barra de búsqueda oculta inicialmente -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchBarContainer"
+        style="@style/TEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- EditText de búsqueda -->
+        <EditText
+            android:id="@+id/edtBusqueda"
+            style="@style/EditTextSearchStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:autofillHints="search"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:hint="@string/buscar"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxWidth="400dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botón siguiente -->
+        <ImageButton
+            android:id="@+id/btnSiguiente"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/siguientebusqueda"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_arrow_downward_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnAnterior"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botón anterior -->
+        <ImageButton
+            android:id="@+id/btnAnterior"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/anteriorbusqueda"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_arrow_upward_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCerrarBusqueda"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botón cerrar -->
+        <ImageButton
+            android:id="@+id/btnCerrarBusqueda"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cerrarbusqueda"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- FloatingActionButton de búsqueda en la esquina inferior derecha -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBuscar"
+        style="@style/IMAGEBOTONBUSQUEDA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/botonbusqueda"
+        android:src="@drawable/baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

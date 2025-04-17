@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <style name="Theme.codigoprocesalcivilpe" parent="Base.Theme.codigoprocesalcivilpe">
+    <!-- Transparent system bars for edge-to-edge. -->
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+  </style>
+
+  <style name="TOPCARDVIEWFONDO">
+    <item name="backgroundTint">#FFFFFF</item>
+  </style>
+
+
+  <style name="IMAGE">
+    <item name="android:tint">#000000</item>
+  </style>
+
+  <style name="IMAGEBOTONBUSQUEDA">
+    <!-- Fondo negro, ícono blanco -->
+    <item name="backgroundTint">#000000</item> <!-- Color del botón -->
+    <item name="tint">#FFFFFF</item> <!-- Color del ícono -->
+  </style>
+
+  <style name="EditTextSearchStyle">
+    <item name="android:textColor">#000000</item> <!-- Texto negro -->
+    <item name="android:textColorHint">#757575</item> <!-- Hint gris oscuro -->
+    <item name="drawableTint">#757575</item> <!-- Ícono gris oscuro -->
+    <item name="android:background">#FFFFFF</item> <!-- Fondo claro -->
+  </style>
+
+
+  <style name="TEXT">
+    <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="TEXT2">
+    <item name="android:textColor">#424242</item>
+  </style>
+
+  <style name="upBreadcrumb">
+    <item name="android:textColor">#000000</item>
+    <item name="android:background">#e8ecf5</item>
+  </style>
+
+  <style name="Breadcrumb">
+    <item name="android:textColor">#3b6386</item>
+    <item name="android:background">#e8ecf5</item>
+  </style>
+
+  <style name="Disponibilidaddecodigos">
+    <item name="android:textColor">#11C115</item>
+  </style>
+
+  <style name="NoDisponibilidaddecodigos">
+    <item name="android:textColor">#C11111</item>
+  </style>
+
+</resources>
