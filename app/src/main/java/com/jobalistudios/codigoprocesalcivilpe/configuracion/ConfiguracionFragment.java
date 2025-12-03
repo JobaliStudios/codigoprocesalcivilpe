@@ -12,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.jobalistudios.codigoprocesalcivilpe.BuildConfig;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
 
@@ -30,7 +29,7 @@ public class ConfiguracionFragment extends Fragment {
 
         binding.configSubtitle.setText(getString(R.string.config_subtitle));
         binding.configTitle.setText(getString(R.string.config_title));
-        binding.textVersion.setText(getString(R.string.config_version_value, BuildConfig.VERSION_NAME));
+        binding.textVersion.setText(getString(R.string.config_version_value, obtenerVersion()));
 
         setupSwitchObserver(binding.switchNotificaciones, configuracionViewModel.getNotificacionesActivas(),
                 configuracionViewModel::setNotificacionesActivas);
@@ -68,5 +67,16 @@ public class ConfiguracionFragment extends Fragment {
 
     private interface SwitchUpdater {
         void update(boolean isChecked);
+    }
+
+    private String obtenerVersion() {
+        try {
+            return requireContext()
+                    .getPackageManager()
+                    .getPackageInfo(requireContext().getPackageName(), 0)
+                    .versionName;
+        } catch (Exception e) {
+            return getString(R.string.config_version_default);
+        }
     }
 }
