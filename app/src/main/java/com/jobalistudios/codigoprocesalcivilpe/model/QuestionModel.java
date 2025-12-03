@@ -11,6 +11,10 @@ public class QuestionModel {
     private boolean isCorrect;
 
 
+    public QuestionModel() {
+        // Requerido para la deserialización con Gson
+    }
+
     public QuestionModel(String questionText, List<String> options, int correctAnswerIndex, String relatedArticle) {
         this.questionText = questionText;
         this.options = options;
