@@ -502,7 +502,6 @@
     <string name="config_about_desc">Conoce el objetivo del proyecto y las últimas mejoras.</string>
     <string name="config_about_message">Muy pronto verás más detalles de la app en esta sección.</string>
     <string name="config_version_value">Versión %1$s · Código Procesal Civil PE</string>
-    <string name="config_version_default">N/D</string>
 
     <string name="icono_codigoprocesalcivl">Codigo Procesal Civil</string>
 
