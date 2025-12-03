@@ -10,52 +10,63 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
-import com.jobalistudios.codigoprocesalcivilpe.model.QuestionBank;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
 
-import java.util.List;
-
 public class QuizzCPCQuestions extends AppCompatActivity {
-    private List<QuestionModel> questions;
-    private int currentQuestionIndex = 0;
-    private int score = 0;
-    private int totalQuestions;
-
     private MediaPlayer correctSound;
     private MediaPlayer wrongSound;
+    private QuizzCPCViewModel viewModel;
+
+    private ProgressBar progressBar;
+    private RadioGroup radioGroup;
+    private TextView tvQuestion;
+
+    private static final String STATE_QUESTION_COUNT = "STATE_QUESTION_COUNT";
+    private static final String STATE_CURRENT_INDEX = "STATE_CURRENT_INDEX";
+    private static final String STATE_SCORE = "STATE_SCORE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizz_cpcquestions);
 
-        int questionCount = getIntent().getIntExtra("QUESTION_COUNT", 10);
-        questions = QuestionBank.getRandomQuestions(questionCount);
-        totalQuestions = questions.size();
+        viewModel = new ViewModelProvider(this).get(QuizzCPCViewModel.class);
+
+        progressBar = findViewById(R.id.progressBar);
+        radioGroup = findViewById(R.id.radioGroupOptions);
+        tvQuestion = findViewById(R.id.tvQuestion);
+
+        int questionCount = savedInstanceState != null
+                ? savedInstanceState.getInt(STATE_QUESTION_COUNT, getIntent().getIntExtra("QUESTION_COUNT", 10))
+                : getIntent().getIntExtra("QUESTION_COUNT", 10);
+
+        viewModel.initQuestions(questionCount);
+        if (savedInstanceState != null) {
+            viewModel.restoreState(
+                    savedInstanceState.getInt(STATE_CURRENT_INDEX, 0),
+                    savedInstanceState.getInt(STATE_SCORE, 0)
+            );
+        }
 
         setupProgressBar();
-        loadQuestion();
+
+        viewModel.getCurrentQuestionLiveData().observe(this, this::renderQuestion);
 
         Button btnNext = findViewById(R.id.btnNext);
         btnNext.setOnClickListener(v -> handleNextQuestion());
-
-        correctSound = MediaPlayer.create(this, R.raw.correct);
-        wrongSound = MediaPlayer.create(this, R.raw.wrong);
     }
 
     private void setupProgressBar() {
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setMax(totalQuestions);
+        progressBar.setMax(viewModel.getTotalQuestions());
     }
 
-    private void loadQuestion() {
-        QuestionModel currentQuestion = questions.get(currentQuestionIndex);
-        TextView tvQuestion = findViewById(R.id.tvQuestion);
-        RadioGroup radioGroup = findViewById(R.id.radioGroupOptions);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-
+    private void renderQuestion(QuestionModel currentQuestion) {
+        if (currentQuestion == null) {
+            return;
+        }
         tvQuestion.setText(currentQuestion.getQuestionText());
         radioGroup.removeAllViews();
 
@@ -65,59 +76,88 @@ public class QuizzCPCQuestions extends AppCompatActivity {
             radioGroup.addView(radioButton);
         }
 
-        progressBar.setProgress(currentQuestionIndex + 1);
+        progressBar.setProgress(viewModel.getCurrentQuestionIndex() + 1);
     }
 
     private void handleNextQuestion() {
-        checkAnswer();
-        currentQuestionIndex++;
+        RadioGroup radioGroup = findViewById(R.id.radioGroupOptions);
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        if (selectedId == -1) {
+            return;
+        }
 
-        if (currentQuestionIndex < totalQuestions) {
-            loadQuestion();
-        } else {
+        int selectedIndex = radioGroup.indexOfChild(findViewById(selectedId));
+        boolean isCorrect = viewModel.submitAnswer(selectedIndex);
+        playAnswerSound(isCorrect);
+
+        if (!viewModel.moveToNextQuestion()) {
             showResult();
         }
     }
 
-    private void checkAnswer() {
-        RadioGroup radioGroup = findViewById(R.id.radioGroupOptions);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        QuestionModel currentQuestion = questions.get(currentQuestionIndex);
+    private void playAnswerSound(boolean isCorrect) {
+        MediaPlayer mediaPlayer = isCorrect ? correctSound : wrongSound;
 
-        if (selectedId != -1) {
-            int selectedIndex = radioGroup.indexOfChild(findViewById(selectedId));
-            boolean isCorrect = selectedIndex == currentQuestion.getCorrectAnswerIndex();
-
-            currentQuestion.setCorrect(isCorrect);
-
-            // Reproducir sonido
-            if (isCorrect) {
-                score++;
-                correctSound.start();
-            } else {
-                wrongSound.start();
-            }
+        if (mediaPlayer == null) {
+            return;
         }
+
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.seekTo(0);
+        }
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (correctSound == null) {
+            correctSound = MediaPlayer.create(this, R.raw.correct);
+            correctSound.setOnCompletionListener(mp -> mp.seekTo(0));
+        }
+        if (wrongSound == null) {
+            wrongSound = MediaPlayer.create(this, R.raw.wrong);
+            wrongSound.setOnCompletionListener(mp -> mp.seekTo(0));
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pauseMediaPlayer(correctSound);
+        pauseMediaPlayer(wrongSound);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer(correctSound);
+        releaseMediaPlayer(wrongSound);
+        correctSound = null;
+        wrongSound = null;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Liberar recursos de audio
-        if (correctSound != null) {
-            correctSound.release();
-        }
-        if (wrongSound != null) {
-            wrongSound.release();
-        }
+        releaseMediaPlayer(correctSound);
+        releaseMediaPlayer(wrongSound);
     }
 
     private void showResult() {
         Intent intent = new Intent(this, QuizzCPCResult.class);
-        intent.putExtra("SCORE", score);
-        intent.putExtra("TOTAL", totalQuestions);
+        intent.putExtra("SCORE", viewModel.getScore());
+        intent.putExtra("TOTAL", viewModel.getTotalQuestions());
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_QUESTION_COUNT, viewModel.getTotalQuestions());
+        outState.putInt(STATE_CURRENT_INDEX, viewModel.getCurrentQuestionIndex());
+        outState.putInt(STATE_SCORE, viewModel.getScore());
     }
 
     @Override
@@ -125,5 +165,17 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         super.onBackPressed();
         startActivity(new Intent(this, QuizzCPCStartScreen.class));
         finish();
+    }
+
+    private void pauseMediaPlayer(MediaPlayer mediaPlayer) {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+    private void releaseMediaPlayer(MediaPlayer mediaPlayer) {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
     }
 }
