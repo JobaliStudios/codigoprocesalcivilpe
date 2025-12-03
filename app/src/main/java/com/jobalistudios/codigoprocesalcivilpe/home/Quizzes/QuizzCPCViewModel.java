@@ -1,15 +1,21 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionBank;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
 
 import java.util.List;
 
-public class QuizzCPCViewModel extends ViewModel {
+public class QuizzCPCViewModel extends AndroidViewModel {
+
+    public QuizzCPCViewModel(Application application) {
+        super(application);
+    }
 
     private final MutableLiveData<List<QuestionModel>> questionsLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>(0);
@@ -19,7 +25,7 @@ public class QuizzCPCViewModel extends ViewModel {
 
     public void initQuestions(int questionCount) {
         if (questionsLiveData.getValue() == null) {
-            List<QuestionModel> questions = QuestionBank.getRandomQuestions(questionCount);
+            List<QuestionModel> questions = QuestionBank.getRandomQuestions(getApplication(), questionCount);
             questionsLiveData.setValue(questions);
             totalQuestions = questions.size();
             currentQuestionIndex.setValue(0);

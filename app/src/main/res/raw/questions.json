@@ -1,0 +1,317 @@
+[
+  {
+    "questionText": "¿Qué artículo establece que la competencia civil no puede renunciarse?",
+    "options": [
+      "Artículo 5",
+      "Artículo 6",
+      "Artículo 10"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 6 modificado por D-L 25940"
+  },
+  {
+    "questionText": "Si una demanda es desestimada por irregularidad del derecho de acción, ¿qué puede hacer el demandado?",
+    "options": [
+      "Apelar la decisión",
+      "Solicitar la nulidad del proceso",
+      "Demandar resarcimiento por daños y perjuicios",
+      "Pedir la revisión del caso por otro juez"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 4"
+  },
+  {
+    "questionText": "¿Puede demandarse en una sucursal si el hecho ocurrió allí?",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 17 modificado por D-L 25940"
+  },
+  {
+    "questionText": "Si el demandado carece de domicilio conocido, ¿dónde se puede demandar?",
+    "options": [
+      "Último domicilio en Perú",
+      "Domicilio del abogado",
+      "Lugar donde se encuentre o domicilio del demandante",
+      "Corte Superior de Lima"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 14"
+  },
+  {
+    "questionText": "¿Qué juez es competente para designar apoyos a personas con discapacidad?",
+    "options": [
+      "Juez del demandante",
+      "Juez de la sede empresarial",
+      "Juez del lugar de la persona",
+      "Juez de última instancia"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 21 modificado por DL 1384"
+  },
+  {
+    "questionText": "En materia sucesoria, la competencia es:",
+    "options": [
+      "Prorrogable",
+      "Improrrogable",
+      "Modificable por acuerdo",
+      "Determinada por el juez"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 19"
+  },
+  {
+    "questionText": "¿Se incluyen daños futuros en el cálculo de cuantía?",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 11 modificado por DL 25940"
+  },
+  {
+    "questionText": "¿Cuántos días hay para interponer contienda de competencia?",
+    "options": [
+      "3 días",
+      "5 días",
+      "10 días",
+      "15 días"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 38"
+  },
+  {
+    "questionText": "La competencia civil es irrenunciable porque:",
+    "options": [
+      "Lo establece la ley",
+      "Lo deciden las partes",
+      "Es potestad del juez",
+      "Depende de la cuantía"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 6 modificado por DL 25940"
+  },
+  {
+    "questionText": "La competencia por cuantía se determina:",
+    "options": [
+      "Solo por el objeto principal",
+      "Sumando valores devengados",
+      "Con valores futuros",
+      "Según criterio del demandado"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 10 modificado por DL 25940"
+  },
+  {
+    "questionText": "¿Qué juez es competente en expropiación de bienes no inscritos?",
+    "options": [
+      "Juez del lugar de inscripción",
+      "Juez donde está el bien",
+      "Juez del demandante"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 20"
+  },
+  {
+    "questionText": "El artículo 22 del CPC se refiere a:",
+    "options": [
+      "Competencia funcional",
+      "Derechos reales",
+      "Artículo derogado"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 22"
+  },
+  {
+    "questionText": "En procesos no contenciosos, ¿dónde es competente el juez?",
+    "options": [
+      "Domicilio del demandado",
+      "Domicilio del promotor",
+      "Lugar del hecho"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 23"
+  },
+  {
+    "questionText": "¿En qué casos puede elegir el demandante el juez competente?",
+    "options": [
+      "Solo en alimentos",
+      "En 7 supuestos específicos",
+      "Nunca"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 24"
+  },
+  {
+    "questionText": "La prórroga de competencia territorial debe ser:",
+    "options": [
+      "Verbal",
+      "Escrita",
+      "Tácita"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 25"
+  },
+  {
+    "questionText": "¿Cuándo se produce prórroga tácita de competencia?",
+    "options": [
+      "Al apelar",
+      "Al contestar sin reservas",
+      "Al presentar excepciones"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 26"
+  },
+  {
+    "questionText": "En demandas contra el Estado, ¿dónde es competente el juez?",
+    "options": [
+      "Sede de la entidad",
+      "Corte Suprema",
+      "Juzgado de Paz"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 27"
+  },
+  {
+    "questionText": "La competencia funcional se rige por:",
+    "options": [
+      "Reglamento Interno",
+      "Constitución y LOPJ",
+      "Código Penal"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 28"
+  },
+  {
+    "questionText": "¿Qué significa el principio de prevención en competencia?",
+    "options": [
+      "Primer juez en conocer",
+      "Último juez en resolver",
+      "Juez superior"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 29"
+  },
+  {
+    "questionText": "La prevención convierte la competencia en:",
+    "options": [
+      "Exclusiva",
+      "Compartida",
+      "Improcedente"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 30"
+  },
+  {
+    "questionText": "En segunda instancia, la prevención se determina por:",
+    "options": [
+      "Primera notificación",
+      "Fecha de demanda",
+      "Azar"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 31"
+  },
+  {
+    "questionText": "Las pretensiones accesorias las conoce:",
+    "options": [
+      "Juez diferente",
+      "Juez de la principal",
+      "Sala Superior"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 32"
+  },
+  {
+    "questionText": "¿Quién puede dictar medidas cautelares previas al proceso?",
+    "options": [
+      "Juez competente",
+      "Fiscal",
+      "Secretario"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 33"
+  },
+  {
+    "questionText": "Los procesos de ejecución siguen reglas de:",
+    "options": [
+      "Competencia especial",
+      "Competencia general",
+      "Arbitraje"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 34"
+  },
+  {
+    "questionText": "La incompetencia puede declararse:",
+    "options": [
+      "Solo a pedido de parte",
+      "De oficio",
+      "En segunda instancia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 35"
+  },
+  {
+    "questionText": "Si dos jueces se declaran incompetentes:",
+    "options": [
+      "Se archiva",
+      "Interviene Corte Superior",
+      "Se sortea"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 36"
+  },
+  {
+    "questionText": "La competencia de Jueces de Paz se cuestiona mediante:",
+    "options": [
+      "Apelación",
+      "Excepción",
+      "Recurso extraordinario"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 37"
+  },
+  {
+    "questionText": "Si el juez reconoce incompetencia:",
+    "options": [
+      "Remite expediente",
+      "Continúa proceso",
+      "Archiva caso"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 39"
+  },
+  {
+    "questionText": "En conflicto de competencia se remite a:",
+    "options": [
+      "Corte Superior",
+      "Juez Penal",
+      "Árbitro"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 40"
+  },
+  {
+    "questionText": "La contienda entre jueces de distintos distritos la resuelve:",
+    "options": [
+      "Corte Suprema",
+      "Corte Superior",
+      "Jurado Nacional"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 41"
+  },
+  {
+    "questionText": "Las medidas cautelares previas:",
+    "options": [
+      "Pierden efecto",
+      "Mantienen eficacia",
+      "Se anulan"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 42"
+  }
+]
