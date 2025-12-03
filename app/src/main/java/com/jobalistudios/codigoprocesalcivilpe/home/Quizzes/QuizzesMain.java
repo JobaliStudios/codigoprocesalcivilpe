@@ -7,7 +7,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.card.MaterialCardView;
-import com.jobalistudios.codigoprocesalcivilpe.MainActivity;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.ActivityQuizzesMainBinding;
 
 public class QuizzesMain extends AppCompatActivity {
@@ -38,13 +37,6 @@ public class QuizzesMain extends AppCompatActivity {
 
         MaterialCardView cardProcesalPenal = binding.cardCodigoProcesalPenal;
         cardProcesalPenal.setOnClickListener(v -> Toast.makeText(QuizzesMain.this, "Código Procesal Penal próximamente", Toast.LENGTH_SHORT).show());
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
     }
 
     @Override

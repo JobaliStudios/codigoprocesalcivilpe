@@ -7,7 +7,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.card.MaterialCardView;
-import com.jobalistudios.codigoprocesalcivilpe.MainActivity;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 public class CodigosMain extends AppCompatActivity {
@@ -32,13 +31,6 @@ public class CodigosMain extends AppCompatActivity {
 
         MaterialCardView cardProcesalPenal = findViewById(R.id.card_codigo_procesal_penal);
         cardProcesalPenal.setOnClickListener(v -> Toast.makeText(this, "Código Procesal Penal próximamente", Toast.LENGTH_SHORT).show());
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
     }
 
 }
