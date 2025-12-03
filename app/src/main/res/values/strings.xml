@@ -482,6 +482,26 @@
     <string name="title_busqueda">Busqueda</string>
     <string name="title_favoritos">Favoritos</string>
     <string name="title_configuracion">Configuracion</string>
+    <string name="config_title">Ajusta la app a tu medida</string>
+    <string name="config_subtitle">Personaliza la experiencia y mantén a la mano tus herramientas favoritas.</string>
+    <string name="config_icon_notifications">Ícono de notificaciones</string>
+    <string name="config_notifications_title">Notificaciones</string>
+    <string name="config_notifications_desc">Recibe avisos sobre nuevas actualizaciones y recursos.</string>
+    <string name="config_icon_reading">Ícono de modo lectura</string>
+    <string name="config_reading_title">Modo lectura</string>
+    <string name="config_reading_desc">Activa un contraste suave pensado para sesiones largas de estudio.</string>
+    <string name="config_icon_favorites">Ícono de favoritos</string>
+    <string name="config_favorites_title">Consejos en favoritos</string>
+    <string name="config_favorites_desc">Muestra sugerencias y resaltados al guardar un artículo.</string>
+    <string name="config_icon_support">Ícono de soporte</string>
+    <string name="config_support_title">Ayuda y soporte</string>
+    <string name="config_support_desc">Cuéntanos si necesitas algo y te responderemos a la brevedad.</string>
+    <string name="config_contact_message">Pronto podrás escribirnos directamente desde aquí.</string>
+    <string name="config_icon_about">Ícono de acerca de</string>
+    <string name="config_about_title">Acerca de la app</string>
+    <string name="config_about_desc">Conoce el objetivo del proyecto y las últimas mejoras.</string>
+    <string name="config_about_message">Muy pronto verás más detalles de la app en esta sección.</string>
+    <string name="config_version_value">Versión %1$s · Código Procesal Civil PE</string>
 
     <string name="icono_codigoprocesalcivl">Codigo Procesal Civil</string>
 
