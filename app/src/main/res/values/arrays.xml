@@ -8,7 +8,7 @@
     </string-array>
 
     <string-array name="tamano_texto_values">
-        <item>pequeno</item>
+        <item>pequenas</item>
         <item>normal</item>
         <item>grande</item>
         <item>muy_grande</item>
