@@ -514,4 +514,13 @@
     <string name="title_activity_quizzes">Quizzes</string>
 
 
+    <string name="favorites_empty">Aún no tienes favoritos. Pulsa el corazón en una sección, título o artículo para guardarlo.</string>
+    <string name="favorites_open_error">No se pudo abrir este favorito.</string>
+    <string name="favorite_button_description">Marcar como favorito</string>
+    <string name="favorite_saved_message">Guardado en favoritos: %1$s</string>
+    <string name="favorite_removed_message">Quitado de favoritos: %1$s</string>
+    <string name="favorite_type_section">Sección</string>
+    <string name="favorite_type_title">Título</string>
+    <string name="favorite_type_article">Artículo</string>
+
 </resources>
