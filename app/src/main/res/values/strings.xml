@@ -490,6 +490,9 @@
     <string name="config_icon_reading">Ícono de modo lectura</string>
     <string name="config_reading_title">Modo lectura</string>
     <string name="config_reading_desc">Activa un contraste suave pensado para sesiones largas de estudio.</string>
+    <string name="config_icon_dark_mode">Ícono de modo oscuro</string>
+    <string name="config_dark_mode_title">Modo oscuro</string>
+    <string name="config_dark_mode_desc">Activa un tema oscuro fijo para toda la app, sin depender del dispositivo.</string>
     <string name="config_icon_favorites">Ícono de favoritos</string>
     <string name="config_favorites_title">Consejos en favoritos</string>
     <string name="config_favorites_desc">Muestra sugerencias y resaltados al guardar un artículo.</string>
