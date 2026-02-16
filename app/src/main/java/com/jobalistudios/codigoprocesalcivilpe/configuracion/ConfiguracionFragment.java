@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
@@ -40,6 +42,8 @@ public class ConfiguracionFragment extends Fragment {
         setupSwitchObserver(binding.switchConsejos, configuracionViewModel.getConsejosFavoritos(),
                 configuracionViewModel::setConsejosFavoritos);
 
+        setupDarkModeSwitch();
+
         binding.cardSoporte.setOnClickListener(v -> Toast.makeText(requireContext(),
                 R.string.config_contact_message, Toast.LENGTH_SHORT).show());
 
@@ -56,6 +60,19 @@ public class ConfiguracionFragment extends Fragment {
             switchMaterial.setOnCheckedChangeListener(null);
             switchMaterial.setChecked(Boolean.TRUE.equals(enabled));
             switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> updater.update(isChecked));
+        });
+    }
+
+
+    private void setupDarkModeSwitch() {
+        boolean darkModeEnabled = ThemePreferenceManager.isDarkModeEnabled(requireContext());
+        binding.switchModoOscuro.setChecked(darkModeEnabled);
+
+        binding.switchModoOscuro.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            ThemePreferenceManager.setDarkModeEnabled(requireContext(), isChecked);
+            AppCompatDelegate.setDefaultNightMode(
+                    isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+            );
         });
     }
 
