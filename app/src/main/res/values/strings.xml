@@ -514,4 +514,11 @@
     <string name="title_activity_quizzes">Quizzes</string>
 
 
+    <string name="toggle_favorite">Agregar o quitar favorito</string>
+    <string name="remove_favorite">Quitar de favoritos</string>
+    <string name="no_favorites">Todavía no tienes favoritos guardados.</string>
+    <string name="favorite_type_section">Sección</string>
+    <string name="favorite_type_title">Título</string>
+    <string name="favorite_type_article">Artículo</string>
+
 </resources>

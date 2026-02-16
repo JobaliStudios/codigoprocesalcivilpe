@@ -12,6 +12,8 @@ import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 import java.text.Normalizer;
@@ -43,6 +47,8 @@ public class SeccionPrimeraTit2Cap1 extends AppCompatActivity {
     // Lista para almacenar las posiciones (índices) de cada ocurrencia encontrada
     private final List<Integer> searchPositions = new ArrayList<>();
     private int currentSearchIndex = 0;
+    private FavoritesManager favoritesManager;
+    private FavoriteItem favoriteItem;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -65,6 +71,15 @@ public class SeccionPrimeraTit2Cap1 extends AppCompatActivity {
 
         // Configurar listeners
         setupListeners(btnSiguiente, btnAnterior, btnCerrarBusqueda);
+
+        favoritesManager = new FavoritesManager(this);
+        favoriteItem = new FavoriteItem(
+                "art_sec1_tit2_cap1",
+                getString(R.string.capitulo1),
+                getString(R.string.rangartisec1tit2cap1),
+                getString(R.string.favorite_type_article),
+                SeccionPrimeraTit2Cap1.class.getName()
+        );
     }
 
     private void setupTextFormatting() {
@@ -268,5 +283,27 @@ public class SeccionPrimeraTit2Cap1 extends AppCompatActivity {
     private String normalizeText(String input) {
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
         return normalized.replaceAll("\\p{M}", "").toLowerCase();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.favorite_toggle_menu, menu);
+        updateFavoriteIcon(menu.findItem(R.id.action_toggle_favorite));
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_toggle_favorite) {
+            favoritesManager.toggle(favoriteItem);
+            updateFavoriteIcon(item);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void updateFavoriteIcon(MenuItem item) {
+        boolean isFavorite = favoritesManager.isFavorite(favoriteItem.getId());
+        item.setIcon(isFavorite ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
     }
 }
