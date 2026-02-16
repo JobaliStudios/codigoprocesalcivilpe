@@ -31,6 +31,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 import java.text.Normalizer;
@@ -56,6 +58,8 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
     private int selectedEnd;
     private SpannableString originalSpannable;
     private String selectedColor = "yellow";
+    private FavoritesManager favoritesManager;
+    private FavoriteItem favoriteItem;
 
     @SuppressLint("ClickableViewAccessibility")
 
@@ -81,6 +85,15 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
         setupListeners(btnSiguiente, btnAnterior, btnCerrarBusqueda);
 
         setupTextSelection();
+
+        favoritesManager = new FavoritesManager(this);
+        favoriteItem = new FavoriteItem(
+                "art_sec1_tit1",
+                getString(R.string.titulo1),
+                getString(R.string.rangartisec1tit1),
+                getString(R.string.favorite_type_article),
+                SeccionPrimeraTit1.class.getName()
+        );
     }
 
     private void setupTextSelection() {
@@ -415,5 +428,27 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
     private String normalizeText(String input) {
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
         return normalized.replaceAll("\\p{M}", "").toLowerCase();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.favorite_toggle_menu, menu);
+        updateFavoriteIcon(menu.findItem(R.id.action_toggle_favorite));
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_toggle_favorite) {
+            favoritesManager.toggle(favoriteItem);
+            updateFavoriteIcon(item);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void updateFavoriteIcon(MenuItem item) {
+        boolean isFavorite = favoritesManager.isFavorite(favoriteItem.getId());
+        item.setIcon(isFavorite ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
     }
 }
