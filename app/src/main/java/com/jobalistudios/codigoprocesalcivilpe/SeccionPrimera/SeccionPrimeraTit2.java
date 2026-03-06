@@ -15,6 +15,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.SectionContentActivity;
 
 public class SeccionPrimeraTit2 extends AppCompatActivity {
 
@@ -62,9 +63,21 @@ public class SeccionPrimeraTit2 extends AppCompatActivity {
 
         section1.setOnClickListener(v -> startActivity(new Intent(SeccionPrimeraTit2.this, SeccionPrimeraTit2Cap1.class)));
 
-        section2.setOnClickListener(v -> startActivity(new Intent(SeccionPrimeraTit2.this, SeccionPrimeraTit2Cap2.class)));
+        section2.setOnClickListener(v -> startActivity(SectionContentActivity.createIntent(
+                SeccionPrimeraTit2.this,
+                R.layout.activity_section_content,
+                R.string.seccionprimeratit2cap2txt,
+                R.string.capitulo2,
+                R.string.tit2cap2sub
+        )));
 
-        section3.setOnClickListener(v -> startActivity(new Intent(SeccionPrimeraTit2.this, SeccionPrimeraTit2Cap3.class)));
+        section3.setOnClickListener(v -> startActivity(SectionContentActivity.createIntent(
+                SeccionPrimeraTit2.this,
+                R.layout.activity_section_content,
+                R.string.seccionprimeratit2cap3txt,
+                R.string.capitulo3,
+                R.string.tit2cap3sub
+        )));
 
     }
 

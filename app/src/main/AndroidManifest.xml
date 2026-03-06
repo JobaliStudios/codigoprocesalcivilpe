@@ -38,6 +38,9 @@
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main2" />
+        <activity
+            android:name=".SectionContentActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -288,12 +291,6 @@
             android:exported="true" />
         <activity
             android:name=".SeccionPrimera.SeccionPrimeraTit2Cap1"
-            android:exported="true" />
-        <activity
-            android:name=".SeccionPrimera.SeccionPrimeraTit2Cap2"
-            android:exported="true" />
-        <activity
-            android:name=".SeccionPrimera.SeccionPrimeraTit2Cap3"
             android:exported="true" />
         <activity
             android:name=".SeccionSegunda.SeccionSegunda"
