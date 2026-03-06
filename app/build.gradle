@@ -2,6 +2,11 @@ plugins {
     id 'com.android.application'
 }
 
+def releaseStoreFile = project.findProperty("RELEASE_STORE_FILE")
+def releaseStorePassword = project.findProperty("RELEASE_STORE_PASSWORD")
+def releaseKeyAlias = project.findProperty("RELEASE_KEY_ALIAS")
+def releaseKeyPassword = project.findProperty("RELEASE_KEY_PASSWORD")
+
 android {
     namespace 'com.jobalistudios.codigoprocesalcivilpe'
     compileSdk 34
@@ -16,12 +21,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file(releaseStoreFile)
+            storePassword releaseStorePassword
+            keyAlias releaseKeyAlias
+            keyPassword releaseKeyPassword
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -30,12 +44,11 @@ android {
     }
     buildFeatures {
         viewBinding true
-        compose true
     }
 }
 
 dependencies {
-    def nav_version = "2.7.7"
+    def nav_version = "2.8.9"
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
     implementation 'androidx.appcompat:appcompat:1.7.0'
@@ -44,8 +57,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.7'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
-    implementation 'androidx.navigation:navigation-fragment:2.8.9'
-    implementation 'androidx.navigation:navigation-ui:2.8.9'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
