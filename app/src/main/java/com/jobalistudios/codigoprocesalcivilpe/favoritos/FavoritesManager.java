@@ -1,6 +1,7 @@
 package com.jobalistudios.codigoprocesalcivilpe.favoritos;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import org.json.JSONArray;
@@ -13,10 +14,12 @@ public class FavoritesManager {
     private static final String PREFS_NAME = "codigoprocesalcivil_favorites";
     private static final String KEY_ITEMS = "items";
 
+    private final Context appContext;
     private final SharedPreferences sharedPreferences;
 
     public FavoritesManager(Context context) {
-        sharedPreferences = context.getApplicationContext()
+        appContext = context.getApplicationContext();
+        sharedPreferences = appContext
                 .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
@@ -57,6 +60,27 @@ public class FavoritesManager {
             saveArray(array);
         } catch (JSONException ignored) {
         }
+    }
+
+    public boolean removeInvalidFavorites() {
+        JSONArray array = getArray();
+        JSONArray updated = new JSONArray();
+        boolean removedAny = false;
+
+        for (int i = 0; i < array.length(); i++) {
+            FavoriteItem item = FavoriteItem.fromJson(array.optJSONObject(i));
+            Intent intent = FavoriteDestinationMapper.toIntent(appContext, item.getDestinationId());
+            if (intent != null) {
+                updated.put(array.optJSONObject(i));
+            } else {
+                removedAny = true;
+            }
+        }
+
+        if (removedAny) {
+            saveArray(updated);
+        }
+        return removedAny;
     }
 
     public void remove(String id) {

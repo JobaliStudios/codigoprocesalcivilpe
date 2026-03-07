@@ -17,6 +17,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 
@@ -76,7 +77,7 @@ public class SeccionPrimera extends AppCompatActivity {
                 getString(R.string.seccion_primeratit),
                 getString(R.string.seccion_primerasub),
                 getString(R.string.favorite_type_section),
-                SeccionPrimera.class.getName()
+                FavoriteDestinationMapper.DEST_SECTION_PRIMERA
         );
 
     }
