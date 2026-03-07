@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
@@ -27,6 +28,7 @@ public class QuizzCPCQuestions extends AppCompatActivity {
     private static final String STATE_QUESTION_COUNT = "STATE_QUESTION_COUNT";
     private static final String STATE_CURRENT_INDEX = "STATE_CURRENT_INDEX";
     private static final String STATE_SCORE = "STATE_SCORE";
+    private boolean isNavigatingBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,13 @@ public class QuizzCPCQuestions extends AppCompatActivity {
 
         Button btnNext = findViewById(R.id.btnNext);
         btnNext.setOnClickListener(v -> handleNextQuestion());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateToStartScreen();
+            }
+        });
     }
 
     private void setupProgressBar() {
@@ -137,13 +146,6 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         wrongSound = null;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        releaseMediaPlayer(correctSound);
-        releaseMediaPlayer(wrongSound);
-    }
-
     private void showResult() {
         Intent intent = new Intent(this, QuizzCPCResult.class);
         intent.putExtra("SCORE", viewModel.getScore());
@@ -160,9 +162,12 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         outState.putInt(STATE_SCORE, viewModel.getScore());
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    private void navigateToStartScreen() {
+        if (isNavigatingBack) {
+            return;
+        }
+
+        isNavigatingBack = true;
         startActivity(new Intent(this, QuizzCPCStartScreen.class));
         finish();
     }
