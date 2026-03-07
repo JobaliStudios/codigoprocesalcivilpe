@@ -1,6 +1,5 @@
 package com.jobalistudios.codigoprocesalcivilpe.favoritos;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,18 +55,25 @@ public class FavoritosFragment extends Fragment {
     }
 
     private void loadFavorites() {
+        boolean removedCorrupted = favoritesManager.removeInvalidFavorites();
+        if (removedCorrupted) {
+            Toast.makeText(requireContext(), "Se eliminaron favoritos inválidos", Toast.LENGTH_SHORT).show();
+        }
+
         List<FavoriteItem> items = favoritesManager.getAll();
         adapter.submitList(items);
         binding.textFavoritos.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     private void openFavorite(FavoriteItem item) {
-        try {
-            Class<?> activityClass = Class.forName(item.getActivityClassName());
-            startActivity(new Intent(requireContext(), activityClass));
-        } catch (ClassNotFoundException e) {
-            Toast.makeText(requireContext(), "No se pudo abrir este favorito", Toast.LENGTH_SHORT).show();
+        android.content.Intent intent = FavoriteDestinationMapper.toIntent(requireContext(), item.getDestinationId());
+        if (intent == null) {
+            favoritesManager.remove(item.getId());
+            loadFavorites();
+            Toast.makeText(requireContext(), "Este favorito ya no es válido y fue eliminado", Toast.LENGTH_SHORT).show();
+            return;
         }
+        startActivity(intent);
     }
 
     @Override

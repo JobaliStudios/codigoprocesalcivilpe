@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.R;
@@ -78,7 +79,7 @@ public class SeccionPrimeraTit2Cap1 extends AppCompatActivity {
                 getString(R.string.capitulo1),
                 getString(R.string.rangartisec1tit2cap1),
                 getString(R.string.favorite_type_article),
-                SeccionPrimeraTit2Cap1.class.getName()
+                FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_1
         );
     }
 
