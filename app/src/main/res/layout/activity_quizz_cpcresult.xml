@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="Tu puntaje: 0/10"/>
+        android:text="@string/quiz_cpc_result_score_placeholder"/>
 
     <Button
         android:id="@+id/btnRetry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reintentar"
+        android:text="@string/quiz_cpc_retry_button"
         android:layout_marginTop="32dp"/>
 
 </LinearLayout>

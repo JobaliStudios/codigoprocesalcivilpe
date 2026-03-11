@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Código Procesal Civil"
+        android:text="@string/quiz_cpc_start_title"
         android:textSize="24sp"
         android:layout_marginTop="16dp"/>
 
@@ -24,26 +24,26 @@
         android:id="@+id/btn5Questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5 Preguntas"
+        android:text="@string/quiz_cpc_option_5"
         android:layout_marginTop="32dp"/>
 
     <Button
         android:id="@+id/btn10Questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10 Preguntas"/>
+        android:text="@string/quiz_cpc_option_10"/>
 
     <Button
         android:id="@+id/btn20Questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20 Preguntas"/>
+        android:text="@string/quiz_cpc_option_20"/>
 
     <Button
         android:id="@+id/btnStartQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comenzar"
+        android:text="@string/quiz_cpc_start_button"
         android:layout_marginTop="32dp"/>
 
 

@@ -19,7 +19,7 @@
     <activity
         android:id="@+id/codigosmain"
         android:name="com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigosMain"
-        android:label="Código Main"/>
+        android:label="@string/title_codigos_main"/>
 
     <fragment
         android:id="@+id/navigation_busqueda"
