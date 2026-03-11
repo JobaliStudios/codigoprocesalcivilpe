@@ -21,6 +21,7 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_TEXT_RES_ID = "EXTRA_TEXT_RES_ID";
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_SUBTITLE = "EXTRA_SUBTITLE";
+    public static final String EXTRA_INITIAL_QUERY = "EXTRA_INITIAL_QUERY";
 
     public static Intent createIntent(
             Context context,
@@ -45,6 +46,7 @@ public class SectionContentActivity extends AppCompatActivity {
         int textResId = getIntent().getIntExtra(EXTRA_TEXT_RES_ID, 0);
         int titleResId = getIntent().getIntExtra(EXTRA_TITLE, 0);
         int subtitleResId = getIntent().getIntExtra(EXTRA_SUBTITLE, 0);
+        String initialQuery = getIntent().getStringExtra(EXTRA_INITIAL_QUERY);
 
         setContentView(layoutResId);
 
@@ -69,7 +71,7 @@ public class SectionContentActivity extends AppCompatActivity {
 
         contentView.setText(SectionTextFormatter.buildFormattedText(this, textResId));
 
-        new SectionSearchController(
+        SectionSearchController searchController = new SectionSearchController(
                 this,
                 contentView,
                 searchInput,
@@ -81,5 +83,9 @@ public class SectionContentActivity extends AppCompatActivity {
                 scrollView,
                 () -> SectionTextFormatter.buildFormattedText(this, textResId)
         );
+
+        if (initialQuery != null && !initialQuery.trim().isEmpty()) {
+            searchController.submitQuery(initialQuery.trim(), true);
+        }
     }
 }

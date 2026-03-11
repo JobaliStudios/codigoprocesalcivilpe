@@ -20,6 +20,11 @@
     <!--Menu Principal Botton Navigation View-->
     <string name="title_bnv_1">Códigos</string>
     <string name="title_bnv_2">Búsqueda</string>
+    <string name="busqueda_hint">Buscar por artículo, tema o palabra clave</string>
+    <string name="busqueda_recientes">Búsquedas recientes</string>
+    <string name="busqueda_empty_state">Escribe un término para buscar en el índice legal.</string>
+    <string name="busqueda_no_results">No se encontraron resultados con los filtros actuales.</string>
+
     <string name="title_bnv_3">Favoritos</string>
     <string name="title_bnv_4">Ajustes</string>
 
