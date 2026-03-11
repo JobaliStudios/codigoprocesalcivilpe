@@ -60,7 +60,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Código Civil"
+                android:text="@string/codigos_codigo_civil_title"
                 android:textColor="@color/primary_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -120,7 +120,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Código Penal"
+                android:text="@string/codigos_codigo_penal_title"
                 android:textColor="@color/primary_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -180,7 +180,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Código Procesal Civil (FEB 2025)"
+                android:text="@string/codigos_codigo_procesal_civil_title"
                 android:textColor="@color/primary_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -190,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="847 Articulos"
+                android:text="@string/codigos_codigo_procesal_civil_subtitle"
                 android:textColor="@color/secondary_text"
                 android:textSize="14sp"/>
 
@@ -240,7 +240,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Código Procesal Penal"
+                android:text="@string/codigos_codigo_procesal_penal_title"
                 android:textColor="@color/primary_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"/>

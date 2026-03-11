@@ -77,7 +77,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:letterSpacing="0.02"
-                                android:text="Códigos"
+                                android:text="@string/home_card_codigos_title"
                                 android:textColor="@color/primary_dark"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -159,7 +159,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.02"
-                            android:text="Cuestionarios"
+                            android:text="@string/home_card_cuestionarios_title"
                             android:textColor="@color/primary_dark"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -241,7 +241,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:letterSpacing="0.02"
-                            android:text="Recursos"
+                            android:text="@string/home_card_recursos_title"
                             android:textColor="@color/primary_dark"
                             android:textSize="24sp"
                             android:textStyle="bold" />

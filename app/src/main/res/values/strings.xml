@@ -7,15 +7,49 @@
     <string name="back">back</string>
     <string name="breadcrumbersigno">></string>
     <string name="buscar">Buscar...</string>
-    <string name="siguientebusqueda"> siguiente busqueda</string>
-    <string name="anteriorbusqueda"> anterior busqueda</string>
-    <string name="cerrarbusqueda"> cerrar busqueda</string>
-    <string name="botonbusqueda"> boton busqueda</string>
+    <string name="siguientebusqueda">Siguiente búsqueda</string>
+    <string name="anteriorbusqueda">Anterior búsqueda</string>
+    <string name="cerrarbusqueda">Cerrar búsqueda</string>
+    <string name="botonbusqueda">Botón de búsqueda</string>
 
     <!--HomeFragment Cardviews-->
     <string name="descripcion_codigos_main">Contenido actualizado al 2025 de 4 Codigos(CC,CP,CPC,CPP)\n\n</string>
     <string name="descripcion_cuestionarios_main">Pon a prueba tu conocimiento resolviendo cuestionarios\n\n</string>
     <string name="descripcion_recursps_main">Accede a otros recursos disponibles\n\n</string>
+
+
+
+    <!-- Textos de Home -->
+    <string name="home_card_codigos_title">Códigos</string>
+    <string name="home_card_cuestionarios_title">Cuestionarios</string>
+    <string name="home_card_recursos_title">Recursos</string>
+
+    <!-- Textos de Códigos -->
+    <string name="codigos_codigo_civil_title">Código Civil</string>
+    <string name="codigos_codigo_penal_title">Código Penal</string>
+    <string name="codigos_codigo_procesal_civil_title">Código Procesal Civil (FEB 2025)</string>
+    <string name="codigos_codigo_procesal_civil_subtitle">847 artículos</string>
+    <string name="codigos_codigo_procesal_penal_title">Código Procesal Penal</string>
+
+    <!-- Textos de Cuestionarios CPC -->
+    <string name="quiz_cpc_start_title">Código Procesal Civil</string>
+    <string name="quiz_cpc_option_5">5 preguntas</string>
+    <string name="quiz_cpc_option_10">10 preguntas</string>
+    <string name="quiz_cpc_option_20">20 preguntas</string>
+    <string name="quiz_cpc_start_button">Comenzar</string>
+    <string name="quiz_cpc_next_button">Siguiente</string>
+    <string name="quiz_cpc_result_score_placeholder">Tu puntaje: 0/10</string>
+    <string name="quiz_cpc_retry_button">Reintentar</string>
+
+    <!-- Navegación -->
+    <string name="title_codigos_main">Códigos</string>
+
+    <!-- Guía breve de tono para strings (equipo de producto) -->
+    <string-array name="strings_tone_guide" translatable="false">
+        <item>Usar verbos de acción claros al inicio (por ejemplo: Buscar, Guardar, Reintentar).</item>
+        <item>Priorizar lenguaje jurídico simple: términos precisos y comprensibles para usuarios no especialistas.</item>
+        <item>Evitar ambigüedades: cada texto debe indicar una sola acción o resultado esperado.</item>
+    </string-array>
 
     <!--Menu Principal Botton Navigation View-->
     <string name="title_bnv_1">Códigos</string>
@@ -26,7 +60,7 @@
     <string name="busqueda_no_results">No se encontraron resultados con los filtros actuales.</string>
 
     <string name="title_bnv_3">Favoritos</string>
-    <string name="title_bnv_4">Ajustes</string>
+    <string name="title_bnv_4">Configuración</string>
 
     <string name="artxsec1">Articulo:1-47</string>
     <string name="artxsec2">Articulo:48-118</string>
@@ -484,9 +518,9 @@
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Inicio</string>
-    <string name="title_busqueda">Busqueda</string>
+    <string name="title_busqueda">Búsqueda</string>
     <string name="title_favoritos">Favoritos</string>
-    <string name="title_configuracion">Configuracion</string>
+    <string name="title_configuracion">Configuración</string>
     <string name="config_title">Ajusta la app a tu medida</string>
     <string name="config_subtitle">Personaliza la experiencia y mantén a la mano tus herramientas favoritas.</string>
     <string name="config_icon_notifications">Ícono de notificaciones</string>
@@ -512,7 +546,7 @@
     <string name="config_version_value">Versión %1$s · Código Procesal Civil PE</string>
     <string name="config_version_default">N/D</string>
 
-    <string name="icono_codigoprocesalcivl">Codigo Procesal Civil</string>
+    <string name="icono_codigoprocesalcivl">Código Procesal Civil</string>
 
     <string name="disponible">Disponible</string>
     <string name="nodisponible">No Disponible</string>
