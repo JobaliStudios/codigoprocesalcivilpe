@@ -7,7 +7,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -21,6 +20,7 @@ import com.jobalistudios.codigoprocesalcivilpe.R;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SectionSearchController {
 
@@ -35,6 +35,9 @@ public class SectionSearchController {
     private final FloatingActionButton searchFab;
     private final ScrollView scrollView;
     private final FormattedTextProvider textProvider;
+    private final TextView searchCounterView;
+    private final TextView noResultsView;
+    private final ImageButton clearButton;
 
     private final List<Integer> searchPositions = new ArrayList<>();
     private int currentSearchIndex = 0;
@@ -48,6 +51,9 @@ public class SectionSearchController {
             ImageButton nextButton,
             ImageButton previousButton,
             ImageButton closeButton,
+            ImageButton clearButton,
+            TextView searchCounterView,
+            TextView noResultsView,
             ScrollView scrollView,
             FormattedTextProvider textProvider
     ) {
@@ -58,13 +64,18 @@ public class SectionSearchController {
         this.searchFab = searchFab;
         this.scrollView = scrollView;
         this.textProvider = textProvider;
+        this.searchCounterView = searchCounterView;
+        this.noResultsView = noResultsView;
+        this.clearButton = clearButton;
 
         searchFab.setOnClickListener(view -> showSearchBar());
         closeButton.setOnClickListener(view -> hideSearchBar());
         searchInput.addTextChangedListener(createTextWatcher());
-        searchInput.setOnTouchListener(createTouchListener());
+        clearButton.setOnClickListener(view -> searchInput.setText(""));
         nextButton.setOnClickListener(view -> navigateNextResult());
         previousButton.setOnClickListener(view -> navigatePreviousResult());
+        updateClearIcon();
+        updateSearchStatus();
     }
 
     public void submitQuery(String query, boolean showBar) {
@@ -72,7 +83,7 @@ public class SectionSearchController {
             showSearchBar();
         }
         searchInput.setText(query);
-        searchInput.setSelection(searchInput.getText().length());
+        searchInput.selectAll();
         performSearch(query);
     }
 
@@ -80,6 +91,10 @@ public class SectionSearchController {
         searchBarContainer.setVisibility(View.VISIBLE);
         searchFab.setVisibility(View.GONE);
         searchInput.requestFocus();
+        Editable queryText = searchInput.getText();
+        if (queryText != null) {
+            searchInput.setSelection(0, queryText.length());
+        }
         showKeyboard();
     }
 
@@ -109,6 +124,7 @@ public class SectionSearchController {
         textView.setText(textProvider.getFormattedText());
         searchPositions.clear();
         currentSearchIndex = 0;
+        updateSearchStatus();
     }
 
     private TextWatcher createTextWatcher() {
@@ -129,21 +145,6 @@ public class SectionSearchController {
         };
     }
 
-    private View.OnTouchListener createTouchListener() {
-        return (v, event) -> {
-            if (searchInput.getCompoundDrawables()[2] != null
-                    && event.getAction() == MotionEvent.ACTION_UP
-                    && event.getRawX() >= (searchInput.getRight()
-                    - searchInput.getCompoundDrawables()[2].getBounds().width()
-                    - searchInput.getPaddingEnd())) {
-                searchInput.setText("");
-                v.performClick();
-                return true;
-            }
-            return false;
-        };
-    }
-
     private void navigateNextResult() {
         if (!searchPositions.isEmpty()) {
             currentSearchIndex = (currentSearchIndex + 1) % searchPositions.size();
@@ -159,21 +160,8 @@ public class SectionSearchController {
     }
 
     private void updateClearIcon() {
-        if (!searchInput.getText().toString().isEmpty()) {
-            searchInput.setCompoundDrawablesWithIntrinsicBounds(
-                    R.drawable.baseline_search_24,
-                    0,
-                    R.drawable.baseline_close_24,
-                    0
-            );
-        } else {
-            searchInput.setCompoundDrawablesWithIntrinsicBounds(
-                    R.drawable.baseline_search_24,
-                    0,
-                    0,
-                    0
-            );
-        }
+        boolean hasQuery = !searchInput.getText().toString().isEmpty();
+        clearButton.setVisibility(hasQuery ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void performSearch(String query) {
@@ -185,6 +173,10 @@ public class SectionSearchController {
         }
 
         textView.setText(spannable);
+        if (!searchPositions.isEmpty()) {
+            scrollToPosition(searchPositions.get(currentSearchIndex));
+        }
+        updateSearchStatus();
     }
 
     private void clearPreviousSearchHighlights(SpannableString spannable) {
@@ -194,6 +186,7 @@ public class SectionSearchController {
         }
         searchPositions.clear();
         currentSearchIndex = 0;
+        updateSearchStatus();
     }
 
     private void applySearchHighlight(SpannableString spannable, String query) {
@@ -207,6 +200,10 @@ public class SectionSearchController {
             searchPositions.add(index);
             index = normalizedContent.indexOf(normalizedQuery, end);
         }
+
+        if (!searchPositions.isEmpty()) {
+            currentSearchIndex = 0;
+        }
     }
 
     private void scrollToPosition(int charIndex) {
@@ -219,8 +216,18 @@ public class SectionSearchController {
         });
     }
 
+
+    private void updateSearchStatus() {
+        int totalResults = searchPositions.size();
+        int currentResult = totalResults == 0 ? 0 : currentSearchIndex + 1;
+        searchCounterView.setText(String.format(Locale.getDefault(), "%d/%d", currentResult, totalResults));
+
+        boolean hasQuery = !searchInput.getText().toString().trim().isEmpty();
+        noResultsView.setVisibility(hasQuery && totalResults == 0 ? View.VISIBLE : View.GONE);
+    }
+
     private String normalizeText(String input) {
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
-        return normalized.replaceAll("\\p{M}", "").toLowerCase();
+        return normalized.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
     }
 }

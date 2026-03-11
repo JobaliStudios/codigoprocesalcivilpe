@@ -102,8 +102,34 @@
             android:maxWidth="400dp"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
+            app:layout_constraintEnd_toStartOf="@+id/btnLimpiarBusqueda"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnLimpiarBusqueda"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/limpiarbusqueda"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtBusquedaContador"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtBusquedaContador"
+            style="@style/TEXT2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="0/0"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -144,6 +170,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtBusquedaSinResultados"
+            style="@style/TEXT2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/busqueda_sin_coincidencias"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtBusqueda" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
