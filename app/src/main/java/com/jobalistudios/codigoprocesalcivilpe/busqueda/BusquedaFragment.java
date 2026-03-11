@@ -75,7 +75,7 @@ public class BusquedaFragment extends Fragment {
 
         binding.progressLoading.setVisibility(state.loading ? View.VISIBLE : View.GONE);
         boolean emptyQuery = state.query.isEmpty();
-        binding.textEmptyState.setVisibility(emptyQuery ? View.VISIBLE : View.GONE);
+        binding.textBusqueda.setVisibility(emptyQuery ? View.VISIBLE : View.GONE);
         binding.textNoResults.setVisibility(!emptyQuery && state.results.isEmpty() ? View.VISIBLE : View.GONE);
 
         binding.chipGroupRecent.removeAllViews();
