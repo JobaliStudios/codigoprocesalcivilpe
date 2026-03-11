@@ -80,6 +80,9 @@ public class SectionContentActivity extends AppCompatActivity {
                 findViewById(R.id.btnSiguiente),
                 findViewById(R.id.btnAnterior),
                 findViewById(R.id.btnCerrarBusqueda),
+                findViewById(R.id.btnLimpiarBusqueda),
+                findViewById(R.id.txtBusquedaContador),
+                findViewById(R.id.txtBusquedaSinResultados),
                 scrollView,
                 () -> SectionTextFormatter.buildFormattedText(this, textResId)
         );

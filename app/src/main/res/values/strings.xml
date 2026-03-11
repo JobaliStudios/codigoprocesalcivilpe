@@ -11,6 +11,8 @@
     <string name="anteriorbusqueda">Anterior búsqueda</string>
     <string name="cerrarbusqueda">Cerrar búsqueda</string>
     <string name="botonbusqueda">Botón de búsqueda</string>
+    <string name="limpiarbusqueda">Limpiar búsqueda</string>
+    <string name="busqueda_sin_coincidencias">Sin coincidencias</string>
 
     <!--HomeFragment Cardviews-->
     <string name="descripcion_codigos_main">Contenido actualizado al 2025 de 4 Codigos(CC,CP,CPC,CPP)\n\n</string>
