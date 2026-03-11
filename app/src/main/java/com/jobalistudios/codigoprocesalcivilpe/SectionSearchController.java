@@ -67,6 +67,15 @@ public class SectionSearchController {
         previousButton.setOnClickListener(view -> navigatePreviousResult());
     }
 
+    public void submitQuery(String query, boolean showBar) {
+        if (showBar) {
+            showSearchBar();
+        }
+        searchInput.setText(query);
+        searchInput.setSelection(searchInput.getText().length());
+        performSearch(query);
+    }
+
     private void showSearchBar() {
         searchBarContainer.setVisibility(View.VISIBLE);
         searchFab.setVisibility(View.GONE);
