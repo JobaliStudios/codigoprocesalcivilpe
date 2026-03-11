@@ -69,7 +69,13 @@ public class SeccionPrimeraTit2 extends AppCompatActivity {
                 R.string.seccionprimeratit2cap2txt,
                 R.string.capitulo2,
                 R.string.tit2cap2sub
-        )));
+        )
+                .putExtra(SectionContentActivity.EXTRA_SECTION_LABEL, getString(R.string.seccion_primeratit))
+                .putExtra(SectionContentActivity.EXTRA_TITLE_LABEL, getString(R.string.titulo2))
+                .putExtra(SectionContentActivity.EXTRA_CHAPTER_LABEL, getString(R.string.capitulo2))
+                .putExtra(SectionContentActivity.EXTRA_CURRENT_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_2)
+                .putExtra(SectionContentActivity.EXTRA_PREVIOUS_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_1)
+                .putExtra(SectionContentActivity.EXTRA_NEXT_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_3)));
 
         section3.setOnClickListener(v -> startActivity(SectionContentActivity.createIntent(
                 SeccionPrimeraTit2.this,
@@ -77,7 +83,12 @@ public class SeccionPrimeraTit2 extends AppCompatActivity {
                 R.string.seccionprimeratit2cap3txt,
                 R.string.capitulo3,
                 R.string.tit2cap3sub
-        )));
+        )
+                .putExtra(SectionContentActivity.EXTRA_SECTION_LABEL, getString(R.string.seccion_primeratit))
+                .putExtra(SectionContentActivity.EXTRA_TITLE_LABEL, getString(R.string.titulo2))
+                .putExtra(SectionContentActivity.EXTRA_CHAPTER_LABEL, getString(R.string.capitulo3))
+                .putExtra(SectionContentActivity.EXTRA_CURRENT_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_3)
+                .putExtra(SectionContentActivity.EXTRA_PREVIOUS_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_2)));
 
     }
 

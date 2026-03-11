@@ -5,6 +5,29 @@
     android:layout_height="match_parent"
     tools:context=".SectionContentActivity">
 
+    <ProgressBar
+        android:id="@+id/readingProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/readingPercentText"
+        style="@style/TEXT2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="0% leído"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/readingProgressBar" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/fixedCardView"
         style="@style/TOPCARDVIEWFONDO"
@@ -15,7 +38,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/readingPercentText">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +46,15 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/sectionBreadcrumb"
+                style="@style/TEXT2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                tools:text="Sección > Título > Capítulo" />
 
             <TextView
                 android:id="@+id/sectionTitle"
@@ -42,6 +74,68 @@
                 android:gravity="center"
                 android:textSize="14sp"
                 tools:text="Subtítulo" />
+
+            <TextView
+                android:id="@+id/sectionArticleRange"
+                style="@style/TEXT2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                tools:text="Rango de artículos: Artículos 35-41" />
+
+            <TextView
+                android:id="@+id/sectionLastUpdated"
+                style="@style/TEXT2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="Actualizado: 2025" />
+
+            <TextView
+                android:id="@+id/sectionSource"
+                style="@style/TEXT2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="Fuente: Código Procesal Civil del Perú" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnGoSectionStart"
+                    style="@style/TEXT2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/go_section_start"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btnPreviousChapter"
+                    style="@style/TEXT2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:text="@string/previous_chapter"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btnNextChapter"
+                    style="@style/TEXT2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:text="@string/next_chapter"
+                    android:textAllCaps="false" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

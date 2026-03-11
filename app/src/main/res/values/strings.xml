@@ -575,4 +575,20 @@
     <string name="favorite_type_title">Título</string>
     <string name="favorite_type_article">Artículo</string>
 
+    <string name="section_default_label">Sección</string>
+    <string name="section_default_last_updated">2025</string>
+    <string name="section_default_source">Código Procesal Civil del Perú</string>
+    <string name="section_breadcrumb_format">%1$s &gt; %2$s &gt; %3$s</string>
+    <string name="section_metadata_articles">Rango de artículos: %1$s</string>
+    <string name="section_metadata_updated">Actualizado: %1$s</string>
+    <string name="section_metadata_source">Fuente: %1$s</string>
+    <string name="section_article_range_format">Artículos %1$d-%2$d</string>
+    <string name="section_single_article_format">Artículo %1$d</string>
+    <string name="metadata_not_available">No disponible</string>
+    <string name="reading_percent_format">%1$d%% leído</string>
+    <string name="go_section_start">Ir al inicio de sección</string>
+    <string name="next_chapter">Siguiente capítulo</string>
+    <string name="previous_chapter">Anterior capítulo</string>
+    <string name="destination_not_available">No se pudo abrir el capítulo relacionado</string>
+
 </resources>
