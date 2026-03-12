@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritoViewHolder> {
@@ -23,6 +25,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
 
     private final List<FavoriteItem> items = new ArrayList<>();
     private final OnFavoriteClickListener listener;
+    private FavoritosViewModel.SortMode sortMode = FavoritosViewModel.SortMode.RECIENTES;
 
     public FavoritosAdapter(OnFavoriteClickListener listener) {
         this.listener = listener;
@@ -31,7 +34,33 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Favo
     public void submitList(List<FavoriteItem> list) {
         items.clear();
         items.addAll(list);
+        sortInternal();
         notifyDataSetChanged();
+    }
+
+    public void setSortMode(FavoritosViewModel.SortMode mode) {
+        sortMode = mode == null ? FavoritosViewModel.SortMode.RECIENTES : mode;
+        sortInternal();
+        notifyDataSetChanged();
+    }
+
+    private void sortInternal() {
+        if (sortMode == FavoritosViewModel.SortMode.RECIENTES) {
+            Collections.reverse(items);
+            return;
+        }
+
+        Comparator<FavoriteItem> comparator;
+        if (sortMode == FavoritosViewModel.SortMode.SECCION) {
+            comparator = Comparator
+                    .comparing(FavoritosViewModel::resolveSection)
+                    .thenComparing(FavoriteItem::getTitle, String.CASE_INSENSITIVE_ORDER);
+        } else {
+            comparator = Comparator
+                    .comparing(FavoriteItem::getType, String.CASE_INSENSITIVE_ORDER)
+                    .thenComparing(FavoriteItem::getTitle, String.CASE_INSENSITIVE_ORDER);
+        }
+        items.sort(comparator);
     }
 
     @NonNull
