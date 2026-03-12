@@ -23,10 +23,19 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/favoriteType"
+                style="@style/TEXT2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/favoriteTitle"
                 style="@style/TEXT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -34,21 +43,22 @@
                 style="@style/TEXT2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp" />
-
-            <TextView
-                android:id="@+id/favoriteType"
-                style="@style/TEXT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:textStyle="bold" />
+                android:layout_marginTop="4dp"
+                android:textSize="13sp" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/open_favorite"
+            android:src="@drawable/baseline_chevron_right_24"
+            android:tint="@android:color/darker_gray" />
 
         <ImageButton
             android:id="@+id/buttonRemoveFavorite"
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:layout_marginStart="4dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/remove_favorite"
             android:src="@drawable/baseline_favorite_24"

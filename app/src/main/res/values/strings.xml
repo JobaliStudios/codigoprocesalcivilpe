@@ -570,10 +570,22 @@
 
     <string name="toggle_favorite">Agregar o quitar favorito</string>
     <string name="remove_favorite">Quitar de favoritos</string>
-    <string name="no_favorites">Todavía no tienes favoritos guardados.</string>
+    <string name="open_favorite">Abrir favorito</string>
+    <string name="no_favorites">Guarda artículos, títulos o secciones para revisarlos rápido aquí.</string>
+    <string name="favorite_removed_message">Favorito eliminado</string>
+    <string name="undo_action">Deshacer</string>
+    <string name="favorites_sort_label">Ordenar favoritos</string>
+    <string name="favorites_filter_section_label">Filtrar por sección</string>
+    <string name="favorites_cta_explore">Explorar códigos</string>
     <string name="favorite_type_section">Sección</string>
     <string name="favorite_type_title">Título</string>
     <string name="favorite_type_article">Artículo</string>
+
+    <string-array name="favorite_sort_options">
+        <item>Más recientes</item>
+        <item>Sección</item>
+        <item>Tipo</item>
+    </string-array>
 
     <string name="section_default_label">Sección</string>
     <string name="section_default_last_updated">2025</string>
