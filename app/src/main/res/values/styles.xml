@@ -26,6 +26,35 @@
         <item name="android:textSize">@dimen/text_cta_m</item>
     </style>
 
+    <style name="App.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textSize">@dimen/text_cta_m</item>
+    </style>
+
+    <style name="App.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textSize">@dimen/text_body_s</item>
+    </style>
+
+    <style name="App.Text.Title.M" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="App.Text.Status.Available" parent="App.Text.Body.S">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="App.Text.Status.Unavailable" parent="App.Text.Body.S">
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="App.Icon.Tinted">
+        <item name="android:tint">?attr/colorOnSurface</item>
+    </style>
+
+
     <style name="App.Chip.Filter" parent="Widget.Material3.Chip.Filter">
         <item name="chipBackgroundColor">@color/colorSurfaceVariant</item>
         <item name="chipStrokeColor">@color/colorOutline</item>
@@ -98,6 +127,13 @@
     </style>
 
     <!-- backward compatibility styles referenced in old layouts -->
-    <style name="TEXT" parent="App.Text.Body.M" />
-    <style name="TEXT2" parent="App.Text.Body.S" />
+    <style name="TEXT" parent="App.Text.Body.M">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TEXT2" parent="App.Text.Body.S">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    <style name="IMAGE" parent="App.Icon.Tinted" />
+    <style name="Disponibilidaddecodigos" parent="App.Text.Status.Available" />
+    <style name="NoDisponibilidaddecodigos" parent="App.Text.Status.Unavailable" />
 </resources>
