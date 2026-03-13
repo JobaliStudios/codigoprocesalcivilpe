@@ -123,12 +123,28 @@
         <item name="android:insetBottom">0dp</item>
     </style>
 
+
+    <style name="TOPCARDVIEWFONDO">
+        <item name="backgroundTint">?attr/colorSurface</item>
+    </style>
+
+    <style name="IMAGEBOTONBUSQUEDA">
+        <item name="backgroundTint">?attr/colorOnSurface</item>
+        <item name="tint">?attr/colorSurface</item>
+    </style>
+
+    <style name="EditTextSearchStyle">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="drawableTint">?attr/colorOnSurfaceVariant</item>
+        <item name="android:backgroundTint">?attr/colorSurface</item>
+    </style>
+
     <style name="ThemeOverlay.codigoprocesalcivilpe.Toolbar" parent="ThemeOverlay.Material3.Toolbar.Surface">
         <item name="colorControlNormal">@color/toolbar_item_colors</item>
         <item name="actionMenuTextColor">@color/toolbar_item_colors</item>
     </style>
 
-    <!-- backward compatibility styles referenced in old layouts -->
     <style name="TEXT" parent="App.Text.Body.M">
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
