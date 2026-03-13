@@ -47,6 +47,11 @@
         <item name="android:lineSpacingExtra">@dimen/space_xs</item>
     </style>
 
+    <style name="ThemeOverlay.codigoprocesalcivilpe.Toolbar" parent="ThemeOverlay.Material3.Toolbar.Surface">
+        <item name="colorControlNormal">@color/toolbar_item_colors</item>
+        <item name="actionMenuTextColor">@color/toolbar_item_colors</item>
+    </style>
+
     <!-- backward compatibility styles referenced in old layouts -->
     <style name="TEXT" parent="App.Text.Body.M" />
     <style name="TEXT2" parent="App.Text.Body.S" />
