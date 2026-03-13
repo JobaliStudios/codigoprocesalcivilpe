@@ -33,14 +33,8 @@ public class ConfiguracionFragment extends Fragment {
         binding.configTitle.setText(getString(R.string.config_title));
         binding.textVersion.setText(getString(R.string.config_version_value, obtenerVersion()));
 
-        setupSwitchObserver(binding.switchNotificaciones, configuracionViewModel.getNotificacionesActivas(),
-                configuracionViewModel::setNotificacionesActivas);
-
         setupSwitchObserver(binding.switchModoLectura, configuracionViewModel.getModoLectura(),
                 configuracionViewModel::setModoLectura);
-
-        setupSwitchObserver(binding.switchConsejos, configuracionViewModel.getConsejosFavoritos(),
-                configuracionViewModel::setConsejosFavoritos);
 
         setupDarkModeSwitch();
 
