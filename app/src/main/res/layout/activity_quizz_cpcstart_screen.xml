@@ -9,8 +9,7 @@
         android:id="@+id/cardStartQuiz"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="2dp"
+        style="@style/App.Card.Recurrent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,19 +33,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/quiz_cpc_start_title"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textStyle="bold" />
+                style="@style/App.Text.Title.L" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/quiz_cpc_start_subtitle"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+                style="@style/App.Text.Body.M" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn5Questions"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/App.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -54,7 +52,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn10Questions"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/App.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -62,7 +60,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn20Questions"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/App.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"

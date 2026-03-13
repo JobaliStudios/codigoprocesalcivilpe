@@ -10,8 +10,7 @@
         android:id="@+id/cardQuestion"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
+        style="@style/App.Card.Recurrent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +26,7 @@
                 android:id="@+id/tvProgressText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                style="@style/App.Text.Subtitle.M"
                 android:textStyle="bold"
                 tools:text="Pregunta 3 de 10" />
 
@@ -44,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                style="@style/App.Text.Subtitle.M"
                 tools:text="¿Cuál es el plazo para contestar la demanda?" />
 
             <TextView
@@ -52,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                style="@style/App.Text.Body.M"
                 android:visibility="gone"
                 tools:text="¡Correcto!" />
 
@@ -68,6 +67,7 @@
                 android:layout_weight="1" />
 
             <com.google.android.material.button.MaterialButton
+                style="@style/App.Button.Primary"
                 android:id="@+id/btnNext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

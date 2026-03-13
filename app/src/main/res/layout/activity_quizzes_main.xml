@@ -32,8 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -42,7 +41,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/quizz_vector" />
@@ -55,7 +54,7 @@
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Código Civil"
@@ -63,13 +62,13 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/NoDisponibilidaddecodigos"
+                            style="@style/App.Text.Status.Unavailable"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/nodisponible" />
                     </LinearLayout>
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
@@ -82,8 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,7 +90,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/quizz_vector" />
@@ -105,7 +103,7 @@
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Código Penal"
@@ -113,13 +111,13 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/NoDisponibilidaddecodigos"
+                            style="@style/App.Text.Status.Unavailable"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/nodisponible" />
                     </LinearLayout>
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
@@ -133,8 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,7 +140,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/quizz_vector" />
@@ -156,7 +153,7 @@
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Código Procesal Civil"
@@ -164,13 +161,13 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/Disponibilidaddecodigos"
+                            style="@style/App.Text.Status.Available"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/disponible" />
                     </LinearLayout>
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
@@ -184,8 +181,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -194,7 +190,7 @@
                     android:padding="16dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/quizz_vector" />
@@ -207,7 +203,7 @@
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Código Procesal Penal"
@@ -215,13 +211,13 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/NoDisponibilidaddecodigos"
+                            style="@style/App.Text.Status.Unavailable"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/nodisponible" />
                     </LinearLayout>
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
