@@ -39,6 +39,7 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_CHAPTER_LABEL = "EXTRA_CHAPTER_LABEL";
     public static final String EXTRA_SOURCE = "EXTRA_SOURCE";
     public static final String EXTRA_LAST_UPDATED = "EXTRA_LAST_UPDATED";
+    public static final String EXTRA_SHOW_BREADCRUMB = "EXTRA_SHOW_BREADCRUMB";
     public static final String EXTRA_CURRENT_DESTINATION_ID = "EXTRA_CURRENT_DESTINATION_ID";
     public static final String EXTRA_PREVIOUS_DESTINATION_ID = "EXTRA_PREVIOUS_DESTINATION_ID";
     public static final String EXTRA_NEXT_DESTINATION_ID = "EXTRA_NEXT_DESTINATION_ID";
@@ -101,7 +102,13 @@ public class SectionContentActivity extends AppCompatActivity {
         contentView.setText(SectionTextFormatter.buildFormattedText(this, textResId));
         String plainContent = getString(textResId);
 
+        boolean showBreadcrumb = getIntent().getBooleanExtra(EXTRA_SHOW_BREADCRUMB, true);
+
         if (breadcrumbView != null) {
+            if (!showBreadcrumb) {
+                breadcrumbView.setVisibility(View.GONE);
+            }
+
             String chapterLabel = getIntent().getStringExtra(EXTRA_CHAPTER_LABEL);
             String titleLabel = getIntent().getStringExtra(EXTRA_TITLE_LABEL);
             String sectionLabel = getIntent().getStringExtra(EXTRA_SECTION_LABEL);
