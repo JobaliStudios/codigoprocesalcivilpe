@@ -18,13 +18,12 @@
 
     <TextView
         android:id="@+id/readingPercentText"
-        style="@style/TEXT2"
+        style="@style/App.Text.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/space_xs"
+        android:layout_marginEnd="@dimen/space_s"
         android:text="0% leído"
-        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/readingProgressBar" />
 
@@ -33,7 +32,7 @@
         style="@style/TOPCARDVIEWFONDO"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/space_l"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,48 +44,44 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/space_l">
 
             <TextView
                 android:id="@+id/sectionBreadcrumb"
-                style="@style/TEXT2"
+                style="@style/App.Text.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="12sp"
                 tools:text="Sección > Título > Capítulo" />
 
             <TextView
                 android:id="@+id/sectionTitle"
-                style="@style/TEXT"
+                style="@style/App.Text.SectionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 tools:text="Título" />
 
             <TextView
                 android:id="@+id/sectionSubtitle"
-                style="@style/TEXT2"
+                style="@style/App.Text.SectionSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="14sp"
                 tools:text="Subtítulo" />
 
             <TextView
                 android:id="@+id/sectionArticleRange"
-                style="@style/TEXT2"
+                style="@style/App.Text.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/space_m"
                 android:gravity="center"
                 tools:text="Rango de artículos: Artículos 35-41" />
 
             <TextView
                 android:id="@+id/sectionLastUpdated"
-                style="@style/TEXT2"
+                style="@style/App.Text.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -94,7 +89,7 @@
 
             <TextView
                 android:id="@+id/sectionSource"
-                style="@style/TEXT2"
+                style="@style/App.Text.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -103,13 +98,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/space_l"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnGoSectionStart"
-                    style="@style/TEXT2"
+                    style="@style/App.Button.SectionAction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -118,20 +113,20 @@
 
                 <Button
                     android:id="@+id/btnPreviousChapter"
-                    style="@style/TEXT2"
+                    style="@style/App.Button.SectionAction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/space_s"
                     android:layout_weight="1"
                     android:text="@string/previous_chapter"
                     android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnNextChapter"
-                    style="@style/TEXT2"
+                    style="@style/App.Button.SectionAction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="@dimen/space_s"
                     android:layout_weight="1"
                     android:text="@string/next_chapter"
                     android:textAllCaps="false" />
@@ -151,21 +146,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/space_l">
 
             <TextView
                 android:id="@+id/textView2"
-                style="@style/TEXT"
+                style="@style/App.Text.LegalBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/space_l"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="start"
-                android:lineSpacingExtra="6dp"
-                android:lineSpacingMultiplier="1.2"
                 android:textIsSelectable="true"
-                android:textSize="18sp"
                 tools:ignore="VisualLintLongText"
                 tools:text="Contenido" />
         </LinearLayout>
@@ -173,11 +165,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchBarContainer"
-        style="@style/TEXT"
+        style="@style/App.Text.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:padding="8dp"
+        android:padding="@dimen/space_s"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -215,13 +207,12 @@
 
         <TextView
             android:id="@+id/txtBusquedaContador"
-            style="@style/TEXT2"
+            style="@style/App.Text.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="@dimen/space_xs"
+            android:layout_marginEnd="@dimen/space_xs"
             android:text="0/0"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
             app:layout_constraintTop_toTopOf="parent" />
@@ -267,13 +258,12 @@
 
         <TextView
             android:id="@+id/txtBusquedaSinResultados"
-            style="@style/TEXT2"
+            style="@style/App.Text.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/space_s"
             android:text="@string/busqueda_sin_coincidencias"
             android:textColor="@android:color/darker_gray"
-            android:textSize="12sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -286,7 +276,7 @@
         style="@style/IMAGEBOTONBUSQUEDA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/space_l"
         android:contentDescription="@string/botonbusqueda"
         android:src="@drawable/baseline_search_24"
         app:layout_constraintBottom_toBottomOf="parent"
