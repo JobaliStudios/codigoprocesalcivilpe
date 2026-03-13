@@ -38,7 +38,7 @@
           app:cardBackgroundColor="@color/card_background"
           app:cardCornerRadius="16dp"
           app:cardElevation="4dp"
-          app:strokeColor="#336B081D"
+          app:strokeColor="@color/colorOutline"
           app:strokeWidth="1dp">
 
         <LinearLayout
@@ -99,7 +99,7 @@
           app:cardBackgroundColor="@color/card_background"
           app:cardCornerRadius="16dp"
           app:cardElevation="4dp"
-          app:strokeColor="#336B081D"
+          app:strokeColor="@color/colorOutline"
           app:strokeWidth="1dp">
 
         <LinearLayout
@@ -159,7 +159,7 @@
           app:cardBackgroundColor="@color/card_background"
           app:cardCornerRadius="16dp"
           app:cardElevation="4dp"
-          app:strokeColor="#336B081D"
+          app:strokeColor="@color/colorOutline"
           app:strokeWidth="1dp">
 
         <LinearLayout
@@ -219,7 +219,7 @@
           app:cardBackgroundColor="@color/card_background"
           app:cardCornerRadius="16dp"
           app:cardElevation="4dp"
-          app:strokeColor="#336B081D"
+          app:strokeColor="@color/colorOutline"
           app:strokeWidth="1dp">
 
         <LinearLayout

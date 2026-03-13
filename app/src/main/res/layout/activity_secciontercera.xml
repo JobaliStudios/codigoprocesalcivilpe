@@ -8,8 +8,9 @@
     tools:context=".SeccionTercera.SeccionTercera">
 
     <!-- CardView fijo en la parte superior -->
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/fixedCardView"
+        style="@style/App.Card.Recurrent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -29,7 +30,7 @@
 
             <!-- Título -->
             <TextView
-                style="@style/TEXT"
+                style="@style/App.Text.Body.M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -39,14 +40,14 @@
 
             <!-- Subtítulo -->
             <TextView
-                style="@style/TEXT2"
+                style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/seccion_tercerasub"
                 android:textSize="14sp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- ScrollView para el contenido desplazable -->
     <ScrollView
@@ -66,8 +67,9 @@ android:layout_width="match_parent"
             android:orientation="vertical">
 
             <!-- Tu primer CardView -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section1"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -83,7 +85,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_segundaimg"
@@ -97,7 +99,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo1"
@@ -105,7 +107,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -113,7 +115,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit1"
@@ -122,17 +124,18 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Tu segundo CardView -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section2"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -149,7 +152,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -163,7 +166,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo2"
@@ -171,7 +174,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -179,7 +182,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit2"
@@ -188,17 +191,18 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Tu tercer CardView -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section3"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -215,7 +219,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -229,7 +233,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo3"
@@ -237,7 +241,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -245,7 +249,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit3"
@@ -254,16 +258,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section4"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -280,7 +285,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -294,7 +299,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo4"
@@ -302,7 +307,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -310,7 +315,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit4"
@@ -319,16 +324,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section5"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -345,7 +351,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -359,7 +365,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo5"
@@ -367,7 +373,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -375,7 +381,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit5"
@@ -386,16 +392,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section6"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -412,7 +419,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -426,7 +433,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo6"
@@ -434,7 +441,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -442,7 +449,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit6"
@@ -451,16 +458,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section7"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -477,7 +485,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -491,7 +499,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo7"
@@ -499,7 +507,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -507,7 +515,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit7"
@@ -516,16 +524,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section8"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -542,7 +551,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -556,7 +565,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo8"
@@ -564,7 +573,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -572,7 +581,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit8"
@@ -581,16 +590,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section9"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -607,7 +617,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -621,7 +631,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo9"
@@ -629,7 +639,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -637,7 +647,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit9"
@@ -646,16 +656,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section10"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -672,7 +683,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -686,7 +697,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo10"
@@ -694,7 +705,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -702,7 +713,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit10"
@@ -711,16 +722,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section11"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -737,7 +749,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -751,7 +763,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo11"
@@ -759,7 +771,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -767,7 +779,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit11"
@@ -776,16 +788,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section12"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -802,7 +815,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -816,7 +829,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo12"
@@ -824,7 +837,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -832,7 +845,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit12"
@@ -841,16 +854,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section13"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -867,7 +881,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -881,7 +895,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo13"
@@ -889,7 +903,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -897,7 +911,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit13"
@@ -906,16 +920,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section14"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -932,7 +947,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -946,7 +961,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo14"
@@ -954,7 +969,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -962,7 +977,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit14"
@@ -971,16 +986,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section15"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -997,7 +1013,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -1011,7 +1027,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo15"
@@ -1019,7 +1035,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -1027,7 +1043,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit15"
@@ -1036,16 +1052,17 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/section16"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -1062,7 +1079,7 @@ android:layout_width="match_parent"
                     android:padding="12dp">
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:contentDescription="@string/seccion_primeraimg"
@@ -1076,7 +1093,7 @@ android:layout_width="match_parent"
                         android:paddingHorizontal="8dp">
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/titulo16"
@@ -1084,7 +1101,7 @@ android:layout_width="match_parent"
                             android:textStyle="bold" />
 
                         <TextView
-                            style="@style/TEXT2"
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -1092,7 +1109,7 @@ android:layout_width="match_parent"
                             android:textSize="14sp" />
 
                         <TextView
-                            style="@style/TEXT"
+                            style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/rangartisec3tit16"
@@ -1101,13 +1118,13 @@ android:layout_width="match_parent"
                     </LinearLayout>
 
                     <ImageView
-                        style="@style/IMAGE"
+                        style="@style/App.Icon.Tinted"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
