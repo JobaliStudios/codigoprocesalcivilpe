@@ -1,81 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/space_l"
     tools:context=".busqueda.BusquedaFragment">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:queryHint="@string/busqueda_hint" />
+    <LinearLayout
+        android:id="@+id/searchContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="@dimen/space_l"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_m"
-        android:scrollbars="none">
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="@string/busqueda_hint" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupSections"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupSections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="false" />
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textRecentTitle"
+            style="@style/App.Text.Subtitle.M"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:singleLine="true"
-            app:singleSelection="false" />
-    </HorizontalScrollView>
+            android:layout_marginTop="@dimen/space_m"
+            android:text="@string/busqueda_recientes"
+            android:textColor="@color/colorOnSurface" />
 
-    <TextView
-        android:id="@+id/textRecentTitle"
-        style="@style/App.Text.Subtitle.M"
-        android:layout_width="wrap_content"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupRecent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s" />
+
+        <ProgressBar
+            android:id="@+id/progressLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_l"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerResultados"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/space_s"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/space_m"
+            android:layout_weight="1"
+            tools:listitem="@layout/item_resultado_busqueda" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emptyStateBusqueda"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_m"
-        android:text="@string/busqueda_recientes"
-        android:textColor="@color/colorOnSurface" />
+        android:layout_marginHorizontal="@dimen/space_l"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/space_l"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupRecent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_s" />
+        <ImageView
+            android:id="@+id/imageEmptyBusqueda"
+            android:layout_width="@dimen/list_card_icon_size"
+            android:layout_height="@dimen/list_card_icon_size"
+            android:background="@drawable/bg_icon_container"
+            android:contentDescription="@string/busqueda_empty_icon_cd"
+            android:padding="@dimen/space_m"
+            android:src="@drawable/baseline_search_24"
+            app:tint="@color/colorPrimary" />
 
-    <ProgressBar
-        android:id="@+id/progressLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/space_l"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/textEmptyBusquedaTitle"
+            style="@style/App.Text.Subtitle.M"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:gravity="center"
+            android:text="@string/busqueda_empty_title" />
 
-    <TextView
-        android:id="@+id/textBusqueda"
-        style="@style/App.Text.Body.M"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_l"
-        android:gravity="center"
-        android:text="@string/busqueda_empty_state" />
+        <TextView
+            android:id="@+id/textEmptyBusquedaBody"
+            style="@style/App.Text.Body.M"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:gravity="center"
+            android:text="@string/busqueda_empty_state" />
 
-    <TextView
-        android:id="@+id/textNoResults"
-        style="@style/App.Text.Body.M"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_s"
-        android:gravity="center"
-        android:text="@string/busqueda_no_results"
-        android:visibility="gone" />
+        <Button
+            android:id="@+id/buttonEmptyBusquedaCta"
+            style="@style/App.Button.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:text="@string/busqueda_empty_cta" />
+    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerResultados"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/space_s"
-        android:layout_weight="1"
-        tools:listitem="@layout/item_resultado_busqueda" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

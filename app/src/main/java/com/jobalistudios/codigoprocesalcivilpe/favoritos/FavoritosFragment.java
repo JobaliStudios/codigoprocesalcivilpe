@@ -158,8 +158,10 @@ public class FavoritosFragment extends Fragment {
 
     private void updateEmptyState(boolean isEmpty) {
         int visibility = isEmpty ? View.VISIBLE : View.GONE;
+        binding.emptyStateFavoritos.setVisibility(visibility);
         binding.textFavoritos.setVisibility(visibility);
         binding.buttonExplorarCodigos.setVisibility(visibility);
+        binding.recyclerFavoritos.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
     }
 
     private void openFavorite(FavoriteItem item) {

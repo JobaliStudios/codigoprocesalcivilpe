@@ -37,6 +37,7 @@ public class BusquedaFragment extends Fragment {
 
         configureSearchView();
         configureSectionChips();
+        setupEmptyStateCta();
 
         viewModel.getUiState().observe(getViewLifecycleOwner(), this::render);
         return binding.getRoot();
@@ -60,6 +61,17 @@ public class BusquedaFragment extends Fragment {
         });
     }
 
+
+    private void setupEmptyStateCta() {
+        binding.buttonEmptyBusquedaCta.setOnClickListener(v -> {
+            binding.searchView.setIconified(false);
+            if (binding.searchView.requestFocus()) {
+                binding.searchView.clearFocus();
+                binding.searchView.requestFocus();
+            }
+        });
+    }
+
     private void configureSectionChips() {
         for (String section : SECCIONES) {
             Chip chip = new Chip(requireContext());
@@ -75,8 +87,14 @@ public class BusquedaFragment extends Fragment {
 
         binding.progressLoading.setVisibility(state.loading ? View.VISIBLE : View.GONE);
         boolean emptyQuery = state.query.isEmpty();
-        binding.textBusqueda.setVisibility(emptyQuery ? View.VISIBLE : View.GONE);
-        binding.textNoResults.setVisibility(!emptyQuery && state.results.isEmpty() ? View.VISIBLE : View.GONE);
+        boolean hasNoResults = !emptyQuery && state.results.isEmpty();
+        boolean showEmptyState = emptyQuery || hasNoResults;
+        binding.emptyStateBusqueda.setVisibility(showEmptyState ? View.VISIBLE : View.GONE);
+        binding.recyclerResultados.setVisibility(showEmptyState ? View.GONE : View.VISIBLE);
+        binding.textEmptyBusquedaBody.setText(emptyQuery
+                ? R.string.busqueda_empty_state
+                : R.string.busqueda_no_results);
+        binding.buttonEmptyBusquedaCta.setText(R.string.busqueda_empty_cta);
 
         binding.chipGroupRecent.removeAllViews();
         binding.textRecentTitle.setVisibility(state.recentQueries.isEmpty() ? View.GONE : View.VISIBLE);
