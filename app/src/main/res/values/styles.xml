@@ -54,6 +54,8 @@
         <item name="android:tint">?attr/colorOnSurface</item>
     </style>
 
+    <style name="App.Icon" parent="App.Icon.Tinted" />
+
 
     <style name="App.Chip.Filter" parent="Widget.Material3.Chip.Filter">
         <item name="chipBackgroundColor">@color/colorSurfaceVariant</item>
