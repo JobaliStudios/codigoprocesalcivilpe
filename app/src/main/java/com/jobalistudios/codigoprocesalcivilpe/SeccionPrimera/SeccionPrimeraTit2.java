@@ -73,6 +73,7 @@ public class SeccionPrimeraTit2 extends AppCompatActivity {
                 .putExtra(SectionContentActivity.EXTRA_SECTION_LABEL, getString(R.string.seccion_primeratit))
                 .putExtra(SectionContentActivity.EXTRA_TITLE_LABEL, getString(R.string.titulo2))
                 .putExtra(SectionContentActivity.EXTRA_CHAPTER_LABEL, getString(R.string.capitulo2))
+                .putExtra(SectionContentActivity.EXTRA_SHOW_BREADCRUMB, false)
                 .putExtra(SectionContentActivity.EXTRA_CURRENT_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_2)
                 .putExtra(SectionContentActivity.EXTRA_PREVIOUS_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_1)
                 .putExtra(SectionContentActivity.EXTRA_NEXT_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_3)));
@@ -87,6 +88,7 @@ public class SeccionPrimeraTit2 extends AppCompatActivity {
                 .putExtra(SectionContentActivity.EXTRA_SECTION_LABEL, getString(R.string.seccion_primeratit))
                 .putExtra(SectionContentActivity.EXTRA_TITLE_LABEL, getString(R.string.titulo2))
                 .putExtra(SectionContentActivity.EXTRA_CHAPTER_LABEL, getString(R.string.capitulo3))
+                .putExtra(SectionContentActivity.EXTRA_SHOW_BREADCRUMB, false)
                 .putExtra(SectionContentActivity.EXTRA_CURRENT_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_3)
                 .putExtra(SectionContentActivity.EXTRA_PREVIOUS_DESTINATION_ID, com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper.DEST_ART_SECTION_1_TITLE_2_CHAPTER_2)));
 
