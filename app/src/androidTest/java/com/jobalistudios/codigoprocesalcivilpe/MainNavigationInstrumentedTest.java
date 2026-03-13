@@ -20,7 +20,7 @@ public class MainNavigationInstrumentedTest {
         ActivityScenario.launch(MainActivity.class);
 
         onView(withId(R.id.navigation_busqueda)).perform(click());
-        onView(withId(R.id.textBusqueda)).check(matches(isDisplayed()));
+        onView(withId(R.id.searchView)).check(matches(isDisplayed()));
 
         onView(withId(R.id.navigation_favoritos)).perform(click());
         onView(withId(R.id.recyclerFavoritos)).check(matches(isDisplayed()));
