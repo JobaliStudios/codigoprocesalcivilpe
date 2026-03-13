@@ -1,5 +1,14 @@
 # Pruebas manuales rápidas
 
+## Checklist mínimo de UI/UX (obligatorio)
+- [ ] **Consistencia de estilos/tokens:** verificar que colores, tipografías, espacios y tamaños usen estilos/tokens definidos y no valores hardcodeados.
+- [ ] **Contraste y legibilidad:** validar contraste suficiente entre texto/fondo, tamaños legibles y jerarquía tipográfica clara.
+- [ ] **Estados vacíos/carga/error:** revisar que cada flujo relevante tenga estados vacíos, de carga y de error correctamente representados.
+- [ ] **Feedback táctil y jerarquía visual:** confirmar estados de interacción (pressed, focused, disabled), áreas táctiles adecuadas y prioridad visual clara.
+
+## Requisito de revisión antes de merge
+- [ ] **Revisión por pantalla completa:** ningún PR de UI/UX se mergea sin revisión por pantalla de las vistas impactadas (capturas o video corto por pantalla modificada).
+
 ## SplashScreen
 1. Abrir la app desde un estado limpio.
 2. Antes de que transcurran los 3 segundos, presionar el botón Atrás para cerrar el splash.
