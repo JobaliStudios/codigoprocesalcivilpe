@@ -1,14 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.codigoprocesalcivilpe" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <!-- ... otras propiedades ... -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
+        <item name="colorOutline">@color/colorOutline</item>
+
+        <item name="materialCardViewStyle">@style/App.Card.Recurrent</item>
+        <item name="chipStyle">@style/App.Chip.Filter</item>
+        <item name="buttonStyle">@style/App.Button.Primary</item>
     </style>
 
     <style name="Theme.codigoprocesalcivilpe" parent="Base.Theme.codigoprocesalcivilpe" />
-
 </resources>

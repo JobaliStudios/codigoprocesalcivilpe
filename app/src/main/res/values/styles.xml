@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="App.Text.Title.L" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_title_l</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="App.Text.Subtitle.M" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_subtitle_m</item>
+        <item name="android:textColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="App.Text.Body.M" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_body_m</item>
+        <item name="android:textColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="App.Text.Body.S" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_body_s</item>
+        <item name="android:textColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="App.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:textSize">@dimen/text_cta_m</item>
+    </style>
+
+    <style name="App.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/colorSurfaceVariant</item>
+        <item name="chipStrokeColor">@color/colorOutline</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="App.Card.Recurrent" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/colorSurface</item>
+        <item name="cardCornerRadius">@dimen/radius_l</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="strokeColor">@color/colorOutline</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="App.Text.CardTitle" parent="App.Text.Title.L" />
+
+    <style name="App.Text.CardBody" parent="App.Text.Body.S">
+        <item name="android:lineSpacingExtra">@dimen/space_xs</item>
+    </style>
+
+    <!-- backward compatibility styles referenced in old layouts -->
+    <style name="TEXT" parent="App.Text.Body.M" />
+    <style name="TEXT2" parent="App.Text.Body.S" />
+</resources>
