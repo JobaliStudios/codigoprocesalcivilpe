@@ -4,7 +4,7 @@
     <item>
         <shape android:shape="rectangle">
             <size android:height="1dp"/> <!-- Grosor del borde -->
-            <solid android:color="#000000"/> <!-- Color negro -->
+            <solid android:color="@color/colorOnSurface"/> <!-- Color negro -->
         </shape>
     </item>
 
@@ -12,7 +12,7 @@
     <item android:bottom="1dp">
         <shape android:shape="rectangle">
             <size android:height="1dp"/>
-            <solid android:color="#000000"/>
+            <solid android:color="@color/colorOnSurface"/>
         </shape>
     </item>
 
