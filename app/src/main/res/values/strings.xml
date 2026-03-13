@@ -74,6 +74,11 @@
     <string name="busqueda_empty_state">Escribe un término para buscar en el índice legal.</string>
     <string name="busqueda_no_results">No se encontraron resultados con los filtros actuales.</string>
 
+    <string name="busqueda_empty_title">Busca en el Código Procesal Civil</string>
+    <string name="busqueda_empty_cta">Buscar ahora</string>
+    <string name="busqueda_empty_icon_cd">Estado vacío de búsqueda</string>
+    <string name="favorites_empty_title">Aún no tienes favoritos</string>
+    <string name="favorites_empty_icon_cd">Estado vacío de favoritos</string>
     <string name="title_bnv_3">Favoritos</string>
     <string name="title_bnv_4">Configuración</string>
 

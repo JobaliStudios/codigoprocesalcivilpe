@@ -6,14 +6,18 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/space_m"
     android:layout_marginTop="@dimen/space_s"
-    android:layout_marginBottom="@dimen/space_xs">
+    android:layout_marginBottom="@dimen/space_s"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_gradient_card"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/space_m">
+        android:padding="@dimen/space_l">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -22,35 +26,35 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/favoriteTitle"
+                style="@style/App.Text.CardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2" />
+
+            <TextView
                 android:id="@+id/favoriteType"
                 style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/favoriteTitle"
-                style="@style/App.Text.Subtitle.M"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_xs"
-                android:textColor="@color/colorOnSurface"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/space_xs" />
 
             <TextView
                 android:id="@+id/favoriteSubtitle"
-                style="@style/App.Text.Body.S"
+                style="@style/App.Text.CardBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_xs" />
+                android:layout_marginTop="@dimen/space_s"
+                android:maxLines="3" />
         </LinearLayout>
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/list_card_chevron_size"
+            android:layout_height="@dimen/list_card_chevron_size"
+            android:layout_marginStart="@dimen/space_s"
             android:contentDescription="@string/open_favorite"
             android:src="@drawable/baseline_chevron_right_24"
-            app:tint="@color/colorOnSurfaceVariant" />
+            app:tint="@color/colorPrimary" />
 
         <ImageButton
             android:id="@+id/buttonRemoveFavorite"
