@@ -11,7 +11,7 @@
         android:id="@+id/fixedCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/space_l"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,26 +24,25 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/space_l">
 
             <!-- Título -->
             <TextView
-                style="@style/TEXT"
+                style="@style/App.Text.SectionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/subcapitulo1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                                 />
 
             <!-- Subtítulo -->
             <TextView
-                style="@style/TEXT2"
+                style="@style/App.Text.SectionSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/sec5tit4cap1subcap1sub"
-                android:textSize="14sp" />
+                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -61,24 +60,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/space_l">
 
 
             <!-- Texto del contenido -->
             <TextView
                 android:id="@+id/textView2"
-                style="@style/TEXT"
+                style="@style/App.Text.LegalBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/space_l"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="start"
-                android:lineSpacingExtra="2dp"
-                tools:ignore="VisualLintLongText"
+                                tools:ignore="VisualLintLongText"
                 android:textIsSelectable="true"
                 android:text="@string/seccionquintatit4cap1subcap1"
-                android:textSize="18sp" />
+                 />
 
         </LinearLayout>
     </ScrollView>
@@ -86,11 +84,11 @@
     <!-- Barra de búsqueda oculta inicialmente -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchBarContainer"
-        style="@style/TEXT"
+        style="@style/App.Text.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:padding="8dp"
+        android:padding="@dimen/space_s"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +106,7 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxWidth="400dp"
-            android:padding="8dp"
+            android:padding="@dimen/space_s"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSiguiente"
             app:layout_constraintStart_toStartOf="parent"

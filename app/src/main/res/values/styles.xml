@@ -47,6 +47,51 @@
         <item name="android:lineSpacingExtra">@dimen/space_xs</item>
     </style>
 
+    <style name="App.Text.Display" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:textSize">@dimen/text_display</item>
+        <item name="android:lineHeight">@dimen/line_height_display</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="App.Text.SectionTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:lineHeight">@dimen/line_height_title</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="App.Text.SectionSubtitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_subtitle</item>
+        <item name="android:lineHeight">@dimen/line_height_subtitle</item>
+        <item name="android:textColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="App.Text.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:lineHeight">@dimen/line_height_body</item>
+        <item name="android:textColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="App.Text.LegalBody" parent="App.Text.Body">
+        <item name="android:lineSpacingExtra">@dimen/space_s</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+        <item name="android:maxWidth">@dimen/max_reading_line_width</item>
+    </style>
+
+    <style name="App.Text.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:lineHeight">@dimen/line_height_caption</item>
+        <item name="android:textColor">@color/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="App.Button.SectionAction" parent="Widget.Material3.Button">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
     <style name="ThemeOverlay.codigoprocesalcivilpe.Toolbar" parent="ThemeOverlay.Material3.Toolbar.Surface">
         <item name="colorControlNormal">@color/toolbar_item_colors</item>
         <item name="actionMenuTextColor">@color/toolbar_item_colors</item>
