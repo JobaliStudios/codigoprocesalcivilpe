@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/App.Card.Recurrent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:foreground="?attr/selectableItemBackground"
+    android:layout_marginBottom="@dimen/space_s"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/space_m">
 
         <TextView
             android:id="@+id/textTitulo"
+            style="@style/App.Text.Subtitle.M"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorOnSurface"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textMeta"
+            style="@style/App.Text.Body.S"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="@dimen/space_xs" />
 
         <TextView
             android:id="@+id/textSnippet"
+            style="@style/App.Text.Body.S"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/space_s"
             android:maxLines="3" />
     </LinearLayout>
 

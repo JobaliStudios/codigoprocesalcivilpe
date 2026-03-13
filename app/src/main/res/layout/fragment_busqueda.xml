@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/space_l"
     tools:context=".busqueda.BusquedaFragment">
 
     <SearchView
@@ -17,7 +17,7 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/space_m"
         android:scrollbars="none">
 
         <com.google.android.material.chip.ChipGroup
@@ -30,40 +30,42 @@
 
     <TextView
         android:id="@+id/textRecentTitle"
+        style="@style/App.Text.Subtitle.M"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/space_m"
         android:text="@string/busqueda_recientes"
-        android:textStyle="bold" />
+        android:textColor="@color/colorOnSurface" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupRecent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="@dimen/space_s" />
 
     <ProgressBar
         android:id="@+id/progressLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/space_l"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/textBusqueda"
+        style="@style/App.Text.Body.M"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/space_l"
         android:gravity="center"
-        android:text="@string/busqueda_empty_state"
-        android:textAppearance="?attr/textAppearanceBodyLarge" />
+        android:text="@string/busqueda_empty_state" />
 
     <TextView
         android:id="@+id/textNoResults"
+        style="@style/App.Text.Body.M"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_s"
         android:gravity="center"
         android:text="@string/busqueda_no_results"
         android:visibility="gone" />
@@ -72,7 +74,7 @@
         android:id="@+id/recyclerResultados"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_s"
         android:layout_weight="1"
         tools:listitem="@layout/item_resultado_busqueda" />
 

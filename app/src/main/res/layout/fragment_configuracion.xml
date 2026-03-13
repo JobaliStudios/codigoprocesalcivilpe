@@ -27,47 +27,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/space_l">
 
             <TextView
                 android:id="@+id/config_title"
+                style="@style/App.Text.Title.L"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:letterSpacing="0.02"
-                android:text="@string/config_title"
-                android:textColor="@color/primary_dark"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:text="@string/config_title" />
 
             <TextView
                 android:id="@+id/config_subtitle"
+                style="@style/App.Text.Subtitle.M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:lineSpacingExtra="2dp"
-                android:text="@string/config_subtitle"
-                android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:layout_marginTop="@dimen/space_xs"
+                android:text="@string/config_subtitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_preferencias"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clickable="false"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#336B081D"
-                app:strokeWidth="1dp">
+                android:layout_marginTop="@dimen/space_l">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_gradient_card"
                     android:orientation="vertical"
-                    android:padding="16dp">
-
+                    android:padding="@dimen/space_l">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -76,18 +65,18 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:layout_marginEnd="12dp"
+                            android:layout_width="@dimen/list_card_icon_size"
+                            android:layout_height="@dimen/list_card_icon_size"
+                            android:layout_marginEnd="@dimen/space_m"
                             android:background="@drawable/bg_icon_container"
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
+                                android:layout_width="@dimen/list_card_small_icon"
+                                android:layout_height="@dimen/list_card_small_icon"
                                 android:contentDescription="@string/config_icon_reading"
                                 android:src="@drawable/baseline_book_24"
-                                app:tint="@color/primary_dark" />
+                                app:tint="@color/colorPrimary" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -97,20 +86,18 @@
                             android:orientation="vertical">
 
                             <TextView
+                                style="@style/App.Text.Subtitle.M"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/config_reading_title"
-                                android:textColor="@color/primary_dark"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textColor="@color/colorOnSurface" />
 
                             <TextView
+                                style="@style/App.Text.Body.S"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="@string/config_reading_desc"
-                                android:textColor="@color/secondary_text"
-                                android:textSize="12sp" />
+                                android:layout_marginTop="@dimen/space_xs"
+                                android:text="@string/config_reading_desc" />
                         </LinearLayout>
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -122,9 +109,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="12dp"
-                        android:background="@color/divider_gray"
-                        android:alpha="0.2" />
+                        android:layout_marginVertical="@dimen/space_m"
+                        android:alpha="0.2"
+                        android:background="@color/colorDivider" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -133,18 +120,18 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:layout_marginEnd="12dp"
+                            android:layout_width="@dimen/list_card_icon_size"
+                            android:layout_height="@dimen/list_card_icon_size"
+                            android:layout_marginEnd="@dimen/space_m"
                             android:background="@drawable/bg_icon_container"
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
+                                android:layout_width="@dimen/list_card_small_icon"
+                                android:layout_height="@dimen/list_card_small_icon"
                                 android:contentDescription="@string/config_icon_dark_mode"
                                 android:src="@drawable/baseline_settings_24"
-                                app:tint="@color/primary_dark" />
+                                app:tint="@color/colorPrimary" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -154,20 +141,18 @@
                             android:orientation="vertical">
 
                             <TextView
+                                style="@style/App.Text.Subtitle.M"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/config_dark_mode_title"
-                                android:textColor="@color/primary_dark"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textColor="@color/colorOnSurface" />
 
                             <TextView
+                                style="@style/App.Text.Body.S"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="@string/config_dark_mode_desc"
-                                android:textColor="@color/secondary_text"
-                                android:textSize="12sp" />
+                                android:layout_marginTop="@dimen/space_xs"
+                                android:text="@string/config_dark_mode_desc" />
                         </LinearLayout>
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -175,23 +160,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
-
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_soporte"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/space_m"
                 android:clickable="true"
-                android:foreground="?selectableItemBackground"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#336B081D"
-                app:strokeWidth="1dp">
+                android:focusable="true"
+                android:foreground="?selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -199,21 +179,21 @@
                     android:background="@drawable/bg_gradient_card"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_l">
 
                     <LinearLayout
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:layout_marginEnd="12dp"
+                        android:layout_width="@dimen/list_card_icon_size"
+                        android:layout_height="@dimen/list_card_icon_size"
+                        android:layout_marginEnd="@dimen/space_m"
                         android:background="@drawable/bg_icon_container"
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="@dimen/list_card_small_icon"
+                            android:layout_height="@dimen/list_card_small_icon"
                             android:contentDescription="@string/config_icon_support"
                             android:src="@drawable/baseline_article_24"
-                            app:tint="@color/primary_dark" />
+                            app:tint="@color/colorPrimary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -223,43 +203,38 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/App.Text.Subtitle.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/config_support_title"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/colorOnSurface" />
 
                         <TextView
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/config_support_desc"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
+                            android:layout_marginTop="@dimen/space_xs"
+                            android:text="@string/config_support_desc" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/list_card_chevron_size"
+                        android:layout_height="@dimen/list_card_chevron_size"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24"
-                        app:tint="@color/primary_dark" />
+                        app:tint="@color/colorPrimary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_acerca_de"
+                style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/space_m"
                 android:clickable="true"
-                android:foreground="?selectableItemBackground"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#336B081D"
-                app:strokeWidth="1dp">
+                android:focusable="true"
+                android:foreground="?selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,21 +242,21 @@
                     android:background="@drawable/bg_gradient_card"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_l">
 
                     <LinearLayout
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:layout_marginEnd="12dp"
+                        android:layout_width="@dimen/list_card_icon_size"
+                        android:layout_height="@dimen/list_card_icon_size"
+                        android:layout_marginEnd="@dimen/space_m"
                         android:background="@drawable/bg_icon_container"
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="@dimen/list_card_small_icon"
+                            android:layout_height="@dimen/list_card_small_icon"
                             android:contentDescription="@string/config_icon_about"
                             android:src="@drawable/baseline_settings_24"
-                            app:tint="@color/primary_dark" />
+                            app:tint="@color/colorPrimary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -291,40 +266,37 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/App.Text.Subtitle.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/config_about_title"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/colorOnSurface" />
 
                         <TextView
+                            style="@style/App.Text.Body.S"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/config_about_desc"
-                            android:textColor="@color/secondary_text"
-                            android:textSize="12sp" />
+                            android:layout_marginTop="@dimen/space_xs"
+                            android:text="@string/config_about_desc" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/list_card_chevron_size"
+                        android:layout_height="@dimen/list_card_chevron_size"
                         android:contentDescription="@string/next_section"
                         android:src="@drawable/baseline_chevron_right_24"
-                        app:tint="@color/primary_dark" />
+                        app:tint="@color/colorPrimary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/text_version"
+                style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/space_l"
                 android:gravity="center_horizontal"
-                android:text="@string/config_version_value"
-                android:textColor="@color/secondary_text"
-                android:textSize="12sp" />
+                android:text="@string/config_version_value" />
 
         </LinearLayout>
     </ScrollView>
