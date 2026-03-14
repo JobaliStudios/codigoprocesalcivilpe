@@ -608,4 +608,10 @@
     <string name="previous_chapter">Anterior capítulo</string>
     <string name="destination_not_available">No se pudo abrir el capítulo relacionado</string>
 
+    <string name="group_articles_label">Artículos</string>
+    <plurals name="group_articles_count">
+        <item quantity="one">artículo</item>
+        <item quantity="other">artículos</item>
+    </plurals>
+
 </resources>

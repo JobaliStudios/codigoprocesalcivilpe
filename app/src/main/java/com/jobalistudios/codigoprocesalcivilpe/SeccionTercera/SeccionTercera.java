@@ -7,26 +7,29 @@ import android.view.WindowMetrics;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionGroup;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionHierarchyAdapter;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionItem;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SeccionTercera extends AppCompatActivity {
 
     private AdView adView;
 
-    // Get the ad size with screen width.
     public AdSize getAdSize () {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int adWidthPixels;
-
         WindowMetrics windowMetrics = this.getWindowManager().getCurrentWindowMetrics();
-        adWidthPixels = windowMetrics.getBounds().width();
-
+        int adWidthPixels = windowMetrics.getBounds().width();
         float density = displayMetrics.density;
         int adWidth = (int) (adWidthPixels / density);
         return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
@@ -38,69 +41,49 @@ public class SeccionTercera extends AppCompatActivity {
         setContentView(R.layout.activity_secciontercera);
 
         MobileAds.initialize(this, initializationStatus -> {});
-
-        // Inicializacion de Ads en background
         new Thread(() -> MobileAds.initialize(this, initializationStatus -> {})).start();
 
-        // Configuración del AdView
         FrameLayout adContainer = findViewById(R.id.adContainer7);
         adView = new AdView(this);
         adView.setAdUnitId("ca-app-pub-6018202881039088/4089188744");
         adView.setAdSize(getAdSize());
         adContainer.addView(adView);
 
-        // Start loading the ad in the background.
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        CardView section1 = findViewById(R.id.section1);
-        CardView section2 = findViewById(R.id.section2);
-        CardView section3 = findViewById(R.id.section3);
-        CardView section4 = findViewById(R.id.section4);
-        CardView section5 = findViewById(R.id.section5);
-        CardView section6 = findViewById(R.id.section6);
-        CardView section7 = findViewById(R.id.section7);
-        CardView section8 = findViewById(R.id.section8);
-        CardView section9 = findViewById(R.id.section9);
-        CardView section10 = findViewById(R.id.section10);
-        CardView section11 = findViewById(R.id.section11);
-        CardView section12 = findViewById(R.id.section12);
-        CardView section13 = findViewById(R.id.section13);
-        CardView section14 = findViewById(R.id.section14);
-        CardView section15 = findViewById(R.id.section15);
-        CardView section16 = findViewById(R.id.section16);
+        RecyclerView recyclerView = findViewById(R.id.sectionRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new SectionHierarchyAdapter(this, buildGroups(), item ->
+                startActivity(new Intent(SeccionTercera.this, item.getDestination()))));
+    }
 
-        section1.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit1.class)));
-
-        section2.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit2.class)));
-
-        section3.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit3.class)));
-
-        section4.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit4.class)));
-
-        section5.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit5.class)));
-
-        section6.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit6.class)));
-
-        section7.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit7.class)));
-
-        section8.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit8.class)));
-
-        section9.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit9.class)));
-
-        section10.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit10.class)));
-
-        section11.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit11.class)));
-
-        section12.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit12.class)));
-
-        section13.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit13.class)));
-
-        section14.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit14.class)));
-
-        section15.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit15.class)));
-
-        section16.setOnClickListener(v -> startActivity(new Intent(SeccionTercera.this, SeccionTerceraTit16.class)));
-
+    private List<SectionGroup> buildGroups() {
+        return Arrays.asList(
+                new SectionGroup("Títulos I-IV", 36, Arrays.asList(
+                        new SectionItem(R.string.titulo1, R.string.sec3titulo1sub, R.string.rangartisec3tit1, SeccionTerceraTit1.class),
+                        new SectionItem(R.string.titulo2, R.string.sec3titulo2sub, R.string.rangartisec3tit2, SeccionTerceraTit2.class),
+                        new SectionItem(R.string.titulo3, R.string.sec3titulo3sub, R.string.rangartisec3tit3, SeccionTerceraTit3.class),
+                        new SectionItem(R.string.titulo4, R.string.sec3titulo4sub, R.string.rangartisec3tit4, SeccionTerceraTit4.class)
+                )),
+                new SectionGroup("Títulos V-VIII", 71, Arrays.asList(
+                        new SectionItem(R.string.titulo5, R.string.sec3titulo5sub, R.string.rangartisec3tit5, SeccionTerceraTit5.class),
+                        new SectionItem(R.string.titulo6, R.string.sec3titulo6sub, R.string.rangartisec3tit6, SeccionTerceraTit6.class),
+                        new SectionItem(R.string.titulo7, R.string.sec3titulo7sub, R.string.rangartisec3tit7, SeccionTerceraTit7.class),
+                        new SectionItem(R.string.titulo8, R.string.sec3titulo8sub, R.string.rangartisec3tit8, SeccionTerceraTit8.class)
+                )),
+                new SectionGroup("Títulos IX-XII", 73, Arrays.asList(
+                        new SectionItem(R.string.titulo9, R.string.sec3titulo9sub, R.string.rangartisec3tit9, SeccionTerceraTit9.class),
+                        new SectionItem(R.string.titulo10, R.string.sec3titulo10sub, R.string.rangartisec3tit10, SeccionTerceraTit10.class),
+                        new SectionItem(R.string.titulo11, R.string.sec3titulo11sub, R.string.rangartisec3tit11, SeccionTerceraTit11.class),
+                        new SectionItem(R.string.titulo12, R.string.sec3titulo12sub, R.string.rangartisec3tit12, SeccionTerceraTit12.class)
+                )),
+                new SectionGroup("Títulos XIII-XVI", 67, Arrays.asList(
+                        new SectionItem(R.string.titulo13, R.string.sec3titulo13sub, R.string.rangartisec3tit13, SeccionTerceraTit13.class),
+                        new SectionItem(R.string.titulo14, R.string.sec3titulo14sub, R.string.rangartisec3tit14, SeccionTerceraTit14.class),
+                        new SectionItem(R.string.titulo15, R.string.sec3titulo15sub, R.string.rangartisec3tit15, SeccionTerceraTit15.class),
+                        new SectionItem(R.string.titulo16, R.string.sec3titulo16sub, R.string.rangartisec3tit16, SeccionTerceraTit16.class)
+                ))
+        );
     }
 }
