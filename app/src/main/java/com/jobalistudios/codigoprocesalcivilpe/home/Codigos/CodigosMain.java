@@ -2,7 +2,9 @@ package com.jobalistudios.codigoprocesalcivilpe.home.Codigos;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,15 +24,30 @@ public class CodigosMain extends AppCompatActivity {
             startActivity(new Intent(this, CodigoProcesalCivilMain.class));
         });
 
-        // Configurar otros Cards
         MaterialCardView cardCivil = findViewById(R.id.card_codigo_civil);
-        cardCivil.setOnClickListener(v -> Toast.makeText(this, "Código Civil próximamente", Toast.LENGTH_SHORT).show());
-
         MaterialCardView cardPenal = findViewById(R.id.card_codigo_penal);
-        cardPenal.setOnClickListener(v -> Toast.makeText(this, "Código Penal próximamente", Toast.LENGTH_SHORT).show());
-
         MaterialCardView cardProcesalPenal = findViewById(R.id.card_codigo_procesal_penal);
-        cardProcesalPenal.setOnClickListener(v -> Toast.makeText(this, "Código Procesal Penal próximamente", Toast.LENGTH_SHORT).show());
+
+        disableUnavailableCard(cardCivil);
+        disableUnavailableCard(cardPenal);
+        disableUnavailableCard(cardProcesalPenal);
+
+        MaterialCardView proximamenteHeader = findViewById(R.id.card_proximamente_header);
+        LinearLayout proximamenteContent = findViewById(R.id.layout_proximamente_content);
+        ImageView proximamenteChevron = findViewById(R.id.iv_proximamente_chevron);
+
+        proximamenteHeader.setOnClickListener(v -> {
+            boolean isCollapsed = proximamenteContent.getVisibility() == View.GONE;
+            proximamenteContent.setVisibility(isCollapsed ? View.VISIBLE : View.GONE);
+            proximamenteChevron.animate().rotation(isCollapsed ? 90f : 0f).setDuration(150).start();
+        });
+    }
+
+    private void disableUnavailableCard(MaterialCardView card) {
+        card.setClickable(false);
+        card.setFocusable(false);
+        card.setEnabled(false);
+        card.setAlpha(0.55f);
     }
 
 }
