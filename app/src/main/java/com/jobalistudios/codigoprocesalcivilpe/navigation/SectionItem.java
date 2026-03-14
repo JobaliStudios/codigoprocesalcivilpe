@@ -10,16 +10,29 @@ public class SectionItem {
     @StringRes
     private final int rangeRes;
     private final Class<?> destination;
+    private final SectionFilterType type;
 
     public SectionItem(@StringRes int titleRes, @StringRes int subtitleRes, @StringRes int rangeRes, Class<?> destination) {
+        this(titleRes, subtitleRes, rangeRes, destination, SectionFilterType.TITULO);
+    }
+
+    public SectionItem(
+            @StringRes int titleRes,
+            @StringRes int subtitleRes,
+            @StringRes int rangeRes,
+            Class<?> destination,
+            SectionFilterType type
+    ) {
         this.titleRes = titleRes;
         this.subtitleRes = subtitleRes;
         this.rangeRes = rangeRes;
         this.destination = destination;
+        this.type = type;
     }
 
     public int getTitleRes() { return titleRes; }
     public int getSubtitleRes() { return subtitleRes; }
     public int getRangeRes() { return rangeRes; }
     public Class<?> getDestination() { return destination; }
+    public SectionFilterType getType() { return type; }
 }

@@ -45,7 +45,8 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    private final List<SectionGroup> groups;
+    private final List<SectionGroup> originalGroups;
+    private final List<SectionGroup> visibleGroups = new ArrayList<>();
     private final List<Row> rows = new ArrayList<>();
     private final Set<Integer> expandedGroups = new HashSet<>();
     private final OnSectionItemClickListener listener;
@@ -53,15 +54,57 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public SectionHierarchyAdapter(Context context, List<SectionGroup> groups, OnSectionItemClickListener listener) {
         this.context = context;
-        this.groups = groups;
+        this.originalGroups = groups;
         this.listener = listener;
+        this.visibleGroups.addAll(groups);
         rebuildRows();
+    }
+
+    public int applyFilter(String query, SectionFilterType type) {
+        visibleGroups.clear();
+        boolean hasQuery = query != null && !query.trim().isEmpty();
+
+        for (SectionGroup group : originalGroups) {
+            List<SectionItem> matchedItems = new ArrayList<>();
+            for (SectionItem item : group.getItems()) {
+                boolean matchesType = type == SectionFilterType.ALL || item.getType() == type;
+                if (!matchesType) {
+                    continue;
+                }
+                String title = context.getString(item.getTitleRes());
+                String subtitle = context.getString(item.getSubtitleRes());
+                String range = context.getString(item.getRangeRes());
+                boolean matchesText = SectionFilterController.matchesText(query, title, subtitle, range, group.getTitle());
+                if (matchesText) {
+                    matchedItems.add(item);
+                }
+            }
+            if (!matchedItems.isEmpty()) {
+                visibleGroups.add(new SectionGroup(group.getTitle(), group.getArticleCount(), matchedItems));
+            }
+        }
+
+        expandedGroups.clear();
+        if (hasQuery || type != SectionFilterType.ALL) {
+            for (int i = 0; i < visibleGroups.size(); i++) {
+                expandedGroups.add(i);
+            }
+        }
+
+        rebuildRows();
+        notifyDataSetChanged();
+
+        int totalVisibleItems = 0;
+        for (SectionGroup group : visibleGroups) {
+            totalVisibleItems += group.getItems().size();
+        }
+        return totalVisibleItems;
     }
 
     private void rebuildRows() {
         rows.clear();
-        for (int i = 0; i < groups.size(); i++) {
-            SectionGroup group = groups.get(i);
+        for (int i = 0; i < visibleGroups.size(); i++) {
+            SectionGroup group = visibleGroups.get(i);
             rows.add(new Row(group));
             if (expandedGroups.contains(i)) {
                 for (SectionItem item : group.getItems()) {

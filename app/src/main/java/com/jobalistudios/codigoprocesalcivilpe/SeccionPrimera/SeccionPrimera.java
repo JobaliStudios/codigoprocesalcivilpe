@@ -20,7 +20,8 @@ import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
-
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionCardFilterBinder;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 
 public class SeccionPrimera extends AppCompatActivity {
 
@@ -28,7 +29,6 @@ public class SeccionPrimera extends AppCompatActivity {
     private FavoritesManager favoritesManager;
     private FavoriteItem favoriteItem;
 
-    // Get the ad size with screen width.
     public AdSize getAdSize () {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int adWidthPixels = displayMetrics.widthPixels;
@@ -49,27 +49,30 @@ public class SeccionPrimera extends AppCompatActivity {
         setContentView(R.layout.activity_seccionprimera);
 
         MobileAds.initialize(this, initializationStatus -> {});
-
-        // Inicializacion de Ads en background
         new Thread(() -> MobileAds.initialize(this, initializationStatus -> {})).start();
 
-        // Configuración del AdView
         FrameLayout adContainer = findViewById(R.id.adContainer2);
         adView = new AdView(this);
         adView.setAdUnitId("ca-app-pub-6018202881039088/4877029953");
         adView.setAdSize(getAdSize());
         adContainer.addView(adView);
-
-        // Start loading the ad in the background.
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        adView.loadAd(new AdRequest.Builder().build());
 
         CardView section1 = findViewById(R.id.section1);
         CardView section2 = findViewById(R.id.section2);
 
         section1.setOnClickListener(v -> startActivity(new Intent(SeccionPrimera.this, SeccionPrimeraTit1.class)));
-
         section2.setOnClickListener(v -> startActivity(new Intent(SeccionPrimera.this, SeccionPrimeraTit2.class)));
+
+        SectionCardFilterBinder filterBinder = new SectionCardFilterBinder();
+        filterBinder.addEntry(section1, getString(R.string.titulo1), getString(R.string.sec1titulo1sub), getString(R.string.rangartisec1tit1), SectionFilterType.TITULO);
+        filterBinder.addEntry(section2, getString(R.string.titulo2), getString(R.string.sec1titulo2sub), getString(R.string.rangartisec1tit2), SectionFilterType.TITULO);
+        filterBinder.bind(
+                SeccionPrimera.class.getName(),
+                findViewById(R.id.sectionSearchView),
+                findViewById(R.id.sectionTypeChipGroup),
+                findViewById(R.id.sectionFilterEmptyState)
+        );
 
         favoritesManager = new FavoritesManager(this);
         favoriteItem = new FavoriteItem(
@@ -79,7 +82,6 @@ public class SeccionPrimera extends AppCompatActivity {
                 getString(R.string.favorite_type_section),
                 FavoriteDestinationMapper.DEST_SECTION_PRIMERA
         );
-
     }
 
     @Override
@@ -111,5 +113,4 @@ public class SeccionPrimera extends AppCompatActivity {
         }
         super.onDestroy();
     }
-
 }

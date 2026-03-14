@@ -14,6 +14,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionCardFilterBinder;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 public class SeccionCuarta extends AppCompatActivity {
@@ -75,6 +77,22 @@ public class SeccionCuarta extends AppCompatActivity {
         section6.setOnClickListener(v -> startActivity(new Intent(SeccionCuarta.this, SeccionCuartaTit6.class)));
 
         section7.setOnClickListener(v -> startActivity(new Intent(SeccionCuarta.this, SeccionCuartaTit7.class)));
+
+
+        SectionCardFilterBinder filterBinder = new SectionCardFilterBinder();
+        filterBinder.addEntry(section1, getString(R.string.titulo1), getString(R.string.sec4titulo1sub), getString(R.string.rangartisec4tit1), SectionFilterType.TITULO);
+        filterBinder.addEntry(section2, getString(R.string.titulo2), getString(R.string.sec4titulo2sub), getString(R.string.rangartisec4tit2), SectionFilterType.TITULO);
+        filterBinder.addEntry(section3, getString(R.string.titulo3), getString(R.string.sec4titulo3sub), getString(R.string.rangartisec4tit3), SectionFilterType.TITULO);
+        filterBinder.addEntry(section4, getString(R.string.titulo4), getString(R.string.sec4titulo4sub), getString(R.string.rangartisec4tit4), SectionFilterType.TITULO);
+        filterBinder.addEntry(section5, getString(R.string.titulo5), getString(R.string.sec4titulo5sub), getString(R.string.rangartisec4tit5), SectionFilterType.TITULO);
+        filterBinder.addEntry(section6, getString(R.string.titulo6), getString(R.string.sec4titulo6sub), getString(R.string.rangartisec4tit6), SectionFilterType.TITULO);
+        filterBinder.addEntry(section7, getString(R.string.titulo7), getString(R.string.sec4titulo7sub), getString(R.string.rangartisec4tit7), SectionFilterType.TITULO);
+        filterBinder.bind(
+                SeccionCuarta.class.getName(),
+                findViewById(R.id.sectionSearchView),
+                findViewById(R.id.sectionTypeChipGroup),
+                findViewById(R.id.sectionFilterEmptyState)
+        );
 
     }
 

@@ -15,6 +15,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterController;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionGroup;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionHierarchyAdapter;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionItem;
@@ -54,27 +56,36 @@ public class SeccionTerceraTit8 extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.sectionRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new SectionHierarchyAdapter(this, buildGroups(), item ->
-                startActivity(new Intent(SeccionTerceraTit8.this, item.getDestination()))));
+        SectionHierarchyAdapter adapter = new SectionHierarchyAdapter(this, buildGroups(), item ->
+                startActivity(new Intent(SeccionTerceraTit8.this, item.getDestination())));
+        recyclerView.setAdapter(adapter);
+
+        new SectionFilterController(
+                getClass().getName(),
+                findViewById(R.id.sectionSearchView),
+                findViewById(R.id.sectionTypeChipGroup),
+                findViewById(R.id.sectionFilterEmptyState),
+                adapter::applyFilter
+        );
     }
 
     private List<SectionGroup> buildGroups() {
         return Arrays.asList(
                 new SectionGroup("Capítulos I-IV", 28, Arrays.asList(
-                        new SectionItem(R.string.capitulo1, R.string.sec3tit8cap1sub, R.string.rangartisec3tit8cap1, SeccionTerceraTit8Cap1.class),
-                        new SectionItem(R.string.capitulo2, R.string.sec3tit8cap2sub, R.string.rangartisec3tit8cap2, SeccionTerceraTit8Cap2.class),
-                        new SectionItem(R.string.capitulo3, R.string.sec3tit8cap3sub, R.string.rangartisec3tit8cap3, SeccionTerceraTit8Cap3.class),
-                        new SectionItem(R.string.capitulo4, R.string.sec3tit8cap4sub, R.string.rangartisec3tit8cap4, SeccionTerceraTit8Cap4.class)
+                        new SectionItem(R.string.capitulo1, R.string.sec3tit8cap1sub, R.string.rangartisec3tit8cap1, SeccionTerceraTit8Cap1.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo2, R.string.sec3tit8cap2sub, R.string.rangartisec3tit8cap2, SeccionTerceraTit8Cap2.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo3, R.string.sec3tit8cap3sub, R.string.rangartisec3tit8cap3, SeccionTerceraTit8Cap3.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo4, R.string.sec3tit8cap4sub, R.string.rangartisec3tit8cap4, SeccionTerceraTit8Cap4.class, SectionFilterType.CAPITULO)
                 )),
                 new SectionGroup("Capítulos V-VII", 17, Arrays.asList(
-                        new SectionItem(R.string.capitulo5, R.string.sec3tit8cap5sub, R.string.rangartisec3tit8cap5, SeccionTerceraTit8Cap5.class),
-                        new SectionItem(R.string.capitulo6, R.string.sec3tit8cap6sub, R.string.rangartisec3tit8cap6, SeccionTerceraTit8Cap6.class),
-                        new SectionItem(R.string.capitulo7, R.string.sec3tit8cap7sub, R.string.rangartisec3tit8cap7, SeccionTerceraTit8Cap7.class)
+                        new SectionItem(R.string.capitulo5, R.string.sec3tit8cap5sub, R.string.rangartisec3tit8cap5, SeccionTerceraTit8Cap5.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo6, R.string.sec3tit8cap6sub, R.string.rangartisec3tit8cap6, SeccionTerceraTit8Cap6.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo7, R.string.sec3tit8cap7sub, R.string.rangartisec3tit8cap7, SeccionTerceraTit8Cap7.class, SectionFilterType.CAPITULO)
                 )),
                 new SectionGroup("Capítulos VIII-X", 17, Arrays.asList(
-                        new SectionItem(R.string.capitulo8, R.string.sec3tit8cap8sub, R.string.rangartisec3tit8cap8, SeccionTerceraTit8Cap8.class),
-                        new SectionItem(R.string.capitulo9, R.string.sec3tit8cap9sub, R.string.rangartisec3tit8cap9, SeccionTerceraTit8Cap9.class),
-                        new SectionItem(R.string.capitulo10, R.string.sec3tit8cap10sub, R.string.rangartisec3tit8cap10, SeccionTerceraTit8Cap10.class)
+                        new SectionItem(R.string.capitulo8, R.string.sec3tit8cap8sub, R.string.rangartisec3tit8cap8, SeccionTerceraTit8Cap8.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo9, R.string.sec3tit8cap9sub, R.string.rangartisec3tit8cap9, SeccionTerceraTit8Cap9.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo10, R.string.sec3tit8cap10sub, R.string.rangartisec3tit8cap10, SeccionTerceraTit8Cap10.class, SectionFilterType.CAPITULO)
                 ))
         );
     }
