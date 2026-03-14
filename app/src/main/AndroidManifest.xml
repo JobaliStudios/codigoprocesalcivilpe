@@ -59,6 +59,9 @@
         <activity
             android:name=".SectionContentActivity"
             android:exported="false" />
+        <activity
+            android:name=".navigation.SectionListActivity"
+            android:exported="false" />
 
         <!-- Auto-registered section activities -->
         <activity

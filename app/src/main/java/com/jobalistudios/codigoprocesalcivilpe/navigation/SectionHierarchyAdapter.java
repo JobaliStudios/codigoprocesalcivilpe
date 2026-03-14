@@ -71,9 +71,9 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
                 if (!matchesType) {
                     continue;
                 }
-                String title = context.getString(item.getTitleRes());
-                String subtitle = context.getString(item.getSubtitleRes());
-                String range = context.getString(item.getRangeRes());
+                String title = item.hasStringContent() ? item.getTitle() : context.getString(item.getTitleRes());
+                String subtitle = item.hasStringContent() ? item.getSubtitle() : context.getString(item.getSubtitleRes());
+                String range = item.hasStringContent() ? item.getRange() : context.getString(item.getRangeRes());
                 boolean matchesText = SectionFilterController.matchesText(query, title, subtitle, range, group.getTitle());
                 if (matchesText) {
                     matchedItems.add(item);
@@ -173,9 +173,15 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void bindItem(ItemViewHolder holder, SectionItem item) {
-        holder.title.setText(item.getTitleRes());
-        holder.subtitle.setText(item.getSubtitleRes());
-        holder.range.setText(item.getRangeRes());
+        if (item.hasStringContent()) {
+            holder.title.setText(item.getTitle());
+            holder.subtitle.setText(item.getSubtitle());
+            holder.range.setText(item.getRange());
+        } else {
+            holder.title.setText(item.getTitleRes());
+            holder.subtitle.setText(item.getSubtitleRes());
+            holder.range.setText(item.getRangeRes());
+        }
         holder.itemView.setOnClickListener(v -> listener.onSectionItemClick(item));
     }
 
