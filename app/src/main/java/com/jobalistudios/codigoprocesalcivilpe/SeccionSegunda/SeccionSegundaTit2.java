@@ -15,6 +15,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterController;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionGroup;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionHierarchyAdapter;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionItem;
@@ -54,23 +56,32 @@ public class SeccionSegundaTit2 extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.sectionRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new SectionHierarchyAdapter(this, buildGroups(), item ->
-                startActivity(new Intent(SeccionSegundaTit2.this, item.getDestination()))));
+        SectionHierarchyAdapter adapter = new SectionHierarchyAdapter(this, buildGroups(), item ->
+                startActivity(new Intent(SeccionSegundaTit2.this, item.getDestination())));
+        recyclerView.setAdapter(adapter);
+
+        new SectionFilterController(
+                getClass().getName(),
+                findViewById(R.id.sectionSearchView),
+                findViewById(R.id.sectionTypeChipGroup),
+                findViewById(R.id.sectionFilterEmptyState),
+                adapter::applyFilter
+        );
     }
 
     private List<SectionGroup> buildGroups() {
         return Arrays.asList(
                 new SectionGroup("Capítulos I-IV", 33, Arrays.asList(
-                        new SectionItem(R.string.capitulo1, R.string.sec2tit2cap1sub, R.string.rangartisec2tit2cap1, SeccionSegundaTit2Cap1.class),
-                        new SectionItem(R.string.capitulo2, R.string.sec2tit2cap2sub, R.string.rangartisec2tit2cap2, SeccionSegundaTit2Cap2.class),
-                        new SectionItem(R.string.capitulo3, R.string.sec2tit2cap3sub, R.string.rangartisec2tit2cap3, SeccionSegundaTit2Cap3.class),
-                        new SectionItem(R.string.capitulo4, R.string.sec2tit2cap4sub, R.string.rangartisec2tit2cap4, SeccionSegundaTit2Cap4.class)
+                        new SectionItem(R.string.capitulo1, R.string.sec2tit2cap1sub, R.string.rangartisec2tit2cap1, SeccionSegundaTit2Cap1.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo2, R.string.sec2tit2cap2sub, R.string.rangartisec2tit2cap2, SeccionSegundaTit2Cap2.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo3, R.string.sec2tit2cap3sub, R.string.rangartisec2tit2cap3, SeccionSegundaTit2Cap3.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo4, R.string.sec2tit2cap4sub, R.string.rangartisec2tit2cap4, SeccionSegundaTit2Cap4.class, SectionFilterType.CAPITULO)
                 )),
                 new SectionGroup("Capítulos V-VIII", 34, Arrays.asList(
-                        new SectionItem(R.string.capitulo5, R.string.sec2tit2cap5sub, R.string.rangartisec2tit2cap5, SeccionSegundaTit2Cap5.class),
-                        new SectionItem(R.string.capitulo6, R.string.sec2tit2cap6sub, R.string.rangartisec2tit2cap6, SeccionSegundaTit2Cap6.class),
-                        new SectionItem(R.string.capitulo7, R.string.sec2tit2cap7sub, R.string.rangartisec2tit2cap7, SeccionSegundaTit2Cap7.class),
-                        new SectionItem(R.string.capitulo8, R.string.sec2tit2cap8sub, R.string.rangartisec2tit2cap8, SeccionSegundaTit2Cap8.class)
+                        new SectionItem(R.string.capitulo5, R.string.sec2tit2cap5sub, R.string.rangartisec2tit2cap5, SeccionSegundaTit2Cap5.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo6, R.string.sec2tit2cap6sub, R.string.rangartisec2tit2cap6, SeccionSegundaTit2Cap6.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo7, R.string.sec2tit2cap7sub, R.string.rangartisec2tit2cap7, SeccionSegundaTit2Cap7.class, SectionFilterType.CAPITULO),
+                        new SectionItem(R.string.capitulo8, R.string.sec2tit2cap8sub, R.string.rangartisec2tit2cap8, SeccionSegundaTit2Cap8.class, SectionFilterType.CAPITULO)
                 ))
         );
     }

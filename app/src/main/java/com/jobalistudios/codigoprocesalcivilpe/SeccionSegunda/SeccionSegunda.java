@@ -14,6 +14,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionCardFilterBinder;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 
 public class SeccionSegunda extends AppCompatActivity {
 
@@ -60,6 +62,17 @@ public class SeccionSegunda extends AppCompatActivity {
         section2.setOnClickListener(v -> startActivity(new Intent(SeccionSegunda.this, SeccionSegundaTit2.class)));
 
         section3.setOnClickListener(v -> startActivity(new Intent(SeccionSegunda.this, SeccionSegundaTit3.class)));
+
+        SectionCardFilterBinder filterBinder = new SectionCardFilterBinder();
+        filterBinder.addEntry(section1, getString(R.string.titulo1), getString(R.string.sec2titulo1sub), getString(R.string.rangartisec2tit1), SectionFilterType.TITULO);
+        filterBinder.addEntry(section2, getString(R.string.titulo2), getString(R.string.sec2titulo2sub), getString(R.string.rangartisec2tit2), SectionFilterType.TITULO);
+        filterBinder.addEntry(section3, getString(R.string.titulo3), getString(R.string.sec2titulo3sub), getString(R.string.rangartisec2tit3), SectionFilterType.TITULO);
+        filterBinder.bind(
+                SeccionSegunda.class.getName(),
+                findViewById(R.id.sectionSearchView),
+                findViewById(R.id.sectionTypeChipGroup),
+                findViewById(R.id.sectionFilterEmptyState)
+        );
 
     }
 

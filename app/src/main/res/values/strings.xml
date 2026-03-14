@@ -614,4 +614,10 @@
         <item quantity="other">artículos</item>
     </plurals>
 
+    <string name="section_filter_hint">Buscar en esta sección</string>
+    <string name="filter_all">Todos</string>
+    <string name="filter_titulo">Título</string>
+    <string name="filter_capitulo">Capítulo</string>
+    <string name="filter_subcapitulo">Subcapítulo</string>
+    <string name="section_filter_empty">No hay resultados para el filtro actual.</string>
 </resources>

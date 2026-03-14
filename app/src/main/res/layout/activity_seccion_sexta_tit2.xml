@@ -47,13 +47,21 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    
+    <include
+        android:id="@+id/sectionFilter"
+        layout="@layout/view_section_filter"
+        app:layout_constraintTop_toBottomOf="@id/fixedCardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sectionRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@id/fixedCardView"
+        app:layout_constraintTop_toBottomOf="@id/sectionFilter"
         app:layout_constraintBottom_toTopOf="@+id/adContainer27" />
 
 
