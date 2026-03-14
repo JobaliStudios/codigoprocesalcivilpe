@@ -1,16 +1,17 @@
 package com.jobalistudios.codigoprocesalcivilpe.navigation;
 
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.annotation.Nullable;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
-import com.jobalistudios.codigoprocesalcivilpe.SectionContentActivity;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionCuarta.SeccionCuarta;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionQuinta.SeccionQuinta;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionSegunda.SeccionSegunda;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionSexta.SeccionSexta;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionTercera.SeccionTercera;
+import com.jobalistudios.codigoprocesalcivilpe.SectionContentActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
