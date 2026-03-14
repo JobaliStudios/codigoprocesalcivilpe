@@ -1,25 +1,19 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Codigos;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowMetrics;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
-import com.jobalistudios.codigoprocesalcivilpe.SeccionCuarta.SeccionCuarta;
-import com.jobalistudios.codigoprocesalcivilpe.SeccionPrimera.SeccionPrimera;
-import com.jobalistudios.codigoprocesalcivilpe.SeccionQuinta.SeccionQuinta;
-import com.jobalistudios.codigoprocesalcivilpe.SeccionSegunda.SeccionSegunda;
-import com.jobalistudios.codigoprocesalcivilpe.SeccionSexta.SeccionSexta;
-import com.jobalistudios.codigoprocesalcivilpe.SeccionTercera.SeccionTercera;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionListActivity;
 
 
 public class CodigoProcesalCivilMain extends AppCompatActivity {
@@ -58,25 +52,17 @@ public class CodigoProcesalCivilMain extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        CardView section1 = findViewById(R.id.section1);
-        CardView section2 = findViewById(R.id.section2);
-        CardView section3 = findViewById(R.id.section3);
-        CardView section4 = findViewById(R.id.section4);
-        CardView section5 = findViewById(R.id.section5);
-        CardView section6 = findViewById(R.id.section6);
+        findViewById(R.id.section1).setOnClickListener(v -> openHierarchy());
+        findViewById(R.id.section2).setOnClickListener(v -> openHierarchy());
+        findViewById(R.id.section3).setOnClickListener(v -> openHierarchy());
+        findViewById(R.id.section4).setOnClickListener(v -> openHierarchy());
+        findViewById(R.id.section5).setOnClickListener(v -> openHierarchy());
+        findViewById(R.id.section6).setOnClickListener(v -> openHierarchy());
 
-        section1.setOnClickListener(v -> startActivity(new Intent(CodigoProcesalCivilMain.this, SeccionPrimera.class)));
+    }
 
-        section2.setOnClickListener(v -> startActivity(new Intent(CodigoProcesalCivilMain.this, SeccionSegunda.class)));
-
-        section3.setOnClickListener(v -> startActivity(new Intent(CodigoProcesalCivilMain.this, SeccionTercera.class)));
-
-        section4.setOnClickListener(v -> startActivity(new Intent(CodigoProcesalCivilMain.this, SeccionCuarta.class)));
-
-        section5.setOnClickListener(v -> startActivity(new Intent(CodigoProcesalCivilMain.this, SeccionQuinta.class)));
-
-        section6.setOnClickListener(v -> startActivity(new Intent(CodigoProcesalCivilMain.this, SeccionSexta.class)));
-
+    private void openHierarchy() {
+        startActivity(SectionListActivity.createIntent(this, LegalHierarchyRepository.ROOT_ID));
     }
 
     @Override

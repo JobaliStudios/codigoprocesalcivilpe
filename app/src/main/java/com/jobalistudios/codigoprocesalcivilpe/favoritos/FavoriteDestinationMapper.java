@@ -6,11 +6,11 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.jobalistudios.codigoprocesalcivilpe.SeccionPrimera.SeccionPrimera;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionPrimera.SeccionPrimeraTit1;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.SectionContentActivity;
 import com.jobalistudios.codigoprocesalcivilpe.SeccionPrimera.SeccionPrimeraTit2Cap1;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionListActivity;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +28,6 @@ public final class FavoriteDestinationMapper {
 
     static {
         Map<String, String> legacyMap = new HashMap<>();
-        legacyMap.put(SeccionPrimera.class.getName(), DEST_SECTION_PRIMERA);
         legacyMap.put(SeccionPrimeraTit1.class.getName(), DEST_ART_SECTION_1_TITLE_1);
         legacyMap.put(SeccionPrimeraTit2Cap1.class.getName(), DEST_ART_SECTION_1_TITLE_2_CHAPTER_1);
         LEGACY_ACTIVITY_TO_DESTINATION = Collections.unmodifiableMap(legacyMap);
@@ -53,7 +52,7 @@ public final class FavoriteDestinationMapper {
         String normalized = normalizeDestinationId(destinationId);
         switch (normalized) {
             case DEST_SECTION_PRIMERA:
-                return new Intent(context, SeccionPrimera.class);
+                return SectionListActivity.createIntent(context, "sec_1");
             case DEST_ART_SECTION_1_TITLE_1:
                 return new Intent(context, SeccionPrimeraTit1.class);
             case DEST_ART_SECTION_1_TITLE_2_CHAPTER_1:
