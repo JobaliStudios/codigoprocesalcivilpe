@@ -32,6 +32,8 @@
     <string name="codigos_codigo_procesal_civil_title">Código Procesal Civil (FEB 2025)</string>
     <string name="codigos_codigo_procesal_civil_subtitle">847 artículos</string>
     <string name="codigos_codigo_procesal_penal_title">Código Procesal Penal</string>
+    <string name="codigos_proximamente_title">Próximamente</string>
+    <string name="codigos_expandir_proximamente">Expandir sección Próximamente</string>
 
     <!-- Textos de Cuestionarios CPC -->
     <string name="quiz_cpc_start_title">Código Procesal Civil</string>
