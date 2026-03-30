@@ -13,7 +13,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionListActivity;
 
 
 public class CodigoProcesalCivilMain extends AppCompatActivity {
@@ -62,7 +61,11 @@ public class CodigoProcesalCivilMain extends AppCompatActivity {
     }
 
     private void openHierarchy(String nodeId) {
-        startActivity(SectionListActivity.createIntent(this, nodeId));
+        LegalHierarchyRepository.Node node = LegalHierarchyRepository.findNodeById(nodeId);
+        if (node == null) {
+            return;
+        }
+        startActivity(LegalHierarchyRepository.buildIntentForNode(this, node));
     }
 
     @Override
