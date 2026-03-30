@@ -52,17 +52,17 @@ public class CodigoProcesalCivilMain extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        findViewById(R.id.section1).setOnClickListener(v -> openHierarchy());
-        findViewById(R.id.section2).setOnClickListener(v -> openHierarchy());
-        findViewById(R.id.section3).setOnClickListener(v -> openHierarchy());
-        findViewById(R.id.section4).setOnClickListener(v -> openHierarchy());
-        findViewById(R.id.section5).setOnClickListener(v -> openHierarchy());
-        findViewById(R.id.section6).setOnClickListener(v -> openHierarchy());
+        findViewById(R.id.section1).setOnClickListener(v -> openHierarchy("sec_1"));
+        findViewById(R.id.section2).setOnClickListener(v -> openHierarchy("sec_2"));
+        findViewById(R.id.section3).setOnClickListener(v -> openHierarchy("sec_3"));
+        findViewById(R.id.section4).setOnClickListener(v -> openHierarchy("sec_4"));
+        findViewById(R.id.section5).setOnClickListener(v -> openHierarchy("sec_5"));
+        findViewById(R.id.section6).setOnClickListener(v -> openHierarchy("sec_6"));
 
     }
 
-    private void openHierarchy() {
-        startActivity(SectionListActivity.createIntent(this, LegalHierarchyRepository.ROOT_ID));
+    private void openHierarchy(String nodeId) {
+        startActivity(SectionListActivity.createIntent(this, nodeId));
     }
 
     @Override
