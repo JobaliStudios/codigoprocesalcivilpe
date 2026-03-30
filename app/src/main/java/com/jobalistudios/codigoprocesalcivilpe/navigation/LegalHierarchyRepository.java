@@ -115,7 +115,8 @@ public final class LegalHierarchyRepository {
             return SectionContentActivity.createIntent(context, R.layout.activity_section_content, content.textRes, content.titleRes, content.subtitleRes)
                     .putExtra(SectionContentActivity.EXTRA_SECTION_LABEL, content.sectionLabel)
                     .putExtra(SectionContentActivity.EXTRA_TITLE_LABEL, content.titleLabel)
-                    .putExtra(SectionContentActivity.EXTRA_CHAPTER_LABEL, content.chapterLabel);
+                    .putExtra(SectionContentActivity.EXTRA_CHAPTER_LABEL, content.chapterLabel)
+                    .putExtra(SectionContentActivity.EXTRA_SHOW_BREADCRUMB, !node.id.startsWith("sec_1"));
         }
         if (node.legacyDestination != null) {
             return new Intent(context, node.legacyDestination);
@@ -125,17 +126,7 @@ public final class LegalHierarchyRepository {
 
     public static List<SectionGroup> buildGroups(Node node) {
         List<Node> children = node.children;
-        if (children.size() <= 7) {
-            return Collections.singletonList(new SectionGroup("Opciones", children.size(), toItems(children)));
-        }
-
-        List<SectionGroup> groups = new ArrayList<>();
-        for (int i = 0; i < children.size(); i += 5) {
-            int end = Math.min(i + 5, children.size());
-            List<Node> slice = children.subList(i, end);
-            groups.add(new SectionGroup("Grupo " + (groups.size() + 1), slice.size(), toItems(slice)));
-        }
-        return groups;
+        return Collections.singletonList(new SectionGroup("", children.size(), toItems(children)));
     }
 
     private static List<SectionItem> toItems(List<Node> nodes) {

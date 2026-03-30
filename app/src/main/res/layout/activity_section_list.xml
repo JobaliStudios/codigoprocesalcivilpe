@@ -36,17 +36,35 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <include
-        android:id="@+id/sectionFilter"
-        layout="@layout/view_section_filter"
+    <SearchView
+        android:id="@+id/sectionSearchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/section_filter_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fixedCardView"/>
+
+    <TextView
+        android:id="@+id/sectionFilterEmptyState"
+        style="@style/App.Text.Body.S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/section_filter_empty"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sectionSearchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sectionRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@id/sectionFilter"
+        app:layout_constraintTop_toBottomOf="@id/sectionFilterEmptyState"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

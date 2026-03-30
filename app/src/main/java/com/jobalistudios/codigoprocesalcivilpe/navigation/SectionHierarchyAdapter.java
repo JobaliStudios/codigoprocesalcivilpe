@@ -103,13 +103,9 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private void rebuildRows() {
         rows.clear();
-        for (int i = 0; i < visibleGroups.size(); i++) {
-            SectionGroup group = visibleGroups.get(i);
-            rows.add(new Row(group));
-            if (expandedGroups.contains(i)) {
-                for (SectionItem item : group.getItems()) {
-                    rows.add(new Row(group, item));
-                }
+        for (SectionGroup group : visibleGroups) {
+            for (SectionItem item : group.getItems()) {
+                rows.add(new Row(group, item));
             }
         }
     }
