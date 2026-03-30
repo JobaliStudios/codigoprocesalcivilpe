@@ -47,7 +47,7 @@ public class SectionItem {
         this.type = mapType(typeLabel);
         this.title = title;
         this.subtitle = subtitle;
-        this.range = typeLabel;
+        this.range = "";
         this.nodeId = nodeId;
     }
 
