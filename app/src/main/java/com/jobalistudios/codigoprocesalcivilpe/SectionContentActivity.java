@@ -4,15 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SectionContentActivity extends AppCompatActivity {
 
@@ -54,16 +51,12 @@ public class SectionContentActivity extends AppCompatActivity {
         int textResId = getIntent().getIntExtra(EXTRA_TEXT_RES_ID, 0);
         int titleResId = getIntent().getIntExtra(EXTRA_TITLE, 0);
         int subtitleResId = getIntent().getIntExtra(EXTRA_SUBTITLE, 0);
-        String initialQuery = getIntent().getStringExtra(EXTRA_INITIAL_QUERY);
 
         setContentView(layoutResId);
 
         TextView titleView = findViewById(R.id.sectionTitle);
         TextView subtitleView = findViewById(R.id.sectionSubtitle);
         TextView contentView = findViewById(R.id.textView2);
-        EditText searchInput = findViewById(R.id.edtBusqueda);
-        FloatingActionButton searchFab = findViewById(R.id.fabBuscar);
-        ScrollView scrollView = findViewById(R.id.scrollViewContent);
         if (titleView != null && titleResId != 0) {
             titleView.setText(titleResId);
         }
@@ -71,31 +64,11 @@ public class SectionContentActivity extends AppCompatActivity {
             subtitleView.setText(subtitleResId);
         }
 
-        if (textResId == 0 || contentView == null || searchInput == null || searchFab == null || scrollView == null) {
+        if (textResId == 0 || contentView == null) {
             finish();
             return;
         }
 
         contentView.setText(SectionTextFormatter.buildFormattedText(this, textResId));
-
-        SectionSearchController searchController = new SectionSearchController(
-                this,
-                contentView,
-                searchInput,
-                findViewById(R.id.searchBarContainer),
-                searchFab,
-                findViewById(R.id.btnSiguiente),
-                findViewById(R.id.btnAnterior),
-                findViewById(R.id.btnCerrarBusqueda),
-                findViewById(R.id.btnLimpiarBusqueda),
-                findViewById(R.id.txtBusquedaContador),
-                findViewById(R.id.txtBusquedaSinResultados),
-                scrollView,
-                () -> SectionTextFormatter.buildFormattedText(this, textResId)
-        );
-
-        if (initialQuery != null && !initialQuery.trim().isEmpty()) {
-            searchController.submitQuery(initialQuery.trim(), true);
-        }
     }
 }

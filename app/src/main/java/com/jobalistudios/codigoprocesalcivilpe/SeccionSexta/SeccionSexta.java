@@ -13,8 +13,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionCardFilterBinder;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 public class SeccionSexta extends AppCompatActivity {
@@ -61,17 +59,6 @@ public class SeccionSexta extends AppCompatActivity {
         section1.setOnClickListener(v -> startActivity(new Intent(SeccionSexta.this, SeccionSextaTit1.class)));
 
         section2.setOnClickListener(v -> startActivity(new Intent(SeccionSexta.this, SeccionSextaTit2.class)));
-
-
-        SectionCardFilterBinder filterBinder = new SectionCardFilterBinder();
-        filterBinder.addEntry(section1, getString(R.string.titulo1), getString(R.string.sec6titulo1sub), getString(R.string.rangartisec6tit1), SectionFilterType.TITULO);
-        filterBinder.addEntry(section2, getString(R.string.titulo2), getString(R.string.sec6titulo2sub), getString(R.string.rangartisec6tit2), SectionFilterType.TITULO);
-        filterBinder.bind(
-                SeccionSexta.class.getName(),
-                findViewById(R.id.sectionSearchView),
-                findViewById(R.id.sectionTypeChipGroup),
-                findViewById(R.id.sectionFilterEmptyState)
-        );
 
     }
 

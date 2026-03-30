@@ -20,8 +20,6 @@ import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionCardFilterBinder;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 
 public class SeccionPrimera extends AppCompatActivity {
 
@@ -63,16 +61,6 @@ public class SeccionPrimera extends AppCompatActivity {
 
         section1.setOnClickListener(v -> startActivity(new Intent(SeccionPrimera.this, SeccionPrimeraTit1.class)));
         section2.setOnClickListener(v -> startActivity(new Intent(SeccionPrimera.this, SeccionPrimeraTit2.class)));
-
-        SectionCardFilterBinder filterBinder = new SectionCardFilterBinder();
-        filterBinder.addEntry(section1, getString(R.string.titulo1), getString(R.string.sec1titulo1sub), getString(R.string.rangartisec1tit1), SectionFilterType.TITULO);
-        filterBinder.addEntry(section2, getString(R.string.titulo2), getString(R.string.sec1titulo2sub), getString(R.string.rangartisec1tit2), SectionFilterType.TITULO);
-        filterBinder.bind(
-                SeccionPrimera.class.getName(),
-                findViewById(R.id.sectionSearchView),
-                findViewById(R.id.sectionTypeChipGroup),
-                findViewById(R.id.sectionFilterEmptyState)
-        );
 
         favoritesManager = new FavoritesManager(this);
         favoriteItem = new FavoriteItem(
