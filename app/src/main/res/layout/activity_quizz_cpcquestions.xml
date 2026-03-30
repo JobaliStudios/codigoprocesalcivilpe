@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/quiz_bg">
+    android:background="#F7F7F7">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/quiz_cpc_header_title"
-                        android:textColor="@color/quiz_text_primary"
+                        android:textColor="#171717"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/quiz_cpc_section_label"
-                        android:textColor="@color/quiz_text_secondary"
+                        android:textColor="#6B6B6B"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -79,7 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/quiz_text_secondary"
+                    android:textColor="#646464"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="Pregunta 04 de 10" />
@@ -88,7 +88,7 @@
                     android:id="@+id/tvPercentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/quiz_text_primary"
+                    android:textColor="#212121"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="40%" />
@@ -99,16 +99,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:indicatorColor="@color/quiz_progress_indicator"
-                app:trackColor="@color/quiz_progress_track" />
+                app:indicatorColor="#121212"
+                app:trackColor="#D9D9D9" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                app:cardBackgroundColor="@color/quiz_question_card_bg"
+                app:cardBackgroundColor="#EFEFEF"
                 app:cardCornerRadius="20dp"
-                app:strokeColor="@color/quiz_question_card_bg"
+                app:strokeColor="#EFEFEF"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -124,7 +124,7 @@
                         android:background="@drawable/quiz_article_tag_bg"
                         android:paddingHorizontal="14dp"
                         android:paddingVertical="8dp"
-                        android:textColor="@color/quiz_chip_text"
+                        android:textColor="#3E2717"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         tools:text="ART. 42" />
@@ -134,7 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
-                        android:textColor="@color/quiz_icon_tint"
+                        android:textColor="#141414"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         tools:text="¿Cuál es el órgano jurisdiccional competente...?" />
@@ -154,9 +154,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:visibility="gone"
-                app:cardBackgroundColor="@color/quiz_feedback_error_bg"
+                app:cardBackgroundColor="#FDEEEE"
                 app:cardCornerRadius="18dp"
-                app:strokeColor="@color/quiz_wrong"
+                app:strokeColor="#C10F2E"
                 app:strokeWidth="2dp">
 
                 <TextView
@@ -164,7 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="18dp"
-                    android:textColor="@color/quiz_wrong"
+                    android:textColor="#AE1731"
                     android:textSize="16sp"
                     tools:text="Respuesta incorrecta. Según el Art. 24 del CPC, la competencia es facultativa." />
             </com.google.android.material.card.MaterialCardView>
@@ -178,9 +178,8 @@
                 android:textAllCaps="false"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/quiz_button_primary"
-                app:cornerRadius="28dp"
-                android:textColor="@color/quiz_button_on_primary" />
+                app:backgroundTint="#111217"
+                app:cornerRadius="28dp" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

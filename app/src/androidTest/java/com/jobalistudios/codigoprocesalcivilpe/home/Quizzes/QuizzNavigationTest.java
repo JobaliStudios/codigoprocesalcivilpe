@@ -22,11 +22,11 @@ public class QuizzNavigationTest {
     public void backFromQuestionsReturnsToStartScreen() {
         ActivityScenario.launch(QuizzCPCStartScreen.class);
 
-        onView(withId(R.id.btn5Questions)).perform(click());
+        onView(withId(R.id.option5)).perform(click());
         onView(withId(R.id.btnNext)).check(matches(isDisplayed()));
 
         pressBack();
 
-        onView(withId(R.id.btn10Questions)).check(matches(isDisplayed()));
+        onView(withId(R.id.option10)).check(matches(isDisplayed()));
     }
 }

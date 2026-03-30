@@ -57,7 +57,7 @@ public class QuizzCPCStartScreen extends AppCompatActivity {
     }
 
     private void styleOption(MaterialCardView card, ImageView indicator, boolean isSelected) {
-        card.setCardBackgroundColor(getColor(isSelected ? R.color.quiz_option_selected_bg : R.color.quiz_option_default_bg));
+        card.setCardBackgroundColor(getColor(isSelected ? R.color.quiz_option_selected_bg : android.R.color.white));
         card.setStrokeColor(getColor(isSelected ? R.color.quiz_option_selected_stroke : R.color.quiz_option_default_stroke));
         indicator.setImageResource(isSelected ? R.drawable.quiz_radio_selected : R.drawable.quiz_radio_unselected);
     }

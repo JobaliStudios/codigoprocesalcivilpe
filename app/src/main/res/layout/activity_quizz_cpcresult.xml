@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/quiz_bg">
+    android:background="#F7F7F7">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/baseline_star_24"
-                    app:tint="@color/quiz_icon_success_tint" />
+                    app:tint="#4A7247" />
             </FrameLayout>
 
             <TextView
@@ -42,7 +42,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/quiz_cpc_result_title"
-                android:textColor="@color/quiz_text_title"
+                android:textColor="#151515"
                 android:textSize="56sp"
                 android:textStyle="bold" />
 
@@ -53,16 +53,16 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/quiz_cpc_result_subtitle"
                 android:textAlignment="center"
-                android:textColor="@color/quiz_text_secondary"
+                android:textColor="#666666"
                 android:textSize="16sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                app:cardBackgroundColor="@color/quiz_card_surface"
+                app:cardBackgroundColor="#F2F2F2"
                 app:cardCornerRadius="22dp"
-                app:strokeColor="@color/quiz_card_stroke"
+                app:strokeColor="#E1E1E1"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -80,10 +80,10 @@
                             android:id="@+id/circularScore"
                             android:layout_width="220dp"
                             android:layout_height="220dp"
-                            app:indicatorColor="@color/quiz_result_indicator"
+                            app:indicatorColor="#4E7648"
                             app:indicatorSize="220dp"
                             app:indicatorTrackGapSize="0dp"
-                            app:indicatorTrackColor="@color/quiz_result_track"
+                            app:trackColor="#E8EDE2"
                             app:indicatorInset="0dp"
                             app:trackThickness="18dp" />
 
@@ -98,7 +98,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="80%"
-                                android:textColor="@color/quiz_text_primary"
+                                android:textColor="#161616"
                                 android:textSize="46sp"
                                 android:textStyle="bold" />
 
@@ -106,7 +106,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/quiz_cpc_score"
-                                android:textColor="@color/quiz_text_secondary"
+                                android:textColor="#666666"
                                 android:textSize="19sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -116,7 +116,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="16dp"
-                        android:background="@color/quiz_divider" />
+                        android:background="#DCDCDC" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                             android:layout_marginEnd="8dp"
                             android:layout_weight="1"
                             app:cardCornerRadius="16dp"
-                            app:strokeColor="@color/quiz_card_stroke_soft"
+                            app:strokeColor="#DADADA"
                             app:strokeWidth="1dp">
 
                             <LinearLayout
@@ -145,7 +145,7 @@
                                     android:layout_width="22dp"
                                     android:layout_height="22dp"
                                     android:src="@drawable/baseline_check_24"
-                                    app:tint="@color/quiz_correct" />
+                                    app:tint="#4F784C" />
 
                                 <TextView
                                     android:id="@+id/tvCorrectCount"
@@ -153,7 +153,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
                                     android:text="16"
-                                    android:textColor="@color/quiz_text_primary"
+                                    android:textColor="#161616"
                                     android:textSize="22sp"
                                     android:textStyle="bold" />
 
@@ -161,7 +161,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/quiz_cpc_correct"
-                                    android:textColor="@color/quiz_text_secondary" />
+                                    android:textColor="#656565" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
@@ -171,7 +171,7 @@
                             android:layout_marginHorizontal="8dp"
                             android:layout_weight="1"
                             app:cardCornerRadius="16dp"
-                            app:strokeColor="@color/quiz_card_stroke_soft"
+                            app:strokeColor="#DADADA"
                             app:strokeWidth="1dp">
 
                             <LinearLayout
@@ -185,7 +185,7 @@
                                     android:layout_width="22dp"
                                     android:layout_height="22dp"
                                     android:src="@drawable/baseline_close_24"
-                                    app:tint="@color/quiz_wrong" />
+                                    app:tint="#C4102F" />
 
                                 <TextView
                                     android:id="@+id/tvWrongCount"
@@ -193,7 +193,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
                                     android:text="4"
-                                    android:textColor="@color/quiz_text_primary"
+                                    android:textColor="#161616"
                                     android:textSize="22sp"
                                     android:textStyle="bold" />
 
@@ -201,7 +201,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/quiz_cpc_incorrect"
-                                    android:textColor="@color/quiz_text_secondary" />
+                                    android:textColor="#656565" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
@@ -211,7 +211,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             app:cardCornerRadius="16dp"
-                            app:strokeColor="@color/quiz_card_stroke_soft"
+                            app:strokeColor="#DADADA"
                             app:strokeWidth="1dp">
 
                             <LinearLayout
@@ -225,7 +225,7 @@
                                     android:layout_width="22dp"
                                     android:layout_height="22dp"
                                     android:src="@drawable/baseline_history_24"
-                                    app:tint="@color/quiz_progress_indicator" />
+                                    app:tint="#121212" />
 
                                 <TextView
                                     android:id="@+id/tvTime"
@@ -233,7 +233,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
                                     android:text="08:24"
-                                    android:textColor="@color/quiz_text_primary"
+                                    android:textColor="#161616"
                                     android:textSize="22sp"
                                     android:textStyle="bold" />
 
@@ -241,7 +241,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/quiz_cpc_time"
-                                    android:textColor="@color/quiz_text_secondary" />
+                                    android:textColor="#656565" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
@@ -252,9 +252,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                app:cardBackgroundColor="@color/quiz_info_card_bg"
+                app:cardBackgroundColor="#EEF4FA"
                 app:cardCornerRadius="16dp"
-                app:strokeColor="@color/quiz_info_card_stroke"
+                app:strokeColor="#D3DEE9"
                 app:strokeWidth="1dp">
 
                 <TextView
@@ -263,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:padding="18dp"
                     android:text="@string/quiz_cpc_default_recommendation"
-                    android:textColor="@color/quiz_text_body"
+                    android:textColor="#232323"
                     android:textSize="16sp" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -282,11 +282,10 @@
                     android:text="@string/quiz_cpc_retry_button"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    app:backgroundTint="@color/quiz_button_primary"
+                    app:backgroundTint="#111217"
                     app:cornerRadius="24dp"
                     app:icon="@drawable/baseline_history_24"
-                    app:iconTint="@color/quiz_button_on_primary"
-                    android:textColor="@color/quiz_button_on_primary" />
+                    app:iconTint="#FFFFFF" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnShareScore"
@@ -297,13 +296,13 @@
                     android:text="@string/quiz_cpc_share_score"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    app:backgroundTint="@color/quiz_bg"
+                    app:backgroundTint="#F7F7F7"
                     app:cornerRadius="24dp"
                     app:icon="@drawable/baseline_groups_24"
-                    app:iconTint="@color/quiz_button_primary"
-                    app:strokeColor="@color/quiz_button_secondary_stroke"
+                    app:iconTint="#111217"
+                    app:strokeColor="#D3D3D3"
                     app:strokeWidth="1dp"
-                    android:textColor="@color/quiz_button_primary" />
+                    android:textColor="#111217" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -313,15 +312,15 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/quiz_cpc_back_to_start"
                 android:textAllCaps="false"
-                app:backgroundTint="@color/quiz_transparent"
-                android:textColor="@color/quiz_text_secondary" />
+                app:backgroundTint="#00000000"
+                android:textColor="#666666" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/quiz_cpc_quick_review"
-                android:textColor="@color/quiz_text_title"
+                android:textColor="#1A1A1A"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -329,9 +328,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/quiz_card_surface"
+                app:cardBackgroundColor="#F2F2F2"
                 app:cardCornerRadius="16dp"
-                app:strokeColor="@color/quiz_card_stroke_soft"
+                app:strokeColor="#E0E0E0"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -345,7 +344,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/baseline_close_24"
-                        app:tint="@color/quiz_wrong" />
+                        app:tint="#C4102F" />
 
                     <TextView
                         android:id="@+id/tvQuickReview"
@@ -354,7 +353,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/quiz_cpc_quick_review_text"
-                        android:textColor="@color/quiz_text_body"
+                        android:textColor="#242424"
                         android:textSize="16sp" />
 
                     <ImageView

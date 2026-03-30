@@ -3,13 +3,13 @@
     <item>
         <shape android:shape="oval">
             <size android:width="30dp" android:height="30dp"/>
-            <stroke android:width="2dp" android:color="@color/quiz_selected_stroke"/>
-            <solid android:color="@color/quiz_transparent"/>
+            <stroke android:width="2dp" android:color="#111111"/>
+            <solid android:color="#00000000"/>
         </shape>
     </item>
     <item android:left="8dp" android:top="8dp" android:right="8dp" android:bottom="8dp">
         <shape android:shape="oval">
-            <solid android:color="@color/quiz_selected_stroke"/>
+            <solid android:color="#111111"/>
         </shape>
     </item>
 </layer-list>
