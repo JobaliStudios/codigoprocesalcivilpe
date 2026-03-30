@@ -15,7 +15,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterController;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionGroup;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionHierarchyAdapter;
@@ -59,14 +58,6 @@ public class SeccionTercera extends AppCompatActivity {
         SectionHierarchyAdapter adapter = new SectionHierarchyAdapter(this, buildGroups(), item ->
                 startActivity(new Intent(SeccionTercera.this, item.getDestination())));
         recyclerView.setAdapter(adapter);
-
-        new SectionFilterController(
-                getClass().getName(),
-                findViewById(R.id.sectionSearchView),
-                findViewById(R.id.sectionTypeChipGroup),
-                findViewById(R.id.sectionFilterEmptyState),
-                adapter::applyFilter
-        );
     }
 
     private List<SectionGroup> buildGroups() {

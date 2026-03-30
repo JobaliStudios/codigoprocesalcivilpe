@@ -49,13 +49,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- ScrollView para el contenido desplazable -->
-    
-    <include
-        android:id="@+id/sectionFilter"
-        layout="@layout/view_section_filter"
-        app:layout_constraintTop_toBottomOf="@id/fixedCardView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollViewContent"
@@ -63,7 +56,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/adContainer26"
-        app:layout_constraintTop_toBottomOf="@id/sectionFilter">
+        app:layout_constraintTop_toBottomOf="@id/fixedCardView">
 
         <LinearLayout
             android:layout_width="match_parent"

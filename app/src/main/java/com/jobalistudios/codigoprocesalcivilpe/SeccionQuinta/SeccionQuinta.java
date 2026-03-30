@@ -13,8 +13,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionCardFilterBinder;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 public class SeccionQuinta extends AppCompatActivity {
@@ -70,20 +68,6 @@ public class SeccionQuinta extends AppCompatActivity {
         section4.setOnClickListener(v -> startActivity(new Intent(SeccionQuinta.this, SeccionQuintaTit4.class)));
 
         section5.setOnClickListener(v -> startActivity(new Intent(SeccionQuinta.this, SeccionQuintaTit5.class)));
-
-
-        SectionCardFilterBinder filterBinder = new SectionCardFilterBinder();
-        filterBinder.addEntry(section1, getString(R.string.titulo1), getString(R.string.sec5titulo1sub), getString(R.string.rangartisec5tit1), SectionFilterType.TITULO);
-        filterBinder.addEntry(section2, getString(R.string.titulo2), getString(R.string.sec5titulo2sub), getString(R.string.rangartisec5tit2), SectionFilterType.TITULO);
-        filterBinder.addEntry(section3, getString(R.string.titulo3), getString(R.string.sec5titulo3sub), getString(R.string.rangartisec5tit3), SectionFilterType.TITULO);
-        filterBinder.addEntry(section4, getString(R.string.titulo4), getString(R.string.sec5titulo4sub), getString(R.string.rangartisec5tit4), SectionFilterType.TITULO);
-        filterBinder.addEntry(section5, getString(R.string.titulo5), getString(R.string.sec5titulo5sub), getString(R.string.rangartisec5tit5), SectionFilterType.TITULO);
-        filterBinder.bind(
-                SeccionQuinta.class.getName(),
-                findViewById(R.id.sectionSearchView),
-                findViewById(R.id.sectionTypeChipGroup),
-                findViewById(R.id.sectionFilterEmptyState)
-        );
 
     }
 
