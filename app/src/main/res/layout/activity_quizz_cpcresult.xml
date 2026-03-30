@@ -83,7 +83,7 @@
                             app:indicatorColor="#4E7648"
                             app:indicatorSize="220dp"
                             app:indicatorTrackGapSize="0dp"
-                            app:indicatorTrackColor="#E8EDE2"
+                            app:trackColor="#E8EDE2"
                             app:indicatorInset="0dp"
                             app:trackThickness="18dp" />
 
