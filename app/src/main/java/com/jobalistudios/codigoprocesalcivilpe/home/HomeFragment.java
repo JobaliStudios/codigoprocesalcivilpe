@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
 import com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigosMain;
-import com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizzesMain;
+import com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizzCPCStartScreen;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentHomeBinding;
 
@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
 
         MaterialCardView cardQuizzes = root.findViewById(R.id.card_quizzes);
         cardQuizzes.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), QuizzesMain.class);
+            Intent intent = new Intent(getActivity(), QuizzCPCStartScreen.class);
             startActivity(intent);
         });
         return root;

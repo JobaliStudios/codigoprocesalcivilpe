@@ -46,4 +46,16 @@
     <color name="highlight_orange">#FFCC80</color>
     <color name="highlight_green">#C5E1A5</color>
     <color name="highlight_blue">#81D4FA</color>
+
+    <color name="quiz_option_selected_bg">#DCEAF5</color>
+    <color name="quiz_option_selected_stroke">#171717</color>
+    <color name="quiz_option_default_bg">#FFFFFF</color>
+    <color name="quiz_option_default_stroke">#D9D9D9</color>
+    <color name="quiz_selected_stroke">#111111</color>
+    <color name="quiz_text_primary">#171717</color>
+    <color name="quiz_correct">#4F784C</color>
+    <color name="quiz_wrong">#C4102F</color>
+    <color name="quiz_feedback_success_bg">#EEF8EE</color>
+    <color name="quiz_feedback_error_bg">#FDEEEE</color>
+
 </resources>
