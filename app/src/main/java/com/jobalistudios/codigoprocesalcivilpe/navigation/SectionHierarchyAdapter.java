@@ -169,14 +169,23 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void bindItem(ItemViewHolder holder, SectionItem item) {
+        String rangeText;
         if (item.hasStringContent()) {
             holder.title.setText(item.getTitle());
             holder.subtitle.setText(item.getSubtitle());
-            holder.range.setText(item.getRange());
+            rangeText = item.getRange();
         } else {
             holder.title.setText(item.getTitleRes());
             holder.subtitle.setText(item.getSubtitleRes());
-            holder.range.setText(item.getRangeRes());
+            rangeText = context.getString(item.getRangeRes());
+        }
+
+        if (rangeText == null || rangeText.trim().isEmpty()) {
+            holder.range.setVisibility(View.GONE);
+            holder.range.setText("");
+        } else {
+            holder.range.setVisibility(View.VISIBLE);
+            holder.range.setText(rangeText);
         }
         holder.itemView.setOnClickListener(v -> listener.onSectionItemClick(item));
     }
