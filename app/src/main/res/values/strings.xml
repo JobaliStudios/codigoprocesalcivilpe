@@ -58,6 +58,44 @@
     <string name="quiz_cpc_share_text">Obtuve %1$d/%2$d en el quiz de Código Procesal Civil.</string>
     <string name="quiz_cpc_share_chooser_title">Compartir puntaje</string>
 
+
+    <string name="quiz_cpc_header_title">Cuestionario CPC</string>
+    <string name="quiz_cpc_ready_title">Pon a prueba tu conocimiento</string>
+    <string name="quiz_cpc_ready_subtitle">Responde preguntas basadas en el Código Procesal Civil actualizado a 2025</string>
+    <string name="quiz_cpc_config_title">Configura tu sesión</string>
+    <string name="quiz_cpc_option_5_desc">Sesión rápida de 2 minutos</string>
+    <string name="quiz_cpc_option_10_desc">Práctica estándar recomendada</string>
+    <string name="quiz_cpc_option_20_desc">Examen intensivo de refuerzo</string>
+    <string name="quiz_cpc_info">Información</string>
+    <string name="quiz_cpc_back">Volver</string>
+    <string name="quiz_cpc_progress_warning">Tu progreso no se guardará si sales a mitad de la sesión</string>
+    <string name="quiz_cpc_info_time_title">Tiempo</string>
+    <string name="quiz_cpc_info_time_value">Sin límite de tiempo</string>
+    <string name="quiz_cpc_info_content_title">Contenido</string>
+    <string name="quiz_cpc_info_content_value">Secciones I a VI del CPC</string>
+    <string name="quiz_cpc_info_difficulty_title">Dificultad</string>
+    <string name="quiz_cpc_info_difficulty_value">Aleatoria basada en artículos</string>
+    <string name="quiz_cpc_close">Cerrar</string>
+    <string name="quiz_cpc_section_label">Sección Primera</string>
+    <string name="quiz_cpc_percentage_format">%1$d%%</string>
+    <string name="quiz_cpc_feedback_wrong_with_article">Respuesta incorrecta. Revisa %1$s para reforzar este punto.</string>
+    <string name="quiz_cpc_article_fallback">ARTÍCULO CPC</string>
+    <string name="quiz_cpc_result_title_excellent">¡Excelente trabajo!</string>
+    <string name="quiz_cpc_result_title_good">¡Buen avance!</string>
+    <string name="quiz_cpc_result_title_keep_practicing">¡Sigue practicando!</string>
+    <string name="quiz_cpc_result_subtitle">Has completado el cuestionario del Código Procesal Civil.</string>
+    <string name="quiz_cpc_score">Puntaje</string>
+    <string name="quiz_cpc_correct">Correctas</string>
+    <string name="quiz_cpc_incorrect">Incorrectas</string>
+    <string name="quiz_cpc_time">Tiempo</string>
+    <string name="quiz_cpc_default_recommendation">Tu dominio sobre el CPC va mejorando. Te recomendamos reforzar los artículos que fallaste para consolidar resultados.</string>
+    <string name="quiz_cpc_result_recommendation_high">Tu dominio del CPC es sólido. Mantén el ritmo con repasos breves semanales.</string>
+    <string name="quiz_cpc_result_recommendation_mid">Vas por buen camino. Repasa los artículos relacionados a tus errores y vuelve a intentarlo.</string>
+    <string name="quiz_cpc_result_recommendation_low">Aún puedes mejorar bastante. Te sugerimos repasar las secciones clave y repetir el cuestionario.</string>
+    <string name="quiz_cpc_quick_review">Revisión rápida</string>
+    <string name="quiz_cpc_quick_review_text">Pregunta destacada: revisa los artículos vinculados a tus respuestas incorrectas.</string>
+    <string name="quiz_cpc_quick_review_dynamic">Errores: %1$d • Resultado: %2$d/%3$d. Toca para revisar tus puntos débiles.</string>
+
     <!-- Navegación -->
     <string name="title_codigos_main">Códigos</string>
 

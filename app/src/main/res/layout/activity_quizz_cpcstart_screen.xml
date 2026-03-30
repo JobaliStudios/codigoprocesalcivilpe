@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:background="@color/quiz_bg">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardStartQuiz"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/App.Card.Recurrent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,55 +18,316 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="20dp">
 
-            <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:contentDescription="@string/quiz_cpc_start_title"
-                android:src="@drawable/quizz_vector" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/quiz_cpc_start_title"
-                style="@style/App.Text.Title.L" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/quiz_cpc_start_subtitle"
-                style="@style/App.Text.Body.M" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn5Questions"
-                style="@style/App.Button.Outlined"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/quiz_cpc_back"
+                    android:padding="4dp"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:tint="@color/quiz_icon_tint" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/quiz_cpc_header_title"
+                    android:textColor="@color/quiz_icon_tint"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/quiz_cpc_info"
+                    android:padding="8dp"
+                    android:src="@drawable/baseline_highlight_alt_24"
+                    app:tint="@color/quiz_icon_tint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="132dp"
+                    android:layout_height="132dp"
+                    android:background="@drawable/quiz_circle_icon_bg"
+                    android:padding="38dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/quiz_cpc_header_title"
+                        android:src="@drawable/baseline_menu_book_24"
+                        app:tint="@color/quiz_correct" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/quiz_cpc_ready_title"
+                    android:textColor="@color/quiz_icon_tint"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/quiz_cpc_ready_subtitle"
+                    android:textAlignment="center"
+                    android:textColor="@color/quiz_text_secondary"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/quiz_cpc_config_title"
+                android:textColor="@color/quiz_text_muted"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/option5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/quiz_option_default_bg"
+                app:cardCornerRadius="20dp"
+                app:strokeColor="@color/quiz_progress_track"
+                app:strokeWidth="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quiz_cpc_option_5"
+                            android:textColor="@color/quiz_icon_tint"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quiz_cpc_option_5_desc"
+                            android:textColor="@color/quiz_option_subtle"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/option5Indicator"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/quiz_radio_unselected" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/option10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardBackgroundColor="@color/quiz_option_selected_bg"
+                app:cardCornerRadius="20dp"
+                app:strokeColor="@color/quiz_text_primary"
+                app:strokeWidth="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quiz_cpc_option_10"
+                            android:textColor="@color/quiz_icon_tint"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quiz_cpc_option_10_desc"
+                            android:textColor="@color/quiz_option_subtle_selected"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/option10Indicator"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/quiz_radio_selected" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/option20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardBackgroundColor="@color/quiz_option_default_bg"
+                app:cardCornerRadius="20dp"
+                app:strokeColor="@color/quiz_progress_track"
+                app:strokeWidth="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quiz_cpc_option_20"
+                            android:textColor="@color/quiz_icon_tint"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/quiz_cpc_option_20_desc"
+                            android:textColor="@color/quiz_option_subtle"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/option20Indicator"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/quiz_radio_unselected" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/quiz_cpc_option_5" />
+                android:background="@color/quiz_divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/quiz_cpc_info_time_title"
+                android:textColor="@color/quiz_text_muted"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/quiz_cpc_info_time_value"
+                android:textColor="@color/quiz_text_body"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/quiz_cpc_info_content_title"
+                android:textColor="@color/quiz_text_muted"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/quiz_cpc_info_content_value"
+                android:textColor="@color/quiz_text_body"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/quiz_cpc_info_difficulty_title"
+                android:textColor="@color/quiz_text_muted"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/quiz_cpc_info_difficulty_value"
+                android:textColor="@color/quiz_text_body"
+                android:textSize="18sp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn10Questions"
-                style="@style/App.Button.Outlined"
+                android:id="@+id/btnStartQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="32dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/quiz_cpc_start_button"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/quiz_button_primary"
+                app:cornerRadius="30dp"
+                android:textColor="@color/quiz_button_on_primary" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/quiz_cpc_option_10" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn20Questions"
-                style="@style/App.Button.Outlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/quiz_cpc_option_20" />
-
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="@string/quiz_cpc_progress_warning"
+                android:textColor="@color/quiz_text_warning"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

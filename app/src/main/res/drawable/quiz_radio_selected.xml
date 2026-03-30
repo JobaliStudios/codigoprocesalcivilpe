@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size android:width="30dp" android:height="30dp"/>
+            <stroke android:width="2dp" android:color="@color/quiz_selected_stroke"/>
+            <solid android:color="@color/quiz_transparent"/>
+        </shape>
+    </item>
+    <item android:left="8dp" android:top="8dp" android:right="8dp" android:bottom="8dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/quiz_selected_stroke"/>
+        </shape>
+    </item>
+</layer-list>

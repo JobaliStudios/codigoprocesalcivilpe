@@ -46,4 +46,48 @@
     <color name="highlight_orange">#FFCC80</color>
     <color name="highlight_green">#C5E1A5</color>
     <color name="highlight_blue">#81D4FA</color>
+
+    <color name="quiz_option_selected_bg">#DCEAF5</color>
+    <color name="quiz_option_selected_stroke">#171717</color>
+    <color name="quiz_option_default_bg">#FFFFFF</color>
+    <color name="quiz_option_default_stroke">#D9D9D9</color>
+    <color name="quiz_selected_stroke">#111111</color>
+    <color name="quiz_correct">#4F784C</color>
+    <color name="quiz_wrong">#C4102F</color>
+    <color name="quiz_feedback_success_bg">#EEF8EE</color>
+    <color name="quiz_feedback_error_bg">#FDEEEE</color>
+
+
+    <color name="quiz_bg">#F7F7F7</color>
+    <color name="quiz_text_title">#151515</color>
+    <color name="quiz_text_primary">#171717</color>
+    <color name="quiz_text_secondary">#666666</color>
+    <color name="quiz_text_muted">#5B5B5B</color>
+    <color name="quiz_text_body">#232323</color>
+    <color name="quiz_text_warning">#383838</color>
+    <color name="quiz_divider">#DDDDDD</color>
+    <color name="quiz_button_primary">#111217</color>
+    <color name="quiz_button_on_primary">#FFFFFF</color>
+    <color name="quiz_button_secondary">#F7F7F7</color>
+    <color name="quiz_button_secondary_stroke">#D3D3D3</color>
+    <color name="quiz_card_surface">#F2F2F2</color>
+    <color name="quiz_card_stroke">#E1E1E1</color>
+    <color name="quiz_card_stroke_soft">#E0E0E0</color>
+    <color name="quiz_option_subtle">#6A6A6A</color>
+    <color name="quiz_option_subtle_selected">#56606A</color>
+    <color name="quiz_icon_tint">#141414</color>
+    <color name="quiz_icon_success_tint">#4A7247</color>
+    <color name="quiz_progress_indicator">#121212</color>
+    <color name="quiz_progress_track">#D9D9D9</color>
+    <color name="quiz_question_card_bg">#EFEFEF</color>
+    <color name="quiz_result_indicator">#4E7648</color>
+    <color name="quiz_result_track">#E8EDE2</color>
+    <color name="quiz_chip_text">#3E2717</color>
+    <color name="quiz_info_card_bg">#EEF4FA</color>
+    <color name="quiz_info_card_stroke">#D3DEE9</color>
+    <color name="quiz_transparent">#00000000</color>
+
+    <color name="quiz_chip_bg">#D39A7C</color>
+    <color name="quiz_circle_bg">#E5F0E8</color>
+    <color name="quiz_radio_stroke">#D0D0D0</color>
 </resources>
