@@ -215,7 +215,7 @@ public class SeccionQuintaTit3Cap2Subcap1 extends AppCompatActivity {
 
     private void performSearch(String query) {
         // Usar el texto original formateado como base
-        SpannableString spannable = new SpannableString(getString(R.string.seccionquintatit3cap2subcap2));
+        SpannableString spannable = new SpannableString(getString(R.string.seccionquintatit3cap2subcap1));
         applyArticleTitleFormatting(spannable); // <-- Aplicar formato base primero
 
         clearPreviousSearchHighlights(spannable);
@@ -228,7 +228,7 @@ public class SeccionQuintaTit3Cap2Subcap1 extends AppCompatActivity {
     }
 
     private SpannableString getFormattedText() {
-        SpannableString spannable = new SpannableString(getString(R.string.seccionquintatit3cap2subcap2));
+        SpannableString spannable = new SpannableString(getString(R.string.seccionquintatit3cap2subcap1));
         applyArticleTitleFormatting(spannable);
         return spannable;
     }
