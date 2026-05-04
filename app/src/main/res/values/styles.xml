@@ -50,12 +50,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="App.Icon.Tinted">
+    <style name="App.Icon" />
+
+    <style name="App.Icon.Tinted" parent="App.Icon">
         <item name="android:tint">?attr/colorOnSurface</item>
     </style>
-
-    <style name="App.Icon" parent="App.Icon.Tinted" />
-
 
     <style name="App.Chip.Filter" parent="Widget.Material3.Chip.Filter">
         <item name="chipBackgroundColor">@color/colorSurfaceVariant</item>

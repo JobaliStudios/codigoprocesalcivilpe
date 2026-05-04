@@ -58,4 +58,45 @@
     <color name="quiz_feedback_success_bg">#EEF8EE</color>
     <color name="quiz_feedback_error_bg">#FDEEEE</color>
 
+    <color name="quiz_bg">#FFFFFF</color>
+    <color name="quiz_text_title">#1A1A1A</color>
+    <color name="quiz_text_secondary">#555555</color>
+    <color name="quiz_text_muted">#777777</color>
+    <color name="quiz_text_body">#2A2A2A</color>
+    <color name="quiz_text_warning">#6B5A00</color>
+    <color name="quiz_divider">#E0E0E0</color>
+
+    <color name="quiz_button_primary">#1F2937</color>
+    <color name="quiz_button_on_primary">#FFFFFF</color>
+    <color name="quiz_button_secondary">#FFFFFF</color>
+    <color name="quiz_button_secondary_stroke">#D0D0D0</color>
+
+    <color name="quiz_card_surface">#FFFFFF</color>
+    <color name="quiz_card_stroke">#E2E2E2</color>
+    <color name="quiz_card_stroke_soft">#EEEEEE</color>
+
+    <color name="quiz_option_subtle">#666666</color>
+    <color name="quiz_option_subtle_selected">#2F5F95</color>
+
+    <color name="quiz_icon_tint">#333333</color>
+    <color name="quiz_icon_success_tint">#2E7D32</color>
+
+    <color name="quiz_progress_indicator">#1F2937</color>
+    <color name="quiz_progress_track">#E5E5E5</color>
+
+    <color name="quiz_question_card_bg">#FAFAFA</color>
+
+    <color name="quiz_result_indicator">#4CAF50</color>
+    <color name="quiz_result_track">#DDEEDD</color>
+
+    <color name="quiz_chip_text">#1B120B</color>
+    <color name="quiz_info_card_bg">#EEF6FF</color>
+    <color name="quiz_info_card_stroke">#BFD7F0</color>
+
+    <color name="quiz_transparent">#00000000</color>
+
+    <color name="quiz_chip_bg">#E0B292</color>
+    <color name="quiz_circle_bg">#E8F5E9</color>
+    <color name="quiz_radio_stroke">#777777</color>
+
 </resources>
