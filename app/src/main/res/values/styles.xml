@@ -50,9 +50,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="App.Icon" />
+    <style name="App" />
 
-    <style name="App.Icon.Tinted" parent="App.Icon">
+    <style name="App.Icon" parent="@style/App" />
+
+    <style name="App.Icon.Tinted" parent="@style/App.Icon">
         <item name="android:tint">?attr/colorOnSurface</item>
     </style>
 
