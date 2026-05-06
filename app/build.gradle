@@ -9,14 +9,14 @@ def releaseKeyPassword = project.findProperty("RELEASE_KEY_PASSWORD")
 
 android {
     namespace 'com.jobalistudios.codigoprocesalcivilpe'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId 'com.jobalistudios.codigoprocesalcivilpe'
         minSdk 30
-        targetSdk 34
-        versionCode 8
-        versionName "1.03"
+        targetSdk 35
+        versionCode 9
+        versionName "1.04"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
