@@ -118,8 +118,8 @@ public class BusquedaFragment extends Fragment {
                 requireContext(),
                 R.layout.activity_section_content,
                 result.item.textResId,
-                R.string.title_bnv_2,
-                R.string.app_name
+                result.item.titleResId,
+                result.item.subtitleResId
         ).putExtra(SectionContentActivity.EXTRA_INITIAL_QUERY, binding.searchView.getQuery().toString()));
     }
 
