@@ -11,10 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
+
 import com.google.android.material.chip.Chip;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.SectionContentActivity;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentBusquedaBinding;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
 
 public class BusquedaFragment extends Fragment {
 
@@ -114,13 +117,20 @@ public class BusquedaFragment extends Fragment {
     }
 
     private void openResult(BusquedaViewModel.LegalSearchResult result) {
-        startActivity(SectionContentActivity.createIntent(
-                requireContext(),
-                R.layout.activity_section_content,
-                result.item.textResId,
-                result.item.titleResId,
-                result.item.subtitleResId
-        ).putExtra(SectionContentActivity.EXTRA_INITIAL_QUERY, binding.searchView.getQuery().toString()));
+        Intent intent;
+        LegalHierarchyRepository.Node node = LegalHierarchyRepository.findNodeByTextRes(result.item.textResId);
+        if (node != null) {
+            intent = LegalHierarchyRepository.buildIntentForNode(requireContext(), node);
+        } else {
+            intent = SectionContentActivity.createIntent(
+                    requireContext(),
+                    R.layout.activity_section_content,
+                    result.item.textResId,
+                    result.item.titleResId,
+                    result.item.subtitleResId);
+        }
+        startActivity(intent.putExtra(SectionContentActivity.EXTRA_INITIAL_QUERY,
+                binding.searchView.getQuery().toString()));
     }
 
     @Override

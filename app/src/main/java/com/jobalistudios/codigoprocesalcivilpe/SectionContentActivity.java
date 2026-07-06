@@ -5,18 +5,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
 
 public class SectionContentActivity extends AppCompatActivity {
-
-    private HighlightController highlightController;
 
     public static final String EXTRA_LAYOUT_RES_ID = "EXTRA_LAYOUT_RES_ID";
     public static final String EXTRA_TEXT_RES_ID = "EXTRA_TEXT_RES_ID";
@@ -32,6 +35,9 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_CURRENT_DESTINATION_ID = "EXTRA_CURRENT_DESTINATION_ID";
     public static final String EXTRA_PREVIOUS_DESTINATION_ID = "EXTRA_PREVIOUS_DESTINATION_ID";
     public static final String EXTRA_NEXT_DESTINATION_ID = "EXTRA_NEXT_DESTINATION_ID";
+
+    private HighlightController highlightController;
+    private SectionSearchController searchController;
 
     public static Intent createIntent(
             Context context,
@@ -76,13 +82,57 @@ public class SectionContentActivity extends AppCompatActivity {
 
         String blockKey = getResources().getResourceEntryName(textResId);
         highlightController = new HighlightController(this, contentView, blockKey,
-                () -> renderContent(contentView, textResId));
+                () -> refreshContent(contentView, textResId));
         renderContent(contentView, textResId);
+
+        setupInPageSearch(contentView, textResId);
     }
 
     private void renderContent(TextView contentView, @StringRes int textResId) {
+        contentView.setText(buildText(textResId));
+    }
+
+    /** Texto base con formato de artículos y los resaltados guardados del usuario. */
+    private SpannableString buildText(@StringRes int textResId) {
         SpannableString text = SectionTextFormatter.buildFormattedText(this, textResId);
         highlightController.applyHighlights(text);
-        contentView.setText(text);
+        return text;
+    }
+
+    /** Re-render tras cambios de resaltados, conservando la búsqueda interna activa. */
+    private void refreshContent(TextView contentView, @StringRes int textResId) {
+        if (searchController != null && searchController.hasActiveQuery()) {
+            searchController.refreshSearch();
+        } else {
+            renderContent(contentView, textResId);
+        }
+    }
+
+    private void setupInPageSearch(TextView contentView, @StringRes int textResId) {
+        EditText searchInput = findViewById(R.id.edtBusqueda);
+        View searchBarContainer = findViewById(R.id.searchBarContainer);
+        FloatingActionButton searchFab = findViewById(R.id.fabBuscar);
+        ImageButton nextButton = findViewById(R.id.btnSiguiente);
+        ImageButton previousButton = findViewById(R.id.btnAnterior);
+        ImageButton closeButton = findViewById(R.id.btnCerrarBusqueda);
+        ImageButton clearButton = findViewById(R.id.btnLimpiarBusqueda);
+        TextView counterView = findViewById(R.id.searchCounter);
+        TextView noResultsView = findViewById(R.id.searchNoResults);
+        ScrollView scrollView = findViewById(R.id.scrollViewContent);
+
+        if (searchInput == null || searchFab == null || scrollView == null) {
+            return; // el layout no incluye la búsqueda interna
+        }
+
+        searchController = new SectionSearchController(
+                this, contentView, searchInput, searchBarContainer, searchFab,
+                nextButton, previousButton, closeButton, clearButton,
+                counterView, noResultsView, scrollView,
+                () -> buildText(textResId));
+
+        String initialQuery = getIntent().getStringExtra(EXTRA_INITIAL_QUERY);
+        if (initialQuery != null && !initialQuery.trim().isEmpty()) {
+            searchController.submitQuery(initialQuery.trim(), true);
+        }
     }
 }

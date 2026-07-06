@@ -15,7 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -85,6 +85,15 @@ public class SectionSearchController {
         searchInput.setText(query);
         searchInput.selectAll();
         performSearch(query);
+    }
+
+    public boolean hasActiveQuery() {
+        return !searchInput.getText().toString().isEmpty();
+    }
+
+    /** Re-ejecuta la búsqueda actual sobre el texto reconstruido (ej. tras cambiar un resaltado). */
+    public void refreshSearch() {
+        performSearch(searchInput.getText().toString());
     }
 
     private void showSearchBar() {
@@ -182,6 +191,9 @@ public class SectionSearchController {
     private void clearPreviousSearchHighlights(SpannableString spannable) {
         BackgroundColorSpan[] spans = spannable.getSpans(0, spannable.length(), BackgroundColorSpan.class);
         for (BackgroundColorSpan span : spans) {
+            if (span instanceof HighlightController.UserHighlightSpan) {
+                continue; // los resaltados del usuario no son resultados de búsqueda
+            }
             spannable.removeSpan(span);
         }
         searchPositions.clear();

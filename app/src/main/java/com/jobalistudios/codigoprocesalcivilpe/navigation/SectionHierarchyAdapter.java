@@ -71,10 +71,8 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
                 if (!matchesType) {
                     continue;
                 }
-                String title = item.hasStringContent() ? item.getTitle() : context.getString(item.getTitleRes());
-                String subtitle = item.hasStringContent() ? item.getSubtitle() : context.getString(item.getSubtitleRes());
-                String range = item.hasStringContent() ? item.getRange() : context.getString(item.getRangeRes());
-                boolean matchesText = SectionFilterController.matchesText(query, title, subtitle, range, group.getTitle());
+                boolean matchesText = SectionFilterController.matchesText(
+                        query, item.getTitle(), item.getSubtitle(), item.getRange(), group.getTitle());
                 if (matchesText) {
                     matchedItems.add(item);
                 }
@@ -169,16 +167,9 @@ public class SectionHierarchyAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void bindItem(ItemViewHolder holder, SectionItem item) {
-        String rangeText;
-        if (item.hasStringContent()) {
-            holder.title.setText(item.getTitle());
-            holder.subtitle.setText(item.getSubtitle());
-            rangeText = item.getRange();
-        } else {
-            holder.title.setText(item.getTitleRes());
-            holder.subtitle.setText(item.getSubtitleRes());
-            rangeText = context.getString(item.getRangeRes());
-        }
+        holder.title.setText(item.getTitle());
+        holder.subtitle.setText(item.getSubtitle());
+        String rangeText = item.getRange();
 
         if (rangeText == null || rangeText.trim().isEmpty()) {
             holder.range.setVisibility(View.GONE);

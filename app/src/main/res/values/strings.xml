@@ -661,6 +661,9 @@
     <string name="filter_subcapitulo">Subcapítulo</string>
     <string name="section_filter_empty">No hay resultados para el filtro actual.</string>
 
+    <!-- Búsqueda interna en contenido -->
+    <string name="sinresultadosbusqueda">Sin coincidencias en este texto</string>
+
     <!-- Privacidad de anuncios (UMP) -->
     <string name="config_privacy_title">Opciones de privacidad</string>
     <string name="config_privacy_desc">Gestiona tu consentimiento para los anuncios</string>

@@ -46,7 +46,7 @@
         android:id="@+id/scrollViewContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/searchBarContainer"
         app:layout_constraintTop_toBottomOf="@id/fixedCardView">
 
         <LinearLayout
@@ -69,5 +69,111 @@
                 tools:text="Contenido" />
         </LinearLayout>
     </ScrollView>
+
+    <!-- Barra de búsqueda interna (oculta hasta tocar el FAB) -->
+    <LinearLayout
+        android:id="@+id/searchBarContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical"
+        android:padding="@dimen/space_s"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtBusqueda"
+                style="@style/EditTextSearchStyle"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:autofillHints="search"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:hint="@string/buscar"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:padding="@dimen/space_s" />
+
+            <ImageButton
+                android:id="@+id/btnLimpiarBusqueda"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/limpiarbusqueda"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_close_24"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/searchCounter"
+                style="@style/App.Text.Body.S"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_xs"
+                android:minWidth="36dp"
+                android:gravity="center"
+                tools:text="0/0" />
+
+            <ImageButton
+                android:id="@+id/btnAnterior"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/anteriorbusqueda"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_arrow_upward_24" />
+
+            <ImageButton
+                android:id="@+id/btnSiguiente"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/siguientebusqueda"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_arrow_downward_24" />
+
+            <ImageButton
+                android:id="@+id/btnCerrarBusqueda"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cerrarbusqueda"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_close_24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/searchNoResults"
+            style="@style/App.Text.Body.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_s"
+            android:paddingBottom="@dimen/space_xs"
+            android:text="@string/sinresultadosbusqueda"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBuscar"
+        style="@style/IMAGEBOTONBUSQUEDA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/botonbusqueda"
+        android:src="@drawable/baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
