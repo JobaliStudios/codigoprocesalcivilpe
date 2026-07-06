@@ -35,3 +35,8 @@
 
 # Evita que R8 optimice los servicios de Google Play
 -dontwarn com.google.android.gms.**
+
+# Gson rellena por reflexión los DTO de assets/articles.json (contenido por artículo)
+-keepclassmembers class com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository$Json* {
+    <fields>;
+}

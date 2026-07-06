@@ -19,8 +19,8 @@ public final class SectionTextFormatter {
     private SectionTextFormatter() {
     }
 
-    public static SpannableString buildFormattedText(Context context, int textResId) {
-        SpannableString spannable = new SpannableString(context.getString(textResId));
+    public static SpannableString buildFormattedText(Context context, String content) {
+        SpannableString spannable = new SpannableString(content);
         applyArticleTitleFormatting(context, spannable);
         return spannable;
     }

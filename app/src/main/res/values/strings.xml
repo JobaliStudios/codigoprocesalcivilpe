@@ -116,6 +116,7 @@
 
     <string name="busqueda_empty_title">Busca en el Código Procesal Civil</string>
     <string name="busqueda_empty_cta">Buscar ahora</string>
+    <string name="busqueda_ir_articulo">Ir al Artículo %1$s</string>
     <string name="busqueda_empty_icon_cd">Estado vacío de búsqueda</string>
     <string name="favorites_empty_title">Aún no tienes favoritos</string>
     <string name="favorites_empty_icon_cd">Estado vacío de favoritos</string>

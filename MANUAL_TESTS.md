@@ -30,6 +30,22 @@
    resaltado y la barra de búsqueda visible.
 6. Favoritos guardados con versiones anteriores deben seguir navegando correctamente.
 
+## Contenido por artículo (articles.json)
+Mantenimiento: tras editar cualquier string de contenido en `strings.xml`, ejecutar
+`powershell -ExecutionPolicy Bypass -File tools\generate_articles.ps1` para regenerar
+`app/src/main/assets/articles.json` (el test `ArticleRepositoryTest` falla si quedó desfasado).
+
+1. Abrir varios bloques de contenido y verificar que el texto se ve idéntico a antes
+   (encabezados coloreados, resaltados del usuario intactos).
+2. En Búsqueda global escribir `647`: debe aparecer arriba la fila **Ir al Artículo 647 —
+   Secuestro de vehículo**; al tocarla se abre el subcapítulo desplazado directamente al
+   artículo (sin barra de búsqueda interna).
+3. Probar variantes: `art. 647`, `artículo 647-a`, `647 A` → aparece la fila de salto;
+   `9999` → no aparece.
+4. Con un chip de sección activo que no contiene ese artículo, la fila de salto no aparece.
+5. Una búsqueda de texto normal (ej. "embargo") sigue funcionando y abre el resultado con
+   el término resaltado, como antes.
+
 ## Consentimiento de anuncios (UMP)
 Requisito previo (una sola vez): en la consola de AdMob crear el mensaje de GDPR en
 *Privacidad y mensajería → Mensaje de GDPR* para esta app; sin eso el formulario no carga.

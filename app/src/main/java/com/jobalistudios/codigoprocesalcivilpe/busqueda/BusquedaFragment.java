@@ -129,6 +129,11 @@ public class BusquedaFragment extends Fragment {
                     result.item.titleResId,
                     result.item.subtitleResId);
         }
+        if (result.jumpOffset >= 0) {
+            // Salto directo: abre el bloque desplazado al artículo, sin activar la búsqueda interna.
+            startActivity(intent.putExtra(SectionContentActivity.EXTRA_SCROLL_TO_OFFSET, result.jumpOffset));
+            return;
+        }
         startActivity(intent.putExtra(SectionContentActivity.EXTRA_INITIAL_QUERY,
                 binding.searchView.getQuery().toString()));
     }

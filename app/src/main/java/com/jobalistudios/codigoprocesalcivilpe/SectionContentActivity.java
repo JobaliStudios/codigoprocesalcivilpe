@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.SpannableString;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
 
@@ -26,6 +28,7 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_SUBTITLE = "EXTRA_SUBTITLE";
     public static final String EXTRA_INITIAL_QUERY = "EXTRA_INITIAL_QUERY";
+    public static final String EXTRA_SCROLL_TO_OFFSET = "EXTRA_SCROLL_TO_OFFSET";
     public static final String EXTRA_SECTION_LABEL = "EXTRA_SECTION_LABEL";
     public static final String EXTRA_TITLE_LABEL = "EXTRA_TITLE_LABEL";
     public static final String EXTRA_CHAPTER_LABEL = "EXTRA_CHAPTER_LABEL";
@@ -86,6 +89,28 @@ public class SectionContentActivity extends AppCompatActivity {
         renderContent(contentView, textResId);
 
         setupInPageSearch(contentView, textResId);
+
+        int scrollToOffset = getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
+        if (scrollToOffset >= 0) {
+            scrollToOffset(contentView, scrollToOffset);
+        }
+    }
+
+    /** Desplaza el contenido hasta el offset de carácter indicado (ej. inicio de un artículo). */
+    private void scrollToOffset(TextView contentView, int offset) {
+        ScrollView scrollView = findViewById(R.id.scrollViewContent);
+        if (scrollView == null) {
+            return;
+        }
+        contentView.post(() -> {
+            Layout layout = contentView.getLayout();
+            if (layout == null) {
+                return;
+            }
+            int clamped = Math.max(0, Math.min(offset, contentView.getText().length() - 1));
+            int line = layout.getLineForOffset(clamped);
+            scrollView.smoothScrollTo(0, contentView.getTop() + layout.getLineTop(line));
+        });
     }
 
     private void renderContent(TextView contentView, @StringRes int textResId) {
@@ -94,7 +119,8 @@ public class SectionContentActivity extends AppCompatActivity {
 
     /** Texto base con formato de artículos y los resaltados guardados del usuario. */
     private SpannableString buildText(@StringRes int textResId) {
-        SpannableString text = SectionTextFormatter.buildFormattedText(this, textResId);
+        String content = ArticleRepository.getContentText(this, textResId);
+        SpannableString text = SectionTextFormatter.buildFormattedText(this, content);
         highlightController.applyHighlights(text);
         return text;
     }
