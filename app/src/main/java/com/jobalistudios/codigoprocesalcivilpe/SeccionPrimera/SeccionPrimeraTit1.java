@@ -8,14 +8,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
-import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -26,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -34,6 +29,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
+import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
 import java.text.Normalizer;
@@ -54,11 +50,7 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
     private final List<Integer> searchPositions = new ArrayList<>();
     private int currentSearchIndex = 0;
 
-    // ... variables existentes ...
-    private int selectedStart;
-    private int selectedEnd;
-    private SpannableString originalSpannable;
-    private String selectedColor = "yellow";
+    private HighlightController highlightController;
     private FavoritesManager favoritesManager;
     private FavoriteItem favoriteItem;
 
@@ -79,13 +71,15 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
         ImageButton btnCerrarBusqueda = findViewById(R.id.btnCerrarBusqueda);
         scrollViewContent = findViewById(R.id.scrollViewContent);
 
+        // Resaltados y notas persistentes
+        highlightController = new HighlightController(this, textView2,
+                getResources().getResourceEntryName(R.string.seccionprimeratit1txt), this::renderText);
+
         // Configurar texto con formato
         setupTextFormatting();
 
         // Configurar listeners
         setupListeners(btnSiguiente, btnAnterior, btnCerrarBusqueda);
-
-        setupTextSelection();
 
         favoritesManager = new FavoritesManager(this);
         favoriteItem = new FavoriteItem(
@@ -97,139 +91,18 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
         );
     }
 
-    private void setupTextSelection() {
-        textView2.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                menu.add(0, 1, 0, "Resaltar").setIcon(R.drawable.baseline_highlight_alt_24);
-                menu.add(0, 2, 1, "Agregar nota").setIcon(R.drawable.baseline_note_24);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                selectedStart = textView2.getSelectionStart();
-                selectedEnd = textView2.getSelectionEnd();
-                originalSpannable = new SpannableString(textView2.getText());
-                return true;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case 1:
-                        showColorPicker(false);
-                        mode.finish();
-                        return true;
-                    case 2:
-                        showColorPicker(true);
-                        mode.finish();
-                        return true;
-                }
-                return false;
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-
-            }
-        });
-    }
-
-    private void showColorPicker(boolean withNote) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_note, null);
-        EditText etNote = view.findViewById(R.id.etNote);
-
-        if (!withNote) {
-            etNote.setVisibility(View.GONE);
-        }
-
-        builder.setView(view)
-                .setTitle(withNote ? "Agregar nota" : "Seleccionar color")
-                .setNegativeButton("Cancelar", null)
-                .setPositiveButton("Aceptar", (dialog, which) -> {
-                    String note = withNote ? etNote.getText().toString() : null;
-                    applyHighlight(getSelectedColor(view), note, withNote);
-                });
-
-        AlertDialog dialog = builder.create();
-        setupColorSelection(view, dialog, withNote);
-        dialog.show();
-    }
-
-    // Reemplazar los métodos faltantes con:
-    private String getSelectedColor(View view) {
-        return this.selectedColor;
-    }
-
-    private void setSelectedColor(String colorTag) {
-        this.selectedColor = colorTag;
-    }
-
-    private void setupColorSelection(View view, AlertDialog dialog, boolean withNote) {
-        EditText etNote = view.findViewById(R.id.etNote); // Agregar esta línea
-        int[] colorViews = {R.id.colorYellow, R.id.colorOrange, R.id.colorGreen, R.id.colorBlue};
-        for (int id : colorViews) {
-            view.findViewById(id).setOnClickListener(v -> {
-                if (withNote) {
-                    etNote.requestFocus();
-                }
-                setSelectedColor(v.getTag().toString());
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
-            });
-        }
-    }
-
-    private void applyHighlight(String colorTag, String note, boolean isNote) {
-        int color = getColorRes(colorTag);
-
-        SpannableStringBuilder spannable = new SpannableStringBuilder (textView2.getText());
-
-        // Conservar formatos originales
-        spannable.replace(0, spannable.length(), originalSpannable);
-
-        // Aplicar resaltado
-        spannable.setSpan(new BackgroundColorSpan(color),
-                selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        // Si es nota, guardar metadata
-        if (isNote && note != null && !note.isEmpty()) {
-            spannable.setSpan(new NoteSpan(note, color),
-                    selectedStart, selectedEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
-        textView2.setText(spannable);
-    }
-
-    private int getColorRes(String tag) {
-        switch (tag) {
-            case "orange": return ContextCompat.getColor(this, R.color.highlight_orange);
-            case "green": return ContextCompat.getColor(this, R.color.highlight_green);
-            case "blue": return ContextCompat.getColor(this, R.color.highlight_blue);
-            default: return ContextCompat.getColor(this, R.color.highlight_yellow);
-        }
-    }
-
-    // Clase interna para manejar notas
-    private static class NoteSpan extends CharacterStyle {
-        private final String note;
-        private final int color;
-
-        NoteSpan(String note, int color) {
-            this.note = note;
-            this.color = color;
-        }
-
-        @Override
-        public void updateDrawState(TextPaint tp) {
-            tp.bgColor = color;
-        }
-    }
-
-
     private void setupTextFormatting() {
         textView2.setText(getFormattedText());
+    }
+
+    /** Re-renderiza el texto conservando la búsqueda activa; lo invoca HighlightController. */
+    private void renderText() {
+        String query = edtBusqueda == null ? "" : edtBusqueda.getText().toString();
+        if (query.isEmpty()) {
+            textView2.setText(getFormattedText());
+        } else {
+            performSearch(query);
+        }
     }
 
     private void setupListeners(ImageButton btnSiguiente, ImageButton btnAnterior, ImageButton btnCerrarBusqueda) {
@@ -267,10 +140,8 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
     }
 
     private void resetSearchHighlight() {
-        // Reconstruye el Spannable con el formato original
-        SpannableString spannable = new SpannableString(textView2.getText());
-        applyArticleTitleFormatting(spannable);
-        textView2.setText(spannable);
+        // Reconstruye el texto desde el original (formato base + resaltados del usuario)
+        textView2.setText(getFormattedText());
 
         searchPositions.clear();
         currentSearchIndex = 0;
@@ -375,9 +246,8 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
     }
 
     private void performSearch(String query) {
-        // Usar el texto original formateado como base
-        SpannableString spannable = new SpannableString(getString(R.string.seccionprimeratit1txt));
-        applyArticleTitleFormatting(spannable); // <-- Aplicar formato base primero
+        // Usar el texto original formateado como base (con los resaltados del usuario)
+        SpannableString spannable = getFormattedText();
 
         clearPreviousSearchHighlights(spannable);
 
@@ -391,12 +261,16 @@ public class SeccionPrimeraTit1 extends AppCompatActivity {
     private SpannableString getFormattedText() {
         SpannableString spannable = new SpannableString(getString(R.string.seccionprimeratit1txt));
         applyArticleTitleFormatting(spannable);
+        highlightController.applyHighlights(spannable);
         return spannable;
     }
 
     private void clearPreviousSearchHighlights(SpannableString spannable) {
         BackgroundColorSpan[] spans = spannable.getSpans(0, spannable.length(), BackgroundColorSpan.class);
         for (BackgroundColorSpan span : spans) {
+            if (span instanceof HighlightController.UserHighlightSpan) {
+                continue; // los resaltados del usuario no son resultados de búsqueda
+            }
             spannable.removeSpan(span);
         }
         searchPositions.clear();

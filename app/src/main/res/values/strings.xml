@@ -660,4 +660,21 @@
     <string name="filter_capitulo">Capítulo</string>
     <string name="filter_subcapitulo">Subcapítulo</string>
     <string name="section_filter_empty">No hay resultados para el filtro actual.</string>
+
+    <!-- Privacidad de anuncios (UMP) -->
+    <string name="config_privacy_title">Opciones de privacidad</string>
+    <string name="config_privacy_desc">Gestiona tu consentimiento para los anuncios</string>
+    <string name="config_privacy_error">No se pudo abrir el formulario de privacidad</string>
+    <string name="config_icon_privacy">Ícono de privacidad</string>
+
+    <!-- Resaltados y notas -->
+    <string name="highlight_action_highlight">Resaltar</string>
+    <string name="highlight_action_note">Agregar nota</string>
+    <string name="highlight_dialog_color_title">Seleccionar color</string>
+    <string name="highlight_dialog_detail_title">Resaltado</string>
+    <string name="highlight_dialog_note_hint">Escribe tu nota…</string>
+    <string name="highlight_accept">Aceptar</string>
+    <string name="highlight_cancel">Cancelar</string>
+    <string name="highlight_save">Guardar</string>
+    <string name="highlight_remove">Quitar</string>
 </resources>

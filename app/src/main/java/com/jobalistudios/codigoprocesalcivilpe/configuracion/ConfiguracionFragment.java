@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
 
 public class ConfiguracionFragment extends Fragment {
@@ -44,7 +45,24 @@ public class ConfiguracionFragment extends Fragment {
         binding.cardAcercaDe.setOnClickListener(v -> Toast.makeText(requireContext(),
                 R.string.config_about_message, Toast.LENGTH_SHORT).show());
 
+        setupPrivacyOptions();
+
         return root;
+    }
+
+    /** Punto de entrada a las opciones de privacidad de anuncios (exigido por Google donde aplica). */
+    private void setupPrivacyOptions() {
+        GoogleMobileAdsConsentManager consentManager =
+                GoogleMobileAdsConsentManager.getInstance(requireContext());
+        binding.cardPrivacidad.setVisibility(
+                consentManager.isPrivacyOptionsRequired() ? View.VISIBLE : View.GONE);
+        binding.cardPrivacidad.setOnClickListener(v ->
+                consentManager.showPrivacyOptionsForm(requireActivity(), formError -> {
+                    if (formError != null) {
+                        Toast.makeText(requireContext(),
+                                R.string.config_privacy_error, Toast.LENGTH_SHORT).show();
+                    }
+                }));
     }
 
     private void setupSwitchObserver(SwitchMaterial switchMaterial,

@@ -2,19 +2,14 @@ package com.jobalistudios.codigoprocesalcivilpe.SeccionSegunda;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.WindowMetrics;
-import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionFilterType;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionGroup;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.SectionHierarchyAdapter;
@@ -27,31 +22,12 @@ public class SeccionSegundaTit2 extends AppCompatActivity {
 
     private AdView adView;
 
-    public AdSize getAdSize() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        WindowMetrics windowMetrics = this.getWindowManager().getCurrentWindowMetrics();
-        int adWidthPixels = windowMetrics.getBounds().width();
-        float density = displayMetrics.density;
-        int adWidth = (int) (adWidthPixels / density);
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seccion_segunda_tit2);
 
-        MobileAds.initialize(this, initializationStatus -> {});
-        new Thread(() -> MobileAds.initialize(this, initializationStatus -> {})).start();
-
-        FrameLayout adContainer = findViewById(R.id.adContainer6);
-        adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-6018202881039088/4805673922");
-        adView.setAdSize(getAdSize());
-        adContainer.addView(adView);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        adView = BannerAdHelper.loadBanner(this, findViewById(R.id.adContainer6), "ca-app-pub-6018202881039088/4805673922");
 
         RecyclerView recyclerView = findViewById(R.id.sectionRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

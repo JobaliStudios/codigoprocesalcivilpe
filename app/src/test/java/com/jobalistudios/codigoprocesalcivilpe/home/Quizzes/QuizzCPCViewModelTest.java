@@ -38,13 +38,16 @@ public class QuizzCPCViewModelTest {
         QuestionModel first = viewModel.getCurrentQuestionLiveData().getValue();
         assertNotNull(first);
 
-        int correctIndex = first.getCorrectAnswerIndex();
-        int wrongIndex = (correctIndex + 1) % first.getOptions().size();
-
-        assertTrue(viewModel.submitAnswer(correctIndex));
+        assertTrue(viewModel.submitAnswer(first.getCorrectAnswerIndex()));
         assertEquals(1, viewModel.getScore());
 
         viewModel.moveToNextQuestion();
+
+        // El índice incorrecto debe calcularse sobre la pregunta ACTUAL: las preguntas
+        // son aleatorias y un índice de otra pregunta puede coincidir con la correcta.
+        QuestionModel second = viewModel.getCurrentQuestionLiveData().getValue();
+        assertNotNull(second);
+        int wrongIndex = (second.getCorrectAnswerIndex() + 1) % second.getOptions().size();
 
         assertFalse(viewModel.submitAnswer(wrongIndex));
         assertEquals(1, viewModel.getScore());

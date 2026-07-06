@@ -289,6 +289,70 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_privacidad"
+                style="@style/App.Card.Recurrent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?selectableItemBackground"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_card"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/space_l">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/list_card_icon_size"
+                        android:layout_height="@dimen/list_card_icon_size"
+                        android:layout_marginEnd="@dimen/space_m"
+                        android:background="@drawable/bg_icon_container"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/list_card_small_icon"
+                            android:layout_height="@dimen/list_card_small_icon"
+                            android:contentDescription="@string/config_icon_privacy"
+                            android:src="@drawable/baseline_settings_24"
+                            app:tint="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/App.Text.Subtitle.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/config_privacy_title"
+                            android:textColor="@color/colorOnSurface" />
+
+                        <TextView
+                            style="@style/App.Text.Body.S"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_xs"
+                            android:text="@string/config_privacy_desc" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/list_card_chevron_size"
+                        android:layout_height="@dimen/list_card_chevron_size"
+                        android:contentDescription="@string/next_section"
+                        android:src="@drawable/baseline_chevron_right_24"
+                        app:tint="@color/colorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <TextView
                 android:id="@+id/text_version"
                 style="@style/App.Text.Body.S"

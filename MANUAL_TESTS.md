@@ -17,3 +17,20 @@
 ## Banco de preguntas
 1. Abrir cualquier cuestionario y verificar que las preguntas y opciones se muestran correctamente (contenido cargado desde `res/raw/questions.json`).
 2. Probar el mismo cuestionario con diferentes cantidades solicitadas (por ejemplo, 5 y 10) y confirmar que nunca se muestran más preguntas de las pedidas.
+
+## Consentimiento de anuncios (UMP)
+Requisito previo (una sola vez): en la consola de AdMob crear el mensaje de GDPR en
+*Privacidad y mensajería → Mensaje de GDPR* para esta app; sin eso el formulario no carga.
+
+1. **Build debug en emulador** (simula EEA automáticamente): en un arranque limpio debe
+   aparecer el formulario de consentimiento de Google sobre el splash; la app no navega a
+   `MainActivity` hasta cerrarlo.
+2. Aceptar el consentimiento → los banners cargan en las pantallas de secciones.
+3. Ir a *Configuración*: debe aparecer la tarjeta **Opciones de privacidad**; al tocarla se
+   reabre el formulario y se puede cambiar la decisión.
+4. Rechazar/limitar el consentimiento → verificar que la app sigue funcionando (con anuncios
+   limitados o sin anuncios) y no crashea en pantallas con banner.
+5. **Sin red** en el primer arranque: el splash no debe quedarse colgado; la app continúa sin
+   anuncios y los carga en sesiones futuras.
+6. En un dispositivo con región real fuera de EEA (release), el formulario no aparece y los
+   banners cargan directo; la tarjeta de privacidad en Configuración queda oculta.

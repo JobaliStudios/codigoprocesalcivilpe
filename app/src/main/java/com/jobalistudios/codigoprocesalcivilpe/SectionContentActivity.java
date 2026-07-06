@@ -4,14 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
+
 
 public class SectionContentActivity extends AppCompatActivity {
+
+    private HighlightController highlightController;
 
     public static final String EXTRA_LAYOUT_RES_ID = "EXTRA_LAYOUT_RES_ID";
     public static final String EXTRA_TEXT_RES_ID = "EXTRA_TEXT_RES_ID";
@@ -69,6 +74,15 @@ public class SectionContentActivity extends AppCompatActivity {
             return;
         }
 
-        contentView.setText(SectionTextFormatter.buildFormattedText(this, textResId));
+        String blockKey = getResources().getResourceEntryName(textResId);
+        highlightController = new HighlightController(this, contentView, blockKey,
+                () -> renderContent(contentView, textResId));
+        renderContent(contentView, textResId);
+    }
+
+    private void renderContent(TextView contentView, @StringRes int textResId) {
+        SpannableString text = SectionTextFormatter.buildFormattedText(this, textResId);
+        highlightController.applyHighlights(text);
+        contentView.setText(text);
     }
 }

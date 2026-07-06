@@ -2,11 +2,7 @@ package com.jobalistudios.codigoprocesalcivilpe.navigation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.WindowMetrics;
-import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -15,29 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
 
 public class SectionListActivity extends AppCompatActivity {
 
     private AdView adView;
-
-    public AdSize getAdSize () {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int adWidthPixels = displayMetrics.widthPixels;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            WindowMetrics windowMetrics = this.getWindowManager().getCurrentWindowMetrics();
-            adWidthPixels = windowMetrics.getBounds().width();
-        }
-
-        float density = displayMetrics.density;
-        int adWidth = (int) (adWidthPixels / density);
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
-    }
 
     public static Intent createIntent(Context context, String nodeId) {
         return new Intent(context, SectionListActivity.class)
@@ -49,15 +29,7 @@ public class SectionListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_section_list);
 
-        MobileAds.initialize(this, initializationStatus -> {});
-        new Thread(() -> MobileAds.initialize(this, initializationStatus -> {})).start();
-
-        FrameLayout adContainer = findViewById(R.id.adContainerSectionList);
-        adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-6018202881039088/4877029953");
-        adView.setAdSize(getAdSize());
-        adContainer.addView(adView);
-        adView.loadAd(new AdRequest.Builder().build());
+        adView = BannerAdHelper.loadBanner(this, findViewById(R.id.adContainerSectionList), "ca-app-pub-6018202881039088/4877029953");
 
         String nodeId = getIntent().getStringExtra(LegalHierarchyRepository.EXTRA_NODE_ID);
         if (nodeId == null) {
