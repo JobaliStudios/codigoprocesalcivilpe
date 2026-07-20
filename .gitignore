@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Release signing material must stay outside version control.
+/keystore.properties
+*.jks
+*.keystore

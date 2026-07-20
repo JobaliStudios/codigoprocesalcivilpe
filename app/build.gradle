@@ -2,10 +2,32 @@ plugins {
     id 'com.android.application'
 }
 
-def releaseStoreFile = project.findProperty("RELEASE_STORE_FILE")
-def releaseStorePassword = project.findProperty("RELEASE_STORE_PASSWORD")
-def releaseKeyAlias = project.findProperty("RELEASE_KEY_ALIAS")
-def releaseKeyPassword = project.findProperty("RELEASE_KEY_PASSWORD")
+def localSigningProperties = new Properties()
+def localSigningPropertiesFile = rootProject.file("keystore.properties")
+if (localSigningPropertiesFile.exists()) {
+    localSigningPropertiesFile.withInputStream { stream ->
+        localSigningProperties.load(stream)
+    }
+}
+
+// CI can provide environment variables. Developers can use either
+// ~/.gradle/gradle.properties or the ignored root keystore.properties file.
+def signingValue = { String name ->
+    System.getenv(name)
+            ?: project.findProperty(name)?.toString()
+            ?: localSigningProperties.getProperty(name)
+}
+
+def releaseStoreFile = signingValue("RELEASE_STORE_FILE")
+def releaseStorePassword = signingValue("RELEASE_STORE_PASSWORD")
+def releaseKeyAlias = signingValue("RELEASE_KEY_ALIAS")
+def releaseKeyPassword = signingValue("RELEASE_KEY_PASSWORD")
+def hasReleaseSigningConfig = [
+        releaseStoreFile,
+        releaseStorePassword,
+        releaseKeyAlias,
+        releaseKeyPassword
+].every { value -> value != null && !value.trim().isEmpty() }
 
 android {
     namespace 'com.jobalistudios.codigoprocesalcivilpe'
@@ -23,10 +45,12 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(releaseStoreFile)
-            storePassword releaseStorePassword
-            keyAlias releaseKeyAlias
-            keyPassword releaseKeyPassword
+            if (hasReleaseSigningConfig) {
+                storeFile rootProject.file(releaseStoreFile)
+                storePassword releaseStorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+            }
         }
     }
 
@@ -35,7 +59,9 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (hasReleaseSigningConfig) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {
@@ -49,6 +75,23 @@ android {
         unitTests {
             includeAndroidResources = true
         }
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    def releasePackageRequested = taskGraph.allTasks.any { task ->
+        task.project == project && (
+                task.name == "packageRelease"
+                        || task.name == "signReleaseBundle"
+        )
+    }
+    if (releasePackageRequested && !hasReleaseSigningConfig) {
+        throw new GradleException(
+                "Release signing is not configured. Set RELEASE_STORE_FILE, "
+                        + "RELEASE_STORE_PASSWORD, RELEASE_KEY_ALIAS and RELEASE_KEY_PASSWORD "
+                        + "in the ignored keystore.properties file, ~/.gradle/gradle.properties "
+                        + "or environment variables."
+        )
     }
 }
 
