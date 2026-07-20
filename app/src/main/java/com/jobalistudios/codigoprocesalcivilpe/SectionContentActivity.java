@@ -93,9 +93,7 @@ public class SectionContentActivity extends AppCompatActivity {
             return;
         }
 
-        if (ReadingPreferenceManager.isKeepScreenOnEnabled(this)) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
+        applyKeepScreenOnPreference();
         baseContentTextSizePx = contentView.getTextSize();
         applyFontScale(contentView, ReadingPreferenceManager.getContentFontScale(this));
 
@@ -110,6 +108,20 @@ public class SectionContentActivity extends AppCompatActivity {
         int scrollToOffset = getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
         if (scrollToOffset >= 0) {
             scrollToOffset(contentView, scrollToOffset);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        applyKeepScreenOnPreference();
+    }
+
+    private void applyKeepScreenOnPreference() {
+        if (ReadingPreferenceManager.isKeepScreenOnEnabled(this)) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
