@@ -589,7 +589,7 @@
     <string name="config_notifications_desc">Recibe avisos sobre nuevas actualizaciones y recursos.</string>
     <string name="config_icon_reading">Ícono de modo lectura</string>
     <string name="config_reading_title">Modo lectura</string>
-    <string name="config_reading_desc">Activa un contraste suave pensado para sesiones largas de estudio.</string>
+    <string name="config_reading_desc">Mantiene la pantalla encendida mientras lees el código.</string>
     <string name="config_icon_dark_mode">Ícono de modo oscuro</string>
     <string name="config_dark_mode_title">Modo oscuro</string>
     <string name="config_dark_mode_desc">Activa un tema oscuro fijo para toda la app, sin depender del dispositivo.</string>
@@ -619,6 +619,12 @@
     <string name="open_favorite">Abrir favorito</string>
     <string name="no_favorites">Guarda artículos, títulos o secciones para revisarlos rápido aquí.</string>
     <string name="favorite_removed_message">Favorito eliminado</string>
+    <string name="favorite_added_message">Guardado en favoritos</string>
+    <string name="favorite_toggle_add">Agregar a favoritos</string>
+    <string name="favorite_toggle_remove">Quitar de favoritos</string>
+    <string name="font_size_title">Tamaño de letra</string>
+    <string name="font_size_value">Tamaño: %1$d%%</string>
+    <string name="font_size_reset">Restablecer</string>
     <string name="undo_action">Deshacer</string>
     <string name="favorites_sort_label">Ordenar favoritos</string>
     <string name="favorites_filter_section_label">Filtrar por sección</string>

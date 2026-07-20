@@ -12,6 +12,8 @@ public class CodigoProcesalCivilApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        SystemBarInsets.install(this);
+
         boolean darkModeEnabled = ThemePreferenceManager.isDarkModeEnabled(this);
         AppCompatDelegate.setDefaultNightMode(
                 darkModeEnabled ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO

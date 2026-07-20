@@ -6,18 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.SpannableString;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceManager;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
 
@@ -39,8 +46,11 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_PREVIOUS_DESTINATION_ID = "EXTRA_PREVIOUS_DESTINATION_ID";
     public static final String EXTRA_NEXT_DESTINATION_ID = "EXTRA_NEXT_DESTINATION_ID";
 
+    private static final float FONT_SCALE_STEP = 0.05f;
+
     private HighlightController highlightController;
     private SectionSearchController searchController;
+    private float baseContentTextSizePx;
 
     public static Intent createIntent(
             Context context,
@@ -83,11 +93,18 @@ public class SectionContentActivity extends AppCompatActivity {
             return;
         }
 
+        if (ReadingPreferenceManager.isKeepScreenOnEnabled(this)) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        baseContentTextSizePx = contentView.getTextSize();
+        applyFontScale(contentView, ReadingPreferenceManager.getContentFontScale(this));
+
         String blockKey = getResources().getResourceEntryName(textResId);
         highlightController = new HighlightController(this, contentView, blockKey,
                 () -> refreshContent(contentView, textResId));
         renderContent(contentView, textResId);
 
+        setupHeaderActions(contentView, textResId);
         setupInPageSearch(contentView, textResId);
 
         int scrollToOffset = getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
@@ -111,6 +128,64 @@ public class SectionContentActivity extends AppCompatActivity {
             int line = layout.getLineForOffset(clamped);
             scrollView.smoothScrollTo(0, contentView.getTop() + layout.getLineTop(line));
         });
+    }
+
+    /** Estrella de favorito y botón de tamaño de letra sobre la tarjeta del encabezado. */
+    private void setupHeaderActions(TextView contentView, @StringRes int textResId) {
+        ImageButton favoriteButton = findViewById(R.id.btnFavorito);
+        String nodeId = getIntent().getStringExtra(LegalHierarchyRepository.EXTRA_NODE_ID);
+        LegalHierarchyRepository.Node node = nodeId != null
+                ? LegalHierarchyRepository.findNodeById(nodeId)
+                : LegalHierarchyRepository.findNodeByTextRes(textResId);
+        NodeFavorites.bindToggle(favoriteButton, node);
+
+        ImageButton fontSizeButton = findViewById(R.id.btnTamanoLetra);
+        if (fontSizeButton != null) {
+            fontSizeButton.setOnClickListener(v -> showFontSizeDialog(contentView));
+        }
+    }
+
+    private void applyFontScale(TextView contentView, float scale) {
+        contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, baseContentTextSizePx * scale);
+    }
+
+    /** Diálogo de tamaño de letra; el cambio se aplica en vivo y queda guardado. */
+    private void showFontSizeDialog(TextView contentView) {
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_font_size, null);
+        TextView valueLabel = dialogView.findViewById(R.id.fontSizeValue);
+        SeekBar seekBar = dialogView.findViewById(R.id.fontSizeSeekBar);
+
+        float current = ReadingPreferenceManager.getContentFontScale(this);
+        seekBar.setProgress(Math.round((current - ReadingPreferenceManager.MIN_FONT_SCALE) / FONT_SCALE_STEP));
+        valueLabel.setText(getString(R.string.font_size_value, Math.round(current * 100)));
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
+                float scale = ReadingPreferenceManager.MIN_FONT_SCALE + FONT_SCALE_STEP * progress;
+                valueLabel.setText(getString(R.string.font_size_value, Math.round(scale * 100)));
+                applyFontScale(contentView, scale);
+                ReadingPreferenceManager.setContentFontScale(SectionContentActivity.this, scale);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar bar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar bar) {
+            }
+        });
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.font_size_title)
+                .setView(dialogView)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNeutralButton(R.string.font_size_reset, (dialog, which) -> {
+                    ReadingPreferenceManager.setContentFontScale(this, ReadingPreferenceManager.DEFAULT_FONT_SCALE);
+                    applyFontScale(contentView, ReadingPreferenceManager.DEFAULT_FONT_SCALE);
+                })
+                .show();
     }
 
     private void renderContent(TextView contentView, @StringRes int textResId) {

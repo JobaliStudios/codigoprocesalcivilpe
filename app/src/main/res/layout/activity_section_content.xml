@@ -42,6 +42,34 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <ImageButton
+        android:id="@+id/btnFavorito"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/space_xs"
+        android:layout_marginEnd="@dimen/space_xs"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/favorite_toggle_add"
+        android:elevation="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_star_border_24"
+        app:layout_constraintEnd_toEndOf="@id/fixedCardView"
+        app:layout_constraintTop_toTopOf="@id/fixedCardView"
+        app:tint="@color/colorPrimary" />
+
+    <ImageButton
+        android:id="@+id/btnTamanoLetra"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/font_size_title"
+        android:elevation="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_format_size_24"
+        app:layout_constraintEnd_toStartOf="@id/btnFavorito"
+        app:layout_constraintTop_toTopOf="@id/btnFavorito"
+        app:tint="@color/colorPrimary" />
+
     <ScrollView
         android:id="@+id/scrollViewContent"
         android:layout_width="match_parent"

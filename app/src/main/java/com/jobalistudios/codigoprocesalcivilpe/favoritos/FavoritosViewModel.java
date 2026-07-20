@@ -83,6 +83,18 @@ public class FavoritosViewModel extends ViewModel {
         if (id.contains("cuarta")) return "Sección Cuarta";
         if (id.contains("quinta")) return "Sección Quinta";
         if (id.contains("sexta")) return "Sección Sexta";
+        // Formato nuevo de favoritos: "node:sec_N_..."
+        int marker = id.indexOf("sec_");
+        if (marker >= 0 && marker + 4 < id.length()) {
+            switch (id.charAt(marker + 4)) {
+                case '1': return "Sección Primera";
+                case '2': return "Sección Segunda";
+                case '3': return "Sección Tercera";
+                case '4': return "Sección Cuarta";
+                case '5': return "Sección Quinta";
+                case '6': return "Sección Sexta";
+            }
+        }
         return "Sin sección";
     }
 }

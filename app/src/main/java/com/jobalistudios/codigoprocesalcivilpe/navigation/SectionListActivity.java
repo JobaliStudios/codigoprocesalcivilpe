@@ -3,6 +3,7 @@ package com.jobalistudios.codigoprocesalcivilpe.navigation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
 
 public class SectionListActivity extends AppCompatActivity {
 
@@ -46,6 +48,9 @@ public class SectionListActivity extends AppCompatActivity {
         TextView subtitle = findViewById(R.id.sectionListSubtitle);
         title.setText(node.title);
         subtitle.setText(node.subtitle);
+
+        ImageButton favoriteButton = findViewById(R.id.btnFavorito);
+        NodeFavorites.bindToggle(favoriteButton, node);
 
         RecyclerView recyclerView = findViewById(R.id.sectionRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
