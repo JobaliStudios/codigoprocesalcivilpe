@@ -94,6 +94,11 @@ public class FavoritesManager {
         saveArray(updated);
     }
 
+    /** Elimina todos los favoritos guardados por el usuario. */
+    public void clearAll() {
+        sharedPreferences.edit().clear().apply();
+    }
+
     private JSONArray getArray() {
         String raw = sharedPreferences.getString(KEY_ITEMS, "[]");
         try {

@@ -1,5 +1,6 @@
 package com.jobalistudios.codigoprocesalcivilpe.configuracion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
-import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
-import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightsManager;
+import com.jobalistudios.codigoprocesalcivilpe.privacidad.PrivacyCenterActivity;
 
 public class ConfiguracionFragment extends Fragment {
 
@@ -46,39 +46,10 @@ public class ConfiguracionFragment extends Fragment {
         binding.cardAcercaDe.setOnClickListener(v -> Toast.makeText(requireContext(),
                 R.string.config_about_message, Toast.LENGTH_SHORT).show());
 
-        setupPrivacyOptions();
-        setupClearHighlights();
+        binding.cardPrivacidad.setOnClickListener(v -> startActivity(
+                new Intent(requireContext(), PrivacyCenterActivity.class)));
 
         return root;
-    }
-
-    private void setupClearHighlights() {
-        binding.cardClearHighlights.setOnClickListener(v ->
-                new androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                        .setTitle(R.string.config_clear_highlights_confirm_title)
-                        .setMessage(R.string.config_clear_highlights_confirm_message)
-                        .setNegativeButton(R.string.highlight_cancel, null)
-                        .setPositiveButton(R.string.config_clear_highlights_confirm, (dialog, which) -> {
-                            new HighlightsManager(requireContext()).clearAll();
-                            Toast.makeText(requireContext(),
-                                    R.string.config_clear_highlights_done, Toast.LENGTH_SHORT).show();
-                        })
-                        .show());
-    }
-
-    /** Punto de entrada a las opciones de privacidad de anuncios (exigido por Google donde aplica). */
-    private void setupPrivacyOptions() {
-        GoogleMobileAdsConsentManager consentManager =
-                GoogleMobileAdsConsentManager.getInstance(requireContext());
-        binding.cardPrivacidad.setVisibility(
-                consentManager.isPrivacyOptionsRequired() ? View.VISIBLE : View.GONE);
-        binding.cardPrivacidad.setOnClickListener(v ->
-                consentManager.showPrivacyOptionsForm(requireActivity(), formError -> {
-                    if (formError != null) {
-                        Toast.makeText(requireContext(),
-                                R.string.config_privacy_error, Toast.LENGTH_SHORT).show();
-                    }
-                }));
     }
 
     private void setupSwitchObserver(SwitchMaterial switchMaterial,

@@ -1,6 +1,7 @@
 package com.jobalistudios.codigoprocesalcivilpe.busqueda;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
@@ -82,6 +83,15 @@ public class BusquedaViewModel extends AndroidViewModel {
     public void useRecentQuery(String query) {
         currentQuery = query;
         refreshState(false);
+    }
+
+    /** Elimina únicamente el historial de búsquedas recientes. */
+    public static void clearRecentQueries(Context context) {
+        context.getApplicationContext()
+                .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .remove(PREF_RECENT)
+                .apply();
     }
 
     private void refreshState(boolean loading) {

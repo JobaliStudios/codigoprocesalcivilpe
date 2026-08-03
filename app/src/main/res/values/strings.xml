@@ -672,8 +672,8 @@
     <string name="sinresultadosbusqueda">Sin coincidencias en este texto</string>
 
     <!-- Privacidad de anuncios (UMP) -->
-    <string name="config_privacy_title">Opciones de privacidad</string>
-    <string name="config_privacy_desc">Gestiona tu consentimiento para los anuncios</string>
+    <string name="config_privacy_title">Privacidad y datos</string>
+    <string name="config_privacy_desc">Consulta la política y controla tus datos locales</string>
     <string name="config_privacy_error">No se pudo abrir el formulario de privacidad</string>
     <string name="config_icon_privacy">Ícono de privacidad</string>
 
@@ -695,4 +695,27 @@
     <string name="config_clear_highlights_confirm">Borrar todo</string>
     <string name="config_clear_highlights_done">Notas y resaltados eliminados</string>
     <string name="config_icon_clear_highlights">Ícono de borrar notas y resaltados</string>
+
+    <!-- Centro de privacidad -->
+    <string name="privacy_center_title">Privacidad y datos</string>
+    <string name="privacy_policy_title">Política de privacidad</string>
+    <string name="privacy_policy_local_data">El contenido jurídico principal está incluido en la aplicación y funciona sin conexión. No necesitas crear una cuenta. La app guarda localmente tus búsquedas recientes, favoritos, preferencias de lectura, resaltados y notas. Las notas se cifran con Android Keystore. Estos datos no son enviados por el desarrollador a un servidor y puedes eliminarlos con los controles de esta pantalla.</string>
+    <string name="privacy_ads_title">Google Mobile Ads y consentimiento</string>
+    <string name="privacy_ads_explanation">La app utiliza Google Mobile Ads para mostrar publicidad y Google UMP para gestionar el consentimiento cuando corresponde. Google puede procesar la dirección IP —que permite estimar una ubicación aproximada—, interacciones con la app y los anuncios, diagnósticos de rendimiento e identificadores del dispositivo o de publicidad. Estos datos pueden utilizarse para publicidad, medición, analítica y prevención del fraude, y se transmiten cifrados. La app solo solicita anuncios cuando UMP indica que puede hacerlo.</string>
+    <string name="privacy_consent_available">Las opciones de consentimiento publicitario están disponibles para tu región.</string>
+    <string name="privacy_consent_not_required">Google UMP no requiere actualmente un formulario de opciones para tu región. Los controles de datos locales siguen disponibles.</string>
+    <string name="privacy_manage_consent">Administrar consentimiento publicitario</string>
+    <string name="privacy_your_data_title">Tus datos locales</string>
+    <string name="privacy_your_data_explanation">Puedes borrar cada categoría por separado. “Borrar todos los datos locales” también restablece el tema y las preferencias de lectura, pero no modifica directamente las decisiones administradas por Google UMP.</string>
+    <string name="privacy_clear_searches">Borrar búsquedas recientes</string>
+    <string name="privacy_clear_searches_confirm">Se eliminará el historial de búsquedas guardado en este dispositivo.</string>
+    <string name="privacy_clear_searches_done">Búsquedas recientes eliminadas</string>
+    <string name="privacy_clear_favorites">Borrar favoritos</string>
+    <string name="privacy_clear_favorites_confirm">Se eliminarán todos tus favoritos guardados.</string>
+    <string name="privacy_clear_favorites_done">Favoritos eliminados</string>
+    <string name="privacy_clear_all">Borrar todos los datos locales</string>
+    <string name="privacy_clear_all_confirm">Se eliminarán búsquedas, favoritos, notas, resaltados y preferencias de esta aplicación. Esta acción no se puede deshacer. El consentimiento publicitario se administra por separado.</string>
+    <string name="privacy_clear_all_done">Todos los datos locales fueron eliminados</string>
+    <string name="privacy_delete_action">Eliminar</string>
+    <string name="privacy_policy_updated">Última actualización de esta información: agosto de 2026.</string>
 </resources>
