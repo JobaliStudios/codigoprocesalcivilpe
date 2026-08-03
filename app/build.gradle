@@ -31,14 +31,14 @@ def hasReleaseSigningConfig = [
 
 android {
     namespace 'com.jobalistudios.codigoprocesalcivilpe'
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId 'com.jobalistudios.codigoprocesalcivilpe'
         minSdk 30
-        targetSdk 35
-        versionCode 9
-        versionName "1.04"
+        targetSdk 36
+        versionCode 10
+        versionName "1.05"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -65,8 +65,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding true
@@ -107,7 +107,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.test:core:1.6.1'
-    testImplementation 'org.robolectric:robolectric:4.14.1'
+    testImplementation 'org.robolectric:robolectric:4.16.1'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.6.1'
