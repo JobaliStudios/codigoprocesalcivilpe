@@ -2,7 +2,7 @@
     <string name="app_name">Código Procesal Civil PE</string>
     <string name="title_activity_seccion_primera_tit2_cap1">SeccionPrimeraTit2Cap1</string>
     <string name="tituloapp">Código Procesal Civil PE</string>
-    <string name="subtituloapp">Actualizado al 2025</string>
+    <string name="subtituloapp">Contenido incluido en esta versión</string>
     <string name="Home">Inicio</string>
     <string name="back">back</string>
     <string name="breadcrumbersigno">></string>
@@ -15,7 +15,7 @@
     <string name="busqueda_sin_coincidencias">Sin coincidencias</string>
 
     <!--HomeFragment Cardviews-->
-    <string name="descripcion_codigos_main">Contenido actualizado al 2025 de 4 Codigos(CC,CP,CPC,CPP)\n\n</string>
+    <string name="descripcion_codigos_main">Contenido jurídico disponible sin conexión. Las actualizaciones se publican mediante nuevas versiones de la aplicación.\n\n</string>
     <string name="descripcion_cuestionarios_main">Pon a prueba tu conocimiento resolviendo cuestionarios\n\n</string>
     <string name="descripcion_recursps_main">Accede a otros recursos disponibles\n\n</string>
 
@@ -29,7 +29,7 @@
     <!-- Textos de Códigos -->
     <string name="codigos_codigo_civil_title">Código Civil</string>
     <string name="codigos_codigo_penal_title">Código Penal</string>
-    <string name="codigos_codigo_procesal_civil_title">Código Procesal Civil (FEB 2025)</string>
+    <string name="codigos_codigo_procesal_civil_title">Código Procesal Civil</string>
     <string name="codigos_codigo_procesal_civil_subtitle">847 artículos</string>
     <string name="codigos_codigo_procesal_penal_title">Código Procesal Penal</string>
     <string name="codigos_proximamente_title">Próximamente</string>
@@ -61,7 +61,7 @@
 
     <string name="quiz_cpc_header_title">Cuestionario CPC</string>
     <string name="quiz_cpc_ready_title">Pon a prueba tu conocimiento</string>
-    <string name="quiz_cpc_ready_subtitle">Responde preguntas basadas en el Código Procesal Civil actualizado a 2025</string>
+    <string name="quiz_cpc_ready_subtitle">Responde preguntas basadas en el contenido incluido en esta versión de la aplicación</string>
     <string name="quiz_cpc_config_title">Configura tu sesión</string>
     <string name="quiz_cpc_option_5_desc">Sesión rápida de 2 minutos</string>
     <string name="quiz_cpc_option_10_desc">Práctica estándar recomendada</string>
@@ -586,7 +586,7 @@
     <string name="config_subtitle">Personaliza la experiencia y mantén a la mano tus herramientas favoritas.</string>
     <string name="config_icon_notifications">Ícono de notificaciones</string>
     <string name="config_notifications_title">Notificaciones</string>
-    <string name="config_notifications_desc">Recibe avisos sobre nuevas actualizaciones y recursos.</string>
+    <string name="config_notifications_desc">Consulta las novedades incluidas en cada versión.</string>
     <string name="config_icon_reading">Ícono de modo lectura</string>
     <string name="config_reading_title">Modo lectura</string>
     <string name="config_reading_desc">Mantiene la pantalla encendida mientras lees el código.</string>
@@ -640,11 +640,11 @@
     </string-array>
 
     <string name="section_default_label">Sección</string>
-    <string name="section_default_last_updated">2025</string>
+    <string name="section_default_last_updated">incluida en esta versión</string>
     <string name="section_default_source">Código Procesal Civil del Perú</string>
     <string name="section_breadcrumb_format">%1$s &gt; %2$s &gt; %3$s</string>
     <string name="section_metadata_articles">Rango de artículos: %1$s</string>
-    <string name="section_metadata_updated">Actualizado: %1$s</string>
+    <string name="section_metadata_updated">Edición: %1$s</string>
     <string name="section_metadata_source">Fuente: %1$s</string>
     <string name="section_article_range_format">Artículos %1$d-%2$d</string>
     <string name="section_single_article_format">Artículo %1$d</string>
