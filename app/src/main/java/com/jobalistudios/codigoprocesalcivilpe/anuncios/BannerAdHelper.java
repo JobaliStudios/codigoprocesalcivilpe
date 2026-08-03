@@ -40,6 +40,6 @@ public final class BannerAdHelper {
         int adWidthPixels = windowMetrics.getBounds().width();
         float density = activity.getResources().getDisplayMetrics().density;
         int adWidth = (int) (adWidthPixels / density);
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth);
+        return AdSize.getLargeAnchoredAdaptiveBannerAdSize(activity, adWidth);
     }
 }
