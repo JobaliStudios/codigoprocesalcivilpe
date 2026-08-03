@@ -17,6 +17,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
+import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightsManager;
 
 public class ConfiguracionFragment extends Fragment {
 
@@ -46,8 +47,23 @@ public class ConfiguracionFragment extends Fragment {
                 R.string.config_about_message, Toast.LENGTH_SHORT).show());
 
         setupPrivacyOptions();
+        setupClearHighlights();
 
         return root;
+    }
+
+    private void setupClearHighlights() {
+        binding.cardClearHighlights.setOnClickListener(v ->
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.config_clear_highlights_confirm_title)
+                        .setMessage(R.string.config_clear_highlights_confirm_message)
+                        .setNegativeButton(R.string.highlight_cancel, null)
+                        .setPositiveButton(R.string.config_clear_highlights_confirm, (dialog, which) -> {
+                            new HighlightsManager(requireContext()).clearAll();
+                            Toast.makeText(requireContext(),
+                                    R.string.config_clear_highlights_done, Toast.LENGTH_SHORT).show();
+                        })
+                        .show());
     }
 
     /** Punto de entrada a las opciones de privacidad de anuncios (exigido por Google donde aplica). */

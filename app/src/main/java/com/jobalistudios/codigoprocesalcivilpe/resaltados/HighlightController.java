@@ -161,6 +161,7 @@ public class HighlightController {
         EditText etNote = view.findViewById(R.id.etNote);
         if (!withNote) {
             etNote.setVisibility(View.GONE);
+            view.findViewById(R.id.notePrivacyWarning).setVisibility(View.GONE);
         }
         selectedColor = "yellow";
 

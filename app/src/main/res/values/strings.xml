@@ -687,4 +687,12 @@
     <string name="highlight_cancel">Cancelar</string>
     <string name="highlight_save">Guardar</string>
     <string name="highlight_remove">Quitar</string>
+    <string name="highlight_note_privacy_warning">La nota se cifra en este dispositivo. Aun así, no ingreses datos personales o confidenciales. Máximo 2,000 caracteres.</string>
+    <string name="config_clear_highlights_title">Borrar notas y resaltados</string>
+    <string name="config_clear_highlights_desc">Elimina permanentemente todas tus notas y marcas</string>
+    <string name="config_clear_highlights_confirm_title">¿Borrar notas y resaltados?</string>
+    <string name="config_clear_highlights_confirm_message">Esta acción no se puede deshacer.</string>
+    <string name="config_clear_highlights_confirm">Borrar todo</string>
+    <string name="config_clear_highlights_done">Notas y resaltados eliminados</string>
+    <string name="config_icon_clear_highlights">Ícono de borrar notas y resaltados</string>
 </resources>

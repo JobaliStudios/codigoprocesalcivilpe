@@ -7,7 +7,9 @@ import androidx.annotation.Nullable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,22 +21,52 @@ import java.util.List;
 public class HighlightsManager {
 
     private static final String PREFS_NAME = "codigoprocesalcivil_highlights";
+    private static final String NOTE_CIPHERTEXT = "noteCiphertext";
+    private static final String NOTE_IV = "noteIv";
+    private static final String NOTE_VERSION = "noteVersion";
+    private static final int CURRENT_NOTE_VERSION = 1;
 
     private final SharedPreferences sharedPreferences;
+    private final NoteCipher noteCipher;
 
     public HighlightsManager(Context context) {
+        this(context, new AndroidKeystoreNoteCipher());
+    }
+
+    HighlightsManager(Context context, NoteCipher noteCipher) {
         sharedPreferences = context.getApplicationContext()
                 .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        this.noteCipher = noteCipher;
     }
 
     public List<Highlight> getForBlock(String blockKey) {
         List<Highlight> result = new ArrayList<>();
         JSONArray array = getArray(blockKey);
+        boolean containsLegacyPlaintext = false;
+        boolean decryptionFailed = false;
         for (int i = 0; i < array.length(); i++) {
-            Highlight highlight = Highlight.fromJson(array.optJSONObject(i));
+            JSONObject json = array.optJSONObject(i);
+            if (json == null) {
+                continue;
+            }
+            String note = null;
+            if (json.has(NOTE_CIPHERTEXT)) {
+                try {
+                    note = decryptNote(json);
+                } catch (GeneralSecurityException | IllegalArgumentException e) {
+                    decryptionFailed = true;
+                }
+            } else if (json.has("note")) {
+                note = json.optString("note", "");
+                containsLegacyPlaintext = true;
+            }
+            Highlight highlight = Highlight.fromJson(json, note);
             if (highlight != null) {
                 result.add(highlight);
             }
+        }
+        if (containsLegacyPlaintext && !decryptionFailed) {
+            save(blockKey, result);
         }
         return result;
     }
@@ -69,6 +101,11 @@ public class HighlightsManager {
         if (removed) {
             save(blockKey, highlights);
         }
+    }
+
+    /** Borra en una sola operación todos los resaltados y notas del usuario. */
+    public void clearAll() {
+        sharedPreferences.edit().clear().apply();
     }
 
     @Nullable
@@ -118,9 +155,18 @@ public class HighlightsManager {
         JSONArray array = new JSONArray();
         try {
             for (Highlight highlight : highlights) {
-                array.put(highlight.toJson());
+                JSONObject json = highlight.toJson();
+                if (highlight.hasNote()) {
+                    NoteCipher.EncryptedNote encrypted = noteCipher.encrypt(
+                            highlight.getId(), highlight.getNote());
+                    json.put(NOTE_CIPHERTEXT, encrypted.ciphertext);
+                    json.put(NOTE_IV, encrypted.iv);
+                    json.put(NOTE_VERSION, CURRENT_NOTE_VERSION);
+                }
+                array.put(json);
             }
-        } catch (JSONException ignored) {
+        } catch (JSONException | GeneralSecurityException ignored) {
+            // Never fall back to plaintext or overwrite valid data if encryption fails.
             return;
         }
         if (array.length() == 0) {
@@ -128,5 +174,18 @@ public class HighlightsManager {
         } else {
             sharedPreferences.edit().putString(blockKey, array.toString()).apply();
         }
+    }
+
+    private String decryptNote(JSONObject json) throws GeneralSecurityException {
+        if (json.optInt(NOTE_VERSION, -1) != CURRENT_NOTE_VERSION) {
+            throw new GeneralSecurityException("Versión de nota cifrada no compatible");
+        }
+        String highlightId = json.optString("id", "");
+        String ciphertext = json.optString(NOTE_CIPHERTEXT, "");
+        String iv = json.optString(NOTE_IV, "");
+        if (highlightId.isEmpty() || ciphertext.isEmpty() || iv.isEmpty()) {
+            throw new GeneralSecurityException("Nota cifrada incompleta");
+        }
+        return noteCipher.decrypt(highlightId, new NoteCipher.EncryptedNote(ciphertext, iv));
     }
 }

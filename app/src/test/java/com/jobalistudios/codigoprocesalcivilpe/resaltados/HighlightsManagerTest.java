@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -15,6 +16,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+import java.util.Base64;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -23,11 +27,15 @@ public class HighlightsManagerTest {
     private static final String BLOCK = "seccionprimeratit1txt";
 
     private HighlightsManager manager;
+    private SharedPreferences preferences;
 
     @Before
     public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
-        manager = new HighlightsManager(context);
+        preferences = context.getSharedPreferences(
+                "codigoprocesalcivil_highlights", Context.MODE_PRIVATE);
+        preferences.edit().clear().commit();
+        manager = new HighlightsManager(context, new FakeNoteCipher());
     }
 
     private static Highlight highlight(String id, int start, int end, String note, String snippet) {
@@ -49,6 +57,13 @@ public class HighlightsManagerTest {
         assertEquals("Derecho", h.getSnippet());
         assertEquals(123L, h.getCreatedAt());
         assertTrue(h.hasNote());
+
+        String raw = preferences.getString(BLOCK, "");
+        assertFalse(raw.contains("mi nota"));
+        assertFalse(raw.contains("\"note\""));
+        assertTrue(raw.contains("noteCiphertext"));
+        assertTrue(raw.contains("noteIv"));
+        assertTrue(raw.contains("noteVersion"));
     }
 
     @Test
@@ -130,5 +145,64 @@ public class HighlightsManagerTest {
                 .edit().putString(BLOCK, "{esto no es json valido").apply();
 
         assertTrue(manager.getForBlock(BLOCK).isEmpty());
+    }
+
+    @Test
+    public void legacyPlaintextNote_isMigratedToEncryptedFormat() {
+        preferences.edit().putString(BLOCK,
+                "[{\"id\":\"legacy\",\"start\":0,\"end\":4,"
+                        + "\"colorTag\":\"yellow\",\"note\":\"dato privado\","
+                        + "\"snippet\":\"Todo\",\"createdAt\":123}]").commit();
+
+        List<Highlight> stored = manager.getForBlock(BLOCK);
+
+        assertEquals("dato privado", stored.get(0).getNote());
+        String migrated = preferences.getString(BLOCK, "");
+        assertFalse(migrated.contains("dato privado"));
+        assertFalse(migrated.contains("\"note\""));
+        assertTrue(migrated.contains("noteCiphertext"));
+    }
+
+    @Test
+    public void noteLength_isLimitedToTwoThousandCharacters() {
+        String oversized = new String(new char[2100]).replace('\0', 'x');
+
+        manager.add(BLOCK, highlight("h1", 0, 4, oversized, "Todo"));
+
+        assertEquals(Highlight.MAX_NOTE_LENGTH,
+                manager.getForBlock(BLOCK).get(0).getNote().length());
+    }
+
+    @Test
+    public void clearAll_removesEveryBlock() {
+        manager.add("bloqueA", highlight("h1", 0, 4, "nota", "Todo"));
+        manager.add("bloqueB", highlight("h2", 0, 4, null, "Todo"));
+
+        manager.clearAll();
+
+        assertTrue(manager.getForBlock("bloqueA").isEmpty());
+        assertTrue(manager.getForBlock("bloqueB").isEmpty());
+    }
+
+    private static final class FakeNoteCipher implements NoteCipher {
+        @Override
+        public EncryptedNote encrypt(String highlightId, String plaintext) {
+            String value = highlightId + ":" + plaintext;
+            return new EncryptedNote(
+                    Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.UTF_8)),
+                    "test-iv");
+        }
+
+        @Override
+        public String decrypt(String highlightId, EncryptedNote encryptedNote)
+                throws GeneralSecurityException {
+            String value = new String(Base64.getDecoder().decode(encryptedNote.ciphertext),
+                    StandardCharsets.UTF_8);
+            String prefix = highlightId + ":";
+            if (!value.startsWith(prefix)) {
+                throw new GeneralSecurityException("AAD inválido");
+            }
+            return value.substring(prefix.length());
+        }
     }
 }

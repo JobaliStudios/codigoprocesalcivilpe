@@ -12,6 +12,8 @@ import org.json.JSONObject;
  */
 public class Highlight {
 
+    public static final int MAX_NOTE_LENGTH = 2000;
+
     private final String id;
     private final int start;
     private final int end;
@@ -27,7 +29,7 @@ public class Highlight {
         this.start = start;
         this.end = end;
         this.colorTag = colorTag;
-        this.note = note == null || note.isEmpty() ? null : note;
+        this.note = normalizeNote(note);
         this.snippet = snippet;
         this.createdAt = createdAt;
     }
@@ -71,7 +73,6 @@ public class Highlight {
         json.put("start", start);
         json.put("end", end);
         json.put("colorTag", colorTag);
-        json.put("note", note == null ? "" : note);
         json.put("snippet", snippet);
         json.put("createdAt", createdAt);
         return json;
@@ -79,6 +80,11 @@ public class Highlight {
 
     @Nullable
     public static Highlight fromJson(@Nullable JSONObject json) {
+        return fromJson(json, json == null ? null : json.optString("note", ""));
+    }
+
+    @Nullable
+    static Highlight fromJson(@Nullable JSONObject json, @Nullable String decryptedNote) {
         if (json == null) {
             return null;
         }
@@ -91,9 +97,17 @@ public class Highlight {
                 json.optInt("start", -1),
                 json.optInt("end", -1),
                 json.optString("colorTag", "yellow"),
-                json.optString("note", ""),
+                decryptedNote,
                 json.optString("snippet", ""),
                 json.optLong("createdAt", 0L)
         );
+    }
+
+    @Nullable
+    private static String normalizeNote(@Nullable String note) {
+        if (note == null || note.isEmpty()) {
+            return null;
+        }
+        return note.length() <= MAX_NOTE_LENGTH ? note : note.substring(0, MAX_NOTE_LENGTH);
     }
 }
