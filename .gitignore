@@ -8,11 +8,19 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+# Gradle build output (root project and every module).
+build/
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# Android packages and generated output copied outside build directories.
+*.apk
+*.aab
+output-metadata.json
+/app/debug/
+/app/release/
 
 # Release signing material must stay outside version control.
 /keystore.properties
