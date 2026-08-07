@@ -23,6 +23,8 @@ output-metadata.json
 /app/release/
 
 # Release signing material must stay outside version control.
-/keystore.properties
+keystore.properties
 *.jks
 *.keystore
+*.p12
+*.pfx
