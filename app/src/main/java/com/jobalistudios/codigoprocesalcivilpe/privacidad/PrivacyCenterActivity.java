@@ -16,6 +16,7 @@ public class PrivacyCenterActivity extends AppCompatActivity {
 
     private ActivityPrivacyCenterBinding binding;
     private LocalDataManager localDataManager;
+    private GoogleMobileAdsConsentManager consentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class PrivacyCenterActivity extends AppCompatActivity {
         binding = ActivityPrivacyCenterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         localDataManager = new LocalDataManager(this);
+        consentManager = GoogleMobileAdsConsentManager.getInstance(this);
 
         binding.privacyToolbar.setNavigationOnClickListener(v -> finish());
         setupConsentOptions();
@@ -30,20 +32,25 @@ public class PrivacyCenterActivity extends AppCompatActivity {
     }
 
     private void setupConsentOptions() {
-        GoogleMobileAdsConsentManager consentManager =
-                GoogleMobileAdsConsentManager.getInstance(this);
-        boolean optionsRequired = consentManager.isPrivacyOptionsRequired();
-        binding.buttonManageAdsConsent.setVisibility(optionsRequired ? View.VISIBLE : View.GONE);
-        binding.textConsentAvailability.setText(optionsRequired
-                ? R.string.privacy_consent_available
-                : R.string.privacy_consent_not_required);
+        refreshConsentOptions();
         binding.buttonManageAdsConsent.setOnClickListener(v ->
                 consentManager.showPrivacyOptionsForm(this, formError -> {
                     if (formError != null) {
                         Toast.makeText(this, R.string.config_privacy_error,
                                 Toast.LENGTH_SHORT).show();
+                    } else {
+                        consentManager.initializeAdsIfAllowed(this);
                     }
+                    refreshConsentOptions();
                 }));
+    }
+
+    private void refreshConsentOptions() {
+        boolean optionsRequired = consentManager.isPrivacyOptionsRequired();
+        binding.buttonManageAdsConsent.setVisibility(optionsRequired ? View.VISIBLE : View.GONE);
+        binding.textConsentAvailability.setText(optionsRequired
+                ? R.string.privacy_consent_available
+                : R.string.privacy_consent_not_required);
     }
 
     private void setupDeletionActions() {

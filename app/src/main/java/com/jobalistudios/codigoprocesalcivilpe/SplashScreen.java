@@ -29,11 +29,12 @@ public class SplashScreen extends AppCompatActivity {
         // Recolectar consentimiento de anuncios durante el splash; si la región lo exige,
         // el formulario de UMP se muestra encima y la navegación espera a que se cierre.
         GoogleMobileAdsConsentManager consentManager = GoogleMobileAdsConsentManager.getInstance(this);
-        consentManager.initializeAdsIfAllowed(this); // consentimiento de una sesión anterior
         consentManager.gatherConsent(this, error -> {
             consentFlowDone = true;
             maybeNavigate();
         });
+        // Reutiliza el consentimiento previo solo después de iniciar la actualización de UMP.
+        consentManager.initializeAdsIfAllowed(this);
 
         handler = new Handler(Looper.getMainLooper());
         minTimeRunnable = () -> {
