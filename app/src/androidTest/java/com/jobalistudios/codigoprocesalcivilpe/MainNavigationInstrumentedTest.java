@@ -23,7 +23,7 @@ public class MainNavigationInstrumentedTest {
         onView(withId(R.id.searchView)).check(matches(isDisplayed()));
 
         onView(withId(R.id.navigation_favoritos)).perform(click());
-        onView(withId(R.id.recyclerFavoritos)).check(matches(isDisplayed()));
+        onView(withId(R.id.favoritesControlsCard)).check(matches(isDisplayed()));
 
         onView(withId(R.id.navigation_configuracion)).perform(click());
         onView(withId(R.id.card_preferencias)).check(matches(isDisplayed()));

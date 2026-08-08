@@ -3,6 +3,7 @@ package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -23,7 +24,8 @@ public class QuizzNavigationTest {
         ActivityScenario.launch(QuizzCPCStartScreen.class);
 
         onView(withId(R.id.option5)).perform(click());
-        onView(withId(R.id.btnNext)).check(matches(isDisplayed()));
+        onView(withId(R.id.btnStartQuiz)).perform(scrollTo(), click());
+        onView(withId(R.id.tvQuestion)).check(matches(isDisplayed()));
 
         pressBack();
 

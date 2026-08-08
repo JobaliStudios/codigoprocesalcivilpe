@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -21,15 +21,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Configuración DELAYED del NavController
-        binding.navHostFragmentActivityMain.post(() -> {
-            navController = Navigation.findNavController(
-                    MainActivity.this,
-                    R.id.nav_host_fragment_activity_main
-            );
-
-            setupNavigation();
-        });
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_activity_main);
+        if (navHostFragment == null) {
+            throw new IllegalStateException("No se pudo inicializar la navegación principal");
+        }
+        navController = navHostFragment.getNavController();
+        setupNavigation();
     }
 
     private void setupNavigation() {
