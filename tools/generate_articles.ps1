@@ -13,9 +13,9 @@
 $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
-$stringsPath = Join-Path $root 'app\src\main\res\values\strings.xml'
-$catalogPath = Join-Path $root 'app\src\main\java\com\jobalistudios\codigoprocesalcivilpe\navigation\LegalContentCatalog.java'
-$outPath     = Join-Path $root 'app\src\main\assets\articles.json'
+$stringsPath = Join-Path $root 'app/src/main/res/values/strings.xml'
+$catalogPath = Join-Path $root 'app/src/main/java/com/jobalistudios/codigoprocesalcivilpe/navigation/LegalContentCatalog.java'
+$outPath     = Join-Path $root 'app/src/main/assets/articles.json'
 
 # --- 1) Claves de bloques, en el orden del catalogo (ultimo R.string de cada entry(...)) ---
 $catalogSrc = Get-Content $catalogPath -Raw -Encoding utf8

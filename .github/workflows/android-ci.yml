@@ -1,0 +1,163 @@
+name: Android CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-and-build:
+    name: Validar y compilar
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v5
+
+      - name: Validar archivos y credenciales versionados
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Test-Placeholder([string]$Value) {
+            if ([string]::IsNullOrWhiteSpace($Value)) { return $true }
+            $trimmed = $Value.Trim()
+            if ($trimmed -match '^<[^>]+>$') { return $true }
+            if ($trimmed -match '^\$\{[^}]+\}$') { return $true }
+            return $trimmed -match '(?i)(change.?me|replace.?me|example|sample|dummy|your[-_ ]|placeholder|path[/\\]to)'
+          }
+
+          function Add-Issue(
+            [System.Collections.Generic.List[string]]$Issues,
+            [string]$Path,
+            [string]$Reason
+          ) {
+            $description = "${Path} (${Reason})"
+            if (-not $Issues.Contains($description)) {
+              $Issues.Add($description)
+            }
+          }
+
+          $issues = [System.Collections.Generic.List[string]]::new()
+          $forbiddenPath = '(?i)(^|/)(keystore\.properties|[^/]+\.(apk|aab|jks|keystore|p12|pfx))$'
+          $trackedFiles = @(& git -c core.quotePath=false ls-files)
+          if ($LASTEXITCODE -ne 0) {
+            throw 'No se pudo obtener la lista de archivos versionados.'
+          }
+
+          foreach ($relativePath in $trackedFiles) {
+            $normalizedPath = ([string]$relativePath).Replace('\', '/')
+            if ($normalizedPath -match $forbiddenPath) {
+              Add-Issue $issues $normalizedPath 'archivo prohibido en Git'
+              continue
+            }
+
+            if (-not (Test-Path -LiteralPath $relativePath -PathType Leaf)) { continue }
+            try {
+              $content = [System.IO.File]::ReadAllText((Resolve-Path -LiteralPath $relativePath))
+            } catch {
+              continue
+            }
+
+            if ($content -match '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----') {
+              Add-Issue $issues $normalizedPath 'clave privada incrustada'
+            }
+
+            $signingProperties = [regex]::Matches(
+              $content,
+              '(?im)^\s*(RELEASE_STORE_FILE|RELEASE_STORE_PASSWORD|RELEASE_KEY_ALIAS|RELEASE_KEY_PASSWORD)\s*[:=]\s*(.*?)\s*$'
+            )
+            foreach ($property in $signingProperties) {
+              if (-not (Test-Placeholder $property.Groups[2].Value)) {
+                Add-Issue $issues $normalizedPath "valor real para $($property.Groups[1].Value)"
+              }
+            }
+
+            $hardcodedGradleValues = [regex]::Matches(
+              $content,
+              '(?im)\b(storeFile|storePassword|keyAlias|keyPassword)\s+(["''])(.*?)\2'
+            )
+            foreach ($hardcoded in $hardcodedGradleValues) {
+              if (-not (Test-Placeholder $hardcoded.Groups[3].Value)) {
+                Add-Issue $issues $normalizedPath 'credencial de firma escrita directamente'
+              }
+            }
+
+            $genericCredentials = [regex]::Matches(
+              $content,
+              '(?im)^\s*(password|passwd|secret|api[_-]?key|access[_-]?token|client[_-]?secret)\s*[:=]\s*(.*?)\s*$'
+            )
+            foreach ($credential in $genericCredentials) {
+              if (-not (Test-Placeholder $credential.Groups[2].Value)) {
+                Add-Issue $issues $normalizedPath "posible credencial: $($credential.Groups[1].Value)"
+              }
+            }
+
+            $knownSecretPatterns = @(
+              @{ Name = 'token de GitHub'; Pattern = '(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}' },
+              @{ Name = 'token de GitHub'; Pattern = 'github_pat_[A-Za-z0-9_]{20,}' },
+              @{ Name = 'clave de API de Google'; Pattern = 'AIza[0-9A-Za-z_-]{35}' },
+              @{ Name = 'clave de acceso AWS'; Pattern = 'AKIA[0-9A-Z]{16}' },
+              @{ Name = 'token de Slack'; Pattern = 'xox[baprs]-[0-9A-Za-z-]{10,}' },
+              @{ Name = 'token de API'; Pattern = 'sk-[A-Za-z0-9]{20,}' }
+            )
+            foreach ($knownSecret in $knownSecretPatterns) {
+              if ($content -match $knownSecret.Pattern) {
+                Add-Issue $issues $normalizedPath $knownSecret.Name
+              }
+            }
+          }
+
+          if ($issues.Count -gt 0) {
+            Write-Host 'Se encontraron archivos o posibles credenciales sensibles:'
+            foreach ($issue in $issues) {
+              Write-Host " - $issue"
+            }
+            throw "La validación de seguridad encontró $($issues.Count) problema(s). Los valores no se muestran."
+          }
+
+          Write-Host 'Validación correcta: no hay binarios, claves ni credenciales reales versionadas.'
+
+      - name: Validar sincronización de articles.json
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & ./tools/generate_articles.ps1
+
+          & git diff --quiet -- app/src/main/assets/articles.json
+          if ($LASTEXITCODE -ne 0) {
+            & git diff --stat -- app/src/main/assets/articles.json
+            throw 'articles.json no está sincronizado. Ejecute tools/generate_articles.ps1 y confirme el archivo generado.'
+          }
+
+          Write-Host 'articles.json está sincronizado.'
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Habilitar Gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Ejecutar pruebas unitarias
+        run: ./gradlew test --console=plain
+
+      - name: Ejecutar Android Lint
+        run: ./gradlew lint --console=plain
+
+      - name: Compilar debug
+        run: ./gradlew assembleDebug --console=plain
