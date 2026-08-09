@@ -28,6 +28,15 @@
     <string name="home_continue_reading">Continuar leyendo</string>
     <string name="home_recently_viewed">Vistos recientemente</string>
     <string name="article_number_format">Artículo %1$s</string>
+    <string name="article_action_copy">Copiar</string>
+    <string name="article_action_share">Compartir</string>
+    <string name="article_copy_content_description">Copiar el artículo visible</string>
+    <string name="article_share_content_description">Compartir el artículo visible</string>
+    <string name="article_share_chooser_title">Compartir artículo</string>
+    <string name="article_copy_success">Artículo %1$s copiado</string>
+    <string name="article_current_unavailable">No se pudo identificar el artículo actual.</string>
+    <string name="article_clipboard_label">Artículo %1$s - Código Procesal Civil PE</string>
+    <string name="article_share_subject">Artículo %1$s - Código Procesal Civil PE</string>
 
     <!-- Textos de Códigos -->
     <string name="codigos_codigo_civil_title">Código Civil</string>

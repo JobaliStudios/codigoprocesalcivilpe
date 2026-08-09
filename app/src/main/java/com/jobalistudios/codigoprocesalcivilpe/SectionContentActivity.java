@@ -1,6 +1,8 @@
 package com.jobalistudios.codigoprocesalcivilpe;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +23,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceManager;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleShareFormatter;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.VisibleArticleResolver;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
@@ -59,7 +65,11 @@ public class SectionContentActivity extends AppCompatActivity {
     private ArticleBlock trackedArticleBlock;
     private TextView trackedContentView;
     private ScrollView trackedScrollView;
-    private final Runnable registerVisibleArticle = this::registerCurrentlyVisibleArticle;
+    private Article currentVisibleArticle;
+    private ArticleShareFormatter articleShareFormatter;
+    private MaterialButton copyArticleButton;
+    private MaterialButton shareArticleButton;
+    private final Runnable updateVisibleArticle = this::updateCurrentlyVisibleArticle;
 
     public static Intent createIntent(
             Context context,
@@ -103,6 +113,7 @@ public class SectionContentActivity extends AppCompatActivity {
         }
 
         applyKeepScreenOnPreference();
+        articleShareFormatter = new ArticleShareFormatter(getString(R.string.app_name));
         baseContentTextSizePx = contentView.getTextSize();
         applyFontScale(contentView, ReadingPreferenceManager.getContentFontScale(this));
 
@@ -113,6 +124,7 @@ public class SectionContentActivity extends AppCompatActivity {
         setupReadingHistoryTracking(contentView, blockKey);
 
         setupHeaderActions(contentView, textResId);
+        setupArticleActions();
         setupInPageSearch(contentView, textResId);
 
         int scrollToOffset = getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
@@ -132,8 +144,8 @@ public class SectionContentActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         if (trackedContentView != null) {
-            trackedContentView.removeCallbacks(registerVisibleArticle);
-            registerCurrentlyVisibleArticle();
+            trackedContentView.removeCallbacks(updateVisibleArticle);
+            updateCurrentlyVisibleArticle();
         }
         super.onPause();
     }
@@ -141,7 +153,7 @@ public class SectionContentActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if (trackedContentView != null) {
-            trackedContentView.removeCallbacks(registerVisibleArticle);
+            trackedContentView.removeCallbacks(updateVisibleArticle);
         }
         if (trackedScrollView != null) {
             trackedScrollView.setOnScrollChangeListener((View.OnScrollChangeListener) null);
@@ -194,12 +206,14 @@ public class SectionContentActivity extends AppCompatActivity {
         if (trackedContentView == null) {
             return;
         }
-        trackedContentView.removeCallbacks(registerVisibleArticle);
-        trackedContentView.postDelayed(registerVisibleArticle, HISTORY_SCROLL_SETTLE_DELAY_MS);
+        trackedContentView.removeCallbacks(updateVisibleArticle);
+        trackedContentView.postDelayed(updateVisibleArticle, HISTORY_SCROLL_SETTLE_DELAY_MS);
     }
 
-    private void registerCurrentlyVisibleArticle() {
+    private void updateCurrentlyVisibleArticle() {
         Article article = findCurrentlyVisibleArticle();
+        currentVisibleArticle = article;
+        updateArticleActionState();
         if (article != null && readingHistoryManager != null) {
             readingHistoryManager.recordArticle(article.number, article.title);
         }
@@ -218,14 +232,86 @@ public class SectionContentActivity extends AppCompatActivity {
         int line = layout.getLineForVertical(vertical);
         int characterOffset = layout.getLineStart(line);
 
-        Article visible = trackedArticleBlock.articles.get(0);
-        for (Article article : trackedArticleBlock.articles) {
-            if (article.offsetInBlock > characterOffset) {
-                break;
-            }
-            visible = article;
+        return VisibleArticleResolver.findAtOffset(trackedArticleBlock, characterOffset);
+    }
+
+    private void setupArticleActions() {
+        copyArticleButton = findViewById(R.id.btnCopyArticle);
+        shareArticleButton = findViewById(R.id.btnShareArticle);
+        updateArticleActionState();
+
+        if (copyArticleButton != null) {
+            copyArticleButton.setOnClickListener(view -> copyCurrentArticle());
         }
-        return visible;
+        if (shareArticleButton != null) {
+            shareArticleButton.setOnClickListener(view -> shareCurrentArticle());
+        }
+    }
+
+    private void updateArticleActionState() {
+        boolean enabled = currentVisibleArticle != null;
+        if (copyArticleButton != null) {
+            copyArticleButton.setEnabled(enabled);
+        }
+        if (shareArticleButton != null) {
+            shareArticleButton.setEnabled(enabled);
+        }
+    }
+
+    private void copyCurrentArticle() {
+        updateCurrentlyVisibleArticle();
+        Article article = currentVisibleArticle;
+        if (article == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+
+        ClipboardManager clipboard = getSystemService(ClipboardManager.class);
+        if (clipboard == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+
+        String formattedArticle = articleShareFormatter.format(article);
+        String label = getString(R.string.article_clipboard_label, article.number);
+        clipboard.setPrimaryClip(ClipData.newPlainText(label, formattedArticle));
+        Snackbar.make(
+                trackedContentView,
+                getString(R.string.article_copy_success, article.number),
+                Snackbar.LENGTH_SHORT
+        ).show();
+    }
+
+    private void shareCurrentArticle() {
+        updateCurrentlyVisibleArticle();
+        Article article = currentVisibleArticle;
+        if (article == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(
+                Intent.EXTRA_SUBJECT,
+                getString(R.string.article_share_subject, article.number)
+        );
+        shareIntent.putExtra(Intent.EXTRA_TEXT, articleShareFormatter.format(article));
+        startActivity(Intent.createChooser(
+                shareIntent,
+                getString(R.string.article_share_chooser_title)
+        ));
+    }
+
+    private void showArticleUnavailableFeedback() {
+        View feedbackAnchor = trackedContentView != null
+                ? trackedContentView
+                : findViewById(android.R.id.content);
+        Snackbar.make(
+                feedbackAnchor,
+                R.string.article_current_unavailable,
+                Snackbar.LENGTH_SHORT
+        ).show();
     }
 
     /** Estrella de favorito y botón de tamaño de letra sobre la tarjeta del encabezado. */
