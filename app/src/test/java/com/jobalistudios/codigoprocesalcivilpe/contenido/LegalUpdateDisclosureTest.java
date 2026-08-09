@@ -29,6 +29,8 @@ public class LegalUpdateDisclosureTest {
         assertTrue(homeDescription.contains("sin conexión"));
         assertTrue(homeDescription.contains("nuevas versiones"));
         assertTrue(contentSubtitle.contains("esta versión"));
+        assertTrue(contentSubtitle.contains(
+                "contenido normativo verificado al 8 de agosto de 2026"));
 
         String combined = homeDescription + " " + contentSubtitle + " "
                 + context.getString(R.string.codigos_codigo_procesal_civil_title) + " "
