@@ -25,6 +25,9 @@
     <string name="home_card_codigos_title">Códigos</string>
     <string name="home_card_cuestionarios_title">Cuestionarios</string>
     <string name="home_card_recursos_title">Recursos</string>
+    <string name="home_continue_reading">Continuar leyendo</string>
+    <string name="home_recently_viewed">Vistos recientemente</string>
+    <string name="article_number_format">Artículo %1$s</string>
 
     <!-- Textos de Códigos -->
     <string name="codigos_codigo_civil_title">Código Civil</string>
@@ -714,7 +717,7 @@
     <string name="privacy_clear_favorites_confirm">Se eliminarán todos tus favoritos guardados.</string>
     <string name="privacy_clear_favorites_done">Favoritos eliminados</string>
     <string name="privacy_clear_all">Borrar todos los datos locales</string>
-    <string name="privacy_clear_all_confirm">Se eliminarán búsquedas, favoritos, notas, resaltados y preferencias de esta aplicación. Esta acción no se puede deshacer. El consentimiento publicitario se administra por separado.</string>
+    <string name="privacy_clear_all_confirm">Se eliminarán búsquedas, favoritos, notas, resaltados, historial de lectura y preferencias de esta aplicación. Esta acción no se puede deshacer. El consentimiento publicitario se administra por separado.</string>
     <string name="privacy_clear_all_done">Todos los datos locales fueron eliminados</string>
     <string name="privacy_delete_action">Eliminar</string>
     <string name="privacy_policy_updated">Última actualización de esta información: agosto de 2026.</string>

@@ -22,8 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceManager;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
+import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
@@ -47,10 +50,16 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_NEXT_DESTINATION_ID = "EXTRA_NEXT_DESTINATION_ID";
 
     private static final float FONT_SCALE_STEP = 0.05f;
+    private static final long HISTORY_SCROLL_SETTLE_DELAY_MS = 350L;
 
     private HighlightController highlightController;
     private SectionSearchController searchController;
     private float baseContentTextSizePx;
+    private ReadingHistoryManager readingHistoryManager;
+    private ArticleBlock trackedArticleBlock;
+    private TextView trackedContentView;
+    private ScrollView trackedScrollView;
+    private final Runnable registerVisibleArticle = this::registerCurrentlyVisibleArticle;
 
     public static Intent createIntent(
             Context context,
@@ -101,6 +110,7 @@ public class SectionContentActivity extends AppCompatActivity {
         highlightController = new HighlightController(this, contentView, blockKey,
                 () -> refreshContent(contentView, textResId));
         renderContent(contentView, textResId);
+        setupReadingHistoryTracking(contentView, blockKey);
 
         setupHeaderActions(contentView, textResId);
         setupInPageSearch(contentView, textResId);
@@ -108,6 +118,8 @@ public class SectionContentActivity extends AppCompatActivity {
         int scrollToOffset = getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
         if (scrollToOffset >= 0) {
             scrollToOffset(contentView, scrollToOffset);
+        } else {
+            contentView.post(this::scheduleVisibleArticleRegistration);
         }
     }
 
@@ -115,6 +127,26 @@ public class SectionContentActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         applyKeepScreenOnPreference();
+    }
+
+    @Override
+    protected void onPause() {
+        if (trackedContentView != null) {
+            trackedContentView.removeCallbacks(registerVisibleArticle);
+            registerCurrentlyVisibleArticle();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (trackedContentView != null) {
+            trackedContentView.removeCallbacks(registerVisibleArticle);
+        }
+        if (trackedScrollView != null) {
+            trackedScrollView.setOnScrollChangeListener((View.OnScrollChangeListener) null);
+        }
+        super.onDestroy();
     }
 
     private void applyKeepScreenOnPreference() {
@@ -139,7 +171,61 @@ public class SectionContentActivity extends AppCompatActivity {
             int clamped = Math.max(0, Math.min(offset, contentView.getText().length() - 1));
             int line = layout.getLineForOffset(clamped);
             scrollView.smoothScrollTo(0, contentView.getTop() + layout.getLineTop(line));
+            scheduleVisibleArticleRegistration();
         });
+    }
+
+    private void setupReadingHistoryTracking(TextView contentView, String blockKey) {
+        ScrollView scrollView = findViewById(R.id.scrollViewContent);
+        ArticleBlock block = ArticleRepository.getBlock(this, blockKey);
+        if (scrollView == null || block == null || block.articles.isEmpty()) {
+            return;
+        }
+
+        readingHistoryManager = new ReadingHistoryManager(this);
+        trackedArticleBlock = block;
+        trackedContentView = contentView;
+        trackedScrollView = scrollView;
+        scrollView.setOnScrollChangeListener((view, scrollX, scrollY, oldScrollX, oldScrollY) ->
+                scheduleVisibleArticleRegistration());
+    }
+
+    private void scheduleVisibleArticleRegistration() {
+        if (trackedContentView == null) {
+            return;
+        }
+        trackedContentView.removeCallbacks(registerVisibleArticle);
+        trackedContentView.postDelayed(registerVisibleArticle, HISTORY_SCROLL_SETTLE_DELAY_MS);
+    }
+
+    private void registerCurrentlyVisibleArticle() {
+        Article article = findCurrentlyVisibleArticle();
+        if (article != null && readingHistoryManager != null) {
+            readingHistoryManager.recordArticle(article.number, article.title);
+        }
+    }
+
+    private Article findCurrentlyVisibleArticle() {
+        if (trackedContentView == null || trackedScrollView == null || trackedArticleBlock == null
+                || trackedContentView.getLayout() == null || trackedContentView.getLayout().getHeight() == 0) {
+            return null;
+        }
+
+        Layout layout = trackedContentView.getLayout();
+        int viewportProbe = trackedScrollView.getScrollY() - trackedContentView.getTop()
+                + trackedScrollView.getHeight() / 3;
+        int vertical = Math.max(0, Math.min(viewportProbe, layout.getHeight() - 1));
+        int line = layout.getLineForVertical(vertical);
+        int characterOffset = layout.getLineStart(line);
+
+        Article visible = trackedArticleBlock.articles.get(0);
+        for (Article article : trackedArticleBlock.articles) {
+            if (article.offsetInBlock > characterOffset) {
+                break;
+            }
+            visible = article;
+        }
+        return visible;
     }
 
     /** Estrella de favorito y botón de tamaño de letra sobre la tarjeta del encabezado. */

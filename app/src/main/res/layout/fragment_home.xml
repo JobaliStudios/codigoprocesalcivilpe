@@ -25,6 +25,97 @@
             android:orientation="vertical"
             android:padding="@dimen/space_s">
 
+            <LinearLayout
+                android:id="@+id/reading_history_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_continue_reading"
+                    style="@style/App.Card.Recurrent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space_l"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_gradient_card"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/space_l">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/list_card_icon_size"
+                            android:layout_height="@dimen/list_card_icon_size"
+                            android:layout_marginEnd="@dimen/space_l"
+                            android:background="@drawable/bg_icon_container"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/list_card_small_icon"
+                                android:layout_height="@dimen/list_card_small_icon"
+                                android:contentDescription="@null"
+                                android:src="@drawable/baseline_menu_book_24"
+                                app:tint="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/App.Text.Status.Available"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_continue_reading" />
+
+                            <TextView
+                                android:id="@+id/continue_article_number"
+                                style="@style/App.Text.Title.M"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/continue_article_title"
+                                style="@style/App.Text.Body.M"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="2" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/list_card_chevron_size"
+                            android:layout_height="@dimen/list_card_chevron_size"
+                            android:layout_marginStart="@dimen/space_s"
+                            android:contentDescription="@null"
+                            android:src="@drawable/baseline_chevron_right_24"
+                            app:tint="@color/colorPrimary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    style="@style/App.Text.Title.M"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space_s"
+                    android:text="@string/home_recently_viewed" />
+
+                <LinearLayout
+                    android:id="@+id/recent_articles_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space_s"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_codigos"
                 style="@style/App.Card.Recurrent"

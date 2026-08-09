@@ -24,6 +24,7 @@ public class LocalDataManagerTest {
         clear("busqueda_prefs");
         clear("codigoprocesalcivil_favorites");
         clear("codigoprocesalcivil_highlights");
+        clear("reading_history");
         clear("app_settings");
         manager = new LocalDataManager(context);
     }
@@ -32,11 +33,13 @@ public class LocalDataManagerTest {
     public void categoryActions_onlyDeleteSelectedData() {
         put("busqueda_prefs", "recent_queries", "demanda");
         put("codigoprocesalcivil_favorites", "items", "[]");
+        put("reading_history", "recent_articles", "[]");
 
         manager.clearRecentSearches();
 
         assertFalse(has("busqueda_prefs", "recent_queries"));
         assertTrue(has("codigoprocesalcivil_favorites", "items"));
+        assertTrue(has("reading_history", "recent_articles"));
     }
 
     @Test
@@ -44,6 +47,7 @@ public class LocalDataManagerTest {
         put("busqueda_prefs", "recent_queries", "demanda");
         put("codigoprocesalcivil_favorites", "items", "[]");
         put("codigoprocesalcivil_highlights", "block", "[]");
+        put("reading_history", "recent_articles", "[]");
         put("app_settings", "dark_mode_enabled", "true");
 
         manager.clearAllLocalData();
@@ -51,6 +55,7 @@ public class LocalDataManagerTest {
         assertTrue(context.getSharedPreferences("busqueda_prefs", 0).getAll().isEmpty());
         assertTrue(context.getSharedPreferences("codigoprocesalcivil_favorites", 0).getAll().isEmpty());
         assertTrue(context.getSharedPreferences("codigoprocesalcivil_highlights", 0).getAll().isEmpty());
+        assertTrue(context.getSharedPreferences("reading_history", 0).getAll().isEmpty());
         assertTrue(context.getSharedPreferences("app_settings", 0).getAll().isEmpty());
     }
 

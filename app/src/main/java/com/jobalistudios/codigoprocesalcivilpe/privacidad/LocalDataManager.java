@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jobalistudios.codigoprocesalcivilpe.busqueda.BusquedaViewModel;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
+import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightsManager;
 
 /** Control centralizado de los datos que la aplicación guarda localmente. */
@@ -29,6 +30,10 @@ public final class LocalDataManager {
         new HighlightsManager(appContext).clearAll();
     }
 
+    public void clearReadingHistory() {
+        new ReadingHistoryManager(appContext).clearHistory();
+    }
+
     /**
      * Elimina datos creados por el usuario y preferencias funcionales de esta app.
      * No altera directamente el almacenamiento interno de los SDK de Google.
@@ -37,6 +42,7 @@ public final class LocalDataManager {
         clearRecentSearches();
         clearFavorites();
         clearHighlightsAndNotes();
+        clearReadingHistory();
         appContext.getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE)
                 .edit()
                 .clear()
