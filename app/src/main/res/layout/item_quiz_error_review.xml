@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_l"
+    app:cardBackgroundColor="@color/quiz_card_surface"
+    app:cardCornerRadius="@dimen/radius_l"
+    app:strokeColor="@color/quiz_card_stroke"
+    app:strokeWidth="@dimen/stroke_width_thin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_l">
+
+        <TextView
+            android:id="@+id/tvReviewItemPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/App.Text.Body.S"
+            android:textColor="@color/quiz_text_muted"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvReviewQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:textAppearance="@style/App.Text.SectionTitle" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            app:cardBackgroundColor="@color/quiz_feedback_error_bg"
+            app:cardCornerRadius="@dimen/radius_m"
+            app:strokeColor="@color/quiz_wrong"
+            app:strokeWidth="@dimen/stroke_width_thin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_m">
+
+                <ImageView
+                    android:layout_width="@dimen/list_card_chevron_size"
+                    android:layout_height="@dimen/list_card_chevron_size"
+                    android:contentDescription="@null"
+                    android:src="@drawable/baseline_close_24"
+                    app:tint="@color/quiz_wrong" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quiz_cpc_review_your_answer"
+                        android:textAppearance="@style/App.Text.Body.S"
+                        android:textColor="@color/quiz_wrong"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvReviewSelectedAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
+                        android:textAppearance="@style/App.Text.Body"
+                        android:textColor="@color/quiz_text_primary" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            app:cardBackgroundColor="@color/quiz_feedback_success_bg"
+            app:cardCornerRadius="@dimen/radius_m"
+            app:strokeColor="@color/quiz_correct"
+            app:strokeWidth="@dimen/stroke_width_thin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_m">
+
+                <ImageView
+                    android:layout_width="@dimen/list_card_chevron_size"
+                    android:layout_height="@dimen/list_card_chevron_size"
+                    android:contentDescription="@null"
+                    android:src="@drawable/baseline_check_24"
+                    app:tint="@color/quiz_correct" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_m"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quiz_cpc_review_correct_answer"
+                        android:textAppearance="@style/App.Text.Body.S"
+                        android:textColor="@color/quiz_correct"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvReviewCorrectAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
+                        android:textAppearance="@style/App.Text.Body"
+                        android:textColor="@color/quiz_text_primary" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/relatedArticleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/quiz_cpc_review_related_article"
+                android:textAppearance="@style/App.Text.Body.S"
+                android:textColor="@color/quiz_text_secondary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvReviewRelatedArticle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:textAppearance="@style/App.Text.Body"
+                android:textColor="@color/quiz_text_primary" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReviewOpenArticle"
+            style="@style/App.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:minHeight="@dimen/home_card_icon_size"
+            android:text="@string/quiz_cpc_review_open_article"
+            android:textAllCaps="false"
+            app:icon="@drawable/baseline_article_24" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

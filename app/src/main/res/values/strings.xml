@@ -54,7 +54,22 @@
     <string name="quiz_cpc_result_score_format">Tu puntaje: %1$d/%2$d</string>
     <string name="quiz_cpc_retry_button">Reintentar</string>
     <string name="quiz_cpc_review_errors">Revisar errores</string>
-    <string name="quiz_cpc_review_errors_hint">Pronto podrás revisar tus errores detalladamente.</string>
+    <string name="quiz_cpc_review_errors_hint">Repasa las preguntas que fallaste y consulta el artículo relacionado.</string>
+    <string name="quiz_cpc_review_back">Volver a resultados</string>
+    <string name="quiz_cpc_review_item_position">Error %1$d de %2$d · Pregunta %3$d</string>
+    <string name="quiz_cpc_review_your_answer">Tu respuesta</string>
+    <string name="quiz_cpc_review_correct_answer">Respuesta correcta</string>
+    <string name="quiz_cpc_review_related_article">Artículo relacionado</string>
+    <string name="quiz_cpc_review_open_article">Ver artículo relacionado</string>
+    <string name="quiz_cpc_review_empty">No hay errores que revisar en esta sesión.</string>
+    <string name="quiz_cpc_review_unavailable">No se recibió el detalle de los errores de esta sesión.</string>
+    <string name="quiz_cpc_review_card_description">Revisar %1$d respuestas incorrectas</string>
+    <string name="quiz_cpc_perfect_title">¡Sin errores!</string>
+    <string name="quiz_cpc_perfect_text">Respondiste correctamente todas las preguntas de esta sesión.</string>
+    <plurals name="quiz_cpc_review_error_count">
+        <item quantity="one">%1$d respuesta incorrecta. Revisa qué fallaste y consulta el artículo relacionado.</item>
+        <item quantity="other">%1$d respuestas incorrectas. Revisa qué fallaste y consulta los artículos relacionados.</item>
+    </plurals>
     <string name="quiz_cpc_back_to_start">Volver al inicio</string>
     <string name="quiz_cpc_share_score">Compartir puntaje</string>
     <string name="quiz_cpc_share_subject">Mi resultado del quiz CPC</string>

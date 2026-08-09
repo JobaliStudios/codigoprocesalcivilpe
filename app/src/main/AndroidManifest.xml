@@ -55,6 +55,9 @@
         <activity
             android:name=".home.Quizzes.QuizzCPCResult"
             android:exported="false" />
+        <activity
+            android:name=".home.Quizzes.QuizzCPCReviewErrors"
+            android:exported="false" />
 
         <activity
             android:name=".SectionContentActivity"

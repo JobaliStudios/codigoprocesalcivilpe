@@ -19,9 +19,11 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
+import com.jobalistudios.codigoprocesalcivilpe.model.QuizAnswerResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class QuizzCPCQuestions extends AppCompatActivity {
     private MediaPlayer correctSound;
@@ -39,8 +41,6 @@ public class QuizzCPCQuestions extends AppCompatActivity {
     private LinearLayout optionsContainer;
 
     private static final String STATE_QUESTION_COUNT = "STATE_QUESTION_COUNT";
-    private static final String STATE_CURRENT_INDEX = "STATE_CURRENT_INDEX";
-    private static final String STATE_SCORE = "STATE_SCORE";
     private static final String STATE_START_TIME = "STATE_START_TIME";
 
     private final List<MaterialCardView> optionCards = new ArrayList<>();
@@ -73,12 +73,6 @@ public class QuizzCPCQuestions extends AppCompatActivity {
                 : getIntent().getIntExtra("QUESTION_COUNT", 10);
 
         viewModel.initQuestions(questionCount);
-        if (savedInstanceState != null) {
-            viewModel.restoreState(
-                    savedInstanceState.getInt(STATE_CURRENT_INDEX, 0),
-                    savedInstanceState.getInt(STATE_SCORE, 0)
-            );
-        }
 
         progressBar.setMax(viewModel.getTotalQuestions());
 
@@ -127,6 +121,16 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         optionCards.clear();
         for (int i = 0; i < currentQuestion.getOptions().size(); i++) {
             optionsContainer.addView(buildOptionCard(currentQuestion, i));
+        }
+
+        QuizAnswerResult savedAnswer = viewModel.getCurrentAnswer();
+        if (savedAnswer != null) {
+            answered = true;
+            showSelectedAnswer(
+                    currentQuestion,
+                    savedAnswer.getSelectedAnswerIndex(),
+                    savedAnswer.isCorrect()
+            );
         }
     }
 
@@ -188,6 +192,15 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         boolean isCorrect = viewModel.submitAnswer(selectedIndex);
         playAnswerSound(isCorrect);
 
+        showSelectedAnswer(question, selectedIndex, isCorrect);
+    }
+
+    private void showSelectedAnswer(
+            QuestionModel question,
+            int selectedIndex,
+            boolean isCorrect
+    ) {
+
         int correctIndex = question.getCorrectAnswerIndex();
         for (int i = 0; i < optionCards.size(); i++) {
             MaterialCardView card = optionCards.get(i);
@@ -238,14 +251,17 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         if (relatedArticle == null || relatedArticle.isEmpty()) {
             return getString(R.string.quiz_cpc_article_fallback);
         }
-        return relatedArticle.toUpperCase();
+        return relatedArticle.toUpperCase(Locale.getDefault());
     }
 
     private void showResult() {
-        Intent intent = new Intent(this, QuizzCPCResult.class);
-        intent.putExtra("SCORE", viewModel.getScore());
-        intent.putExtra("TOTAL", viewModel.getTotalQuestions());
-        intent.putExtra("ELAPSED_MILLIS", System.currentTimeMillis() - startTimeMillis);
+        Intent intent = QuizSessionContract.createResultIntent(
+                this,
+                viewModel.getScore(),
+                viewModel.getTotalQuestions(),
+                System.currentTimeMillis() - startTimeMillis,
+                viewModel.getIncorrectAnswers()
+        );
         startActivity(intent);
         finish();
     }
@@ -254,8 +270,6 @@ public class QuizzCPCQuestions extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_QUESTION_COUNT, viewModel.getTotalQuestions());
-        outState.putInt(STATE_CURRENT_INDEX, viewModel.getCurrentQuestionIndex());
-        outState.putInt(STATE_SCORE, viewModel.getScore());
         outState.putLong(STATE_START_TIME, startTimeMillis);
     }
 

@@ -1,14 +1,20 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.model.QuizAnswerResult;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class QuizzCPCResult extends AppCompatActivity {
@@ -21,9 +27,14 @@ public class QuizzCPCResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizz_cpcresult);
 
-        score = getIntent().getIntExtra("SCORE", 0);
-        total = Math.max(getIntent().getIntExtra("TOTAL", 0), 1);
-        elapsedMillis = getIntent().getLongExtra("ELAPSED_MILLIS", 0L);
+        score = getIntent().getIntExtra(QuizSessionContract.EXTRA_SCORE, 0);
+        total = Math.max(getIntent().getIntExtra(QuizSessionContract.EXTRA_TOTAL, 0), 1);
+        elapsedMillis = getIntent().getLongExtra(
+                QuizSessionContract.EXTRA_ELAPSED_MILLIS,
+                0L
+        );
+        ArrayList<QuizAnswerResult> incorrectAnswers =
+                QuizSessionContract.getIncorrectAnswers(getIntent());
 
         int wrongAnswers = Math.max(total - score, 0);
         int percentage = Math.round((score * 100f) / total);
@@ -34,7 +45,6 @@ public class QuizzCPCResult extends AppCompatActivity {
         TextView tvWrongCount = findViewById(R.id.tvWrongCount);
         TextView tvTime = findViewById(R.id.tvTime);
         TextView tvRecommendation = findViewById(R.id.tvRecommendation);
-        TextView tvQuickReview = findViewById(R.id.tvQuickReview);
         CircularProgressIndicator circularScore = findViewById(R.id.circularScore);
 
         tvResult.setText(getString(R.string.quiz_cpc_percentage_format, percentage));
@@ -43,7 +53,7 @@ public class QuizzCPCResult extends AppCompatActivity {
         tvWrongCount.setText(String.valueOf(wrongAnswers));
         tvTime.setText(formatElapsedTime(elapsedMillis));
         tvRecommendation.setText(getRecommendation(percentage));
-        tvQuickReview.setText(getString(R.string.quiz_cpc_quick_review_dynamic, wrongAnswers, score, total));
+        configureReviewAction(incorrectAnswers);
 
         circularScore.setMax(100);
         circularScore.setProgress(percentage);
@@ -65,6 +75,57 @@ public class QuizzCPCResult extends AppCompatActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.quiz_cpc_share_text, score, total));
             startActivity(Intent.createChooser(shareIntent, getString(R.string.quiz_cpc_share_chooser_title)));
         });
+    }
+
+    private void configureReviewAction(ArrayList<QuizAnswerResult> incorrectAnswers) {
+        TextView title = findViewById(R.id.tvQuickReviewTitle);
+        TextView summary = findViewById(R.id.tvQuickReview);
+        ImageView statusIcon = findViewById(R.id.ivQuickReviewStatus);
+        ImageView chevron = findViewById(R.id.ivQuickReviewChevron);
+        MaterialCardView card = findViewById(R.id.cardQuickReview);
+
+        if (!incorrectAnswers.isEmpty()) {
+            int errorCount = incorrectAnswers.size();
+            title.setText(R.string.quiz_cpc_review_errors);
+            summary.setText(getResources().getQuantityString(
+                    R.plurals.quiz_cpc_review_error_count,
+                    errorCount,
+                    errorCount
+            ));
+            statusIcon.setImageResource(R.drawable.baseline_close_24);
+            statusIcon.setImageTintList(ColorStateList.valueOf(getColor(R.color.quiz_wrong)));
+            chevron.setVisibility(View.VISIBLE);
+            card.setClickable(true);
+            card.setFocusable(true);
+            card.setContentDescription(getString(
+                    R.string.quiz_cpc_review_card_description,
+                    errorCount
+            ));
+            card.setOnClickListener(view -> startActivity(QuizSessionContract.createReviewIntent(
+                    this,
+                    score,
+                    total,
+                    elapsedMillis,
+                    incorrectAnswers
+            )));
+            return;
+        }
+
+        card.setOnClickListener(null);
+        card.setClickable(false);
+        card.setFocusable(false);
+        card.setContentDescription(null);
+        chevron.setVisibility(View.GONE);
+
+        if (score >= total) {
+            title.setText(R.string.quiz_cpc_perfect_title);
+            summary.setText(R.string.quiz_cpc_perfect_text);
+            statusIcon.setImageResource(R.drawable.baseline_check_24);
+            statusIcon.setImageTintList(ColorStateList.valueOf(getColor(R.color.quiz_correct)));
+        } else {
+            title.setText(R.string.quiz_cpc_review_errors);
+            summary.setText(R.string.quiz_cpc_review_unavailable);
+        }
     }
 
     private String formatElapsedTime(long elapsedMs) {
