@@ -230,7 +230,7 @@
                 android:paddingVertical="@dimen/space_s">
 
                 <TextView
-                    style="@style/App.Text.Subtitle.M"
+                    style="@style/App.Text.Title.M"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/home_no_favorites_title" />
@@ -245,10 +245,11 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_explore_code"
                     style="@style/App.Button.Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_xs"
-                    android:text="@string/home_explore_code" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
+                        android:minHeight="@dimen/touch_target_min"
+                        android:text="@string/home_explore_code" />
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView

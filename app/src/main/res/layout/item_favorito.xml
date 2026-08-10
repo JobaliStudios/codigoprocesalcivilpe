@@ -107,8 +107,8 @@
 
         <ImageButton
             android:id="@+id/buttonRemoveFavorite"
-            android:layout_width="@dimen/home_card_icon_size"
-            android:layout_height="@dimen/home_card_icon_size"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:layout_marginStart="@dimen/space_xs"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/remove_favorite"

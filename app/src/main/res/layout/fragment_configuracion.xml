@@ -74,7 +74,7 @@
                             <ImageView
                                 android:layout_width="@dimen/list_card_small_icon"
                                 android:layout_height="@dimen/list_card_small_icon"
-                                android:contentDescription="@string/config_icon_reading"
+                                android:contentDescription="@null"
                                 android:src="@drawable/baseline_book_24"
                                 app:tint="@color/colorPrimary" />
                         </LinearLayout>
@@ -86,7 +86,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/App.Text.Subtitle.M"
+                                style="@style/App.Text.Title.M"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/config_reading_title"
@@ -103,12 +103,14 @@
                         <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/switch_modo_lectura"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/config_reading_title"
+                            android:minHeight="@dimen/touch_target_min" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="@dimen/stroke_width_thin"
                         android:layout_marginVertical="@dimen/space_m"
                         android:alpha="0.2"
                         android:background="@color/colorDivider" />
@@ -129,7 +131,7 @@
                             <ImageView
                                 android:layout_width="@dimen/list_card_small_icon"
                                 android:layout_height="@dimen/list_card_small_icon"
-                                android:contentDescription="@string/config_icon_dark_mode"
+                                android:contentDescription="@null"
                                 android:src="@drawable/baseline_settings_24"
                                 app:tint="@color/colorPrimary" />
                         </LinearLayout>
@@ -141,7 +143,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/App.Text.Subtitle.M"
+                                style="@style/App.Text.Title.M"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/config_dark_mode_title"
@@ -158,7 +160,9 @@
                         <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/switch_modo_oscuro"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/config_dark_mode_title"
+                            android:minHeight="@dimen/touch_target_min" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -191,7 +195,7 @@
                         <ImageView
                             android:layout_width="@dimen/list_card_small_icon"
                             android:layout_height="@dimen/list_card_small_icon"
-                            android:contentDescription="@string/config_icon_support"
+                            android:contentDescription="@null"
                             android:src="@drawable/baseline_article_24"
                             app:tint="@color/colorPrimary" />
                     </LinearLayout>
@@ -203,7 +207,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/App.Text.Subtitle.M"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/config_support_title"
@@ -220,7 +224,7 @@
                     <ImageView
                         android:layout_width="@dimen/list_card_chevron_size"
                         android:layout_height="@dimen/list_card_chevron_size"
-                        android:contentDescription="@string/next_section"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24"
                         app:tint="@color/colorPrimary" />
                 </LinearLayout>
@@ -254,7 +258,7 @@
                         <ImageView
                             android:layout_width="@dimen/list_card_small_icon"
                             android:layout_height="@dimen/list_card_small_icon"
-                            android:contentDescription="@string/config_icon_about"
+                            android:contentDescription="@null"
                             android:src="@drawable/baseline_settings_24"
                             app:tint="@color/colorPrimary" />
                     </LinearLayout>
@@ -266,7 +270,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/App.Text.Subtitle.M"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/config_about_title"
@@ -283,7 +287,7 @@
                     <ImageView
                         android:layout_width="@dimen/list_card_chevron_size"
                         android:layout_height="@dimen/list_card_chevron_size"
-                        android:contentDescription="@string/next_section"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24"
                         app:tint="@color/colorPrimary" />
                 </LinearLayout>
@@ -317,7 +321,7 @@
                         <ImageView
                             android:layout_width="@dimen/list_card_small_icon"
                             android:layout_height="@dimen/list_card_small_icon"
-                            android:contentDescription="@string/config_icon_privacy"
+                            android:contentDescription="@null"
                             android:src="@drawable/baseline_settings_24"
                             app:tint="@color/colorPrimary" />
                     </LinearLayout>
@@ -329,7 +333,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/App.Text.Subtitle.M"
+                            style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/config_privacy_title"
@@ -346,7 +350,7 @@
                     <ImageView
                         android:layout_width="@dimen/list_card_chevron_size"
                         android:layout_height="@dimen/list_card_chevron_size"
-                        android:contentDescription="@string/next_section"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24"
                         app:tint="@color/colorPrimary" />
                 </LinearLayout>

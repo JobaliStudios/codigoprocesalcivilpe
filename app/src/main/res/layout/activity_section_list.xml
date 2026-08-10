@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_l"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/radius_l"
+        app:cardElevation="@dimen/elevation_card"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -38,13 +38,13 @@
 
     <ImageButton
         android:id="@+id/btnFavorito"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/touch_target_min"
+        android:layout_height="@dimen/touch_target_min"
         android:layout_marginTop="@dimen/space_xs"
         android:layout_marginEnd="@dimen/space_xs"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/favorite_toggle_add"
-        android:elevation="8dp"
+        android:elevation="@dimen/elevation_card"
         android:scaleType="centerInside"
         android:src="@drawable/baseline_star_border_24"
         app:layout_constraintEnd_toEndOf="@id/fixedCardView"

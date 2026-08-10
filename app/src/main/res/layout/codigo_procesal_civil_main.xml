@@ -13,9 +13,9 @@
         style="@style/App.Card.Recurrent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp"
+        android:layout_margin="@dimen/space_s"
+        app:cardCornerRadius="@dimen/radius_l"
+        app:cardElevation="@dimen/elevation_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,26 +26,24 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/space_l">
 
             <!-- Título -->
+            <TextView
+                style="@style/App.Text.Title.M"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/tituloapp"
+                android:textStyle="bold" />
+
+            <!-- Subtítulo -->
             <TextView
                 style="@style/App.Text.Body.M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/tituloapp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- Subtítulo -->
-            <TextView
-                style="@style/App.Text.Body.S"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/content_verified_date"
-                android:textSize="18sp" />
+                android:text="@string/content_verified_date" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -68,24 +66,24 @@
                 style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_l"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="@dimen/radius_l"
+                app:cardElevation="@dimen/elevation_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_m">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/seccion_primeraimg"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_balance_24" />
 
                     <LinearLayout
@@ -93,38 +91,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
+
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seccion_primeratit"
+                            android:textStyle="bold" />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/seccion_primeratit"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            style="@style/App.Text.Body.S"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:text="@string/seccion_primerasub"
 
-                            android:textSize="14sp" />
+                            />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/artxsec1"
-                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
 
                 </LinearLayout>
@@ -136,12 +132,12 @@
                 style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_l"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="@dimen/radius_l"
+                app:cardElevation="@dimen/elevation_card">
 
                 <!-- Misma estructura que sección 1 -->
                 <!-- Cambia: ícono, texto y color -->
@@ -149,13 +145,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_m">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/seccion_segundaimg"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_groups_24" />
 
                     <LinearLayout
@@ -163,38 +159,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
+
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seccion_segundatit"
+                            android:textStyle="bold" />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/seccion_segundatit"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            style="@style/App.Text.Body.S"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:text="@string/seccion_segundasub"
 
-                            android:textSize="14sp" />
+                            />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/artxsec2"
-                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
 
                 </LinearLayout>
@@ -206,12 +200,12 @@
                 style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_l"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="@dimen/radius_l"
+                app:cardElevation="@dimen/elevation_card">
 
                 <!-- Misma estructura que sección 1 -->
                 <!-- Cambia: ícono, texto y color -->
@@ -219,13 +213,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_m">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/seccion_terceraimg"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_check_24" />
 
                     <LinearLayout
@@ -233,38 +227,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
+
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seccion_terceratit"
+                            android:textStyle="bold" />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/seccion_terceratit"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            style="@style/App.Text.Body.S"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:text="@string/seccion_tercerasub"
 
-                            android:textSize="14sp" />
+                            />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/artxsec3"
-                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
 
                 </LinearLayout>
@@ -276,12 +268,12 @@
                 style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_l"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="@dimen/radius_l"
+                app:cardElevation="@dimen/elevation_card">
 
                 <!-- Misma estructura que sección 1 -->
                 <!-- Cambia: ícono, texto y color -->
@@ -289,13 +281,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_m">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/seccion_cuartaimg"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_drive_folder_upload_24" />
 
                     <LinearLayout
@@ -303,38 +295,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
+
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seccion_cuartatit"
+                            android:textStyle="bold" />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/seccion_cuartatit"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            style="@style/App.Text.Body.S"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:text="@string/seccion_cuartasub"
 
-                            android:textSize="14sp" />
+                            />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/artxsec4"
-                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
 
                 </LinearLayout>
@@ -346,12 +336,12 @@
                 style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_l"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="@dimen/radius_l"
+                app:cardElevation="@dimen/elevation_card">
 
                 <!-- Misma estructura que sección 1 -->
                 <!-- Cambia: ícono, texto y color -->
@@ -359,13 +349,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_m">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/seccion_quintaimg"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_gavel_24" />
 
                     <LinearLayout
@@ -373,38 +363,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
+
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seccion_quintatit"
+                            android:textStyle="bold" />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/seccion_quintatit"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            style="@style/App.Text.Body.S"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:text="@string/seccion_quintasub"
 
-                            android:textSize="14sp" />
+                            />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/artxsec5"
-                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
 
                 </LinearLayout>
@@ -416,12 +404,12 @@
                 style="@style/App.Card.Recurrent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_l"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="@dimen/radius_l"
+                app:cardElevation="@dimen/elevation_card">
 
                 <!-- Misma estructura que sección 1 -->
                 <!-- Cambia: ícono, texto y color -->
@@ -429,13 +417,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:padding="@dimen/space_m">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/seccion_sextaimg"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_handshake_24" />
 
                     <LinearLayout
@@ -443,38 +431,36 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
+
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/seccion_sextatit"
+                            android:textStyle="bold" />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/seccion_sextatit"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            style="@style/App.Text.Body.S"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:text="@string/seccion_sextasub"
-                            android:textSize="14sp" />
+                            />
 
                         <TextView
                             style="@style/App.Text.Body.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/artxsec6"
-                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
 
                 </LinearLayout>

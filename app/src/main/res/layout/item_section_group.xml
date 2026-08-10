@@ -4,20 +4,20 @@
     style="@style/App.Card.Recurrent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginHorizontal="@dimen/space_s"
+    android:layout_marginTop="@dimen/space_s"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="@dimen/radius_l"
+    app:cardElevation="@dimen/elevation_card">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="@dimen/space_m">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/groupTitle"
-                style="@style/App.Text.Body.M"
+                style="@style/App.Text.Title.M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold" />
@@ -37,15 +37,15 @@
                 style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp" />
+                android:layout_marginTop="@dimen/space_xs" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/groupChevron"
             style="@style/App.Icon.Tinted"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="@string/next_section"
+            android:layout_width="@dimen/icon_s"
+            android:layout_height="@dimen/icon_s"
+            android:contentDescription="@null"
             android:src="@drawable/baseline_chevron_right_24" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

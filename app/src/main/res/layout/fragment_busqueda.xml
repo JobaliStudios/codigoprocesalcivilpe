@@ -13,6 +13,9 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_search_field"
+        android:minHeight="@dimen/touch_target_min"
+        android:paddingHorizontal="@dimen/space_s"
         android:queryHint="@string/busqueda_hint" />
 
     <HorizontalScrollView
@@ -106,7 +109,7 @@
             style="@style/App.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/home_card_icon_size"
+            android:minHeight="@dimen/touch_target_min"
             android:text="@string/busqueda_clear_recents"
             android:textAllCaps="false" />
     </LinearLayout>
@@ -165,17 +168,17 @@
 
             <ImageView
                 android:id="@+id/imageEmptyBusqueda"
-                android:layout_width="@dimen/list_card_icon_size"
-                android:layout_height="@dimen/list_card_icon_size"
+                android:layout_width="@dimen/empty_state_icon_size"
+                android:layout_height="@dimen/empty_state_icon_size"
                 android:background="@drawable/bg_icon_container"
-                android:contentDescription="@string/busqueda_empty_icon_cd"
+                android:contentDescription="@null"
                 android:padding="@dimen/space_m"
                 android:src="@drawable/baseline_search_24"
                 app:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/textEmptyBusquedaTitle"
-                style="@style/App.Text.Subtitle.M"
+                style="@style/App.Text.Title.M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_m"

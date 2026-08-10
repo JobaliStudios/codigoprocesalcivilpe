@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -140,17 +141,18 @@ public class QuizzCPCQuestions extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        cardParams.topMargin = dp(12);
+        cardParams.topMargin = dimensionPixelSize(R.dimen.space_m);
         card.setLayoutParams(cardParams);
         card.setCardBackgroundColor(getColor(R.color.quiz_option_default_bg));
         card.setStrokeColor(getColor(R.color.quiz_option_default_stroke));
-        card.setStrokeWidth(dp(1));
-        card.setRadius(dp(18));
+        card.setStrokeWidth(dimensionPixelSize(R.dimen.stroke_width_thin));
+        card.setRadius(dimensionPixelSize(R.dimen.radius_l));
 
         LinearLayout row = new LinearLayout(this);
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(dp(16), dp(16), dp(16), dp(16));
+        int cardPadding = dimensionPixelSize(R.dimen.space_l);
+        row.setPadding(cardPadding, cardPadding, cardPadding, cardPadding);
 
         ImageView radio = new ImageView(this);
         radio.setImageResource(R.drawable.quiz_radio_unselected);
@@ -159,10 +161,13 @@ public class QuizzCPCQuestions extends AppCompatActivity {
 
         TextView optionText = new TextView(this);
         optionText.setText(question.getOptions().get(optionIndex));
-        optionText.setTextSize(18);
+        optionText.setTextSize(
+                TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_title_m)
+        );
         optionText.setTextColor(getColor(R.color.quiz_text_primary));
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-        textParams.leftMargin = dp(14);
+        textParams.leftMargin = dimensionPixelSize(R.dimen.space_m);
         optionText.setLayoutParams(textParams);
 
         ImageView resultIcon = new ImageView(this);
@@ -211,7 +216,7 @@ public class QuizzCPCQuestions extends AppCompatActivity {
             radio.setImageResource(i == selectedIndex ? R.drawable.quiz_radio_selected : R.drawable.quiz_radio_unselected);
             if (i == selectedIndex) {
                 card.setStrokeColor(getColor(R.color.quiz_selected_stroke));
-                card.setStrokeWidth(dp(2));
+                card.setStrokeWidth(dimensionPixelSize(R.dimen.stroke_width_emphasis));
             }
 
             if (i == selectedIndex && selectedIndex != correctIndex) {
@@ -312,5 +317,9 @@ public class QuizzCPCQuestions extends AppCompatActivity {
 
     private int dp(int value) {
         return Math.round(getResources().getDisplayMetrics().density * value);
+    }
+
+    private int dimensionPixelSize(int resourceId) {
+        return getResources().getDimensionPixelSize(resourceId);
     }
 }

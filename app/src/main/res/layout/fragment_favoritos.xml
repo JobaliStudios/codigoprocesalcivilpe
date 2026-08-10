@@ -29,7 +29,10 @@
                 android:id="@+id/favoriteSearchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_search_field"
                 android:iconifiedByDefault="false"
+                android:minHeight="@dimen/touch_target_min"
+                android:paddingHorizontal="@dimen/space_s"
                 android:queryHint="@string/favorites_search_hint" />
 
             <HorizontalScrollView
@@ -92,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/favorites_sort_label"
-                    android:minHeight="@dimen/home_card_icon_size"
+                    android:minHeight="@dimen/touch_target_min"
                     android:spinnerMode="dropdown" />
             </LinearLayout>
         </LinearLayout>
@@ -127,17 +130,17 @@
 
         <ImageView
             android:id="@+id/imageEmptyFavoritos"
-            android:layout_width="@dimen/list_card_icon_size"
-            android:layout_height="@dimen/list_card_icon_size"
+            android:layout_width="@dimen/empty_state_icon_size"
+            android:layout_height="@dimen/empty_state_icon_size"
             android:background="@drawable/bg_icon_container"
-            android:contentDescription="@string/favorites_empty_icon_cd"
+            android:contentDescription="@null"
             android:padding="@dimen/space_m"
             android:src="@drawable/baseline_favorite_border_24"
             app:tint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/textEmptyFavoritosTitle"
-            style="@style/App.Text.Subtitle.M"
+            style="@style/App.Text.Title.M"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_m"

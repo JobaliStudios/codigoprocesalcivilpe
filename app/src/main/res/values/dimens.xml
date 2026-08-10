@@ -13,6 +13,12 @@
     <dimen name="text_label_m">13sp</dimen>
     <dimen name="text_cta_m">14sp</dimen>
 
+    <!-- Quiz result display sizes (specialized, not part of the reusable text hierarchy). -->
+    <dimen name="quiz_result_title_text">56sp</dimen>
+    <dimen name="quiz_result_score_text">46sp</dimen>
+    <dimen name="quiz_result_score_min_text">24sp</dimen>
+    <dimen name="quiz_result_label_text">19sp</dimen>
+
     <!-- Section reading scale -->
     <dimen name="text_display">28sp</dimen>
     <dimen name="text_title">20sp</dimen>
@@ -25,6 +31,7 @@
     <dimen name="line_height_subtitle">24sp</dimen>
     <dimen name="line_height_body">30sp</dimen>
     <dimen name="line_height_caption">16sp</dimen>
+    <dimen name="line_height_body_m">20sp</dimen>
 
     <dimen name="max_reading_line_width">640dp</dimen>
 
@@ -38,16 +45,26 @@
     <!-- Radius/Elevation tokens -->
     <dimen name="radius_m">12dp</dimen>
     <dimen name="radius_l">16dp</dimen>
-    <dimen name="elevation_card">4dp</dimen>
+    <dimen name="elevation_card">2dp</dimen>
     <dimen name="stroke_width_thin">1dp</dimen>
+    <dimen name="stroke_width_emphasis">2dp</dimen>
+    <dimen name="chip_height_compact">28dp</dimen>
+    <dimen name="touch_target_min">48dp</dimen>
     <dimen name="reading_action_height">64dp</dimen>
+
+    <!-- Icon scale. The drawable can stay at 24dp while its clickable parent is 48dp. -->
+    <dimen name="icon_s">24dp</dimen>
+    <dimen name="icon_m">36dp</dimen>
+    <dimen name="icon_l">48dp</dimen>
+    <dimen name="icon_container_l">56dp</dimen>
+    <dimen name="empty_state_icon_size">56dp</dimen>
 
     <!-- Reusable card anatomy -->
     <dimen name="home_card_margin_horizontal">8dp</dimen>
     <dimen name="home_card_margin_bottom">16dp</dimen>
     <dimen name="home_card_icon_container_size">96dp</dimen>
-    <dimen name="home_card_icon_size">48dp</dimen>
-    <dimen name="list_card_icon_size">72dp</dimen>
-    <dimen name="list_card_small_icon">36dp</dimen>
-    <dimen name="list_card_chevron_size">24dp</dimen>
+    <dimen name="home_card_icon_size">@dimen/icon_l</dimen>
+    <dimen name="list_card_icon_size">@dimen/icon_container_l</dimen>
+    <dimen name="list_card_small_icon">@dimen/icon_m</dimen>
+    <dimen name="list_card_chevron_size">@dimen/icon_s</dimen>
 </resources>

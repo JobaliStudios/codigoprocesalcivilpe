@@ -107,6 +107,6 @@
 
     <color name="quiz_chip_bg">#E0B292</color>
     <color name="quiz_circle_bg">#E8F5E9</color>
-    <color name="quiz_radio_stroke">#777777</color>
+    <color name="quiz_radio_stroke">#D0D0D0</color>
 
 </resources>

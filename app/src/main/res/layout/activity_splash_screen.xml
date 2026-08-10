@@ -8,6 +8,7 @@
         android:id="@+id/logo"
         android:layout_width="264dp"
         android:layout_height="204dp"
+        android:contentDescription="@null"
         android:src="@mipmap/ic_launcher" />
 
 </RelativeLayout>

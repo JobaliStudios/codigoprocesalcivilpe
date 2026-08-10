@@ -25,25 +25,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="16dp">
+            android:paddingHorizontal="@dimen/space_s"
+            android:paddingBottom="@dimen/space_l">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_codigo_civil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/space_l"
                 style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_l">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/quizz_vector" />
 
                     <LinearLayout
@@ -51,14 +53,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
 
                         <TextView
                             style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Código Civil"
-                            android:textSize="18sp"
+                            android:text="@string/codigos_codigo_civil_title"
                             android:textStyle="bold" />
 
                         <TextView
@@ -69,9 +70,9 @@
                     </LinearLayout>
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -80,19 +81,20 @@
                 android:id="@+id/card_codigo_penal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/space_l"
                 style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_l">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/quizz_vector" />
 
                     <LinearLayout
@@ -100,14 +102,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
 
                         <TextView
                             style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Código Penal"
-                            android:textSize="18sp"
+                            android:text="@string/codigos_codigo_penal_title"
                             android:textStyle="bold" />
 
                         <TextView
@@ -118,9 +119,9 @@
                     </LinearLayout>
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -130,19 +131,20 @@
                 android:id="@+id/card_codigo_procesal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/space_l"
                 style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_l">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/quizz_vector" />
 
                     <LinearLayout
@@ -150,14 +152,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
 
                         <TextView
                             style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Código Procesal Civil"
-                            android:textSize="18sp"
+                            android:text="@string/codigos_codigo_procesal_civil_title"
                             android:textStyle="bold" />
 
                         <TextView
@@ -168,9 +169,9 @@
                     </LinearLayout>
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -180,19 +181,20 @@
                 android:id="@+id/card_codigo_procesal_penal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/space_l"
                 style="@style/App.Card.Recurrent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_l">
 
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="@dimen/icon_l"
+                        android:layout_height="@dimen/icon_l"
+                        android:contentDescription="@null"
                         android:src="@drawable/quizz_vector" />
 
                     <LinearLayout
@@ -200,14 +202,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingHorizontal="8dp">
+                        android:paddingHorizontal="@dimen/space_s">
 
                         <TextView
                             style="@style/App.Text.Title.M"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Código Procesal Penal"
-                            android:textSize="18sp"
+                            android:text="@string/codigos_codigo_procesal_penal_title"
                             android:textStyle="bold" />
 
                         <TextView
@@ -218,9 +219,9 @@
                     </LinearLayout>
                     <ImageView
                         style="@style/App.Icon.Tinted"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@string/next_section"
+                        android:layout_width="@dimen/icon_s"
+                        android:layout_height="@dimen/icon_s"
+                        android:contentDescription="@null"
                         android:src="@drawable/baseline_chevron_right_24" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

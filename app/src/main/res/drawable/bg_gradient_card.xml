@@ -9,6 +9,6 @@
         android:endColor="?attr/colorSurface"
         android:type="linear" />
 
-    <corners android:radius="16dp" />
+    <corners android:radius="@dimen/radius_l" />
 
 </shape>

@@ -767,6 +767,10 @@
     <string name="highlight_dialog_color_title">Seleccionar color</string>
     <string name="highlight_dialog_detail_title">Resaltado</string>
     <string name="highlight_dialog_note_hint">Escribe tu nota…</string>
+    <string name="highlight_color_yellow">Resaltado amarillo</string>
+    <string name="highlight_color_orange">Resaltado naranja</string>
+    <string name="highlight_color_green">Resaltado verde</string>
+    <string name="highlight_color_blue">Resaltado azul</string>
     <string name="highlight_accept">Aceptar</string>
     <string name="highlight_cancel">Cancelar</string>
     <string name="highlight_save">Guardar</string>

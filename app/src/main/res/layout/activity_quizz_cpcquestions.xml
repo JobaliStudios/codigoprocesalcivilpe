@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F7F7F7">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -19,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="@dimen/space_l">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,10 +28,11 @@
 
                 <ImageButton
                     android:id="@+id/btnClose"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@android:color/transparent"
+                    android:layout_width="@dimen/touch_target_min"
+                    android:layout_height="@dimen/touch_target_min"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/quiz_cpc_close"
+                    android:padding="@dimen/space_m"
                     android:src="@drawable/baseline_close_24" />
 
                 <LinearLayout
@@ -46,8 +46,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/quiz_cpc_header_title"
-                        android:textColor="#171717"
-                        android:textSize="20sp"
+                        android:textColor="@color/quiz_text_title"
+                        android:textSize="@dimen/text_title_m"
                         android:textStyle="bold" />
 
                     <TextView
@@ -55,22 +55,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/quiz_cpc_section_label"
-                        android:textColor="#6B6B6B"
-                        android:textSize="14sp" />
+                        android:textColor="@color/quiz_text_secondary"
+                        android:textSize="@dimen/text_body_m" />
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/touch_target_min"
+                    android:layout_height="@dimen/touch_target_min"
                     android:contentDescription="@string/quiz_cpc_time"
-                    android:padding="8dp"
-                    android:src="@drawable/baseline_history_24" />
+                    android:padding="@dimen/space_m"
+                    android:src="@drawable/baseline_history_24"
+                    app:tint="@color/quiz_icon_tint" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/space_xl"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -79,8 +80,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#646464"
-                    android:textSize="20sp"
+                    android:textColor="@color/quiz_text_secondary"
+                    android:textSize="@dimen/text_title_m"
                     android:textStyle="bold"
                     tools:text="Pregunta 04 de 10" />
 
@@ -88,8 +89,8 @@
                     android:id="@+id/tvPercentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#212121"
-                    android:textSize="20sp"
+                    android:textColor="@color/quiz_text_primary"
+                    android:textSize="@dimen/text_title_m"
                     android:textStyle="bold"
                     tools:text="40%" />
             </LinearLayout>
@@ -98,34 +99,34 @@
                 android:id="@+id/progressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:indicatorColor="#121212"
-                app:trackColor="#D9D9D9" />
+                android:layout_marginTop="@dimen/space_s"
+                app:indicatorColor="@color/quiz_progress_indicator"
+                app:trackColor="@color/quiz_progress_track" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                app:cardBackgroundColor="#EFEFEF"
-                app:cardCornerRadius="20dp"
-                app:strokeColor="#EFEFEF"
-                app:strokeWidth="1dp">
+                android:layout_marginTop="@dimen/space_xl"
+                app:cardBackgroundColor="@color/quiz_question_card_bg"
+                app:cardCornerRadius="@dimen/radius_l"
+                app:strokeColor="@color/quiz_card_stroke_soft"
+                app:strokeWidth="@dimen/stroke_width_thin">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="@dimen/space_l">
 
                     <TextView
                         android:id="@+id/tvArticle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/quiz_article_tag_bg"
-                        android:paddingHorizontal="14dp"
-                        android:paddingVertical="8dp"
-                        android:textColor="#3E2717"
-                        android:textSize="18sp"
+                        android:paddingHorizontal="@dimen/space_m"
+                        android:paddingVertical="@dimen/space_s"
+                        android:textColor="@color/quiz_chip_text"
+                        android:textSize="@dimen/text_title_m"
                         android:textStyle="bold"
                         tools:text="ART. 42" />
 
@@ -133,9 +134,9 @@
                         android:id="@+id/tvQuestion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:textColor="#141414"
-                        android:textSize="24sp"
+                        android:layout_marginTop="@dimen/space_m"
+                        android:textColor="@color/quiz_text_title"
+                        android:textSize="@dimen/text_title_l"
                         android:textStyle="bold"
                         tools:text="¿Cuál es el órgano jurisdiccional competente...?" />
                 </LinearLayout>
@@ -145,40 +146,42 @@
                 android:id="@+id/optionsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/space_xl"
                 android:orientation="vertical" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/space_xl"
                 android:visibility="gone"
-                app:cardBackgroundColor="#FDEEEE"
-                app:cardCornerRadius="18dp"
-                app:strokeColor="#C10F2E"
-                app:strokeWidth="2dp">
+                app:cardBackgroundColor="@color/quiz_feedback_error_bg"
+                app:cardCornerRadius="@dimen/radius_l"
+                app:strokeColor="@color/quiz_wrong"
+                app:strokeWidth="@dimen/stroke_width_emphasis">
 
                 <TextView
                     android:id="@+id/tvAnswerFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="18dp"
-                    android:textColor="#AE1731"
-                    android:textSize="16sp"
+                    android:padding="@dimen/space_l"
+                    android:textColor="@color/quiz_wrong"
+                    android:textSize="@dimen/text_body_l"
                     tools:text="Respuesta incorrecta. Según el Art. 24 del CPC, la competencia es facultativa." />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnNext"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xl"
+                android:minHeight="@dimen/touch_target_min"
                 android:text="@string/quiz_cpc_next_button"
                 android:textAllCaps="false"
-                android:textSize="18sp"
+                android:textColor="@color/quiz_button_on_primary"
+                android:textSize="@dimen/text_title_m"
                 android:textStyle="bold"
-                app:backgroundTint="#111217"
+                app:backgroundTint="@color/quiz_button_primary"
                 app:cornerRadius="28dp" />
         </LinearLayout>
 

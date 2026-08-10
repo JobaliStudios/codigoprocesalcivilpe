@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/font_size_title"
-                    android:minHeight="@dimen/home_card_icon_size"
+                    android:minHeight="@dimen/touch_target_min"
                     android:text="@string/reading_action_font_size"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary" />
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/article_copy_content_description"
-                    android:minHeight="@dimen/home_card_icon_size"
+                    android:minHeight="@dimen/touch_target_min"
                     android:text="@string/article_action_copy"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
@@ -172,22 +172,23 @@
                 android:id="@+id/edtBusqueda"
                 style="@style/EditTextSearchStyle"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autofillHints="search"
                 android:drawableStart="@drawable/baseline_search_24"
                 android:hint="@string/buscar"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
+                android:minHeight="@dimen/touch_target_min"
                 android:padding="@dimen/space_s" />
 
             <ImageButton
                 android:id="@+id/btnLimpiarBusqueda"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/limpiarbusqueda"
-                android:padding="8dp"
+                android:padding="@dimen/space_m"
                 android:scaleType="centerInside"
                 android:src="@drawable/baseline_close_24"
                 android:visibility="invisible" />
@@ -204,31 +205,31 @@
 
             <ImageButton
                 android:id="@+id/btnAnterior"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/anteriorbusqueda"
-                android:padding="8dp"
+                android:padding="@dimen/space_m"
                 android:scaleType="centerInside"
                 android:src="@drawable/baseline_arrow_upward_24" />
 
             <ImageButton
                 android:id="@+id/btnSiguiente"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/siguientebusqueda"
-                android:padding="8dp"
+                android:padding="@dimen/space_m"
                 android:scaleType="centerInside"
                 android:src="@drawable/baseline_arrow_downward_24" />
 
             <ImageButton
                 android:id="@+id/btnCerrarBusqueda"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cerrarbusqueda"
-                android:padding="8dp"
+                android:padding="@dimen/space_m"
                 android:scaleType="centerInside"
                 android:src="@drawable/baseline_close_24" />
         </LinearLayout>
@@ -264,9 +265,10 @@
                 android:id="@+id/btnPreviousArticle"
                 style="@style/App.Button.ReadingAction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/reading_action_height"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/article_previous"
+                android:minHeight="@dimen/reading_action_height"
                 android:text="@string/article_previous"
                 app:icon="@drawable/baseline_chevron_left_24" />
 
@@ -274,9 +276,10 @@
                 android:id="@+id/btnFavoriteArticle"
                 style="@style/App.Button.ReadingAction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/reading_action_height"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/article_favorite"
+                android:minHeight="@dimen/reading_action_height"
                 android:text="@string/article_favorite"
                 app:icon="@drawable/baseline_star_border_24" />
 
@@ -284,9 +287,10 @@
                 android:id="@+id/btnArticleNote"
                 style="@style/App.Button.ReadingAction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/reading_action_height"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/article_note"
+                android:minHeight="@dimen/reading_action_height"
                 android:text="@string/article_note"
                 app:icon="@drawable/baseline_note_24" />
 
@@ -294,9 +298,10 @@
                 android:id="@+id/btnShareArticle"
                 style="@style/App.Button.ReadingAction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/reading_action_height"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/article_share_content_description"
+                android:minHeight="@dimen/reading_action_height"
                 android:text="@string/article_action_share"
                 app:icon="@drawable/baseline_share_24" />
 
@@ -304,9 +309,10 @@
                 android:id="@+id/btnNextArticle"
                 style="@style/App.Button.ReadingAction"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/reading_action_height"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:contentDescription="@string/article_next"
+                android:minHeight="@dimen/reading_action_height"
                 android:text="@string/article_next"
                 app:icon="@drawable/baseline_chevron_right_24" />
         </LinearLayout>

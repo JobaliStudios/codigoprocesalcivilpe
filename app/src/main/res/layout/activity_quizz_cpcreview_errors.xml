@@ -19,8 +19,8 @@
         <ImageButton
             android:id="@+id/btnReviewBack"
             style="@style/App.Icon.Tinted"
-            android:layout_width="@dimen/home_card_icon_size"
-            android:layout_height="@dimen/home_card_icon_size"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/quiz_cpc_review_back"
             android:src="@drawable/baseline_arrow_back_24" />

@@ -3,15 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/space_l">
 
     <EditText
         android:id="@+id/etNote"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="top|start"
         android:hint="@string/highlight_dialog_note_hint"
         android:inputType="textMultiLine"
-        android:maxLength="2000" />
+        android:maxLength="2000"
+        android:maxLines="6"
+        android:minHeight="100dp"
+        android:minLines="4" />
 
     <TextView
         android:id="@+id/notePrivacyWarning"
@@ -25,37 +29,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="16dp">
+        android:paddingTop="@dimen/space_l">
 
         <View
             android:id="@+id/colorYellow"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="@color/highlight_yellow"
+            android:contentDescription="@string/highlight_color_yellow"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:tag="yellow"/>
 
         <View
             android:id="@+id/colorOrange"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="@color/highlight_orange"
-            android:layout_marginStart="8dp"
+            android:contentDescription="@string/highlight_color_orange"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginStart="@dimen/space_s"
             android:tag="orange"/>
 
         <View
             android:id="@+id/colorGreen"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="@color/highlight_green"
-            android:layout_marginStart="8dp"
+            android:contentDescription="@string/highlight_color_green"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginStart="@dimen/space_s"
             android:tag="green"/>
 
         <View
             android:id="@+id/colorBlue"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="@color/highlight_blue"
-            android:layout_marginStart="8dp"
+            android:contentDescription="@string/highlight_color_blue"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginStart="@dimen/space_s"
             android:tag="blue"/>
     </LinearLayout>
 </LinearLayout>
