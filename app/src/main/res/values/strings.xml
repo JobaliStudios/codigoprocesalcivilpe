@@ -150,8 +150,27 @@
     <string name="title_bnv_2">Búsqueda</string>
     <string name="busqueda_hint">Buscar por artículo, tema o palabra clave</string>
     <string name="busqueda_recientes">Búsquedas recientes</string>
-    <string name="busqueda_empty_state">Escribe un término para buscar en el índice legal.</string>
-    <string name="busqueda_no_results">No se encontraron resultados con los filtros actuales.</string>
+    <string name="busqueda_clear_recents">Borrar</string>
+    <string name="busqueda_remove_recent_description">Eliminar búsqueda reciente: %1$s</string>
+    <string name="busqueda_empty_state">Busca por artículo, tema o palabra clave.</string>
+    <string name="busqueda_no_results">No encontramos resultados para “%1$s”.</string>
+    <string name="busqueda_filtered_no_results">No hay resultados con los filtros seleccionados.</string>
+    <string name="busqueda_invalid_number">Escribe un número de artículo, por ejemplo 564 o 506-A.</string>
+    <string name="busqueda_no_article_favorites_title">Aún no tienes artículos favoritos</string>
+    <string name="busqueda_no_article_favorites_body">Guarda artículos desde la pantalla de lectura para encontrarlos rápidamente aquí.</string>
+    <string name="busqueda_no_results_title">Sin resultados</string>
+    <string name="busqueda_clear_filters">Limpiar filtros</string>
+    <string name="busqueda_sections_label">Secciones</string>
+    <string name="busqueda_filter_all">Todos</string>
+    <string name="busqueda_filter_number">Número</string>
+    <string name="busqueda_filter_text">Texto</string>
+    <string name="busqueda_filter_favorites">Favoritos</string>
+    <string name="busqueda_favorite_indicator">★</string>
+    <string name="busqueda_favorite_indicator_description">Artículo favorito</string>
+    <plurals name="busqueda_result_count">
+        <item quantity="one">%1$d resultado</item>
+        <item quantity="other">%1$d resultados</item>
+    </plurals>
 
     <string name="busqueda_empty_title">Busca en el Código Procesal Civil</string>
     <string name="busqueda_empty_cta">Buscar ahora</string>

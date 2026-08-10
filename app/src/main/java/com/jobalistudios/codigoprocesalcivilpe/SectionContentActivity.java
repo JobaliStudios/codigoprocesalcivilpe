@@ -48,6 +48,7 @@ public class SectionContentActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "EXTRA_TITLE";
     public static final String EXTRA_SUBTITLE = "EXTRA_SUBTITLE";
     public static final String EXTRA_INITIAL_QUERY = "EXTRA_INITIAL_QUERY";
+    public static final String EXTRA_INITIAL_QUERY_OFFSET = "EXTRA_INITIAL_QUERY_OFFSET";
     public static final String EXTRA_SCROLL_TO_OFFSET = "EXTRA_SCROLL_TO_OFFSET";
     public static final String EXTRA_SECTION_LABEL = "EXTRA_SECTION_LABEL";
     public static final String EXTRA_TITLE_LABEL = "EXTRA_TITLE_LABEL";
@@ -679,7 +680,12 @@ public class SectionContentActivity extends AppCompatActivity {
 
         String initialQuery = getIntent().getStringExtra(EXTRA_INITIAL_QUERY);
         if (initialQuery != null && !initialQuery.trim().isEmpty()) {
-            searchController.submitQuery(initialQuery.trim(), true);
+            int preferredOffset = getIntent().getIntExtra(EXTRA_INITIAL_QUERY_OFFSET, -1);
+            if (preferredOffset >= 0) {
+                searchController.submitQueryAtOffset(initialQuery.trim(), true, preferredOffset);
+            } else {
+                searchController.submitQuery(initialQuery.trim(), true);
+            }
         }
     }
 }

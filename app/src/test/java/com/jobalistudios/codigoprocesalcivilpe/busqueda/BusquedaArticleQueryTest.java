@@ -9,6 +9,8 @@ public class BusquedaArticleQueryTest {
 
     @Test
     public void reconoceLasFormasComunesDeConsulta() {
+        assertEquals("564", BusquedaViewModel.extractArticleNumber("564"));
+        assertEquals("564", BusquedaViewModel.extractArticleNumber("Artículo 564"));
         assertEquals("647", BusquedaViewModel.extractArticleNumber("647"));
         assertEquals("647", BusquedaViewModel.extractArticleNumber("art. 647"));
         assertEquals("647", BusquedaViewModel.extractArticleNumber("Artículo 647"));
@@ -19,6 +21,7 @@ public class BusquedaArticleQueryTest {
         assertEquals("647-A", BusquedaViewModel.extractArticleNumber("647 A"));
         assertEquals("647-A", BusquedaViewModel.extractArticleNumber("artículo 647-A"));
         assertEquals("647-A", BusquedaViewModel.extractArticleNumber("647a"));
+        assertEquals("506-A", BusquedaViewModel.extractArticleNumber("Artículo 506 a"));
     }
 
     @Test

@@ -15,9 +15,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jobalistudios.codigoprocesalcivilpe.busqueda.SearchTextNormalizer;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -84,7 +84,17 @@ public class SectionSearchController {
         }
         searchInput.setText(query);
         searchInput.selectAll();
-        performSearch(query);
+        performSearch(query, -1);
+    }
+
+    /** Abre la búsqueda interna seleccionando la coincidencia que originó el resultado global. */
+    public void submitQueryAtOffset(String query, boolean showBar, int preferredOffset) {
+        if (showBar) {
+            showSearchBar();
+        }
+        searchInput.setText(query);
+        searchInput.selectAll();
+        performSearch(query, preferredOffset);
     }
 
     public boolean hasActiveQuery() {
@@ -93,7 +103,7 @@ public class SectionSearchController {
 
     /** Re-ejecuta la búsqueda actual sobre el texto reconstruido (ej. tras cambiar un resaltado). */
     public void refreshSearch() {
-        performSearch(searchInput.getText().toString());
+        performSearch(searchInput.getText().toString(), -1);
     }
 
     private void showSearchBar() {
@@ -145,7 +155,7 @@ public class SectionSearchController {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 updateClearIcon();
-                performSearch(s.toString());
+                performSearch(s.toString(), -1);
             }
 
             @Override
@@ -173,12 +183,16 @@ public class SectionSearchController {
         clearButton.setVisibility(hasQuery ? View.VISIBLE : View.INVISIBLE);
     }
 
-    private void performSearch(String query) {
+    private void performSearch(String query, int preferredOffset) {
         SpannableString spannable = textProvider.getFormattedText();
         clearPreviousSearchHighlights(spannable);
 
         if (!query.isEmpty()) {
             applySearchHighlight(spannable, query);
+        }
+
+        if (preferredOffset >= 0 && !searchPositions.isEmpty()) {
+            currentSearchIndex = nearestSearchPosition(preferredOffset);
         }
 
         textView.setText(spannable);
@@ -202,20 +216,29 @@ public class SectionSearchController {
     }
 
     private void applySearchHighlight(SpannableString spannable, String query) {
-        String normalizedContent = normalizeText(spannable.toString());
-        String normalizedQuery = normalizeText(query);
-        int index = normalizedContent.indexOf(normalizedQuery);
-
-        while (index >= 0) {
-            int end = index + normalizedQuery.length();
-            spannable.setSpan(new BackgroundColorSpan(Color.YELLOW), index, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            searchPositions.add(index);
-            index = normalizedContent.indexOf(normalizedQuery, end);
+        for (SearchTextNormalizer.Range range
+                : SearchTextNormalizer.findAll(spannable.toString(), query)) {
+            spannable.setSpan(new BackgroundColorSpan(Color.YELLOW), range.start, range.end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            searchPositions.add(range.start);
         }
 
         if (!searchPositions.isEmpty()) {
             currentSearchIndex = 0;
         }
+    }
+
+    private int nearestSearchPosition(int preferredOffset) {
+        int bestIndex = 0;
+        int bestDistance = Integer.MAX_VALUE;
+        for (int index = 0; index < searchPositions.size(); index++) {
+            int distance = Math.abs(searchPositions.get(index) - preferredOffset);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestIndex = index;
+            }
+        }
+        return bestIndex;
     }
 
     private void scrollToPosition(int charIndex) {
@@ -236,10 +259,5 @@ public class SectionSearchController {
 
         boolean hasQuery = !searchInput.getText().toString().trim().isEmpty();
         noResultsView.setVisibility(hasQuery && totalResults == 0 ? View.VISIBLE : View.GONE);
-    }
-
-    private String normalizeText(String input) {
-        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
-        return normalized.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
     }
 }

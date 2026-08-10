@@ -6,53 +6,43 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.jobalistudios.codigoprocesalcivilpe.R;
-import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalContentCatalog;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapper;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+/** Coordina el estado del buscador; el índice y ranking viven en {@link LegalSearchEngine}. */
 public class BusquedaViewModel extends AndroidViewModel {
-
-    private static final String PREFS_NAME = "busqueda_prefs";
-    private static final String PREF_RECENT = "recent_queries";
-    private static final int MAX_RECENT = 8;
-    private static final Pattern ARTICLE_QUERY_PATTERN = Pattern.compile(
-            "^\\s*(?:art(?:\\.|[íi]culo)?)?\\s*(?:n[°º.]?\\s*)?(\\d{1,4})\\s*(?:[-\\s]?\\s*([a-f]))?\\s*\\.?\\s*$",
-            Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+    static final String PREFS_NAME = "busqueda_prefs";
+    static final String PREF_RECENT = "recent_queries";
+    static final int MAX_RECENT = 8;
 
     private final SharedPreferences sharedPreferences;
-    private final List<LegalSearchItem> legalIndex;
-    private final Map<String, LegalSearchItem> itemsByBlockKey = new HashMap<>();
+    private final LegalSearchEngine searchEngine;
+    private final FavoritesManager favoritesManager;
     private final Set<String> selectedSections = new HashSet<>();
     private final MutableLiveData<BusquedaUiState> uiState = new MutableLiveData<>();
 
     private String currentQuery = "";
+    private SearchFilter currentFilter = SearchFilter.ALL;
 
     public BusquedaViewModel(@NonNull Application application) {
         super(application);
-        sharedPreferences = application.getSharedPreferences(PREFS_NAME, 0);
-        legalIndex = LegalSearchItemFactory.create(application);
-        for (LegalSearchItem item : legalIndex) {
-            itemsByBlockKey.put(application.getResources().getResourceEntryName(item.textResId), item);
-        }
-        refreshState(false);
+        sharedPreferences = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        searchEngine = LegalSearchEngine.create(application);
+        favoritesManager = new FavoritesManager(application);
+        refreshState();
     }
 
     public LiveData<BusquedaUiState> getUiState() {
@@ -60,8 +50,15 @@ public class BusquedaViewModel extends AndroidViewModel {
     }
 
     public void updateQuery(String query) {
-        currentQuery = query == null ? "" : query.trim();
-        refreshState(false);
+        // Conserva los espacios mientras el usuario escribe consultas de varias palabras.
+        // El motor y la persistencia ya recortan la entrada en sus respectivos límites.
+        currentQuery = query == null ? "" : query;
+        refreshState();
+    }
+
+    public void setFilter(@NonNull SearchFilter filter) {
+        currentFilter = filter;
+        refreshState();
     }
 
     public void toggleSection(String sectionName) {
@@ -70,22 +67,49 @@ public class BusquedaViewModel extends AndroidViewModel {
         } else {
             selectedSections.add(sectionName);
         }
-        refreshState(false);
+        refreshState();
+    }
+
+    public void clearFilters() {
+        currentFilter = SearchFilter.ALL;
+        selectedSections.clear();
+        refreshState();
     }
 
     public void submitCurrentQuery() {
-        if (!currentQuery.isEmpty()) {
-            persistRecentQuery(currentQuery);
-            refreshState(false);
-        }
+        persistRecentQuery(currentQuery);
+        refreshState();
+    }
+
+    public void recordResultOpened() {
+        persistRecentQuery(currentQuery);
+        refreshState();
     }
 
     public void useRecentQuery(String query) {
-        currentQuery = query;
-        refreshState(false);
+        currentQuery = query == null ? "" : query.trim();
+        refreshState();
     }
 
-    /** Elimina únicamente el historial de búsquedas recientes. */
+    public void removeRecentQuery(String query) {
+        List<String> recents = getRecentQueries();
+        String normalized = SearchTextNormalizer.normalizePlain(query);
+        recents.removeIf(item -> SearchTextNormalizer.normalizePlain(item).equals(normalized));
+        saveRecentQueries(recents);
+        refreshState();
+    }
+
+    public void clearAllRecentQueries() {
+        clearRecentQueries(getApplication());
+        refreshState();
+    }
+
+    /** Refresca el set de favoritos después de volver desde la pantalla de lectura. */
+    public void refreshFavorites() {
+        refreshState();
+    }
+
+    /** Elimina únicamente el historial de búsquedas recientes, también desde Privacidad. */
     public static void clearRecentQueries(Context context) {
         context.getApplicationContext()
                 .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -94,199 +118,134 @@ public class BusquedaViewModel extends AndroidViewModel {
                 .apply();
     }
 
-    private void refreshState(boolean loading) {
-        List<String> recents = getRecentQueries();
-        List<LegalSearchResult> results = search(currentQuery);
-        uiState.setValue(new BusquedaUiState(currentQuery, loading, results, recents, selectedSections));
-    }
-
-    private List<LegalSearchResult> search(String query) {
-        if (query.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        String normalizedQuery = normalize(query);
-        List<LegalSearchResult> results = new ArrayList<>();
-
-        for (LegalSearchItem item : legalIndex) {
-            if (!selectedSections.isEmpty() && !selectedSections.contains(item.sectionName)) {
-                continue;
-            }
-            int score = calculateScore(item, normalizedQuery);
-            if (score > 0) {
-                results.add(new LegalSearchResult(item, score));
-            }
-        }
-
-        results.sort(Comparator.comparingInt((LegalSearchResult r) -> r.relevance).reversed());
-
-        List<LegalSearchResult> jumps = buildJumpResults(query);
-        if (!jumps.isEmpty()) {
-            results.addAll(0, jumps);
-        }
-        return results;
-    }
-
-    /** Filas "Ir al Artículo N°" cuando la consulta es un número de artículo. */
-    private List<LegalSearchResult> buildJumpResults(String query) {
-        String number = extractArticleNumber(query);
-        if (number == null) {
-            return Collections.emptyList();
-        }
-        List<LegalSearchResult> jumps = new ArrayList<>();
-        for (ArticleRepository.Location location : ArticleRepository.findArticle(getApplication(), number)) {
-            LegalSearchItem blockItem = itemsByBlockKey.get(location.block.key);
-            if (blockItem == null) {
-                continue;
-            }
-            if (!selectedSections.isEmpty() && !selectedSections.contains(blockItem.sectionName)) {
-                continue;
-            }
-            String title = getApplication().getString(R.string.busqueda_ir_articulo, number);
-            if (!location.article.title.isEmpty()) {
-                title += " — " + location.article.title;
-            }
-            LegalSearchItem jumpItem = new LegalSearchItem(title, blockItem.sectionName,
-                    blockItem.articleRange, blockItem.title, "",
-                    blockItem.textResId, blockItem.titleResId, blockItem.subtitleResId);
-            jumps.add(new LegalSearchResult(jumpItem, Integer.MAX_VALUE, location.article.offsetInBlock));
-        }
-        return jumps;
-    }
-
-    /** "art. 647-a", "Artículo 647", "647 A" → "647-A"; null si la consulta no es un número de artículo. */
+    @Nullable
     static String extractArticleNumber(String query) {
-        if (query == null) {
-            return null;
-        }
-        Matcher matcher = ARTICLE_QUERY_PATTERN.matcher(query);
-        if (!matcher.matches()) {
-            return null;
-        }
-        String letter = matcher.group(2);
-        return letter == null ? matcher.group(1)
-                : matcher.group(1) + "-" + letter.toUpperCase(Locale.ROOT);
+        return ArticleNumberQueryParser.extract(query);
     }
 
-    private int calculateScore(LegalSearchItem item, String normalizedQuery) {
-        int score = 0;
-        if (item.normalizedTitle.contains(normalizedQuery)) score += 5;
-        if (item.normalizedSnippet.contains(normalizedQuery)) score += 3;
-        if (item.normalizedFullText.contains(normalizedQuery)) score += 1;
-        return score;
+    private void refreshState() {
+        Set<String> favoriteNumbers = favoriteArticleNumbers();
+        LegalSearchEngine.SearchResponse response = searchEngine.search(
+                currentQuery,
+                currentFilter,
+                selectedSections,
+                favoriteNumbers
+        );
+        EmptyState emptyState = resolveEmptyState(response, favoriteNumbers);
+        uiState.setValue(new BusquedaUiState(
+                currentQuery,
+                response.results,
+                getRecentQueries(),
+                currentFilter,
+                selectedSections,
+                emptyState
+        ));
+    }
+
+    private EmptyState resolveEmptyState(
+            LegalSearchEngine.SearchResponse response,
+            Set<String> favoriteNumbers
+    ) {
+        if (!response.results.isEmpty()) {
+            return EmptyState.NONE;
+        }
+        if (response.invalidNumberQuery) {
+            return EmptyState.INVALID_NUMBER;
+        }
+        if (currentFilter == SearchFilter.FAVORITES && currentQuery.trim().isEmpty()) {
+            if (favoriteNumbers.isEmpty()) {
+                return EmptyState.NO_FAVORITES;
+            }
+            return EmptyState.FILTERED_NO_RESULTS;
+        }
+        if (currentQuery.trim().isEmpty()) {
+            return EmptyState.PROMPT;
+        }
+        if (!selectedSections.isEmpty() || currentFilter != SearchFilter.ALL) {
+            return EmptyState.FILTERED_NO_RESULTS;
+        }
+        return EmptyState.NO_RESULTS;
+    }
+
+    private Set<String> favoriteArticleNumbers() {
+        Set<String> result = new HashSet<>();
+        for (FavoriteItem favorite : favoritesManager.getAll()) {
+            String destination = favorite.getDestinationId();
+            if (destination.startsWith(FavoriteDestinationMapper.ARTICLE_PREFIX)) {
+                result.add(destination.substring(FavoriteDestinationMapper.ARTICLE_PREFIX.length()));
+            }
+        }
+        return result;
     }
 
     private List<String> getRecentQueries() {
         String value = sharedPreferences.getString(PREF_RECENT, "");
         if (value == null || value.isEmpty()) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         return new ArrayList<>(Arrays.asList(value.split("\\n")));
     }
 
     private void persistRecentQuery(String query) {
+        String trimmed = query == null ? "" : query.trim();
+        if (trimmed.isEmpty()) {
+            return;
+        }
+        String normalized = SearchTextNormalizer.normalizePlain(trimmed);
         List<String> queries = getRecentQueries();
-        queries.remove(query);
-        queries.add(0, query);
+        queries.removeIf(item -> SearchTextNormalizer.normalizePlain(item).equals(normalized));
+        queries.add(0, trimmed);
         if (queries.size() > MAX_RECENT) {
-            queries = queries.subList(0, MAX_RECENT);
+            queries = new ArrayList<>(queries.subList(0, MAX_RECENT));
         }
-        sharedPreferences.edit().putString(PREF_RECENT, TextUtils.join("\n", queries)).apply();
+        saveRecentQueries(queries);
     }
 
-    private static String normalize(String input) {
-        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
-                .replaceAll("\\p{M}", "");
-        return normalized.toLowerCase(Locale.ROOT);
+    private void saveRecentQueries(List<String> queries) {
+        if (queries.isEmpty()) {
+            sharedPreferences.edit().remove(PREF_RECENT).apply();
+        } else {
+            sharedPreferences.edit()
+                    .putString(PREF_RECENT, TextUtils.join("\n", queries))
+                    .apply();
+        }
     }
 
-    public static class BusquedaUiState {
-        public final String query;
-        public final boolean loading;
-        public final List<LegalSearchResult> results;
-        public final List<String> recentQueries;
-        public final Set<String> selectedSections;
+    public enum EmptyState {
+        NONE,
+        PROMPT,
+        NO_RESULTS,
+        INVALID_NUMBER,
+        NO_FAVORITES,
+        FILTERED_NO_RESULTS
+    }
 
-        BusquedaUiState(String query, boolean loading, List<LegalSearchResult> results,
-                        List<String> recentQueries, Set<String> selectedSections) {
+    public static final class BusquedaUiState {
+        @NonNull public final String query;
+        @NonNull public final List<ArticleSearchResult> results;
+        @NonNull public final List<String> recentQueries;
+        @NonNull public final SearchFilter filter;
+        @NonNull public final Set<String> selectedSections;
+        @NonNull public final EmptyState emptyState;
+
+        BusquedaUiState(
+                @NonNull String query,
+                @NonNull List<ArticleSearchResult> results,
+                @NonNull List<String> recentQueries,
+                @NonNull SearchFilter filter,
+                @NonNull Set<String> selectedSections,
+                @NonNull EmptyState emptyState
+        ) {
             this.query = query;
-            this.loading = loading;
             this.results = results;
-            this.recentQueries = recentQueries;
-            this.selectedSections = new HashSet<>(selectedSections);
-        }
-    }
-
-    static class LegalSearchItemFactory {
-        static List<LegalSearchItem> create(Application app) {
-            List<LegalSearchItem> items = new ArrayList<>();
-            for (LegalContentCatalog.Entry entry : LegalContentCatalog.getEntries()) {
-                items.add(item(app, entry));
-            }
-            return items;
+            this.recentQueries = Collections.unmodifiableList(new ArrayList<>(recentQueries));
+            this.filter = filter;
+            this.selectedSections = Collections.unmodifiableSet(new HashSet<>(selectedSections));
+            this.emptyState = emptyState;
         }
 
-        private static LegalSearchItem item(Application app, LegalContentCatalog.Entry entry) {
-            String fullText = ArticleRepository.getContentText(app, entry.textRes);
-            String snippetSource = fullText.trim();
-            String snippet = snippetSource.length() > 180 ? snippetSource.substring(0, 180) + "…" : snippetSource;
-            String title = app.getString(entry.titleRes) + " — " + app.getString(entry.subtitleRes);
-            return new LegalSearchItem(
-                    title,
-                    app.getString(entry.sectionNameRes),
-                    app.getString(entry.articleRangeRes),
-                    snippet,
-                    fullText,
-                    entry.textRes,
-                    entry.titleRes,
-                    entry.subtitleRes
-            );
-        }
-    }
-
-    public static class LegalSearchItem {
-        public final String title;
-        public final String sectionName;
-        public final String articleRange;
-        public final String snippet;
-        public final String fullText;
-        public final int textResId;
-        public final int titleResId;
-        public final int subtitleResId;
-        final String normalizedTitle;
-        final String normalizedSnippet;
-        final String normalizedFullText;
-
-        LegalSearchItem(String title, String sectionName, String articleRange, String snippet, String fullText,
-                        int textResId, int titleResId, int subtitleResId) {
-            this.title = title;
-            this.sectionName = sectionName;
-            this.articleRange = articleRange;
-            this.snippet = snippet;
-            this.fullText = fullText;
-            this.textResId = textResId;
-            this.titleResId = titleResId;
-            this.subtitleResId = subtitleResId;
-            this.normalizedTitle = normalize(title);
-            this.normalizedSnippet = normalize(snippet);
-            this.normalizedFullText = normalize(fullText);
-        }
-    }
-
-    public static class LegalSearchResult {
-        public final LegalSearchItem item;
-        public final int relevance;
-        /** Offset del artículo destino dentro del bloque; -1 si no es una fila de salto directo. */
-        public final int jumpOffset;
-
-        LegalSearchResult(LegalSearchItem item, int relevance) {
-            this(item, relevance, -1);
-        }
-
-        LegalSearchResult(LegalSearchItem item, int relevance, int jumpOffset) {
-            this.item = item;
-            this.relevance = relevance;
-            this.jumpOffset = jumpOffset;
+        public boolean hasActiveFilters() {
+            return filter != SearchFilter.ALL || !selectedSections.isEmpty();
         }
     }
 }
