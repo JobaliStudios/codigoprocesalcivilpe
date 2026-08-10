@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
 
 import java.util.Collections;
@@ -14,13 +15,14 @@ import java.util.Map;
 
 /**
  * Traduce el destino guardado de un favorito a un Intent de navegación. Los destinos
- * nuevos usan el id del nodo con prefijo "node:"; los ids antiguos (y los nombres de
- * las actividades legadas eliminadas) se remapean a su nodo equivalente para que los
- * favoritos guardados por usuarios existentes sigan funcionando.
+ * de nodo usan el prefijo "node:" y los de artículo "article:". Los ids antiguos (y
+ * los nombres de actividades legadas eliminadas) se remapean a su nodo equivalente
+ * para que los favoritos guardados por usuarios existentes sigan funcionando.
  */
 public final class FavoriteDestinationMapper {
 
     public static final String NODE_PREFIX = "node:";
+    public static final String ARTICLE_PREFIX = "article:";
 
     public static final String DEST_SECTION_PRIMERA = "section_primera";
     public static final String DEST_ART_SECTION_1_TITLE_1 = "article_section_1_title_1";
@@ -58,6 +60,11 @@ public final class FavoriteDestinationMapper {
         return NODE_PREFIX + nodeId;
     }
 
+    /** Id estable de destino para un artículo individual. */
+    public static String destinationForArticle(String articleNumber) {
+        return ARTICLE_PREFIX + articleNumber;
+    }
+
     public static String normalizeDestinationId(@Nullable String rawId) {
         if (TextUtils.isEmpty(rawId)) {
             return "";
@@ -72,6 +79,13 @@ public final class FavoriteDestinationMapper {
     @Nullable
     public static Intent toIntent(Context context, String destinationId) {
         String normalized = normalizeDestinationId(destinationId);
+
+        if (normalized.startsWith(ARTICLE_PREFIX)) {
+            String articleNumber = normalized.substring(ARTICLE_PREFIX.length());
+            ArticleNavigationResolver.Target target =
+                    ArticleNavigationResolver.resolve(context, articleNumber);
+            return target == null ? null : target.createIntent(context);
+        }
 
         String nodeId;
         if (normalized.startsWith(NODE_PREFIX)) {

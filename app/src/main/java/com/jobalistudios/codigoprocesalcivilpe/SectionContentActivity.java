@@ -18,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,11 +30,14 @@ import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceMa
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleSequenceResolver;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleShareFormatter;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.VisibleArticleResolver;
-import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
-import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
 
@@ -57,6 +61,7 @@ public class SectionContentActivity extends AppCompatActivity {
 
     private static final float FONT_SCALE_STEP = 0.05f;
     private static final long HISTORY_SCROLL_SETTLE_DELAY_MS = 350L;
+    private static final String STATE_CURRENT_ARTICLE_NUMBER = "currentArticleNumber";
 
     private HighlightController highlightController;
     private SectionSearchController searchController;
@@ -66,9 +71,19 @@ public class SectionContentActivity extends AppCompatActivity {
     private TextView trackedContentView;
     private ScrollView trackedScrollView;
     private Article currentVisibleArticle;
+    private Article preferredProgrammaticArticle;
+    private ArticleSequenceResolver.Result currentSequence;
     private ArticleShareFormatter articleShareFormatter;
+    private FavoritesManager favoritesManager;
+    private TextView currentArticleNumberView;
+    private TextView currentArticleTitleView;
+    private View readingBottomBar;
+    private MaterialButton previousArticleButton;
+    private MaterialButton favoriteArticleButton;
+    private MaterialButton articleNoteButton;
     private MaterialButton copyArticleButton;
     private MaterialButton shareArticleButton;
+    private MaterialButton nextArticleButton;
     private final Runnable updateVisibleArticle = this::updateCurrentlyVisibleArticle;
 
     public static Intent createIntent(
@@ -114,22 +129,36 @@ public class SectionContentActivity extends AppCompatActivity {
 
         applyKeepScreenOnPreference();
         articleShareFormatter = new ArticleShareFormatter(getString(R.string.app_name));
+        favoritesManager = new FavoritesManager(this);
         baseContentTextSizePx = contentView.getTextSize();
         applyFontScale(contentView, ReadingPreferenceManager.getContentFontScale(this));
 
         String blockKey = getResources().getResourceEntryName(textResId);
-        highlightController = new HighlightController(this, contentView, blockKey,
-                () -> refreshContent(contentView, textResId));
+        highlightController = new HighlightController(this, contentView, blockKey, () -> {
+            refreshContent(contentView, textResId);
+            renderCurrentArticleState();
+        });
         renderContent(contentView, textResId);
         setupReadingHistoryTracking(contentView, blockKey);
 
-        setupHeaderActions(contentView, textResId);
+        setupHeaderActions(contentView);
         setupArticleActions();
         setupInPageSearch(contentView, textResId);
 
-        int scrollToOffset = getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
+        String restoredArticleNumber = savedInstanceState == null
+                ? null
+                : savedInstanceState.getString(STATE_CURRENT_ARTICLE_NUMBER);
+        Article restoredArticle = findArticleInTrackedBlock(restoredArticleNumber);
+        int scrollToOffset = restoredArticle != null
+                ? restoredArticle.offsetInBlock
+                : getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
         if (scrollToOffset >= 0) {
-            scrollToOffset(contentView, scrollToOffset);
+            Article directArticle = restoredArticle != null
+                    ? restoredArticle
+                    : (trackedArticleBlock == null
+                    ? null
+                    : VisibleArticleResolver.findAtOffset(trackedArticleBlock, scrollToOffset));
+            scrollToOffset(contentView, scrollToOffset, directArticle);
         } else {
             contentView.post(this::scheduleVisibleArticleRegistration);
         }
@@ -139,6 +168,18 @@ public class SectionContentActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         applyKeepScreenOnPreference();
+        renderCurrentArticleState();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Article article = currentVisibleArticle != null
+                ? currentVisibleArticle
+                : findCurrentlyVisibleArticle();
+        if (article != null) {
+            outState.putString(STATE_CURRENT_ARTICLE_NUMBER, article.number);
+        }
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -170,7 +211,11 @@ public class SectionContentActivity extends AppCompatActivity {
     }
 
     /** Desplaza el contenido hasta el offset de carácter indicado (ej. inicio de un artículo). */
-    private void scrollToOffset(TextView contentView, int offset) {
+    private void scrollToOffset(
+            TextView contentView,
+            int offset,
+            @Nullable Article expectedArticle
+    ) {
         ScrollView scrollView = findViewById(R.id.scrollViewContent);
         if (scrollView == null) {
             return;
@@ -182,7 +227,11 @@ public class SectionContentActivity extends AppCompatActivity {
             }
             int clamped = Math.max(0, Math.min(offset, contentView.getText().length() - 1));
             int line = layout.getLineForOffset(clamped);
-            scrollView.smoothScrollTo(0, contentView.getTop() + layout.getLineTop(line));
+            preferredProgrammaticArticle = expectedArticle;
+            scrollView.scrollTo(0, contentView.getTop() + layout.getLineTop(line));
+            if (expectedArticle != null) {
+                applyCurrentVisibleArticle(expectedArticle, false);
+            }
             scheduleVisibleArticleRegistration();
         });
     }
@@ -202,6 +251,19 @@ public class SectionContentActivity extends AppCompatActivity {
                 scheduleVisibleArticleRegistration());
     }
 
+    @Nullable
+    private Article findArticleInTrackedBlock(@Nullable String articleNumber) {
+        if (articleNumber == null || trackedArticleBlock == null) {
+            return null;
+        }
+        for (Article article : trackedArticleBlock.articles) {
+            if (article.number.equals(articleNumber)) {
+                return article;
+            }
+        }
+        return null;
+    }
+
     private void scheduleVisibleArticleRegistration() {
         if (trackedContentView == null) {
             return;
@@ -212,9 +274,19 @@ public class SectionContentActivity extends AppCompatActivity {
 
     private void updateCurrentlyVisibleArticle() {
         Article article = findCurrentlyVisibleArticle();
+        applyCurrentVisibleArticle(article, true);
+    }
+
+    private void applyCurrentVisibleArticle(
+            @Nullable Article article,
+            boolean recordHistory
+    ) {
         currentVisibleArticle = article;
-        updateArticleActionState();
-        if (article != null && readingHistoryManager != null) {
+        currentSequence = article == null
+                ? null
+                : ArticleSequenceResolver.resolve(this, article.number);
+        renderCurrentArticleState();
+        if (recordHistory && article != null && readingHistoryManager != null) {
             readingHistoryManager.recordArticle(article.number, article.title);
         }
     }
@@ -232,34 +304,224 @@ public class SectionContentActivity extends AppCompatActivity {
         int line = layout.getLineForVertical(vertical);
         int characterOffset = layout.getLineStart(line);
 
-        return VisibleArticleResolver.findAtOffset(trackedArticleBlock, characterOffset);
+        Article detected = VisibleArticleResolver.findAtOffset(trackedArticleBlock, characterOffset);
+        if (preferredProgrammaticArticle != null) {
+            if (preferredProgrammaticArticle == detected) {
+                preferredProgrammaticArticle = null;
+            } else if (isArticleHeaderVisible(preferredProgrammaticArticle, layout)) {
+                return preferredProgrammaticArticle;
+            } else {
+                preferredProgrammaticArticle = null;
+            }
+        }
+        return detected;
+    }
+
+    /** Mantiene un destino explícito en el encabezado cuando el final del bloque impide alinearlo arriba. */
+    private boolean isArticleHeaderVisible(Article article, Layout layout) {
+        int textLength = trackedContentView.getText().length();
+        if (textLength == 0 || article.offsetInBlock >= textLength) {
+            return false;
+        }
+        int headerEnd = article.offsetInBlock + article.text.indexOf('\n');
+        if (headerEnd < article.offsetInBlock) {
+            headerEnd = article.offsetInBlock + article.text.length();
+        }
+        int startLine = layout.getLineForOffset(article.offsetInBlock);
+        int endOffset = Math.max(article.offsetInBlock,
+                Math.min(headerEnd, textLength - 1));
+        int endLine = layout.getLineForOffset(endOffset);
+        int headerTop = trackedContentView.getTop() + layout.getLineTop(startLine);
+        int headerBottom = trackedContentView.getTop() + layout.getLineBottom(endLine);
+        int viewportTop = trackedScrollView.getScrollY();
+        int viewportBottom = viewportTop + trackedScrollView.getHeight();
+        return headerBottom > viewportTop && headerTop < viewportBottom;
     }
 
     private void setupArticleActions() {
+        currentArticleNumberView = findViewById(R.id.currentArticleNumber);
+        currentArticleTitleView = findViewById(R.id.currentArticleTitle);
+        readingBottomBar = findViewById(R.id.readingBottomBar);
+        previousArticleButton = findViewById(R.id.btnPreviousArticle);
+        favoriteArticleButton = findViewById(R.id.btnFavoriteArticle);
+        articleNoteButton = findViewById(R.id.btnArticleNote);
         copyArticleButton = findViewById(R.id.btnCopyArticle);
         shareArticleButton = findViewById(R.id.btnShareArticle);
-        updateArticleActionState();
+        nextArticleButton = findViewById(R.id.btnNextArticle);
 
+        if (previousArticleButton != null) {
+            previousArticleButton.setOnClickListener(view -> navigateRelativeArticle(false));
+        }
+        if (favoriteArticleButton != null) {
+            favoriteArticleButton.setOnClickListener(view -> toggleCurrentArticleFavorite());
+        }
+        if (articleNoteButton != null) {
+            articleNoteButton.setOnClickListener(view -> openCurrentArticleNote());
+        }
         if (copyArticleButton != null) {
             copyArticleButton.setOnClickListener(view -> copyCurrentArticle());
         }
         if (shareArticleButton != null) {
             shareArticleButton.setOnClickListener(view -> shareCurrentArticle());
         }
+        if (nextArticleButton != null) {
+            nextArticleButton.setOnClickListener(view -> navigateRelativeArticle(true));
+        }
+        renderCurrentArticleState();
     }
 
-    private void updateArticleActionState() {
-        boolean enabled = currentVisibleArticle != null;
+    private void renderCurrentArticleState() {
+        Article article = currentVisibleArticle;
+        boolean available = article != null;
+        if (currentArticleNumberView != null) {
+            currentArticleNumberView.setVisibility(available ? View.VISIBLE : View.GONE);
+            if (available) {
+                currentArticleNumberView.setText(getString(
+                        R.string.article_number_format,
+                        article.number
+                ));
+            }
+        }
+        if (currentArticleTitleView != null) {
+            boolean hasTitle = available && !article.title.trim().isEmpty();
+            currentArticleTitleView.setVisibility(hasTitle ? View.VISIBLE : View.GONE);
+            if (hasTitle) {
+                currentArticleTitleView.setText(article.title);
+            }
+        }
+
+        boolean hasPrevious = currentSequence != null && currentSequence.previous != null;
+        boolean hasNext = currentSequence != null && currentSequence.next != null;
+        setEnabled(previousArticleButton, hasPrevious);
+        setEnabled(nextArticleButton, hasNext);
+        setEnabled(favoriteArticleButton, available);
+        setEnabled(articleNoteButton, available);
         if (copyArticleButton != null) {
-            copyArticleButton.setEnabled(enabled);
+            copyArticleButton.setEnabled(available);
         }
         if (shareArticleButton != null) {
-            shareArticleButton.setEnabled(enabled);
+            shareArticleButton.setEnabled(available);
         }
+
+        if (!available) {
+            if (favoriteArticleButton != null) {
+                favoriteArticleButton.setSelected(false);
+                favoriteArticleButton.setIconResource(R.drawable.baseline_star_border_24);
+            }
+            if (articleNoteButton != null) {
+                articleNoteButton.setSelected(false);
+            }
+            return;
+        }
+
+        boolean favorite = favoritesManager != null
+                && favoritesManager.isFavorite(ArticleFavorites.itemForArticle(article).getId());
+        if (favoriteArticleButton != null) {
+            favoriteArticleButton.setSelected(favorite);
+            favoriteArticleButton.setIconResource(favorite
+                    ? R.drawable.baseline_star_24
+                    : R.drawable.baseline_star_border_24);
+            favoriteArticleButton.setContentDescription(getString(
+                    favorite
+                            ? R.string.article_favorite_remove_description
+                            : R.string.article_favorite_add_description,
+                    article.number
+            ));
+        }
+
+        boolean hasQuickNote = highlightController != null
+                && highlightController.hasArticleQuickNote(article);
+        if (articleNoteButton != null) {
+            articleNoteButton.setSelected(hasQuickNote);
+            articleNoteButton.setContentDescription(getString(
+                    R.string.article_note_content_description,
+                    article.number
+            ));
+        }
+        if (shareArticleButton != null) {
+            shareArticleButton.setContentDescription(getString(
+                    R.string.article_share_dynamic_description,
+                    article.number
+            ));
+        }
+        if (previousArticleButton != null) {
+            previousArticleButton.setContentDescription(getString(
+                    R.string.article_previous_content_description,
+                    article.number
+            ));
+        }
+        if (nextArticleButton != null) {
+            nextArticleButton.setContentDescription(getString(
+                    R.string.article_next_content_description,
+                    article.number
+            ));
+        }
+        if (copyArticleButton != null) {
+            copyArticleButton.setContentDescription(getString(
+                    R.string.article_copy_dynamic_description,
+                    article.number
+            ));
+        }
+    }
+
+    private void setEnabled(@Nullable MaterialButton button, boolean enabled) {
+        if (button != null) {
+            button.setEnabled(enabled);
+        }
+    }
+
+    private void navigateRelativeArticle(boolean forward) {
+        ArticleRepository.Location target = currentSequence == null
+                ? null
+                : (forward ? currentSequence.next : currentSequence.previous);
+        if (target == null) {
+            return;
+        }
+
+        if (trackedArticleBlock != null
+                && trackedArticleBlock.key.equals(target.block.key)
+                && trackedContentView != null) {
+            scrollToOffset(trackedContentView, target.article.offsetInBlock, target.article);
+            return;
+        }
+
+        ArticleNavigationResolver.Target navigationTarget =
+                ArticleNavigationResolver.resolve(this, target.article.number);
+        if (navigationTarget != null) {
+            startActivity(navigationTarget.createIntent(this));
+            finish();
+        }
+    }
+
+    private void toggleCurrentArticleFavorite() {
+        synchronizeCurrentVisibleArticle();
+        Article article = currentVisibleArticle;
+        if (article == null || favoritesManager == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+
+        FavoriteItem item = ArticleFavorites.itemForArticle(article);
+        favoritesManager.toggle(item);
+        boolean favorite = favoritesManager.isFavorite(item.getId());
+        renderCurrentArticleState();
+        showReadingSnackbar(favorite
+                ? R.string.favorite_added_message
+                : R.string.favorite_removed_message);
+    }
+
+    private void openCurrentArticleNote() {
+        synchronizeCurrentVisibleArticle();
+        Article article = currentVisibleArticle;
+        if (article == null || highlightController == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+        highlightController.openArticleQuickNote(article);
     }
 
     private void copyCurrentArticle() {
-        updateCurrentlyVisibleArticle();
+        synchronizeCurrentVisibleArticle();
         Article article = currentVisibleArticle;
         if (article == null) {
             showArticleUnavailableFeedback();
@@ -275,15 +537,11 @@ public class SectionContentActivity extends AppCompatActivity {
         String formattedArticle = articleShareFormatter.format(article);
         String label = getString(R.string.article_clipboard_label, article.number);
         clipboard.setPrimaryClip(ClipData.newPlainText(label, formattedArticle));
-        Snackbar.make(
-                trackedContentView,
-                getString(R.string.article_copy_success, article.number),
-                Snackbar.LENGTH_SHORT
-        ).show();
+        showReadingSnackbar(getString(R.string.article_copy_success, article.number));
     }
 
     private void shareCurrentArticle() {
-        updateCurrentlyVisibleArticle();
+        synchronizeCurrentVisibleArticle();
         Article article = currentVisibleArticle;
         if (article == null) {
             showArticleUnavailableFeedback();
@@ -304,26 +562,29 @@ public class SectionContentActivity extends AppCompatActivity {
     }
 
     private void showArticleUnavailableFeedback() {
-        View feedbackAnchor = trackedContentView != null
-                ? trackedContentView
-                : findViewById(android.R.id.content);
-        Snackbar.make(
-                feedbackAnchor,
-                R.string.article_current_unavailable,
-                Snackbar.LENGTH_SHORT
-        ).show();
+        showReadingSnackbar(R.string.article_current_unavailable);
     }
 
-    /** Estrella de favorito y botón de tamaño de letra sobre la tarjeta del encabezado. */
-    private void setupHeaderActions(TextView contentView, @StringRes int textResId) {
-        ImageButton favoriteButton = findViewById(R.id.btnFavorito);
-        String nodeId = getIntent().getStringExtra(LegalHierarchyRepository.EXTRA_NODE_ID);
-        LegalHierarchyRepository.Node node = nodeId != null
-                ? LegalHierarchyRepository.findNodeById(nodeId)
-                : LegalHierarchyRepository.findNodeByTextRes(textResId);
-        NodeFavorites.bindToggle(favoriteButton, node);
+    private void synchronizeCurrentVisibleArticle() {
+        applyCurrentVisibleArticle(findCurrentlyVisibleArticle(), false);
+    }
 
-        ImageButton fontSizeButton = findViewById(R.id.btnTamanoLetra);
+    private void showReadingSnackbar(int messageRes) {
+        showReadingSnackbar(getString(messageRes));
+    }
+
+    private void showReadingSnackbar(String message) {
+        View feedbackAnchor = findViewById(android.R.id.content);
+        Snackbar snackbar = Snackbar.make(feedbackAnchor, message, Snackbar.LENGTH_SHORT);
+        if (readingBottomBar != null) {
+            snackbar.setAnchorView(readingBottomBar);
+        }
+        snackbar.show();
+    }
+
+    /** Acciones secundarias compactas del encabezado: Aa y Copiar. */
+    private void setupHeaderActions(TextView contentView) {
+        MaterialButton fontSizeButton = findViewById(R.id.btnTamanoLetra);
         if (fontSizeButton != null) {
             fontSizeButton.setOnClickListener(v -> showFontSizeDialog(contentView));
         }
@@ -331,6 +592,7 @@ public class SectionContentActivity extends AppCompatActivity {
 
     private void applyFontScale(TextView contentView, float scale) {
         contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, baseContentTextSizePx * scale);
+        scheduleVisibleArticleRegistration();
     }
 
     /** Diálogo de tamaño de letra; el cambio se aplica en vivo y queda guardado. */

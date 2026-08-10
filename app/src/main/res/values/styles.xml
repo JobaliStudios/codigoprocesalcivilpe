@@ -34,6 +34,20 @@
         <item name="android:textSize">@dimen/text_body_s</item>
     </style>
 
+    <style name="App.Button.ReadingAction" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textSize">@dimen/text_body_s</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingHorizontal">@dimen/space_xs</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/reading_action_tint</item>
+        <item name="iconGravity">top</item>
+        <item name="iconPadding">@dimen/space_xs</item>
+        <item name="iconTint">@color/reading_action_tint</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
     <style name="App.Text.Title.M" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
@@ -106,8 +120,6 @@
     </style>
 
     <style name="App.Text.LegalBody" parent="App.Text.Body">
-        <item name="android:lineSpacingExtra">@dimen/space_s</item>
-        <item name="android:lineSpacingMultiplier">1.15</item>
         <item name="android:maxWidth">@dimen/max_reading_line_width</item>
     </style>
 

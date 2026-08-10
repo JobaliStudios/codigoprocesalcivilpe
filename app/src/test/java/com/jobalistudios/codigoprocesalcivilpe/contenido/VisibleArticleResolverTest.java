@@ -2,6 +2,7 @@ package com.jobalistudios.codigoprocesalcivilpe.contenido;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 import android.content.Context;
 
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
+import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class VisibleArticleResolverTest {
@@ -29,6 +31,16 @@ public class VisibleArticleResolverTest {
     @Test
     public void offsetInsideAlphanumericArticle_resolvesExactStringNumber() {
         assertOffsetResolves("506-A");
+    }
+
+    @Test
+    public void offsetInsidePreamble_isNotTreatedAsAnArticle() {
+        Article article = new Article("1", "Título", "Artículo 1.- Título", 12);
+        ArticleBlock block = new ArticleBlock(
+                "bloque", "Preámbulo.\n", Collections.singletonList(article));
+
+        assertNull(VisibleArticleResolver.findAtOffset(block, 0));
+        assertEquals(article, VisibleArticleResolver.findAtOffset(block, 12));
     }
 
     private void assertOffsetResolves(String number) {

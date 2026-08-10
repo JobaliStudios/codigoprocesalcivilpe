@@ -40,6 +40,7 @@
     <dimen name="radius_l">16dp</dimen>
     <dimen name="elevation_card">4dp</dimen>
     <dimen name="stroke_width_thin">1dp</dimen>
+    <dimen name="reading_action_height">64dp</dimen>
 
     <!-- Reusable card anatomy -->
     <dimen name="home_card_margin_horizontal">8dp</dimen>

@@ -15,10 +15,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 
 import java.util.List;
 import java.util.UUID;
@@ -51,6 +54,7 @@ public class HighlightController {
     private final TextView textView;
     private final String blockKey;
     private final HighlightsManager manager;
+    private final ArticleQuickNotes articleQuickNotes;
     private final Runnable refreshText;
     private String selectedColor = "yellow";
 
@@ -60,6 +64,7 @@ public class HighlightController {
         this.textView = textView;
         this.blockKey = blockKey;
         this.manager = new HighlightsManager(context);
+        this.articleQuickNotes = new ArticleQuickNotes(context, blockKey);
         this.refreshText = refreshText;
 
         setupSelectionActions();
@@ -80,6 +85,21 @@ public class HighlightController {
             spannable.setSpan(new UserHighlightSpan(colorFor(highlight.getColorTag()), highlight.getId()),
                     range[0], range[1], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+    }
+
+    public boolean hasArticleQuickNote(@NonNull Article article) {
+        return articleQuickNotes.has(article);
+    }
+
+    /** Abre la nota rápida existente o crea una vinculada solo a la línea del encabezado. */
+    public void openArticleQuickNote(@NonNull Article article) {
+        Highlight existing = articleQuickNotes.get(article);
+        if (existing != null) {
+            showDetailDialog(existing);
+            return;
+        }
+        showCreateDialog(true, article.offsetInBlock,
+                article.offsetInBlock + firstLineLength(article.text), article);
     }
 
     private void setupSelectionActions() {
@@ -108,7 +128,7 @@ public class HighlightController {
                 if (start < 0 || start == end) {
                     return false;
                 }
-                showCreateDialog(item.getItemId() == MENU_NOTE, start, end);
+                showCreateDialog(item.getItemId() == MENU_NOTE, start, end, null);
                 mode.finish();
                 return true;
             }
@@ -156,7 +176,12 @@ public class HighlightController {
         }
     }
 
-    private void showCreateDialog(boolean withNote, int start, int end) {
+    private void showCreateDialog(
+            boolean withNote,
+            int start,
+            int end,
+            @Nullable Article quickNoteArticle
+    ) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_note, null);
         EditText etNote = view.findViewById(R.id.etNote);
         if (!withNote) {
@@ -171,7 +196,12 @@ public class HighlightController {
                 .setNegativeButton(R.string.highlight_cancel, null)
                 .setPositiveButton(R.string.highlight_accept, (d, which) -> {
                     String note = withNote ? etNote.getText().toString().trim() : null;
-                    saveNewHighlight(start, end, selectedColor, note);
+                    if (quickNoteArticle == null) {
+                        saveNewHighlight(start, end, selectedColor, note);
+                    } else {
+                        articleQuickNotes.save(quickNoteArticle, selectedColor, note);
+                        refreshText.run();
+                    }
                 })
                 .create();
 
@@ -256,6 +286,11 @@ public class HighlightController {
                 System.currentTimeMillis()
         ));
         refreshText.run();
+    }
+
+    private int firstLineLength(@NonNull String text) {
+        int newline = text.indexOf('\n');
+        return newline >= 0 ? newline : text.length();
     }
 
     private int colorFor(String tag) {

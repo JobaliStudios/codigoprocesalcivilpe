@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.text.Layout;
 import android.widget.ScrollView;
@@ -21,6 +22,7 @@ import com.google.android.material.button.MaterialButton;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleShareFormatter;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 
 import org.junit.After;
@@ -41,6 +43,9 @@ public class SectionContentActivityArticleActionsTest {
     @Before
     public void setUp() {
         application = ApplicationProvider.getApplicationContext();
+        application.getSharedPreferences(
+                "codigoprocesalcivil_favorites", Context.MODE_PRIVATE)
+                .edit().clear().commit();
         ClipboardManager clipboard = application.getSystemService(ClipboardManager.class);
         if (clipboard != null) {
             clipboard.clearPrimaryClip();
@@ -130,6 +135,64 @@ public class SectionContentActivityArticleActionsTest {
         assertFalse(secondCopy.contains("Artículo 560.-"));
     }
 
+    @Test
+    public void dynamicHeader_andSameBlockNavigation_followVisibleArticleImmediately() {
+        SectionContentActivity activity = launchArticle("564");
+        Article article564 = findArticle("564");
+        Article article565 = findArticle("565");
+        assertEquals(
+                ArticleRepository.findArticle(application, "564").get(0).block.key,
+                ArticleRepository.findArticle(application, "565").get(0).block.key
+        );
+
+        assertHeader(activity, article564);
+        MaterialButton previous = activity.findViewById(R.id.btnPreviousArticle);
+        MaterialButton next = activity.findViewById(R.id.btnNextArticle);
+        assertTrue(previous.isEnabled());
+        assertTrue(next.isEnabled());
+
+        next.performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+        assertHeader(activity, article565);
+
+        previous.performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+        assertHeader(activity, article564);
+    }
+
+    @Test
+    public void favoriteButton_tracksCurrentArticleInsteadOfNode() {
+        SectionContentActivity activity = launchArticle("564");
+        MaterialButton favorite = activity.findViewById(R.id.btnFavoriteArticle);
+        FavoritesManager manager = new FavoritesManager(application);
+
+        assertFalse(favorite.isSelected());
+        favorite.performClick();
+        assertTrue(favorite.isSelected());
+        assertTrue(manager.isFavorite("article:564"));
+
+        activity.findViewById(R.id.btnNextArticle).performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+        assertHeader(activity, findArticle("565"));
+        assertFalse(favorite.isSelected());
+        assertFalse(manager.isFavorite("article:565"));
+        assertTrue(manager.isFavorite("article:564"));
+    }
+
+    @Test
+    public void crossingBlockBoundary_startsResolvedDestinationAndFinishesReader() {
+        ArticleRepository.Location[] boundary = firstBlockBoundary();
+        SectionContentActivity activity = launchArticle(boundary[0].article.number);
+
+        activity.findViewById(R.id.btnNextArticle).performClick();
+
+        Intent started = Shadows.shadowOf(activity).getNextStartedActivity();
+        assertNotNull(started);
+        assertEquals(boundary[1].article.offsetInBlock, started.getIntExtra(
+                SectionContentActivity.EXTRA_SCROLL_TO_OFFSET, -1));
+        assertTrue(activity.isFinishing());
+    }
+
     private SectionContentActivity launchArticle(String number) {
         ArticleNavigationResolver.Target target =
                 ArticleNavigationResolver.resolve(application, number);
@@ -146,6 +209,30 @@ public class SectionContentActivityArticleActionsTest {
         ArticleRepository.Location location =
                 ArticleRepository.findArticle(application, number).get(0);
         return location.article;
+    }
+
+    private void assertHeader(SectionContentActivity activity, Article article) {
+        TextView number = activity.findViewById(R.id.currentArticleNumber);
+        TextView title = activity.findViewById(R.id.currentArticleTitle);
+        assertEquals(application.getString(R.string.article_number_format, article.number),
+                number.getText().toString());
+        assertEquals(article.title, title.getText().toString());
+    }
+
+    private ArticleRepository.Location[] firstBlockBoundary() {
+        ArticleRepository.Location previous = null;
+        for (com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock block
+                : ArticleRepository.getBlocks(application).values()) {
+            for (Article article : block.articles) {
+                ArticleRepository.Location current =
+                        ArticleRepository.findArticle(application, article.number).get(0);
+                if (previous != null && !previous.block.key.equals(current.block.key)) {
+                    return new ArticleRepository.Location[]{previous, current};
+                }
+                previous = current;
+            }
+        }
+        throw new AssertionError("El repositorio no contiene un límite entre bloques");
     }
 
     private void scrollProbeInside(SectionContentActivity activity, Article article) {

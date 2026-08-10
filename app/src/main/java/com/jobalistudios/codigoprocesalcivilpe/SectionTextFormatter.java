@@ -30,7 +30,10 @@ public final class SectionTextFormatter {
         int colorArticulo = ContextCompat.getColor(context, R.color.article_title_color);
         int colorModificado = ContextCompat.getColor(context, R.color.modified_article_color);
 
-        Pattern articlePattern = Pattern.compile("^Artículo\\s+\\d+\\s*.-\\s*[^\\n]+", Pattern.MULTILINE);
+        Pattern articlePattern = Pattern.compile(
+                "^Artículo\\s+\\d+(?:-[A-Z])?\\s*\\.\\s*-\\s*[^\\n]+",
+                Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
+        );
         Matcher articleMatcher = articlePattern.matcher(fullText);
         while (articleMatcher.find()) {
             int start = articleMatcher.start();

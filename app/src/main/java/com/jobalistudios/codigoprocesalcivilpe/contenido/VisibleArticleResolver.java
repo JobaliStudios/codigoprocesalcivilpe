@@ -14,7 +14,12 @@ public final class VisibleArticleResolver {
             return null;
         }
 
-        Article visible = block.articles.get(0);
+        Article first = block.articles.get(0);
+        if (characterOffset < first.offsetInBlock) {
+            return null;
+        }
+
+        Article visible = first;
         for (Article article : block.articles) {
             if (article.offsetInBlock > characterOffset) {
                 break;
