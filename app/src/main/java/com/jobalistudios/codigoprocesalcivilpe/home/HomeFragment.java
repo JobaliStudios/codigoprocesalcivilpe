@@ -5,137 +5,149 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
-import com.google.android.material.card.MaterialCardView;
-import com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigoProcesalCivilMain;
-import com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizzCPCStartScreen;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentHomeBinding;
-import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
-import com.jobalistudios.codigoprocesalcivilpe.historial.RecentArticle;
+import com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigoProcesalCivilMain;
+import com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizzCPCStartScreen;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private ReadingHistoryManager readingHistoryManager;
+    private HomeDashboardStateBuilder stateBuilder;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
+    ) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        readingHistoryManager = new ReadingHistoryManager(requireContext());
-
-        MaterialCardView cardProcesal = root.findViewById(R.id.card_codigos);
-        cardProcesal.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), CodigoProcesalCivilMain.class);
-            startActivity(intent);
-        });
-
-        MaterialCardView cardQuizzes = root.findViewById(R.id.card_quizzes);
-        cardQuizzes.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), QuizzCPCStartScreen.class);
-            startActivity(intent);
-        });
-        return root;
+        stateBuilder = new HomeDashboardStateBuilder(requireContext());
+        configureActions();
+        return binding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        renderReadingHistory();
+        renderDashboard(stateBuilder.build());
     }
 
-    private void renderReadingHistory() {
+    private void configureActions() {
+        binding.buttonConsultarCodigo.setOnClickListener(view -> openCode());
+        binding.buttonExploreCode.setOnClickListener(view -> openCode());
+        binding.buttonPracticeQuiz.setOnClickListener(view -> startActivity(
+                new Intent(requireContext(), QuizzCPCStartScreen.class)));
+        binding.buttonViewAllFavorites.setOnClickListener(view ->
+                Navigation.findNavController(view).navigate(R.id.navigation_favoritos));
+    }
+
+    private void openCode() {
+        startActivity(new Intent(requireContext(), CodigoProcesalCivilMain.class));
+    }
+
+    private void renderDashboard(HomeDashboardState state) {
         if (binding == null) {
             return;
         }
-
-        List<RecentArticle> validArticles = new ArrayList<>();
-        List<ArticleNavigationResolver.Target> targets = new ArrayList<>();
-        for (RecentArticle recent : readingHistoryManager.getRecentArticles()) {
-            ArticleNavigationResolver.Target target =
-                    ArticleNavigationResolver.resolve(requireContext(), recent.getNumber());
-            if (target == null) {
-                readingHistoryManager.removeArticle(recent.getNumber());
-                continue;
-            }
-            validArticles.add(recent);
-            targets.add(target);
-        }
-
-        if (validArticles.isEmpty()) {
-            binding.readingHistorySection.setVisibility(View.GONE);
-            binding.recentArticlesContainer.removeAllViews();
-            return;
-        }
-
-        binding.readingHistorySection.setVisibility(View.VISIBLE);
-        bindContinueReading(validArticles.get(0), targets.get(0));
-        bindRecentArticles(validArticles, targets);
+        renderReadingHistory(state);
+        renderRecentFavorites(state.recentFavorites);
     }
 
-    private void bindContinueReading(RecentArticle recent, ArticleNavigationResolver.Target target) {
-        String title = displayTitle(recent, target);
+    private void renderReadingHistory(HomeDashboardState state) {
+        boolean hasContinueReading = state.continueReading != null;
+        boolean hasRecentlyViewed = !state.recentlyViewed.isEmpty();
+        binding.readingHistorySection.setVisibility(
+                hasContinueReading || hasRecentlyViewed ? View.VISIBLE : View.GONE);
+        binding.continueReadingSection.setVisibility(
+                hasContinueReading ? View.VISIBLE : View.GONE);
+        binding.recentlyViewedSection.setVisibility(
+                hasRecentlyViewed ? View.VISIBLE : View.GONE);
+
+        if (state.continueReading != null) {
+            bindContinueReading(state.continueReading);
+        }
+        bindArticleRows(
+                binding.recentArticlesContainer,
+                state.recentlyViewed,
+                false
+        );
+    }
+
+    private void bindContinueReading(HomeDashboardState.ArticleEntry article) {
         binding.continueArticleNumber.setText(
-                getString(R.string.article_number_format, target.getNumber()));
-        bindOptionalTitle(binding.continueArticleTitle, title);
-        binding.cardContinueReading.setContentDescription(
-                articleContentDescription(target.getNumber(), title));
-        binding.cardContinueReading.setOnClickListener(v -> openArticle(target.getNumber()));
+                getString(R.string.article_number_format, article.number));
+        bindOptionalTitle(binding.continueArticleTitle, article.title);
+        binding.cardContinueReading.setContentDescription(getString(
+                R.string.home_continue_article_description,
+                accessibleArticleLabel(article)
+        ));
+        binding.cardContinueReading.setOnClickListener(view -> openArticle(article.number));
     }
 
-    private void bindRecentArticles(List<RecentArticle> recent,
-                                    List<ArticleNavigationResolver.Target> targets) {
-        binding.recentArticlesContainer.removeAllViews();
+    private void renderRecentFavorites(List<HomeDashboardState.ArticleEntry> favorites) {
+        boolean empty = favorites.isEmpty();
+        binding.favoriteArticlesContainer.setVisibility(empty ? View.GONE : View.VISIBLE);
+        binding.favoritesEmptyState.setVisibility(empty ? View.VISIBLE : View.GONE);
+        bindArticleRows(binding.favoriteArticlesContainer, favorites, true);
+    }
+
+    private void bindArticleRows(
+            ViewGroup container,
+            List<HomeDashboardState.ArticleEntry> articles,
+            boolean favorite
+    ) {
+        container.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(requireContext());
-        for (int index = 0; index < recent.size(); index++) {
-            ArticleNavigationResolver.Target target = targets.get(index);
-            String title = displayTitle(recent.get(index), target);
-            View item = inflater.inflate(R.layout.item_recent_article,
-                    binding.recentArticlesContainer, false);
-            TextView numberView = item.findViewById(R.id.recent_article_number);
-            TextView titleView = item.findViewById(R.id.recent_article_title);
-            numberView.setText(getString(R.string.article_number_format, target.getNumber()));
-            bindOptionalTitle(titleView, title);
-            item.setContentDescription(articleContentDescription(target.getNumber(), title));
-            item.setOnClickListener(v -> openArticle(target.getNumber()));
-            binding.recentArticlesContainer.addView(item);
+        for (HomeDashboardState.ArticleEntry article : articles) {
+            View item = inflater.inflate(R.layout.item_recent_article, container, false);
+            ImageView icon = item.findViewById(R.id.dashboard_article_icon);
+            TextView number = item.findViewById(R.id.dashboard_article_number);
+            TextView title = item.findViewById(R.id.dashboard_article_title);
+            icon.setImageResource(favorite
+                    ? R.drawable.baseline_star_24
+                    : R.drawable.baseline_history_24);
+            number.setText(getString(R.string.article_number_format, article.number));
+            bindOptionalTitle(title, article.title);
+            item.setContentDescription(getString(
+                    favorite
+                            ? R.string.home_open_favorite_article_description
+                            : R.string.home_open_recent_article_description,
+                    accessibleArticleLabel(article)
+            ));
+            item.setOnClickListener(view -> openArticle(article.number));
+            container.addView(item);
         }
     }
 
     private void openArticle(String articleNumber) {
-        ArticleNavigationResolver.Target target =
-                ArticleNavigationResolver.resolve(requireContext(), articleNumber);
+        ArticleNavigationResolver.Target target = ArticleNavigationResolver.resolve(
+                requireContext(), articleNumber);
         if (target == null) {
-            readingHistoryManager.removeArticle(articleNumber);
-            renderReadingHistory();
+            renderDashboard(stateBuilder.build());
             return;
         }
         startActivity(target.createIntent(requireContext()));
     }
 
-    private String displayTitle(RecentArticle recent, ArticleNavigationResolver.Target target) {
-        return target.getTitle().isEmpty() ? recent.getTitle() : target.getTitle();
+    private String accessibleArticleLabel(HomeDashboardState.ArticleEntry article) {
+        String number = getString(R.string.article_number_format, article.number);
+        return article.title.isEmpty() ? number : number + ", " + article.title;
     }
 
     private void bindOptionalTitle(TextView view, String title) {
         view.setText(title);
         view.setVisibility(title.isEmpty() ? View.GONE : View.VISIBLE);
-    }
-
-    private String articleContentDescription(String number, String title) {
-        String article = getString(R.string.article_number_format, number);
-        return title.isEmpty() ? article : article + ". " + title;
     }
 
     @Override

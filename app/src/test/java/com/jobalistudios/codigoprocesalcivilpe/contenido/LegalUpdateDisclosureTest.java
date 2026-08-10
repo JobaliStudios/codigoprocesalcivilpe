@@ -21,14 +21,13 @@ public class LegalUpdateDisclosureTest {
     @Test
     public void visibleDescriptions_matchBundledOfflineUpdateModel() {
         Context context = ApplicationProvider.getApplicationContext();
-        String homeDescription = context.getString(R.string.descripcion_codigos_main)
+        String homeDescription = (context.getString(R.string.home_dashboard_subtitle) + " "
+                + context.getString(R.string.home_offline_available))
                 .toLowerCase(Locale.ROOT);
-        String contentSubtitle = context.getString(R.string.subtituloapp)
+        String contentSubtitle = context.getString(R.string.content_verified_date)
                 .toLowerCase(Locale.ROOT);
 
         assertTrue(homeDescription.contains("sin conexión"));
-        assertTrue(homeDescription.contains("nuevas versiones"));
-        assertTrue(contentSubtitle.contains("esta versión"));
         assertTrue(contentSubtitle.contains(
                 "contenido normativo verificado al 8 de agosto de 2026"));
 

@@ -9,6 +9,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.LongSupplier;
 
 public class FavoritesManager {
     private static final String PREFS_NAME = "codigoprocesalcivil_favorites";
@@ -16,11 +17,17 @@ public class FavoritesManager {
 
     private final Context appContext;
     private final SharedPreferences sharedPreferences;
+    private final LongSupplier clock;
 
     public FavoritesManager(Context context) {
+        this(context, System::currentTimeMillis);
+    }
+
+    FavoritesManager(Context context, LongSupplier clock) {
         appContext = context.getApplicationContext();
         sharedPreferences = appContext
                 .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        this.clock = clock;
     }
 
     public List<FavoriteItem> getAll() {
@@ -56,7 +63,11 @@ public class FavoritesManager {
             return;
         }
         try {
-            array.put(item.toJson());
+            FavoriteItem storedItem = item.getDestinationId()
+                    .startsWith(FavoriteDestinationMapper.ARTICLE_PREFIX)
+                    ? item.withAddedAt(clock.getAsLong())
+                    : item;
+            array.put(storedItem.toJson());
             saveArray(array);
         } catch (JSONException ignored) {
         }

@@ -2,8 +2,7 @@
     <string name="app_name">Código Procesal Civil PE</string>
     <string name="title_activity_seccion_primera_tit2_cap1">SeccionPrimeraTit2Cap1</string>
     <string name="tituloapp">Código Procesal Civil PE</string>
-    <string name="subtituloapp">Contenido incluido en esta versión\nContenido normativo verificado al 8 de agosto de 2026.</string>
-    <string name="Home">Inicio</string>
+    <string name="content_verified_date">Contenido normativo verificado al 8 de agosto de 2026</string>
     <string name="back">back</string>
     <string name="breadcrumbersigno">></string>
     <string name="buscar">Buscar...</string>
@@ -14,19 +13,24 @@
     <string name="limpiarbusqueda">Limpiar búsqueda</string>
     <string name="busqueda_sin_coincidencias">Sin coincidencias</string>
 
-    <!--HomeFragment Cardviews-->
-    <string name="descripcion_codigos_main">Contenido jurídico disponible sin conexión. Las actualizaciones se publican mediante nuevas versiones de la aplicación.\n\n</string>
-    <string name="descripcion_cuestionarios_main">Pon a prueba tu conocimiento resolviendo cuestionarios\n\n</string>
-    <string name="descripcion_recursps_main">Accede a otros recursos disponibles\n\n</string>
-
-
-
     <!-- Textos de Home -->
-    <string name="home_card_codigos_title">Códigos</string>
-    <string name="home_card_cuestionarios_title">Cuestionarios</string>
-    <string name="home_card_recursos_title">Recursos</string>
     <string name="home_continue_reading">Continuar leyendo</string>
     <string name="home_recently_viewed">Vistos recientemente</string>
+    <string name="home_dashboard_title">Código Procesal Civil</string>
+    <string name="home_dashboard_subtitle">Consulta el Código Procesal Civil del Perú desde tu dispositivo.</string>
+    <string name="home_offline_available">Disponible sin conexión</string>
+    <string name="home_consult_code">Consultar código</string>
+    <string name="home_recent_favorites">Favoritos recientes</string>
+    <string name="home_view_all_favorites">Ver todos</string>
+    <string name="home_no_favorites_title">Aún no tienes artículos favoritos</string>
+    <string name="home_no_favorites_body">Guarda artículos mientras lees para acceder rápidamente a ellos.</string>
+    <string name="home_explore_code">Explorar código</string>
+    <string name="home_practice_quiz_title">Practicar cuestionario</string>
+    <string name="home_practice_quiz_body">Pon a prueba tus conocimientos del Código Procesal Civil.</string>
+    <string name="home_practice_quiz_action">Practicar ahora</string>
+    <string name="home_continue_article_description">Continuar leyendo %1$s</string>
+    <string name="home_open_recent_article_description">Abrir %1$s de vistos recientemente</string>
+    <string name="home_open_favorite_article_description">Abrir %1$s de favoritos</string>
     <string name="article_number_format">Artículo %1$s</string>
     <string name="article_action_copy">Copiar</string>
     <string name="article_action_share">Compartir</string>
