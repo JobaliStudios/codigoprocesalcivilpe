@@ -1,6 +1,7 @@
 package com.jobalistudios.codigoprocesalcivilpe;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,8 +50,14 @@ public class SplashScreen extends AppCompatActivity {
             return;
         }
         navigated = true;
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, destinationFor(this)));
         finish(); // Cierra la actividad Splash para que no se pueda volver atrás
+    }
+
+    static Class<?> destinationFor(Context context) {
+        return OnboardingPreferences.shouldShow(context)
+                ? OnboardingActivity.class
+                : MainActivity.class;
     }
 
     @Override

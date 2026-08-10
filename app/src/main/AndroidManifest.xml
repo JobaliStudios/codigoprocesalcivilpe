@@ -37,6 +37,10 @@
             android:label="@string/title_activity_main2" />
 
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".home.Codigos.CodigosMain"
             android:exported="false" />
         <activity

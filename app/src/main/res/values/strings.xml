@@ -13,6 +13,18 @@
     <string name="limpiarbusqueda">Limpiar búsqueda</string>
     <string name="busqueda_sin_coincidencias">Sin coincidencias</string>
 
+    <!-- Onboarding de primera apertura -->
+    <string name="onboarding_offline_title">Consulta sin conexión</string>
+    <string name="onboarding_offline_body">Accede al Código Procesal Civil desde tu dispositivo incluso cuando no tengas conexión a Internet.</string>
+    <string name="onboarding_personalize_title">Guarda, resalta y añade notas</string>
+    <string name="onboarding_personalize_body">Marca tus artículos favoritos, resalta fragmentos importantes y añade notas personales mientras estudias.</string>
+    <string name="onboarding_search_title">Busca cualquier artículo</string>
+    <string name="onboarding_search_body">Encuentra artículos por número, título o palabras del contenido y abre directamente la coincidencia que necesitas.</string>
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_back">Atrás</string>
+    <string name="onboarding_start">Empezar</string>
+    <string name="onboarding_progress">Paso %1$d de %2$d</string>
+
     <!-- Textos de Home -->
     <string name="home_continue_reading">Continuar leyendo</string>
     <string name="home_recently_viewed">Vistos recientemente</string>
