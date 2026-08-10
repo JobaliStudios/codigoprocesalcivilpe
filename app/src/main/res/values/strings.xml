@@ -32,6 +32,10 @@
     <string name="home_open_recent_article_description">Abrir %1$s de vistos recientemente</string>
     <string name="home_open_favorite_article_description">Abrir %1$s de favoritos</string>
     <string name="article_number_format">Artículo %1$s</string>
+    <string name="article_status_repealed">DEROGADO</string>
+    <string name="article_status_repealed_description">Artículo %1$s derogado</string>
+    <string name="normative_callout_title_update">ACTUALIZACIÓN NORMATIVA</string>
+    <string name="normative_callout_title_repealed">DEROGACIÓN NORMATIVA</string>
     <string name="article_action_copy">Copiar</string>
     <string name="article_action_share">Compartir</string>
     <string name="reading_action_font_size">Aa</string>

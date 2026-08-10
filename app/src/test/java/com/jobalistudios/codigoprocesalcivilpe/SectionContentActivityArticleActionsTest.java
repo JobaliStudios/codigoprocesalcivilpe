@@ -12,6 +12,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Layout;
+import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import androidx.core.content.IntentCompat;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleShareFormatter;
@@ -158,6 +160,32 @@ public class SectionContentActivityArticleActionsTest {
         previous.performClick();
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
         assertHeader(activity, article564);
+    }
+
+    @Test
+    public void repealedChip_appearsOnlyWhileArticle835IsCurrent() {
+        SectionContentActivity activity = launchArticle("834");
+        Chip statusChip = activity.findViewById(R.id.currentArticleStatusChip);
+        TextView title = activity.findViewById(R.id.currentArticleTitle);
+        MaterialButton next = activity.findViewById(R.id.btnNextArticle);
+
+        assertEquals(View.GONE, statusChip.getVisibility());
+
+        next.performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+        assertEquals("Artículo 835",
+                ((TextView) activity.findViewById(R.id.currentArticleNumber)).getText().toString());
+        assertEquals(View.VISIBLE, statusChip.getVisibility());
+        assertEquals("DEROGADO", statusChip.getText().toString());
+        assertEquals("Artículo 835 derogado", statusChip.getContentDescription().toString());
+        assertEquals(View.GONE, title.getVisibility());
+
+        next.performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+        assertEquals("Artículo 836",
+                ((TextView) activity.findViewById(R.id.currentArticleNumber)).getText().toString());
+        assertEquals(View.GONE, statusChip.getVisibility());
+        assertEquals(View.VISIBLE, title.getVisibility());
     }
 
     @Test

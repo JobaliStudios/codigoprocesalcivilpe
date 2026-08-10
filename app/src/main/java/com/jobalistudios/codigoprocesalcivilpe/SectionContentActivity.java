@@ -25,10 +25,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceManager;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleLegalStatusResolver;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleSequenceResolver;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleShareFormatter;
@@ -78,6 +80,7 @@ public class SectionContentActivity extends AppCompatActivity {
     private FavoritesManager favoritesManager;
     private TextView currentArticleNumberView;
     private TextView currentArticleTitleView;
+    private Chip currentArticleStatusChip;
     private View readingBottomBar;
     private MaterialButton previousArticleButton;
     private MaterialButton favoriteArticleButton;
@@ -342,6 +345,7 @@ public class SectionContentActivity extends AppCompatActivity {
     private void setupArticleActions() {
         currentArticleNumberView = findViewById(R.id.currentArticleNumber);
         currentArticleTitleView = findViewById(R.id.currentArticleTitle);
+        currentArticleStatusChip = findViewById(R.id.currentArticleStatusChip);
         readingBottomBar = findViewById(R.id.readingBottomBar);
         previousArticleButton = findViewById(R.id.btnPreviousArticle);
         favoriteArticleButton = findViewById(R.id.btnFavoriteArticle);
@@ -374,6 +378,7 @@ public class SectionContentActivity extends AppCompatActivity {
     private void renderCurrentArticleState() {
         Article article = currentVisibleArticle;
         boolean available = article != null;
+        boolean repealed = ArticleLegalStatusResolver.isRepealed(article);
         if (currentArticleNumberView != null) {
             currentArticleNumberView.setVisibility(available ? View.VISIBLE : View.GONE);
             if (available) {
@@ -383,8 +388,14 @@ public class SectionContentActivity extends AppCompatActivity {
                 ));
             }
         }
+        if (currentArticleStatusChip != null) {
+            currentArticleStatusChip.setVisibility(repealed ? View.VISIBLE : View.GONE);
+            currentArticleStatusChip.setContentDescription(repealed
+                    ? getString(R.string.article_status_repealed_description, article.number)
+                    : null);
+        }
         if (currentArticleTitleView != null) {
-            boolean hasTitle = available && !article.title.trim().isEmpty();
+            boolean hasTitle = available && !repealed && !article.title.trim().isEmpty();
             currentArticleTitleView.setVisibility(hasTitle ? View.VISIBLE : View.GONE);
             if (hasTitle) {
                 currentArticleTitleView.setText(article.title);

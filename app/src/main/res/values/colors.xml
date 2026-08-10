@@ -38,6 +38,16 @@
     <color name="article_title_color">#fc0405</color>
     <color name="modified_article_color">#2a30d5</color>
 
+    <!-- Presentación normativa: aliases semánticos que heredan sus variantes nocturnas. -->
+    <color name="legal_update_background">@color/colorSurfaceVariant</color>
+    <color name="legal_update_border">@color/colorPrimary</color>
+    <color name="legal_update_title">@color/colorOnPrimaryContainer</color>
+    <color name="legal_update_summary">@color/colorPrimary</color>
+    <color name="legal_update_text">@color/colorOnSurface</color>
+    <color name="legal_status_repealed_background">@color/colorPrimaryContainer</color>
+    <color name="legal_status_repealed_text">@color/colorOnPrimaryContainer</color>
+    <color name="legal_status_repealed_border">@color/colorSecondary</color>
+
     <color name="edit_text_text_color_dark">#FFFFFF</color>
     <color name="edit_text_hint_color_dark">#BDBDBD</color>
     <color name="edit_text_icon_color_dark">#FFFFFF</color>

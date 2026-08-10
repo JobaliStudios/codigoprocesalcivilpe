@@ -123,6 +123,16 @@
         <item name="android:maxWidth">@dimen/max_reading_line_width</item>
     </style>
 
+    <style name="App.Chip.LegalStatus" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/legal_status_repealed_background</item>
+        <item name="chipStrokeColor">@color/legal_status_repealed_border</item>
+        <item name="chipStrokeWidth">@dimen/stroke_width_thin</item>
+        <item name="chipMinHeight">28dp</item>
+        <item name="android:textColor">@color/legal_status_repealed_text</item>
+        <item name="android:textSize">@dimen/text_body_s</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="App.Text.Caption" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textSize">@dimen/text_caption</item>
         <item name="android:lineHeight">@dimen/line_height_caption</item>

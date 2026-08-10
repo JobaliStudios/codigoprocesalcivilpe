@@ -16,13 +16,19 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jobalistudios.codigoprocesalcivilpe.busqueda.SearchTextNormalizer;
-import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class SectionSearchController {
+
+    /** Marca solo resultados de búsqueda; permite retirar estos spans sin tocar otros fondos. */
+    public static final class SearchHighlightSpan extends BackgroundColorSpan {
+        public SearchHighlightSpan(int color) {
+            super(color);
+        }
+    }
 
     public interface FormattedTextProvider {
         SpannableString getFormattedText();
@@ -203,11 +209,12 @@ public class SectionSearchController {
     }
 
     private void clearPreviousSearchHighlights(SpannableString spannable) {
-        BackgroundColorSpan[] spans = spannable.getSpans(0, spannable.length(), BackgroundColorSpan.class);
-        for (BackgroundColorSpan span : spans) {
-            if (span instanceof HighlightController.UserHighlightSpan) {
-                continue; // los resaltados del usuario no son resultados de búsqueda
-            }
+        SearchHighlightSpan[] spans = spannable.getSpans(
+                0,
+                spannable.length(),
+                SearchHighlightSpan.class
+        );
+        for (SearchHighlightSpan span : spans) {
             spannable.removeSpan(span);
         }
         searchPositions.clear();
@@ -218,7 +225,7 @@ public class SectionSearchController {
     private void applySearchHighlight(SpannableString spannable, String query) {
         for (SearchTextNormalizer.Range range
                 : SearchTextNormalizer.findAll(spannable.toString(), query)) {
-            spannable.setSpan(new BackgroundColorSpan(Color.YELLOW), range.start, range.end,
+            spannable.setSpan(new SearchHighlightSpan(Color.YELLOW), range.start, range.end,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             searchPositions.add(range.start);
         }
