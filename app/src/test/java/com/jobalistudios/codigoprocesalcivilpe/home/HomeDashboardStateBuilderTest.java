@@ -99,6 +99,24 @@ public class HomeDashboardStateBuilderTest {
         assertEquals(Arrays.asList("647-A", "566-A", "506-A"), numbers(result));
     }
 
+    @Test
+    public void restoredFavorite_keepsItsOriginalPositionAmongRecentHomeFavorites() {
+        FavoritesManager manager = new FavoritesManager(context);
+        FavoriteItem article564 = article("564", 100L);
+        FavoriteItem article731 = article("731", 300L);
+        FavoriteItem article759 = article("759", 200L);
+        manager.restore(article564);
+        manager.restore(article731);
+        manager.restore(article759);
+        manager.remove(article564.getId());
+        manager.restore(article564);
+
+        assertEquals(
+                Arrays.asList("731", "759", "564"),
+                numbers(builder.resolveRecentFavorites(manager.getAll()))
+        );
+    }
+
     private FavoriteItem article(String number, long addedAt) {
         String destination = "article:" + number;
         return new FavoriteItem(

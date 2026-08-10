@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/App.Card.Recurrent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,55 +18,103 @@
         android:background="@drawable/bg_gradient_card"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/space_l">
+        android:padding="@dimen/space_m">
+
+        <ImageView
+            android:layout_width="@dimen/list_card_chevron_size"
+            android:layout_height="@dimen/list_card_chevron_size"
+            android:layout_gravity="top"
+            android:importantForAccessibility="no"
+            android:src="@drawable/baseline_star_24"
+            app:tint="@color/colorPrimary" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_s"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/favoriteTitle"
-                style="@style/App.Text.CardTitle"
+                style="@style/App.Text.Title.M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2" />
+                android:ellipsize="end"
+                android:maxLines="2"
+                tools:text="Artículo 564" />
 
             <TextView
                 android:id="@+id/favoriteType"
                 style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_xs" />
+                android:layout_marginTop="@dimen/space_xs"
+                tools:text="Sección" />
 
             <TextView
                 android:id="@+id/favoriteSubtitle"
                 style="@style/App.Text.CardBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:ellipsize="end"
+                android:maxLines="2"
+                tools:text="Acceso de oficio a información en línea" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/favoriteIndicators"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_s"
-                android:maxLines="3" />
+                android:visibility="gone"
+                app:chipSpacingHorizontal="@dimen/space_xs"
+                app:chipSpacingVertical="@dimen/space_xs"
+                app:singleLine="false"
+                tools:visibility="visible">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/favoriteNoteIndicator"
+                    style="@style/App.Chip.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:text="@string/favorite_indicator_note"
+                    android:visibility="gone"
+                    app:chipIcon="@drawable/baseline_note_24"
+                    tools:visibility="visible" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/favoriteHighlightIndicator"
+                    style="@style/App.Chip.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:text="@string/favorite_indicator_highlight"
+                    android:visibility="gone"
+                    app:chipIcon="@drawable/baseline_highlight_alt_24"
+                    tools:visibility="visible" />
+            </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
 
         <ImageView
             android:layout_width="@dimen/list_card_chevron_size"
             android:layout_height="@dimen/list_card_chevron_size"
             android:layout_marginStart="@dimen/space_s"
-            android:contentDescription="@string/open_favorite"
+            android:importantForAccessibility="no"
             android:src="@drawable/baseline_chevron_right_24"
             app:tint="@color/colorPrimary" />
 
         <ImageButton
             android:id="@+id/buttonRemoveFavorite"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="@dimen/home_card_icon_size"
+            android:layout_height="@dimen/home_card_icon_size"
             android:layout_marginStart="@dimen/space_xs"
-            android:background="@android:color/transparent"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/remove_favorite"
-            android:src="@drawable/baseline_favorite_24"
+            android:padding="@dimen/space_m"
+            android:src="@drawable/baseline_delete_outline_24"
             app:tint="@color/colorSecondary" />
-
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

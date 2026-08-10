@@ -1,100 +1,242 @@
 package com.jobalistudios.codigoprocesalcivilpe.favoritos;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
+import com.jobalistudios.codigoprocesalcivilpe.busqueda.SearchTextNormalizer;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
-public class FavoritosViewModel extends ViewModel {
+/** Fuente única para búsqueda, filtro, orden y presentación de Favoritos. */
+public class FavoritosViewModel extends AndroidViewModel {
+
+    public enum FilterMode {
+        ALL,
+        WITH_NOTES,
+        WITH_HIGHLIGHTS
+    }
 
     public enum SortMode {
-        RECIENTES,
-        SECCION,
-        TIPO
+        RECENT,
+        ARTICLE_NUMBER
     }
 
-    private static final String FILTER_ALL = "Todas";
+    private final ArticleUserContentResolver userContentResolver;
+    private final MutableLiveData<FavoritosUiState> uiState = new MutableLiveData<>();
+    private List<FavoriteItem> sourceFavorites = new ArrayList<>();
+    private List<FavoriteListItem> preparedFavorites = new ArrayList<>();
+    private String query = "";
+    private FilterMode filterMode = FilterMode.ALL;
+    private SortMode sortMode = SortMode.RECENT;
 
-    private final MutableLiveData<List<FavoriteItem>> favorites = new MutableLiveData<>(new ArrayList<>());
-    private final MutableLiveData<List<String>> sectionFilters = new MutableLiveData<>(new ArrayList<>());
-    private final MutableLiveData<String> selectedSection = new MutableLiveData<>(FILTER_ALL);
-    private final MutableLiveData<SortMode> sortMode = new MutableLiveData<>(SortMode.RECIENTES);
-
-    public LiveData<List<FavoriteItem>> getFavorites() {
-        return favorites;
+    public FavoritosViewModel(@NonNull Application application) {
+        this(application, new ArticleUserContentResolver(application));
     }
 
-    public LiveData<List<String>> getSectionFilters() {
-        return sectionFilters;
+    FavoritosViewModel(
+            @NonNull Application application,
+            @NonNull ArticleUserContentResolver userContentResolver
+    ) {
+        super(application);
+        this.userContentResolver = userContentResolver;
+        refreshState();
     }
 
-    public LiveData<String> getSelectedSection() {
-        return selectedSection;
+    @NonNull
+    public LiveData<FavoritosUiState> getUiState() {
+        return uiState;
     }
 
-    public LiveData<SortMode> getSortMode() {
-        return sortMode;
+    /** Refresca favoritos y metadatos personales; conserva query, filtro y orden actuales. */
+    public void setFavorites(@NonNull List<FavoriteItem> favorites) {
+        sourceFavorites = new ArrayList<>(favorites);
+        preparedFavorites = prepareFavorites(sourceFavorites);
+        refreshState();
     }
 
-    public void setFavorites(List<FavoriteItem> allFavorites) {
-        Set<String> sections = new LinkedHashSet<>();
-        sections.add(FILTER_ALL);
-        for (FavoriteItem item : allFavorites) {
-            sections.add(resolveSection(item));
-        }
-
-        String activeFilter = selectedSection.getValue() == null ? FILTER_ALL : selectedSection.getValue();
-        if (!sections.contains(activeFilter)) {
-            activeFilter = FILTER_ALL;
-            selectedSection.setValue(FILTER_ALL);
-        }
-
-        sectionFilters.setValue(new ArrayList<>(sections));
-
-        List<FavoriteItem> filtered = new ArrayList<>();
-        for (FavoriteItem item : allFavorites) {
-            if (FILTER_ALL.equals(activeFilter) || resolveSection(item).equals(activeFilter)) {
-                filtered.add(item);
-            }
-        }
-        favorites.setValue(filtered);
+    public void setQuery(String value) {
+        query = value == null ? "" : value;
+        refreshState();
     }
 
-    public void setSectionFilter(String section) {
-        selectedSection.setValue(section == null || section.isEmpty() ? FILTER_ALL : section);
+    public void setFilterMode(FilterMode mode) {
+        filterMode = mode == null ? FilterMode.ALL : mode;
+        refreshState();
     }
 
     public void setSortMode(SortMode mode) {
-        sortMode.setValue(mode == null ? SortMode.RECIENTES : mode);
+        sortMode = mode == null ? SortMode.RECENT : mode;
+        refreshState();
     }
 
-    public static String resolveSection(FavoriteItem item) {
-        if (item == null || item.getId() == null) {
-            return "Sin sección";
+    @NonNull
+    private List<FavoriteListItem> prepareFavorites(List<FavoriteItem> favorites) {
+        Map<String, ArticleReference> articleIndex = buildArticleIndex();
+        ArticleUserContentResolver.Session contentSession = userContentResolver.newSession();
+        List<FavoriteListItem> result = new ArrayList<>();
+        for (int position = 0; position < favorites.size(); position++) {
+            FavoriteItem favorite = favorites.get(position);
+            ArticleReference reference = resolveArticle(favorite, articleIndex);
+            ArticleUserContentState contentState = reference == null
+                    ? ArticleUserContentState.EMPTY
+                    : contentSession.resolve(reference.block, reference.article);
+            String searchable = favorite.getTitle() + " " + favorite.getSubtitle();
+            if (reference != null) {
+                searchable += " " + reference.article.number + " " + reference.article.title;
+            }
+            result.add(new FavoriteListItem(
+                    favorite,
+                    reference == null ? null : reference.article.number,
+                    contentState.hasNote(),
+                    contentState.hasHighlight(),
+                    reference == null ? Integer.MAX_VALUE : reference.legalOrder,
+                    position,
+                    SearchTextNormalizer.normalizePlain(searchable)
+            ));
         }
-        String id = item.getId().toLowerCase();
-        if (id.contains("primera")) return "Sección Primera";
-        if (id.contains("segunda")) return "Sección Segunda";
-        if (id.contains("tercera")) return "Sección Tercera";
-        if (id.contains("cuarta")) return "Sección Cuarta";
-        if (id.contains("quinta")) return "Sección Quinta";
-        if (id.contains("sexta")) return "Sección Sexta";
-        // Formato nuevo de favoritos: "node:sec_N_..."
-        int marker = id.indexOf("sec_");
-        if (marker >= 0 && marker + 4 < id.length()) {
-            switch (id.charAt(marker + 4)) {
-                case '1': return "Sección Primera";
-                case '2': return "Sección Segunda";
-                case '3': return "Sección Tercera";
-                case '4': return "Sección Cuarta";
-                case '5': return "Sección Quinta";
-                case '6': return "Sección Sexta";
+        return result;
+    }
+
+    @NonNull
+    private Map<String, ArticleReference> buildArticleIndex() {
+        Map<String, ArticleReference> result = new HashMap<>();
+        Set<String> ambiguousNumbers = new HashSet<>();
+        int legalOrder = 0;
+        for (ArticleBlock block : ArticleRepository.getBlocks(getApplication()).values()) {
+            for (Article article : block.articles) {
+                String number = article.number.toUpperCase(Locale.ROOT);
+                if (result.containsKey(number)) {
+                    result.remove(number);
+                    ambiguousNumbers.add(number);
+                } else if (!ambiguousNumbers.contains(number)) {
+                    result.put(number, new ArticleReference(block, article, legalOrder));
+                }
+                legalOrder++;
             }
         }
-        return "Sin sección";
+        return result;
+    }
+
+    private ArticleReference resolveArticle(
+            FavoriteItem favorite,
+            Map<String, ArticleReference> articleIndex
+    ) {
+        String destination = favorite.getDestinationId();
+        if (!destination.startsWith(FavoriteDestinationMapper.ARTICLE_PREFIX)) {
+            return null;
+        }
+        String number = destination.substring(FavoriteDestinationMapper.ARTICLE_PREFIX.length())
+                .trim().toUpperCase(Locale.ROOT);
+        return articleIndex.get(number);
+    }
+
+    private void refreshState() {
+        String normalizedQuery = SearchTextNormalizer.normalizePlain(query);
+        List<FavoriteListItem> visible = new ArrayList<>();
+        for (FavoriteListItem item : preparedFavorites) {
+            if (matchesFilter(item) && item.matchesQuery(normalizedQuery)) {
+                visible.add(item);
+            }
+        }
+        visible.sort(sortMode == SortMode.ARTICLE_NUMBER
+                ? ARTICLE_NUMBER_COMPARATOR
+                : RECENT_COMPARATOR);
+        uiState.setValue(new FavoritosUiState(
+                visible,
+                query,
+                filterMode,
+                sortMode,
+                resolveEmptyState(visible),
+                sourceFavorites.size()
+        ));
+    }
+
+    private boolean matchesFilter(FavoriteListItem item) {
+        if (filterMode == FilterMode.WITH_NOTES) {
+            return item.isArticle() && item.hasNote();
+        }
+        if (filterMode == FilterMode.WITH_HIGHLIGHTS) {
+            return item.isArticle() && item.hasHighlight();
+        }
+        return true;
+    }
+
+    @NonNull
+    private FavoritosUiState.EmptyState resolveEmptyState(List<FavoriteListItem> visible) {
+        if (!visible.isEmpty()) {
+            return FavoritosUiState.EmptyState.NONE;
+        }
+        if (sourceFavorites.isEmpty()) {
+            return FavoritosUiState.EmptyState.NO_FAVORITES;
+        }
+        if (!query.trim().isEmpty()) {
+            return FavoritosUiState.EmptyState.NO_QUERY_RESULTS;
+        }
+        if (filterMode == FilterMode.WITH_NOTES) {
+            return FavoritosUiState.EmptyState.NO_NOTES;
+        }
+        if (filterMode == FilterMode.WITH_HIGHLIGHTS) {
+            return FavoritosUiState.EmptyState.NO_HIGHLIGHTS;
+        }
+        return FavoritosUiState.EmptyState.NO_QUERY_RESULTS;
+    }
+
+    private static final Comparator<FavoriteListItem> RECENT_COMPARATOR = (first, second) -> {
+        long firstTime = first.getFavorite().getAddedAt();
+        long secondTime = second.getFavorite().getAddedAt();
+        boolean firstDated = firstTime > 0L;
+        boolean secondDated = secondTime > 0L;
+        if (firstDated != secondDated) {
+            return firstDated ? -1 : 1;
+        }
+        if (firstDated && firstTime != secondTime) {
+            return Long.compare(secondTime, firstTime);
+        }
+        return Integer.compare(first.getOriginalPosition(), second.getOriginalPosition());
+    };
+
+    private static final Comparator<FavoriteListItem> ARTICLE_NUMBER_COMPARATOR =
+            (first, second) -> {
+                if (first.isArticle() != second.isArticle()) {
+                    return first.isArticle() ? -1 : 1;
+                }
+                if (first.isArticle()) {
+                    int order = Integer.compare(first.getLegalOrder(), second.getLegalOrder());
+                    if (order != 0) {
+                        return order;
+                    }
+                }
+                int title = SearchTextNormalizer.normalizePlain(first.getFavorite().getTitle())
+                        .compareTo(SearchTextNormalizer.normalizePlain(
+                                second.getFavorite().getTitle()));
+                return title != 0
+                        ? title
+                        : Integer.compare(first.getOriginalPosition(), second.getOriginalPosition());
+            };
+
+    private static final class ArticleReference {
+        final ArticleBlock block;
+        final Article article;
+        final int legalOrder;
+
+        ArticleReference(ArticleBlock block, Article article, int legalOrder) {
+            this.block = block;
+            this.article = article;
+            this.legalOrder = legalOrder;
+        }
     }
 }

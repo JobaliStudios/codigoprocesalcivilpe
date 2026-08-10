@@ -693,6 +693,25 @@
     <string name="font_size_reset">Restablecer</string>
     <string name="undo_action">Deshacer</string>
     <string name="favorites_sort_label">Ordenar favoritos</string>
+    <string name="favorites_sort_prefix">Ordenar por:</string>
+    <string name="favorites_search_hint">Buscar por artículo o título</string>
+    <string name="favorites_filter_all">Todos</string>
+    <string name="favorites_filter_notes">Con notas</string>
+    <string name="favorites_filter_highlights">Con resaltados</string>
+    <string name="favorite_indicator_note">Nota</string>
+    <string name="favorite_indicator_highlight">Resaltado</string>
+    <string name="favorite_has_note">Tiene nota.</string>
+    <string name="favorite_has_highlight">Tiene resaltado.</string>
+    <string name="favorite_has_note_and_highlight">Tiene nota y resaltado.</string>
+    <string name="favorite_remove_dynamic">Quitar %1$s de favoritos</string>
+    <string name="favorites_empty_notes_title">No tienes favoritos con notas</string>
+    <string name="favorites_empty_notes_body">Añade una nota mientras lees un artículo para encontrarlo aquí.</string>
+    <string name="favorites_empty_highlights_title">No tienes favoritos con resaltados</string>
+    <string name="favorites_empty_highlights_body">Resalta fragmentos importantes mientras lees para encontrarlos aquí.</string>
+    <string name="favorites_empty_query_title">No encontramos favoritos para “%1$s”</string>
+    <string name="favorites_empty_query_body">Prueba con otro número de artículo o título.</string>
+    <string name="favorites_invalid_removed">Se eliminaron favoritos inválidos</string>
+    <string name="favorite_invalid_removed">Este favorito ya no es válido y fue eliminado</string>
     <string name="favorites_filter_section_label">Filtrar por sección</string>
     <string name="favorites_cta_explore">Explorar códigos</string>
     <string name="favorite_type_section">Sección</string>
@@ -701,8 +720,7 @@
 
     <string-array name="favorite_sort_options">
         <item>Más recientes</item>
-        <item>Sección</item>
-        <item>Tipo</item>
+        <item>Número de artículo</item>
     </string-array>
 
     <string name="section_default_label">Sección</string>

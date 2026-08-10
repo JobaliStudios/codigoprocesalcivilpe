@@ -129,6 +129,26 @@ public class FavoritesManagerTest {
         assertEquals(200L, manager.getAll().get(0).getAddedAt());
     }
 
+    @Test
+    public void restore_preservesOriginalAddedAtInsteadOfUsingCurrentClock() {
+        FavoritesManager manager = new FavoritesManager(context, () -> 9_999L);
+        FavoriteItem stored = new FavoriteItem(
+                "article:564", "Artículo 564", "Acceso de oficio", "Artículo",
+                "article:564", 1_234L);
+
+        manager.restore(stored);
+        manager.remove(stored.getId());
+        manager.restore(stored);
+
+        FavoriteItem restored = manager.getAll().get(0);
+        assertEquals(stored.getId(), restored.getId());
+        assertEquals(stored.getTitle(), restored.getTitle());
+        assertEquals(stored.getSubtitle(), restored.getSubtitle());
+        assertEquals(stored.getType(), restored.getType());
+        assertEquals(stored.getDestinationId(), restored.getDestinationId());
+        assertEquals(1_234L, restored.getAddedAt());
+    }
+
     private FavoriteItem createFavorite(String id) {
         return new FavoriteItem(id, "Título", "Subtítulo", "articulo", "seccion_primera_titulo_1");
     }

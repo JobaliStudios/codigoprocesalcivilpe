@@ -105,6 +105,19 @@ public class FavoritesManager {
         saveArray(updated);
     }
 
+    /** Restaura el registro eliminado sin convertirlo en un favorito recién creado. */
+    public void restore(FavoriteItem item) {
+        JSONArray array = getArray();
+        if (isFavorite(item.getId())) {
+            return;
+        }
+        try {
+            array.put(item.toJson());
+            saveArray(array);
+        } catch (JSONException ignored) {
+        }
+    }
+
     /** Elimina todos los favoritos guardados por el usuario. */
     public void clearAll() {
         sharedPreferences.edit().clear().apply();

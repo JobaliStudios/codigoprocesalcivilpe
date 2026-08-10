@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentFavoritosBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritosFragment extends Fragment {
@@ -26,27 +26,31 @@ public class FavoritosFragment extends Fragment {
     private FavoritesManager favoritesManager;
     private FavoritosAdapter adapter;
     private FavoritosViewModel viewModel;
-    private ArrayAdapter<String> sectionFilterAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
+    ) {
         binding = FragmentFavoritosBinding.inflate(inflater, container, false);
         favoritesManager = new FavoritesManager(requireContext());
         viewModel = new ViewModelProvider(this).get(FavoritosViewModel.class);
 
         setupRecycler();
-        setupSortAndFilters();
+        setupControls();
         setupObservers();
         setupCta();
         loadFavorites();
-
         return binding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadFavorites();
+        if (binding != null) {
+            loadFavorites();
+        }
     }
 
     private void setupRecycler() {
@@ -65,7 +69,39 @@ public class FavoritosFragment extends Fragment {
         binding.recyclerFavoritos.setAdapter(adapter);
     }
 
-    private void setupSortAndFilters() {
+    private void setupControls() {
+        FavoritosUiState currentState = viewModel.getUiState().getValue();
+        if (currentState != null) {
+            binding.favoriteSearchView.setQuery(currentState.query, false);
+            binding.favoriteFilterGroup.check(filterId(currentState.filterMode));
+        }
+        binding.favoriteSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                viewModel.setQuery(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                viewModel.setQuery(newText);
+                return true;
+            }
+        });
+
+        binding.favoriteFilterGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            int checkedId = checkedIds.isEmpty()
+                    ? R.id.favoriteFilterAll
+                    : checkedIds.get(0);
+            if (checkedId == R.id.favoriteFilterNotes) {
+                viewModel.setFilterMode(FavoritosViewModel.FilterMode.WITH_NOTES);
+            } else if (checkedId == R.id.favoriteFilterHighlights) {
+                viewModel.setFilterMode(FavoritosViewModel.FilterMode.WITH_HIGHLIGHTS);
+            } else {
+                viewModel.setFilterMode(FavoritosViewModel.FilterMode.ALL);
+            }
+        });
+
         ArrayAdapter<CharSequence> sortAdapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.favorite_sort_options,
@@ -73,62 +109,93 @@ public class FavoritosFragment extends Fragment {
         );
         sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerSort.setAdapter(sortAdapter);
-        binding.spinnerSort.setSelection(0, false);
+        if (currentState != null) {
+            binding.spinnerSort.setSelection(
+                    currentState.sortMode == FavoritosViewModel.SortMode.ARTICLE_NUMBER ? 1 : 0,
+                    false
+            );
+        }
         binding.spinnerSort.setOnItemSelectedListener(new SimpleItemSelectedListener() {
             @Override
             public void onItemSelected(int position) {
-                if (position == 1) {
-                    viewModel.setSortMode(FavoritosViewModel.SortMode.SECCION);
-                } else if (position == 2) {
-                    viewModel.setSortMode(FavoritosViewModel.SortMode.TIPO);
-                } else {
-                    viewModel.setSortMode(FavoritosViewModel.SortMode.RECIENTES);
-                }
-            }
-        });
-
-        sectionFilterAdapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                new ArrayList<>()
-        );
-        sectionFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinnerSectionFilter.setAdapter(sectionFilterAdapter);
-        binding.spinnerSectionFilter.setOnItemSelectedListener(new SimpleItemSelectedListener() {
-            @Override
-            public void onItemSelected(int position) {
-                if (position >= 0 && position < sectionFilterAdapter.getCount()) {
-                    viewModel.setSectionFilter(sectionFilterAdapter.getItem(position));
-                    loadFavorites();
-                }
+                viewModel.setSortMode(position == 1
+                        ? FavoritosViewModel.SortMode.ARTICLE_NUMBER
+                        : FavoritosViewModel.SortMode.RECENT);
             }
         });
     }
 
     private void setupObservers() {
-        viewModel.getFavorites().observe(getViewLifecycleOwner(), items -> {
-            adapter.submitList(items);
-            updateEmptyState(items.isEmpty());
-        });
-
-        viewModel.getSortMode().observe(getViewLifecycleOwner(), adapter::setSortMode);
-
-        viewModel.getSectionFilters().observe(getViewLifecycleOwner(), sections -> {
-            sectionFilterAdapter.clear();
-            sectionFilterAdapter.addAll(sections);
-            sectionFilterAdapter.notifyDataSetChanged();
-        });
-
-        viewModel.getSelectedSection().observe(getViewLifecycleOwner(), selected -> {
-            int index = sectionFilterAdapter.getPosition(selected);
-            if (index >= 0 && binding.spinnerSectionFilter.getSelectedItemPosition() != index) {
-                binding.spinnerSectionFilter.setSelection(index, false);
-            }
+        viewModel.getUiState().observe(getViewLifecycleOwner(), state -> {
+            adapter.submitList(state.visibleItems);
+            renderControls(state);
+            renderEmptyState(state);
         });
     }
 
+    private void renderControls(FavoritosUiState state) {
+        if (!binding.favoriteSearchView.getQuery().toString().equals(state.query)) {
+            binding.favoriteSearchView.setQuery(state.query, false);
+        }
+        int filterId = filterId(state.filterMode);
+        if (binding.favoriteFilterGroup.getCheckedChipId() != filterId) {
+            binding.favoriteFilterGroup.check(filterId);
+        }
+        int sortPosition = state.sortMode == FavoritosViewModel.SortMode.ARTICLE_NUMBER ? 1 : 0;
+        if (binding.spinnerSort.getSelectedItemPosition() != sortPosition) {
+            binding.spinnerSort.setSelection(sortPosition, false);
+        }
+    }
+
+    private int filterId(FavoritosViewModel.FilterMode mode) {
+        if (mode == FavoritosViewModel.FilterMode.WITH_NOTES) {
+            return R.id.favoriteFilterNotes;
+        }
+        if (mode == FavoritosViewModel.FilterMode.WITH_HIGHLIGHTS) {
+            return R.id.favoriteFilterHighlights;
+        }
+        return R.id.favoriteFilterAll;
+    }
+
+    private void renderEmptyState(FavoritosUiState state) {
+        boolean empty = state.emptyState != FavoritosUiState.EmptyState.NONE;
+        binding.emptyStateFavoritos.setVisibility(empty ? View.VISIBLE : View.GONE);
+        binding.recyclerFavoritos.setVisibility(empty ? View.GONE : View.VISIBLE);
+        if (!empty) {
+            return;
+        }
+
+        int titleRes;
+        int bodyRes;
+        if (state.emptyState == FavoritosUiState.EmptyState.NO_NOTES) {
+            titleRes = R.string.favorites_empty_notes_title;
+            bodyRes = R.string.favorites_empty_notes_body;
+        } else if (state.emptyState == FavoritosUiState.EmptyState.NO_HIGHLIGHTS) {
+            titleRes = R.string.favorites_empty_highlights_title;
+            bodyRes = R.string.favorites_empty_highlights_body;
+        } else if (state.emptyState == FavoritosUiState.EmptyState.NO_QUERY_RESULTS) {
+            binding.textEmptyFavoritosTitle.setText(getString(
+                    R.string.favorites_empty_query_title,
+                    state.query.trim()
+            ));
+            binding.textFavoritos.setText(R.string.favorites_empty_query_body);
+            binding.buttonExplorarCodigos.setVisibility(View.GONE);
+            return;
+        } else {
+            titleRes = R.string.favorites_empty_title;
+            bodyRes = R.string.no_favorites;
+        }
+        binding.textEmptyFavoritosTitle.setText(titleRes);
+        binding.textFavoritos.setText(bodyRes);
+        binding.buttonExplorarCodigos.setVisibility(
+                state.emptyState == FavoritosUiState.EmptyState.NO_FAVORITES
+                        ? View.VISIBLE
+                        : View.GONE
+        );
+    }
+
     private void setupCta() {
-        binding.buttonExplorarCodigos.setOnClickListener(v ->
+        binding.buttonExplorarCodigos.setOnClickListener(view ->
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main)
                         .navigate(R.id.navigation_home)
         );
@@ -137,9 +204,12 @@ public class FavoritosFragment extends Fragment {
     private void loadFavorites() {
         boolean removedCorrupted = favoritesManager.removeInvalidFavorites();
         if (removedCorrupted) {
-            Toast.makeText(requireContext(), "Se eliminaron favoritos inválidos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    requireContext(),
+                    R.string.favorites_invalid_removed,
+                    Toast.LENGTH_SHORT
+            ).show();
         }
-
         List<FavoriteItem> items = favoritesManager.getAll();
         viewModel.setFavorites(items);
     }
@@ -150,26 +220,25 @@ public class FavoritosFragment extends Fragment {
 
         Snackbar.make(binding.getRoot(), R.string.favorite_removed_message, Snackbar.LENGTH_LONG)
                 .setAction(R.string.undo_action, view -> {
-                    favoritesManager.add(item);
+                    favoritesManager.restore(item);
                     loadFavorites();
                 })
                 .show();
     }
 
-    private void updateEmptyState(boolean isEmpty) {
-        int visibility = isEmpty ? View.VISIBLE : View.GONE;
-        binding.emptyStateFavoritos.setVisibility(visibility);
-        binding.textFavoritos.setVisibility(visibility);
-        binding.buttonExplorarCodigos.setVisibility(visibility);
-        binding.recyclerFavoritos.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
-    }
-
     private void openFavorite(FavoriteItem item) {
-        android.content.Intent intent = FavoriteDestinationMapper.toIntent(requireContext(), item.getDestinationId());
+        android.content.Intent intent = FavoriteDestinationMapper.toIntent(
+                requireContext(),
+                item.getDestinationId()
+        );
         if (intent == null) {
             favoritesManager.remove(item.getId());
             loadFavorites();
-            Toast.makeText(requireContext(), "Este favorito ya no es válido y fue eliminado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    requireContext(),
+                    R.string.favorite_invalid_removed,
+                    Toast.LENGTH_SHORT
+            ).show();
             return;
         }
         startActivity(intent);
@@ -181,14 +250,20 @@ public class FavoritosFragment extends Fragment {
         binding = null;
     }
 
-    private abstract static class SimpleItemSelectedListener implements android.widget.AdapterView.OnItemSelectedListener {
+    private abstract static class SimpleItemSelectedListener implements
+            android.widget.AdapterView.OnItemSelectedListener {
         @Override
         public void onNothingSelected(android.widget.AdapterView<?> parent) {
             // no-op
         }
 
         @Override
-        public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
+        public void onItemSelected(
+                android.widget.AdapterView<?> parent,
+                View view,
+                int position,
+                long id
+        ) {
             onItemSelected(position);
         }
 
