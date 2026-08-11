@@ -31,7 +31,7 @@ public class SectionListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_section_list);
 
-        adView = BannerAdHelper.loadBanner(this, findViewById(R.id.adContainerSectionList), "ca-app-pub-6018202881039088/4877029953");
+        adView = BannerAdHelper.loadBanner(this, findViewById(R.id.adContainerSectionList), "ca-app-pub-6018202881039088/6018399383");
 
         String nodeId = getIntent().getStringExtra(LegalHierarchyRepository.EXTRA_NODE_ID);
         if (nodeId == null) {

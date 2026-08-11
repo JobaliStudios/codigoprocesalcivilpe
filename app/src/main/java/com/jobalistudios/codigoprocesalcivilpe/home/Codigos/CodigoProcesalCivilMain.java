@@ -19,7 +19,7 @@ public class CodigoProcesalCivilMain extends AppCompatActivity {
         setContentView(R.layout.codigo_procesal_civil_main);
 
         // Configuración del AdView
-        adView = BannerAdHelper.loadBanner(this, findViewById(R.id.adContainer), "ca-app-pub-6018202881039088/2334541370");
+        adView = BannerAdHelper.loadBanner(this, findViewById(R.id.adContainer), "ca-app-pub-6018202881039088/4642452541");
 
         findViewById(R.id.section1).setOnClickListener(v -> openHierarchy("sec_1"));
         findViewById(R.id.section2).setOnClickListener(v -> openHierarchy("sec_2"));
