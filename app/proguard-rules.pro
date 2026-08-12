@@ -37,6 +37,10 @@
 -dontwarn com.google.android.gms.**
 
 # Gson rellena por reflexión los DTO de assets/articles.json (contenido por artículo)
--keepclassmembers class com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository$Json* {
+-keep,allowoptimization,allowobfuscation class com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository$Json* {
+    <fields>;
+}
+
+-keep,allowoptimization,allowobfuscation class com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel {
     <fields>;
 }

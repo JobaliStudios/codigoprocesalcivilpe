@@ -1,11 +1,17 @@
 package com.jobalistudios.codigoprocesalcivilpe.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class QuestionModel {
+    @SerializedName("questionText")
     private String questionText;
+    @SerializedName("options")
     private List<String> options;
+    @SerializedName("correctAnswerIndex")
     private int correctAnswerIndex; // 0-based
+    @SerializedName("relatedArticle")
     private String relatedArticle;
 
     private boolean isCorrect;

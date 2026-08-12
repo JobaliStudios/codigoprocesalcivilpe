@@ -2,6 +2,16 @@
 
 Este archivo documenta los cambios relevantes de cada versión publicada de la aplicación.
 
+## [1.06] - 2026-08-11
+
+### Corregido
+
+- Restaurada en compilaciones `release` la carga del índice local de artículos que alimenta las acciones de anterior/siguiente, favoritos por artículo, notas, búsqueda global e historial de lectura.
+- Restaurada la carga de preguntas del cuestionario en compilaciones minimizadas, evitando el cierre al iniciar una sesión.
+- Protegidos explícitamente los contratos JSON frente a la optimización de R8 y añadidas pruebas de regresión para esos modelos.
+
+El contenido jurídico no fue modificado en esta corrección.
+
 ## [1.05] - 2026-08-07
 
 ### Añadido

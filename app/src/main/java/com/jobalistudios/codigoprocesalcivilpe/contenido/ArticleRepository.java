@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -130,21 +131,29 @@ public final class ArticleRepository {
         }
     }
 
-    // DTO que Gson rellena por reflexión (ver regla -keepclassmembers en proguard-rules.pro).
+    // DTO que Gson rellena por reflexión (ver reglas de conservación en proguard-rules.pro).
     private static final class JsonFile {
+        @SerializedName("version")
         int version;
+        @SerializedName("blocks")
         List<JsonBlock> blocks;
     }
 
     private static final class JsonBlock {
+        @SerializedName("key")
         String key;
+        @SerializedName("preamble")
         String preamble;
+        @SerializedName("articles")
         List<JsonArticle> articles;
     }
 
     private static final class JsonArticle {
+        @SerializedName("number")
         String number;
+        @SerializedName("title")
         String title;
+        @SerializedName("text")
         String text;
     }
 }
