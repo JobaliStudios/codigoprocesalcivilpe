@@ -43,6 +43,9 @@ import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryBottomSheet;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryEntry;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryResolver;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceResolver;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.RelatedArticlesResolver;
@@ -106,6 +109,8 @@ public class SectionContentActivity extends AppCompatActivity {
     private final ArticleCrossReferenceResolver crossReferenceResolver =
             new ArticleCrossReferenceResolver();
     private final RelatedArticlesResolver relatedArticlesResolver = new RelatedArticlesResolver();
+    private final NormativeHistoryResolver normativeHistoryResolver =
+            new NormativeHistoryResolver();
     private final Map<String, List<ResolvedArticleCrossReference>> crossReferencesByBlock =
             new HashMap<>();
     private final Map<String, List<ArticleNavigationResolver.Target>> relatedArticlesByNumber =
@@ -574,6 +579,20 @@ public class SectionContentActivity extends AppCompatActivity {
         );
     }
 
+    /** Abre una capa informativa sin navegar ni modificar el artículo visible. */
+    void openNormativeHistory(String articleNumber) {
+        if (trackedArticleBlock == null
+                || getSupportFragmentManager().isStateSaved()
+                || getSupportFragmentManager().findFragmentByTag(
+                NormativeHistoryBottomSheet.TAG) != null) {
+            return;
+        }
+        NormativeHistoryBottomSheet.newInstance(
+                trackedArticleBlock.key,
+                articleNumber
+        ).show(getSupportFragmentManager(), NormativeHistoryBottomSheet.TAG);
+    }
+
     private void navigateRelativeArticle(boolean forward) {
         ArticleRepository.Location target = currentSequence == null
                 ? null
@@ -766,6 +785,15 @@ public class SectionContentActivity extends AppCompatActivity {
                 text,
                 references,
                 this::openArticleReference
+        );
+        List<NormativeHistoryEntry> normativeHistory = block == null
+                ? Collections.emptyList()
+                : normativeHistoryResolver.resolveBlock(block, content);
+        SectionTextFormatter.applyNormativeHistoryInteraction(
+                this,
+                text,
+                normativeHistory,
+                this::openNormativeHistory
         );
         highlightController.applyHighlights(text);
         return text;

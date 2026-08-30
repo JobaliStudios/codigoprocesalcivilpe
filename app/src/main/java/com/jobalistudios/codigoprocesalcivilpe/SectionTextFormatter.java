@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.util.TypedValue;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.text.style.TtsSpan;
 
 import androidx.core.content.ContextCompat;
 
@@ -14,6 +15,8 @@ import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeAnnotation;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeAnnotationParser;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeCalloutSpan;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryEntry;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistorySpan;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ResolvedArticleCrossReference;
 
@@ -96,7 +99,8 @@ public final class SectionTextFormatter {
                             titleTextSize,
                             summaryTextSize,
                             title,
-                            annotation.compactSummary()
+                            annotation.compactSummary(),
+                            context.getString(R.string.normative_callout_action)
                     ),
                     annotation.start,
                     annotation.end,
@@ -110,6 +114,47 @@ public final class SectionTextFormatter {
             );
             spannable.setSpan(
                     new StyleSpan(Typeface.ITALIC),
+                    annotation.start,
+                    annotation.end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+        }
+    }
+
+    /** Superpone una acción accesible sobre cada anotación sin alterar ningún carácter. */
+    public static void applyNormativeHistoryInteraction(
+            Context context,
+            SpannableString spannable,
+            List<NormativeHistoryEntry> entries,
+            NormativeHistorySpan.Listener listener
+    ) {
+        for (NormativeHistoryEntry entry : entries) {
+            NormativeAnnotation annotation = entry.annotation;
+            if (annotation.start < 0
+                    || annotation.end <= annotation.start
+                    || annotation.end > spannable.length()) {
+                continue;
+            }
+            spannable.setSpan(
+                    new NormativeHistorySpan(entry.articleNumber, listener),
+                    annotation.start,
+                    annotation.end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+            String title = context.getString(
+                    annotation.type == NormativeAnnotation.Type.REPEALED
+                            ? R.string.normative_callout_title_repealed
+                            : R.string.normative_callout_title_update
+            );
+            String details = annotation.compactSummary() == null
+                    ? annotation.rawText
+                    : annotation.compactSummary();
+            spannable.setSpan(
+                    new TtsSpan.TextBuilder(context.getString(
+                            R.string.normative_history_accessibility_description,
+                            title,
+                            details
+                    )).build(),
                     annotation.start,
                     annotation.end,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

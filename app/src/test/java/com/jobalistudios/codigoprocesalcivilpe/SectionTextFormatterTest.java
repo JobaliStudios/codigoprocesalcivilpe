@@ -12,12 +12,20 @@ import android.text.style.StyleSpan;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeCalloutSpan;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeAnnotation;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryEntry;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistorySpan;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceResolver;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+
+import java.time.LocalDate;
+import java.util.Collections;
+
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleLegalStatusResolver;
 
 @RunWith(RobolectricTestRunner.class)
 public class SectionTextFormatterTest {
@@ -57,7 +65,51 @@ public class SectionTextFormatterTest {
         assertEquals(noteStart + note.length(), formatted.getSpanEnd(noteSpans[0]));
         assertEquals("ACTUALIZACIÓN NORMATIVA", noteSpans[0].getTitle());
         assertEquals("Ley 32377 · 7 jun. 2025", noteSpans[0].getSummary());
+        assertEquals("VER DETALLE NORMATIVO ›", noteSpans[0].getActionLabel());
         assertFalse(hasCalloutAt(formatted, original.indexOf("Texto normal")));
+    }
+
+    @Test
+    public void normativeHistoryInteraction_preservesStringAndExactOffsets() {
+        Context context = ApplicationProvider.getApplicationContext();
+        String note = "* Artículo derogado por la Ley 32377, publicada el 7 de junio de 2025.";
+        String original = "Artículo 835.- [Derogado]\n\n" + note;
+        int start = original.indexOf(note);
+        NormativeAnnotation annotation = new NormativeAnnotation(
+                start,
+                original.length(),
+                note,
+                NormativeAnnotation.Type.REPEALED,
+                "Ley 32377",
+                "7 de junio de 2025"
+        );
+        NormativeHistoryEntry entry = new NormativeHistoryEntry(
+                "835",
+                ArticleLegalStatusResolver.Status.REPEALED,
+                annotation,
+                "Ley N.º 32377",
+                LocalDate.of(2025, 6, 7),
+                NormativeHistoryEntry.ChangeType.DEROGATION,
+                null
+        );
+
+        SpannableString formatted = SectionTextFormatter.buildFormattedText(context, original);
+        SectionTextFormatter.applyNormativeHistoryInteraction(
+                context,
+                formatted,
+                Collections.singletonList(entry),
+                ignored -> { }
+        );
+
+        assertEquals(original, formatted.toString());
+        NormativeHistorySpan[] spans = formatted.getSpans(
+                start,
+                start + 1,
+                NormativeHistorySpan.class
+        );
+        assertEquals(1, spans.length);
+        assertEquals(start, formatted.getSpanStart(spans[0]));
+        assertEquals(original.length(), formatted.getSpanEnd(spans[0]));
     }
 
     @Test

@@ -32,6 +32,7 @@ public final class NormativeCalloutSpan implements
     private final float summaryTextSize;
     @NonNull private final String title;
     @Nullable private final String summary;
+    @NonNull private final String actionLabel;
 
     public NormativeCalloutSpan(
             int annotationStart,
@@ -46,7 +47,8 @@ public final class NormativeCalloutSpan implements
             float titleTextSize,
             float summaryTextSize,
             @NonNull String title,
-            @Nullable String summary
+            @Nullable String summary,
+            @NonNull String actionLabel
     ) {
         this.annotationStart = annotationStart;
         this.annotationEnd = annotationEnd;
@@ -61,6 +63,7 @@ public final class NormativeCalloutSpan implements
         this.summaryTextSize = summaryTextSize;
         this.title = title;
         this.summary = summary;
+        this.actionLabel = actionLabel;
     }
 
     @NonNull
@@ -71,6 +74,11 @@ public final class NormativeCalloutSpan implements
     @Nullable
     public String getSummary() {
         return summary;
+    }
+
+    @NonNull
+    public String getActionLabel() {
+        return actionLabel;
     }
 
     @Override
@@ -130,6 +138,7 @@ public final class NormativeCalloutSpan implements
             float titleBaseline = top + verticalPadding - titleMetrics.ascent;
             canvas.drawText(title, textLeft, titleBaseline, paint);
 
+            float actionBaseline;
             if (summary != null) {
                 paint.setColor(summaryColor);
                 paint.setTextSize(summaryTextSize);
@@ -138,7 +147,16 @@ public final class NormativeCalloutSpan implements
                 float summaryBaseline = titleBaseline + titleMetrics.descent
                         + Math.max(1f, verticalPadding / 2f) - summaryMetrics.ascent;
                 canvas.drawText(summary, textLeft, summaryBaseline, paint);
+                actionBaseline = summaryBaseline + summaryMetrics.descent
+                        + Math.max(1f, verticalPadding / 2f) - summaryMetrics.ascent;
+            } else {
+                actionBaseline = titleBaseline + titleMetrics.descent
+                        + Math.max(1f, verticalPadding / 2f) - titleMetrics.ascent;
             }
+            paint.setColor(summaryColor);
+            paint.setTextSize(summaryTextSize);
+            paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            canvas.drawText(actionLabel, textLeft, actionBaseline, paint);
         }
 
         paint.setColor(oldColor);
@@ -174,6 +192,7 @@ public final class NormativeCalloutSpan implements
             if (summary != null) {
                 headerHeight += Math.round(summaryTextSize + verticalPadding / 2f);
             }
+            headerHeight += Math.round(summaryTextSize + verticalPadding / 2f);
             metrics.ascent -= headerHeight;
             metrics.top -= headerHeight;
         }

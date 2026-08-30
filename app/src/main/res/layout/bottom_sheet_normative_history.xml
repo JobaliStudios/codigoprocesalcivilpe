@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/space_l"
+        android:paddingTop="@dimen/space_m"
+        android:paddingEnd="@dimen/space_l"
+        android:paddingBottom="@dimen/space_xl">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/normativeHistoryTitle"
+                style="@style/App.Text.Title.M"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/normative_history_title" />
+
+            <ImageButton
+                android:id="@+id/normativeHistoryClose"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/normative_history_close"
+                android:padding="@dimen/space_m"
+                android:src="@drawable/baseline_close_24"
+                app:tint="@color/colorOnSurface" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/normativeHistoryArticle"
+            style="@style/App.Text.Title.M"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            tools:text="Artículo 835" />
+
+        <TextView
+            style="@style/App.Text.Body.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:text="@string/normative_history_current_status"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/normativeHistoryActiveStatus"
+            style="@style/App.Text.Status.Available"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:text="@string/normative_history_status_active" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/normativeHistoryRepealedStatus"
+            style="@style/App.Chip.LegalStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/article_status_repealed"
+            android:visibility="gone"
+            app:ensureMinTouchTargetSize="false" />
+
+        <LinearLayout
+            android:id="@+id/normativeHistoryEntries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:orientation="vertical" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

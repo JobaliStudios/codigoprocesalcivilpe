@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
+import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistorySpan;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
 
 import java.util.List;
@@ -168,7 +169,7 @@ public class HighlightController {
             return;
         }
         Spanned spanned = (Spanned) text;
-        if (openArticleReferenceAt(spanned, offset, textView)) {
+        if (openPriorityInteractiveSpanAt(spanned, offset, textView)) {
             return;
         }
         UserHighlightSpan[] spans = spanned.getSpans(offset, offset, UserHighlightSpan.class);
@@ -195,6 +196,29 @@ public class HighlightController {
             return false;
         }
         links[0].onClick(widget);
+        return true;
+    }
+
+    /** Prioridad compartida del lector: referencia cruzada antes que detalle normativo. */
+    static boolean openPriorityInteractiveSpanAt(Spanned text, int offset, View widget) {
+        return openArticleReferenceAt(text, offset, widget)
+                || openNormativeHistoryAt(text, offset, widget);
+    }
+
+    /** Retorna true si el tap fue consumido por el callout normativo. */
+    static boolean openNormativeHistoryAt(Spanned text, int offset, View widget) {
+        if (offset < 0 || offset > text.length()) {
+            return false;
+        }
+        NormativeHistorySpan[] histories = text.getSpans(
+                offset,
+                Math.min(offset + 1, text.length()),
+                NormativeHistorySpan.class
+        );
+        if (histories.length == 0) {
+            return false;
+        }
+        histories[0].onClick(widget);
         return true;
     }
 
