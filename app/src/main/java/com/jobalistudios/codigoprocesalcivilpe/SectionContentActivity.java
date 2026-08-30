@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.text.SpannableString;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ContextThemeWrapper;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,7 +27,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceManager;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
@@ -41,6 +44,14 @@ import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 import com.jobalistudios.codigoprocesalcivilpe.resaltados.HighlightController;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceResolver;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.RelatedArticlesResolver;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ResolvedArticleCrossReference;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class SectionContentActivity extends AppCompatActivity {
@@ -65,6 +76,7 @@ public class SectionContentActivity extends AppCompatActivity {
     private static final float FONT_SCALE_STEP = 0.05f;
     private static final long HISTORY_SCROLL_SETTLE_DELAY_MS = 350L;
     private static final String STATE_CURRENT_ARTICLE_NUMBER = "currentArticleNumber";
+    private static final int MAX_RELATED_ARTICLES = 6;
 
     private HighlightController highlightController;
     private SectionSearchController searchController;
@@ -88,6 +100,16 @@ public class SectionContentActivity extends AppCompatActivity {
     private MaterialButton copyArticleButton;
     private MaterialButton shareArticleButton;
     private MaterialButton nextArticleButton;
+    private View relatedArticlesContainer;
+    private ChipGroup relatedArticlesChipGroup;
+    private String renderedRelatedArticleNumber;
+    private final ArticleCrossReferenceResolver crossReferenceResolver =
+            new ArticleCrossReferenceResolver();
+    private final RelatedArticlesResolver relatedArticlesResolver = new RelatedArticlesResolver();
+    private final Map<String, List<ResolvedArticleCrossReference>> crossReferencesByBlock =
+            new HashMap<>();
+    private final Map<String, List<ArticleNavigationResolver.Target>> relatedArticlesByNumber =
+            new HashMap<>();
     private final Runnable updateVisibleArticle = this::updateCurrentlyVisibleArticle;
 
     public static Intent createIntent(
@@ -225,18 +247,25 @@ public class SectionContentActivity extends AppCompatActivity {
             return;
         }
         contentView.post(() -> {
-            Layout layout = contentView.getLayout();
-            if (layout == null) {
-                return;
-            }
-            int clamped = Math.max(0, Math.min(offset, contentView.getText().length() - 1));
-            int line = layout.getLineForOffset(clamped);
             preferredProgrammaticArticle = expectedArticle;
-            scrollView.scrollTo(0, contentView.getTop() + layout.getLineTop(line));
             if (expectedArticle != null) {
                 applyCurrentVisibleArticle(expectedArticle, false);
             }
-            scheduleVisibleArticleRegistration();
+            // La sección de relacionados puede cambiar la altura del header. Esperamos su
+            // relayout antes de calcular el scroll, especialmente en el final de un bloque.
+            scrollView.post(() -> {
+                Layout layout = contentView.getLayout();
+                if (layout == null || contentView.getText().length() == 0) {
+                    return;
+                }
+                int clamped = Math.max(
+                        0,
+                        Math.min(offset, contentView.getText().length() - 1)
+                );
+                int line = layout.getLineForOffset(clamped);
+                scrollView.scrollTo(0, contentView.getTop() + layout.getLineTop(line));
+                scheduleVisibleArticleRegistration();
+            });
         });
     }
 
@@ -353,6 +382,8 @@ public class SectionContentActivity extends AppCompatActivity {
         copyArticleButton = findViewById(R.id.btnCopyArticle);
         shareArticleButton = findViewById(R.id.btnShareArticle);
         nextArticleButton = findViewById(R.id.btnNextArticle);
+        relatedArticlesContainer = findViewById(R.id.relatedArticlesContainer);
+        relatedArticlesChipGroup = findViewById(R.id.relatedArticlesChipGroup);
 
         if (previousArticleButton != null) {
             previousArticleButton.setOnClickListener(view -> navigateRelativeArticle(false));
@@ -401,6 +432,7 @@ public class SectionContentActivity extends AppCompatActivity {
                 currentArticleTitleView.setText(article.title);
             }
         }
+        renderRelatedArticles(article);
 
         boolean hasPrevious = currentSequence != null && currentSequence.previous != null;
         boolean hasNext = currentSequence != null && currentSequence.next != null;
@@ -482,6 +514,66 @@ public class SectionContentActivity extends AppCompatActivity {
         }
     }
 
+    private void renderRelatedArticles(@Nullable Article article) {
+        if (relatedArticlesContainer == null || relatedArticlesChipGroup == null) {
+            return;
+        }
+        if (article == null) {
+            relatedArticlesContainer.setVisibility(View.GONE);
+            relatedArticlesChipGroup.removeAllViews();
+            renderedRelatedArticleNumber = null;
+            return;
+        }
+        if (article.number.equals(renderedRelatedArticleNumber)) {
+            return;
+        }
+        renderedRelatedArticleNumber = article.number;
+        List<ArticleNavigationResolver.Target> targets = relatedArticlesByNumber.get(article.number);
+        if (targets == null) {
+            targets = relatedArticlesResolver.resolve(this, article);
+            relatedArticlesByNumber.put(article.number, targets);
+        }
+        relatedArticlesChipGroup.removeAllViews();
+        int visibleCount = Math.min(MAX_RELATED_ARTICLES, targets.size());
+        for (int index = 0; index < visibleCount; index++) {
+            ArticleNavigationResolver.Target target = targets.get(index);
+            Chip chip = new Chip(new ContextThemeWrapper(
+                    this,
+                    R.style.App_Chip_ArticleReference
+            ));
+            chip.setText(getString(R.string.related_article_chip, target.getNumber()));
+            chip.setCheckable(false);
+            chip.setClickable(true);
+            chip.setFocusable(true);
+            chip.setEnsureMinTouchTargetSize(true);
+            String title = target.getTitle().trim();
+            chip.setContentDescription(title.isEmpty()
+                    ? getString(R.string.related_article_open_description_short, target.getNumber())
+                    : getString(
+                    R.string.related_article_open_description,
+                    target.getNumber(),
+                    title
+            ));
+            chip.setOnClickListener(view -> openArticleReference(target.getNumber()));
+            relatedArticlesChipGroup.addView(chip);
+        }
+        relatedArticlesContainer.setVisibility(visibleCount > 0 ? View.VISIBLE : View.GONE);
+    }
+
+    /** Navegación compartida por spans y chips, siempre con una nueva entrada normal. */
+    void openArticleReference(String articleNumber) {
+        ArticleNavigationResolver.Target target =
+                ArticleNavigationResolver.resolve(this, articleNumber);
+        if (target == null) {
+            return;
+        }
+        InterstitialAdCoordinator.getInstance().navigate(
+                this,
+                getString(R.string.admob_interstitial_ad_unit_id),
+                () -> startActivity(target.createIntent(this))
+        );
+    }
+
     private void navigateRelativeArticle(boolean forward) {
         ArticleRepository.Location target = currentSequence == null
                 ? null
@@ -493,6 +585,7 @@ public class SectionContentActivity extends AppCompatActivity {
         if (trackedArticleBlock != null
                 && trackedArticleBlock.key.equals(target.block.key)
                 && trackedContentView != null) {
+            InterstitialAdCoordinator.getInstance().recordNavigationWithoutInterruption();
             scrollToOffset(trackedContentView, target.article.offsetInBlock, target.article);
             return;
         }
@@ -500,8 +593,14 @@ public class SectionContentActivity extends AppCompatActivity {
         ArticleNavigationResolver.Target navigationTarget =
                 ArticleNavigationResolver.resolve(this, target.article.number);
         if (navigationTarget != null) {
-            startActivity(navigationTarget.createIntent(this));
-            finish();
+            InterstitialAdCoordinator.getInstance().navigate(
+                    this,
+                    getString(R.string.admob_interstitial_ad_unit_id),
+                    () -> {
+                        startActivity(navigationTarget.createIntent(this));
+                        finish();
+                    }
+            );
         }
     }
 
@@ -654,6 +753,20 @@ public class SectionContentActivity extends AppCompatActivity {
     private SpannableString buildText(@StringRes int textResId) {
         String content = ArticleRepository.getContentText(this, textResId);
         SpannableString text = SectionTextFormatter.buildFormattedText(this, content);
+        String blockKey = getResources().getResourceEntryName(textResId);
+        ArticleBlock block = ArticleRepository.getBlock(this, blockKey);
+        List<ResolvedArticleCrossReference> references = block == null
+                ? Collections.emptyList()
+                : crossReferencesByBlock.computeIfAbsent(
+                blockKey,
+                ignored -> crossReferenceResolver.resolveBlock(this, block)
+        );
+        SectionTextFormatter.applyArticleCrossReferenceFormatting(
+                this,
+                text,
+                references,
+                this::openArticleReference
+        );
         highlightController.applyHighlights(text);
         return text;
     }

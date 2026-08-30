@@ -83,6 +83,16 @@
         <item name="android:textColor">@color/colorOnSurface</item>
     </style>
 
+    <style name="App.Chip.ArticleReference" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/colorPrimaryContainer</item>
+        <item name="chipStrokeColor">@color/colorOutline</item>
+        <item name="chipStrokeWidth">@dimen/stroke_width_thin</item>
+        <item name="android:textColor">@color/colorOnPrimaryContainer</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="ensureMinTouchTargetSize">true</item>
+    </style>
+
     <style name="App.Card.Recurrent" parent="Widget.Material3.CardView.Elevated">
         <item name="cardBackgroundColor">@color/colorSurface</item>
         <item name="cardCornerRadius">@dimen/radius_l</item>

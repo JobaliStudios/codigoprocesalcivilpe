@@ -64,6 +64,11 @@
     <string name="article_previous_content_description">Ir al artículo anterior desde el artículo %1$s</string>
     <string name="article_next_content_description">Ir al artículo siguiente desde el artículo %1$s</string>
     <string name="article_copy_dynamic_description">Copiar artículo %1$s</string>
+    <string name="related_articles_title">Artículos relacionados</string>
+    <string name="related_article_chip">Art. %1$s</string>
+    <string name="related_article_open_description">Abrir Artículo %1$s, %2$s</string>
+    <string name="related_article_open_description_short">Abrir Artículo %1$s</string>
+    <string name="admob_interstitial_ad_unit_id" translatable="false">ca-app-pub-6018202881039088/9386415288</string>
     <string name="article_share_chooser_title">Compartir artículo</string>
     <string name="article_copy_success">Artículo %1$s copiado</string>
     <string name="article_current_unavailable">No se pudo identificar el artículo actual.</string>

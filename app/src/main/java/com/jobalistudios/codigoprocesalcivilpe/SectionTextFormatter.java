@@ -14,7 +14,10 @@ import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeAnnotation;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeAnnotationParser;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeCalloutSpan;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ResolvedArticleCrossReference;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,7 +41,7 @@ public final class SectionTextFormatter {
         int colorArticulo = ContextCompat.getColor(context, R.color.article_title_color);
 
         Pattern articlePattern = Pattern.compile(
-                "^Artículo\\s+\\d+(?:-[A-Z])?\\s*\\.\\s*-\\s*[^\\n]+",
+                "^Artículo\\s+\\d+(?:(?:\\s*-\\s*|\\s+)[A-Z])?\\s*\\.\\s*-\\s*[^\\n]+",
                 Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
         );
         Matcher articleMatcher = articlePattern.matcher(fullText);
@@ -109,6 +112,33 @@ public final class SectionTextFormatter {
                     new StyleSpan(Typeface.ITALIC),
                     annotation.start,
                     annotation.end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+        }
+    }
+
+    /** Añade navegación sobre rangos existentes; no inserta ni reemplaza caracteres. */
+    public static void applyArticleCrossReferenceFormatting(
+            Context context,
+            SpannableString spannable,
+            List<ResolvedArticleCrossReference> references,
+            ArticleCrossReferenceSpan.Listener listener
+    ) {
+        int linkColor = ContextCompat.getColor(context, R.color.colorPrimary);
+        for (ResolvedArticleCrossReference resolved : references) {
+            int start = resolved.reference.start;
+            int end = resolved.reference.end;
+            if (start < 0 || end <= start || end > spannable.length()) {
+                continue;
+            }
+            spannable.setSpan(
+                    new ArticleCrossReferenceSpan(
+                            resolved.target.getNumber(),
+                            linkColor,
+                            listener
+                    ),
+                    start,
+                    end,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             );
         }

@@ -12,6 +12,8 @@ import android.text.style.StyleSpan;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeCalloutSpan;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceResolver;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,13 +26,15 @@ public class SectionTextFormatterTest {
     public void normalAndAlphanumericHeaders_areFormattedWithoutChangingText() {
         Context context = ApplicationProvider.getApplicationContext();
         String original = "Artículo 564.- Título normal\n\nTexto.\n\n"
-                + "Artículo 506-A.- Título alfanumérico\n\nMás texto.";
+                + "Artículo 506-A.- Título alfanumérico\n\nMás texto.\n\n"
+                + "Artículo 647 A.- Variante real con espacio\n\nFin.";
 
         SpannableString formatted = SectionTextFormatter.buildFormattedText(context, original);
 
         assertEquals(original, formatted.toString());
         assertBoldAt(formatted, original.indexOf("Artículo 564"));
         assertBoldAt(formatted, original.indexOf("Artículo 506-A"));
+        assertBoldAt(formatted, original.indexOf("Artículo 647 A"));
     }
 
     @Test
@@ -54,6 +58,43 @@ public class SectionTextFormatterTest {
         assertEquals("ACTUALIZACIÓN NORMATIVA", noteSpans[0].getTitle());
         assertEquals("Ley 32377 · 7 jun. 2025", noteSpans[0].getSummary());
         assertFalse(hasCalloutAt(formatted, original.indexOf("Texto normal")));
+    }
+
+    @Test
+    public void crossReference_searchAndNormativeCallout_coexistWithoutChangingText() {
+        Context context = ApplicationProvider.getApplicationContext();
+        String original = "* Artículo modificado por la Ley 32377. Conforme al artículo 424 de este Código.";
+        SpannableString formatted = SectionTextFormatter.buildFormattedText(context, original);
+        SectionTextFormatter.applyArticleCrossReferenceFormatting(
+                context,
+                formatted,
+                new ArticleCrossReferenceResolver().resolveText(context, "834", original),
+                ignored -> { }
+        );
+        int referenceStart = original.indexOf("artículo 424");
+        formatted.setSpan(
+                new SectionSearchController.SearchHighlightSpan(0xFFFFFF00),
+                referenceStart,
+                referenceStart + "artículo 424".length(),
+                SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+
+        assertEquals(original, formatted.toString());
+        assertTrue(formatted.getSpans(
+                referenceStart,
+                referenceStart + 1,
+                ArticleCrossReferenceSpan.class
+        ).length > 0);
+        assertTrue(formatted.getSpans(
+                referenceStart,
+                referenceStart + 1,
+                SectionSearchController.SearchHighlightSpan.class
+        ).length > 0);
+        assertTrue(formatted.getSpans(
+                referenceStart,
+                referenceStart + 1,
+                NormativeCalloutSpan.class
+        ).length > 0);
     }
 
     private boolean hasCalloutAt(SpannableString text, int offset) {

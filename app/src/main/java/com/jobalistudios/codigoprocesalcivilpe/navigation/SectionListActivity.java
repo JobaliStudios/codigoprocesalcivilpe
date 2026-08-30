@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
 
 public class SectionListActivity extends AppCompatActivity {
@@ -58,7 +59,11 @@ public class SectionListActivity extends AppCompatActivity {
         SectionHierarchyAdapter adapter = new SectionHierarchyAdapter(this, LegalHierarchyRepository.buildGroups(node), item -> {
             LegalHierarchyRepository.Node selected = LegalHierarchyRepository.findNodeById(item.getNodeId());
             if (selected == null) return;
-            startActivity(LegalHierarchyRepository.buildIntentForNode(this, selected));
+            InterstitialAdCoordinator.getInstance().navigate(
+                    this,
+                    getString(R.string.admob_interstitial_ad_unit_id),
+                    () -> startActivity(LegalHierarchyRepository.buildIntentForNode(this, selected))
+            );
         });
         recyclerView.setAdapter(adapter);
 

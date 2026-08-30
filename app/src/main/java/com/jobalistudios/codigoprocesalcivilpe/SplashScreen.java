@@ -10,6 +10,7 @@ import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
@@ -31,6 +32,10 @@ public class SplashScreen extends AppCompatActivity {
         // el formulario de UMP se muestra encima y la navegación espera a que se cierre.
         GoogleMobileAdsConsentManager consentManager = GoogleMobileAdsConsentManager.getInstance(this);
         consentManager.gatherConsent(this, error -> {
+            InterstitialAdCoordinator.getInstance().preload(
+                    this,
+                    getString(R.string.admob_interstitial_ad_unit_id)
+            );
             consentFlowDone = true;
             maybeNavigate();
         });

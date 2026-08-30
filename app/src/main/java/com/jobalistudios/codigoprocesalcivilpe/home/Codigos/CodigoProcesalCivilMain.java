@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.ads.AdView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
+import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
 
 public class CodigoProcesalCivilMain extends AppCompatActivity {
@@ -35,7 +36,11 @@ public class CodigoProcesalCivilMain extends AppCompatActivity {
         if (node == null) {
             return;
         }
-        startActivity(LegalHierarchyRepository.buildIntentForNode(this, node));
+        InterstitialAdCoordinator.getInstance().navigate(
+                this,
+                getString(R.string.admob_interstitial_ad_unit_id),
+                () -> startActivity(LegalHierarchyRepository.buildIntentForNode(this, node))
+        );
     }
 
     @Override

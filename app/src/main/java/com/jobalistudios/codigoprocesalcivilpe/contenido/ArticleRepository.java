@@ -19,6 +19,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Contenido del código segmentado por artículo, cargado desde assets/articles.json
@@ -33,6 +35,9 @@ public final class ArticleRepository {
     private static final int SUPPORTED_VERSION = 1;
 
     private static volatile Map<String, ArticleBlock> blocksByKey;
+    private static volatile Map<String, List<Location>> locationsByNumber;
+    private static final Pattern NUMBER_WITH_SEPARATED_SUFFIX =
+            Pattern.compile("^(\\d+)\\s+([A-Z])$");
 
     private ArticleRepository() {
     }
@@ -54,16 +59,26 @@ public final class ArticleRepository {
     /** Todas las ubicaciones del artículo con ese número canónico (ej. "647", "647-A"). */
     @NonNull
     public static List<Location> findArticle(Context context, String number) {
-        String wanted = number.trim().toUpperCase(Locale.ROOT);
-        List<Location> locations = new ArrayList<>();
-        for (ArticleBlock block : getBlocks(context).values()) {
-            for (Article article : block.articles) {
-                if (article.number.equals(wanted)) {
-                    locations.add(new Location(block, article));
-                }
-            }
+        String wanted = normalizeArticleNumber(number);
+        if (wanted.isEmpty()) {
+            return Collections.emptyList();
         }
-        return locations;
+        List<Location> locations = getLocationsByNumber(context).get(wanted);
+        return locations == null ? Collections.emptyList() : locations;
+    }
+
+    /** Normaliza solo para búsquedas; nunca cambia el número que se muestra al usuario. */
+    @NonNull
+    public static String normalizeArticleNumber(@Nullable String number) {
+        if (number == null) {
+            return "";
+        }
+        String normalized = number.trim().toUpperCase(Locale.ROOT)
+                .replaceAll("\\s*-\\s*", "-");
+        Matcher separatedSuffix = NUMBER_WITH_SEPARATED_SUFFIX.matcher(normalized);
+        return separatedSuffix.matches()
+                ? separatedSuffix.group(1) + "-" + separatedSuffix.group(2)
+                : normalized;
     }
 
     @NonNull
@@ -75,6 +90,33 @@ public final class ArticleRepository {
                 if (cached == null) {
                     cached = load(context.getApplicationContext());
                     blocksByKey = cached;
+                }
+            }
+        }
+        return cached;
+    }
+
+    @NonNull
+    private static Map<String, List<Location>> getLocationsByNumber(Context context) {
+        Map<String, List<Location>> cached = locationsByNumber;
+        if (cached == null) {
+            synchronized (ArticleRepository.class) {
+                cached = locationsByNumber;
+                if (cached == null) {
+                    Map<String, List<Location>> mutable = new LinkedHashMap<>();
+                    for (ArticleBlock block : getBlocks(context).values()) {
+                        for (Article article : block.articles) {
+                            String key = normalizeArticleNumber(article.number);
+                            mutable.computeIfAbsent(key, ignored -> new ArrayList<>())
+                                    .add(new Location(block, article));
+                        }
+                    }
+                    Map<String, List<Location>> immutable = new LinkedHashMap<>();
+                    for (Map.Entry<String, List<Location>> entry : mutable.entrySet()) {
+                        immutable.put(entry.getKey(), Collections.unmodifiableList(entry.getValue()));
+                    }
+                    cached = Collections.unmodifiableMap(immutable);
+                    locationsByNumber = cached;
                 }
             }
         }

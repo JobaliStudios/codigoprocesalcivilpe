@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
+import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
 
 import java.util.List;
 import java.util.UUID;
@@ -166,7 +167,11 @@ public class HighlightController {
         if (offset < 0) {
             return;
         }
-        UserHighlightSpan[] spans = ((Spanned) text).getSpans(offset, offset, UserHighlightSpan.class);
+        Spanned spanned = (Spanned) text;
+        if (openArticleReferenceAt(spanned, offset, textView)) {
+            return;
+        }
+        UserHighlightSpan[] spans = spanned.getSpans(offset, offset, UserHighlightSpan.class);
         if (spans.length == 0) {
             return;
         }
@@ -174,6 +179,23 @@ public class HighlightController {
         if (highlight != null) {
             showDetailDialog(highlight);
         }
+    }
+
+    /** Retorna true si el tap fue consumido por un enlace, antes de revisar Highlights. */
+    static boolean openArticleReferenceAt(Spanned text, int offset, View widget) {
+        if (offset < 0 || offset > text.length()) {
+            return false;
+        }
+        ArticleCrossReferenceSpan[] links = text.getSpans(
+                offset,
+                Math.min(offset + 1, text.length()),
+                ArticleCrossReferenceSpan.class
+        );
+        if (links.length == 0) {
+            return false;
+        }
+        links[0].onClick(widget);
+        return true;
     }
 
     private void showCreateDialog(
