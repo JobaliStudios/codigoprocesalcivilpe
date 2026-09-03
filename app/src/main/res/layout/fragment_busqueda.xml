@@ -18,6 +18,20 @@
         android:paddingHorizontal="@dimen/space_s"
         android:queryHint="@string/busqueda_hint" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGoToArticle"
+        style="@style/App.Button.Outlined"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_s"
+        android:contentDescription="@string/go_to_article_action_description"
+        android:minHeight="@dimen/touch_target_min"
+        android:text="@string/go_to_article_action"
+        android:textAllCaps="false"
+        app:icon="@drawable/baseline_article_24"
+        app:iconGravity="textStart"
+        app:iconPadding="@dimen/space_s" />
+
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

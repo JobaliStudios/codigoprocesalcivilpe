@@ -21,6 +21,7 @@ public class MainNavigationInstrumentedTest {
 
         onView(withId(R.id.navigation_busqueda)).perform(click());
         onView(withId(R.id.searchView)).check(matches(isDisplayed()));
+        onView(withId(R.id.buttonGoToArticle)).check(matches(isDisplayed()));
 
         onView(withId(R.id.navigation_favoritos)).perform(click());
         onView(withId(R.id.favoritesControlsCard)).check(matches(isDisplayed()));

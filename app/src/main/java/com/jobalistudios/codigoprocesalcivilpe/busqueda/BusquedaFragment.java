@@ -131,12 +131,25 @@ public class BusquedaFragment extends Fragment {
     }
 
     private void configureActions() {
+        binding.buttonGoToArticle.setOnClickListener(view -> openGoToArticle());
         binding.buttonEmptyBusquedaCta.setOnClickListener(view -> {
             binding.searchView.setIconified(false);
             binding.searchView.requestFocus();
         });
         binding.buttonClearSearchFilters.setOnClickListener(view -> viewModel.clearFilters());
         binding.buttonClearRecent.setOnClickListener(view -> viewModel.clearAllRecentQueries());
+    }
+
+    private void openGoToArticle() {
+        if (getChildFragmentManager().isStateSaved()
+                || getChildFragmentManager().findFragmentByTag(
+                GoToArticleBottomSheet.TAG) != null) {
+            return;
+        }
+        GoToArticleBottomSheet.newInstance().show(
+                getChildFragmentManager(),
+                GoToArticleBottomSheet.TAG
+        );
     }
 
     private void render(BusquedaViewModel.BusquedaUiState state) {

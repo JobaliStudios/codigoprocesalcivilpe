@@ -859,4 +859,17 @@
     <string name="article_speech_error_missing_language">No hay una voz en español instalada para la lectura.</string>
     <string name="article_speech_error_unsupported_language">El motor de voz del dispositivo no admite español.</string>
     <string name="article_speech_error_playback">No se pudo reproducir la lectura.</string>
+
+    <!-- Acceso rápido por número exacto -->
+    <string name="go_to_article_action">Ir al artículo</string>
+    <string name="go_to_article_action_description">Abrir acceso rápido para ir a un artículo</string>
+    <string name="go_to_article_title">Ir al artículo</string>
+    <string name="go_to_article_help">Escribe el número exacto del artículo que deseas consultar.</string>
+    <string name="go_to_article_field_label">Número de artículo</string>
+    <string name="go_to_article_hint">Ej.: 564 o 506-A</string>
+    <string name="go_to_article_cancel">Cancelar</string>
+    <string name="go_to_article_submit">Ir</string>
+    <string name="go_to_article_error_empty">Ingresa un número de artículo.</string>
+    <string name="go_to_article_error_invalid">Ingresa un número de artículo válido.</string>
+    <string name="go_to_article_error_not_found">No encontramos el artículo %1$s.</string>
 </resources>

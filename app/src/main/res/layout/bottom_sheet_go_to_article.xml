@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/space_l"
+        android:paddingTop="@dimen/space_l"
+        android:paddingEnd="@dimen/space_l"
+        android:paddingBottom="@dimen/space_xl">
+
+        <TextView
+            android:id="@+id/goToArticleTitle"
+            style="@style/App.Text.Title.M"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/go_to_article_title" />
+
+        <TextView
+            style="@style/App.Text.Body.M"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            android:text="@string/go_to_article_help" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/goToArticleInputLayout"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:hint="@string/go_to_article_field_label"
+            app:boxBackgroundColor="@color/colorSurface"
+            app:errorEnabled="true"
+            app:placeholderText="@string/go_to_article_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/goToArticleInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:freezesText="true"
+                android:imeOptions="actionGo"
+                android:inputType="text|textNoSuggestions"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:minHeight="@dimen/touch_target_min"
+                android:singleLine="true"
+                android:textColor="@color/colorOnSurface"
+                android:textColorHint="@color/colorOnSurfaceVariant"
+                tools:text="506-A" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goToArticleCancel"
+                style="@style/App.Button.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/go_to_article_cancel"
+                android:textAllCaps="false" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goToArticleSubmit"
+                style="@style/App.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_s"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/go_to_article_submit"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
