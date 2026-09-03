@@ -42,6 +42,9 @@ import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
+import com.jobalistudios.codigoprocesalcivilpe.lectura.ArticleSpeechContent;
+import com.jobalistudios.codigoprocesalcivilpe.lectura.ArticleSpeechContentResolver;
+import com.jobalistudios.codigoprocesalcivilpe.lectura.ArticleTextToSpeechController;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryBottomSheet;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistoryEntry;
@@ -103,6 +106,15 @@ public class SectionContentActivity extends AppCompatActivity {
     private MaterialButton copyArticleButton;
     private MaterialButton shareArticleButton;
     private MaterialButton nextArticleButton;
+    private View articleSpeechControls;
+    private MaterialButton listenArticleButton;
+    private View articleSpeechPlaybackControls;
+    private TextView articleSpeechStatusView;
+    private MaterialButton pauseResumeArticleButton;
+    private MaterialButton stopArticleSpeechButton;
+    private ArticleTextToSpeechController articleSpeechController;
+    private final ArticleSpeechContentResolver articleSpeechContentResolver =
+            new ArticleSpeechContentResolver();
     private View relatedArticlesContainer;
     private ChipGroup relatedArticlesChipGroup;
     private String renderedRelatedArticleNumber;
@@ -223,12 +235,24 @@ public class SectionContentActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        if (articleSpeechController != null) {
+            articleSpeechController.stop();
+        }
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         if (trackedContentView != null) {
             trackedContentView.removeCallbacks(updateVisibleArticle);
         }
         if (trackedScrollView != null) {
             trackedScrollView.setOnScrollChangeListener((View.OnScrollChangeListener) null);
+        }
+        if (articleSpeechController != null) {
+            articleSpeechController.release();
+            articleSpeechController = null;
         }
         super.onDestroy();
     }
@@ -387,6 +411,12 @@ public class SectionContentActivity extends AppCompatActivity {
         copyArticleButton = findViewById(R.id.btnCopyArticle);
         shareArticleButton = findViewById(R.id.btnShareArticle);
         nextArticleButton = findViewById(R.id.btnNextArticle);
+        articleSpeechControls = findViewById(R.id.articleSpeechControls);
+        listenArticleButton = findViewById(R.id.btnListenArticle);
+        articleSpeechPlaybackControls = findViewById(R.id.articleSpeechPlaybackControls);
+        articleSpeechStatusView = findViewById(R.id.articleSpeechStatus);
+        pauseResumeArticleButton = findViewById(R.id.btnPauseResumeArticle);
+        stopArticleSpeechButton = findViewById(R.id.btnStopArticleSpeech);
         relatedArticlesContainer = findViewById(R.id.relatedArticlesContainer);
         relatedArticlesChipGroup = findViewById(R.id.relatedArticlesChipGroup);
 
@@ -408,6 +438,7 @@ public class SectionContentActivity extends AppCompatActivity {
         if (nextArticleButton != null) {
             nextArticleButton.setOnClickListener(view -> navigateRelativeArticle(true));
         }
+        setupArticleSpeechActions();
         renderCurrentArticleState();
     }
 
@@ -438,6 +469,7 @@ public class SectionContentActivity extends AppCompatActivity {
             }
         }
         renderRelatedArticles(article);
+        renderArticleSpeechControls();
 
         boolean hasPrevious = currentSequence != null && currentSequence.previous != null;
         boolean hasNext = currentSequence != null && currentSequence.next != null;
@@ -572,6 +604,7 @@ public class SectionContentActivity extends AppCompatActivity {
         if (target == null) {
             return;
         }
+        stopArticleSpeech();
         InterstitialAdCoordinator.getInstance().navigate(
                 this,
                 getString(R.string.admob_interstitial_ad_unit_id),
@@ -601,6 +634,8 @@ public class SectionContentActivity extends AppCompatActivity {
             return;
         }
 
+        stopArticleSpeech();
+
         if (trackedArticleBlock != null
                 && trackedArticleBlock.key.equals(target.block.key)
                 && trackedContentView != null) {
@@ -620,6 +655,194 @@ public class SectionContentActivity extends AppCompatActivity {
                         finish();
                     }
             );
+        }
+    }
+
+    private void setupArticleSpeechActions() {
+        if (articleSpeechControls == null || listenArticleButton == null) {
+            return;
+        }
+        articleSpeechController = new ArticleTextToSpeechController(
+                this,
+                new ArticleTextToSpeechController.Listener() {
+                    @Override
+                    public void onStateChanged(
+                            ArticleTextToSpeechController.State state,
+                            @Nullable ArticleSpeechContent activeContent,
+                            int currentSpeechOffset
+                    ) {
+                        renderArticleSpeechControls();
+                        announceArticleSpeechState(state, activeContent);
+                        if (state == ArticleTextToSpeechController.State.COMPLETED
+                                || state == ArticleTextToSpeechController.State.ERROR) {
+                            articleSpeechControls.post(() -> {
+                                if (articleSpeechController != null) {
+                                    articleSpeechController.acknowledgeTerminalState();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onError(ArticleTextToSpeechController.ErrorReason reason) {
+                        showReadingSnackbar(articleSpeechErrorMessage(reason));
+                    }
+                }
+        );
+        listenArticleButton.setOnClickListener(view -> playCurrentArticle());
+        if (pauseResumeArticleButton != null) {
+            pauseResumeArticleButton.setOnClickListener(view -> toggleArticleSpeechPause());
+        }
+        if (stopArticleSpeechButton != null) {
+            stopArticleSpeechButton.setOnClickListener(view -> stopArticleSpeech());
+        }
+    }
+
+    private void playCurrentArticle() {
+        synchronizeCurrentVisibleArticle();
+        Article article = currentVisibleArticle;
+        if (article == null || trackedArticleBlock == null || articleSpeechController == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+        ArticleSpeechContent content = articleSpeechContentResolver.resolve(
+                trackedArticleBlock,
+                article.number
+        );
+        if (content == null) {
+            showArticleUnavailableFeedback();
+            return;
+        }
+        articleSpeechController.play(content);
+    }
+
+    private void toggleArticleSpeechPause() {
+        if (articleSpeechController == null) {
+            return;
+        }
+        if (articleSpeechController.getState() == ArticleTextToSpeechController.State.PLAYING) {
+            articleSpeechController.pause();
+        } else if (articleSpeechController.getState()
+                == ArticleTextToSpeechController.State.PAUSED) {
+            articleSpeechController.resume();
+        }
+    }
+
+    private void stopArticleSpeech() {
+        if (articleSpeechController != null) {
+            articleSpeechController.stop();
+        }
+    }
+
+    private void renderArticleSpeechControls() {
+        if (articleSpeechControls == null || listenArticleButton == null) {
+            return;
+        }
+        ArticleTextToSpeechController.State speechState = articleSpeechController == null
+                ? ArticleTextToSpeechController.State.IDLE
+                : articleSpeechController.getState();
+        ArticleSpeechContent activeContent = articleSpeechController == null
+                ? null
+                : articleSpeechController.getActiveContent();
+        boolean active = activeContent != null && (
+                speechState == ArticleTextToSpeechController.State.INITIALIZING
+                        || speechState == ArticleTextToSpeechController.State.PLAYING
+                        || speechState == ArticleTextToSpeechController.State.PAUSED
+        );
+        boolean currentArticleAvailable = currentVisibleArticle != null;
+        boolean visibleArticleIsActive = active && currentArticleAvailable
+                && activeContent.articleNumber.equals(currentVisibleArticle.number);
+
+        articleSpeechControls.setVisibility(
+                currentArticleAvailable || active ? View.VISIBLE : View.GONE
+        );
+        listenArticleButton.setVisibility(currentArticleAvailable && !visibleArticleIsActive
+                ? View.VISIBLE
+                : View.GONE);
+        if (currentArticleAvailable) {
+            listenArticleButton.setContentDescription(getString(
+                    R.string.article_speech_listen_description,
+                    currentVisibleArticle.number
+            ));
+        }
+        if (!active) {
+            if (articleSpeechPlaybackControls != null) {
+                articleSpeechPlaybackControls.setVisibility(View.GONE);
+            }
+            return;
+        }
+
+        if (articleSpeechPlaybackControls != null) {
+            articleSpeechPlaybackControls.setVisibility(View.VISIBLE);
+        }
+        String articleNumber = activeContent.articleNumber;
+        if (articleSpeechStatusView != null) {
+            int statusRes = speechState == ArticleTextToSpeechController.State.INITIALIZING
+                    ? R.string.article_speech_preparing_format
+                    : (speechState == ArticleTextToSpeechController.State.PAUSED
+                    ? R.string.article_speech_paused_format
+                    : R.string.article_speech_playing_format);
+            articleSpeechStatusView.setText(getString(statusRes, articleNumber));
+        }
+        if (pauseResumeArticleButton != null) {
+            boolean initializing = speechState
+                    == ArticleTextToSpeechController.State.INITIALIZING;
+            boolean paused = speechState == ArticleTextToSpeechController.State.PAUSED;
+            pauseResumeArticleButton.setVisibility(initializing ? View.GONE : View.VISIBLE);
+            pauseResumeArticleButton.setText(paused
+                    ? R.string.article_speech_resume
+                    : R.string.article_speech_pause);
+            pauseResumeArticleButton.setIconResource(paused
+                    ? R.drawable.baseline_play_arrow_24
+                    : R.drawable.baseline_pause_24);
+            pauseResumeArticleButton.setContentDescription(getString(
+                    paused
+                            ? R.string.article_speech_resume_description
+                            : R.string.article_speech_pause_description,
+                    articleNumber
+            ));
+        }
+        if (stopArticleSpeechButton != null) {
+            stopArticleSpeechButton.setContentDescription(getString(
+                    R.string.article_speech_stop_description,
+                    articleNumber
+            ));
+        }
+    }
+
+    private void announceArticleSpeechState(
+            ArticleTextToSpeechController.State state,
+            @Nullable ArticleSpeechContent content
+    ) {
+        if (articleSpeechStatusView == null || content == null) {
+            return;
+        }
+        if (state == ArticleTextToSpeechController.State.PLAYING) {
+            articleSpeechStatusView.announceForAccessibility(getString(
+                    R.string.article_speech_playing_announcement,
+                    content.articleNumber
+            ));
+        } else if (state == ArticleTextToSpeechController.State.PAUSED) {
+            articleSpeechStatusView.announceForAccessibility(getString(
+                    R.string.article_speech_paused_announcement,
+                    content.articleNumber
+            ));
+        }
+    }
+
+    private String articleSpeechErrorMessage(
+            ArticleTextToSpeechController.ErrorReason reason
+    ) {
+        switch (reason) {
+            case INITIALIZATION_FAILED:
+                return getString(R.string.article_speech_error_initialization);
+            case MISSING_LANGUAGE_DATA:
+                return getString(R.string.article_speech_error_missing_language);
+            case LANGUAGE_NOT_SUPPORTED:
+                return getString(R.string.article_speech_error_unsupported_language);
+            case PLAYBACK_FAILED:
+            default:
+                return getString(R.string.article_speech_error_playback);
         }
     }
 

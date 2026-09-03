@@ -840,4 +840,23 @@
     <string name="privacy_clear_all_done">Todos los datos locales fueron eliminados</string>
     <string name="privacy_delete_action">Eliminar</string>
     <string name="privacy_policy_updated">Última actualización de esta información: agosto de 2026.</string>
+
+    <!-- Lectura nativa de un único artículo -->
+    <string name="article_speech_listen">Escuchar</string>
+    <string name="article_speech_pause">Pausar</string>
+    <string name="article_speech_resume">Reanudar</string>
+    <string name="article_speech_stop">Detener</string>
+    <string name="article_speech_preparing_format">Preparando lectura… · Artículo %1$s</string>
+    <string name="article_speech_playing_format">Escuchando · Artículo %1$s</string>
+    <string name="article_speech_paused_format">Lectura pausada · Artículo %1$s</string>
+    <string name="article_speech_listen_description">Escuchar Artículo %1$s</string>
+    <string name="article_speech_pause_description">Pausar lectura del Artículo %1$s</string>
+    <string name="article_speech_resume_description">Reanudar lectura del Artículo %1$s</string>
+    <string name="article_speech_stop_description">Detener lectura del Artículo %1$s</string>
+    <string name="article_speech_playing_announcement">Reproduciendo Artículo %1$s</string>
+    <string name="article_speech_paused_announcement">Lectura del Artículo %1$s pausada</string>
+    <string name="article_speech_error_initialization">No se pudo iniciar el motor de lectura del dispositivo.</string>
+    <string name="article_speech_error_missing_language">No hay una voz en español instalada para la lectura.</string>
+    <string name="article_speech_error_unsupported_language">El motor de voz del dispositivo no admite español.</string>
+    <string name="article_speech_error_playback">No se pudo reproducir la lectura.</string>
 </resources>

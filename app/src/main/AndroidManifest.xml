@@ -6,6 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.AD_ID" />
 
+    <!-- Visibilidad del motor TTS predeterminado en Android 11 y posteriores. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".CodigoProcesalCivilApp"
         android:allowBackup="true"

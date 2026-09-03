@@ -87,6 +87,82 @@
                 tools:visibility="visible" />
 
             <LinearLayout
+                android:id="@+id/articleSpeechControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnListenArticle"
+                    style="@style/App.Button.Outlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/touch_target_min"
+                    android:text="@string/article_speech_listen"
+                    android:textAllCaps="false"
+                    app:icon="@drawable/baseline_volume_up_24"
+                    app:iconGravity="textStart"
+                    app:iconPadding="@dimen/space_s"
+                    app:iconTint="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:id="@+id/articleSpeechPlaybackControls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/articleSpeechStatus"
+                        style="@style/App.Text.Body.S"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        tools:text="Escuchando · Artículo 564" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPauseResumeArticle"
+                            style="@style/App.Button.Outlined"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:minHeight="@dimen/touch_target_min"
+                            android:text="@string/article_speech_pause"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/baseline_pause_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="@dimen/space_xs" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStopArticleSpeech"
+                            style="@style/App.Button.Text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:minHeight="@dimen/touch_target_min"
+                            android:text="@string/article_speech_stop"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/baseline_stop_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="@dimen/space_xs" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/relatedArticlesContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

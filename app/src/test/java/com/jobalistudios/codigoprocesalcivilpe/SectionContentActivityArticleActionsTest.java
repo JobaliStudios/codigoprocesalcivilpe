@@ -208,6 +208,23 @@ public class SectionContentActivityArticleActionsTest {
     }
 
     @Test
+    public void listenAction_isInDynamicHeaderAndNamesVisibleArticleForTalkBack() {
+        SectionContentActivity activity = launchArticle("564");
+        View speechControls = activity.findViewById(R.id.articleSpeechControls);
+        MaterialButton listen = activity.findViewById(R.id.btnListenArticle);
+
+        assertEquals(View.VISIBLE, speechControls.getVisibility());
+        assertEquals(View.VISIBLE, listen.getVisibility());
+        assertEquals(speechControls, listen.getParent());
+        assertEquals("Escuchar Artículo 564", listen.getContentDescription().toString());
+
+        activity.findViewById(R.id.btnNextArticle).performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        assertEquals("Escuchar Artículo 565", listen.getContentDescription().toString());
+    }
+
+    @Test
     public void crossingBlockBoundary_startsResolvedDestinationAndFinishesReader() {
         ArticleRepository.Location[] boundary = firstBlockBoundary();
         SectionContentActivity activity = launchArticle(boundary[0].article.number);
