@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/space_l">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/quiz_choose_section" android:textColor="@color/quiz_text_title" android:textSize="@dimen/text_title_l" android:textStyle="bold" />
+    <LinearLayout android:id="@+id/quizSectionList" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="@dimen/space_m" />
+</LinearLayout>

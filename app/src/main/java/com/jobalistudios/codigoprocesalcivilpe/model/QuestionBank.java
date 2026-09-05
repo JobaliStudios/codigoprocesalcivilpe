@@ -35,7 +35,8 @@ public class QuestionBank {
         return allQuestions.subList(0, Math.min(count, allQuestions.size()));
     }
 
-    private static List<QuestionModel> getQuestions(Context context) {
+    /** Returns the local, immutable question bank without choosing a session subset. */
+    public static List<QuestionModel> getQuestions(Context context) {
         if (cachedQuestions == null) {
             synchronized (QuestionBank.class) {
                 if (cachedQuestions == null) {

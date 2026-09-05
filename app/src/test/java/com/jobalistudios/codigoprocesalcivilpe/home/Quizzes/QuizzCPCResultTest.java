@@ -55,18 +55,11 @@ public class QuizzCPCResultTest {
         Intent reviewIntent = Shadows.shadowOf(activity).getNextStartedActivity();
         assertNotNull(reviewIntent);
         assertEquals(
-                QuizzCPCReviewErrors.class.getName(),
+                QuizzCPCQuestions.class.getName(),
                 reviewIntent.getComponent().getClassName()
         );
-        assertEquals(4, reviewIntent.getIntExtra(QuizSessionContract.EXTRA_SCORE, -1));
-        assertEquals(15_000L, reviewIntent.getLongExtra(
-                QuizSessionContract.EXTRA_ELAPSED_MILLIS,
-                -1L
-        ));
-        assertEquals(
-                error.getQuestionText(),
-                QuizSessionContract.getIncorrectAnswers(reviewIntent).get(0).getQuestionText()
-        );
+        assertEquals(QuizPracticeMode.PREVIOUS_ERRORS,
+                QuizSessionContract.getConfig(reviewIntent).getMode());
     }
 
     @Test

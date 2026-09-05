@@ -250,7 +250,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/quiz_cpc_time"
+                                    android:text="@string/quiz_points_obtained"
                                     android:textColor="@color/quiz_text_secondary" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>

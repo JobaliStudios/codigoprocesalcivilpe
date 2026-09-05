@@ -103,6 +103,27 @@
                 app:indicatorColor="@color/quiz_progress_indicator"
                 app:trackColor="@color/quiz_progress_track" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvQuizStreak"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/quiz_text_secondary"
+                    android:textSize="@dimen/text_body_m" />
+                <TextView
+                    android:id="@+id/tvQuizPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/quiz_text_primary"
+                    android:textSize="@dimen/text_body_m"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

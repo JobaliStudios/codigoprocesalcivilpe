@@ -17,27 +17,44 @@ import java.util.Map;
 
 public class QuizzCPCViewModel extends AndroidViewModel {
 
+    private final QuizErrorStore errorStore;
+
     public QuizzCPCViewModel(Application application) {
+        this(application, new QuizErrorStore(application));
+    }
+
+    QuizzCPCViewModel(Application application, QuizErrorStore errorStore) {
         super(application);
+        this.errorStore = errorStore;
     }
 
     private final MutableLiveData<List<QuestionModel>> questionsLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>(0);
-    private final MutableLiveData<Integer> score = new MutableLiveData<>(0);
     private final MutableLiveData<QuestionModel> currentQuestionLiveData = new MutableLiveData<>();
     private final Map<Integer, QuizAnswerResult> answersByPosition = new LinkedHashMap<>();
     private int totalQuestions = 0;
+    private QuizSessionConfig config;
+    private QuizSessionStats stats;
+    private int currentAnswerPoints;
 
     public void initQuestions(int questionCount) {
-        if (questionsLiveData.getValue() == null) {
-            List<QuestionModel> questions = QuestionBank.getRandomQuestions(getApplication(), questionCount);
-            questionsLiveData.setValue(questions);
-            totalQuestions = questions.size();
-            currentQuestionIndex.setValue(0);
-            score.setValue(0);
-            answersByPosition.clear();
-            updateCurrentQuestion();
+        initSession(new QuizSessionConfig(
+                        QuizPracticeMode.ALL, null, questionCount, true, new ArrayList<>()),
+                QuestionBank.getRandomQuestions(getApplication(), questionCount));
+    }
+
+    public void initSession(QuizSessionConfig config, List<QuestionModel> questions) {
+        if (questionsLiveData.getValue() != null) {
+            return;
         }
+        this.config = config;
+        questionsLiveData.setValue(new ArrayList<>(questions));
+        totalQuestions = questions.size();
+        stats = new QuizSessionStats(totalQuestions);
+        currentQuestionIndex.setValue(0);
+        currentAnswerPoints = 0;
+        answersByPosition.clear();
+        updateCurrentQuestion();
     }
 
     public LiveData<QuestionModel> getCurrentQuestionLiveData() {
@@ -50,8 +67,7 @@ public class QuizzCPCViewModel extends AndroidViewModel {
     }
 
     public int getScore() {
-        Integer currentScore = score.getValue();
-        return currentScore != null ? currentScore : 0;
+        return getStats().getCorrect();
     }
 
     public int getTotalQuestions() {
@@ -94,8 +110,11 @@ public class QuizzCPCViewModel extends AndroidViewModel {
                 isCorrect
         ));
 
-        if (isCorrect) {
-            score.setValue(getScore() + 1);
+        currentAnswerPoints = getStats().recordAnswer(isCorrect);
+        if (isCorrect && config != null && config.getMode() == QuizPracticeMode.PREVIOUS_ERRORS) {
+            errorStore.resolve(currentQuestion);
+        } else if (!isCorrect) {
+            errorStore.recordIncorrect(currentQuestion);
         }
 
         return isCorrect;
@@ -107,6 +126,21 @@ public class QuizzCPCViewModel extends AndroidViewModel {
 
     public int getAnswerCount() {
         return answersByPosition.size();
+    }
+
+    public QuizSessionStats getStats() {
+        if (stats == null) {
+            stats = new QuizSessionStats(totalQuestions);
+        }
+        return stats;
+    }
+
+    public int getCurrentAnswerPoints() {
+        return currentAnswerPoints;
+    }
+
+    public QuizSessionConfig getConfig() {
+        return config;
     }
 
     public List<QuizAnswerResult> getIncorrectAnswers() {

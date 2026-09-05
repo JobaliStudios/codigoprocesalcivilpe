@@ -13,14 +13,18 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuizAnswerResult;
+import com.jobalistudios.codigoprocesalcivilpe.model.QuestionBank;
+import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class QuizzCPCResult extends AppCompatActivity {
     private int score;
     private int total;
     private long elapsedMillis;
+    private QuizSessionConfig config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,13 @@ public class QuizzCPCResult extends AppCompatActivity {
         );
         ArrayList<QuizAnswerResult> incorrectAnswers =
                 QuizSessionContract.getIncorrectAnswers(getIntent());
+        QuizSessionStats stats = QuizSessionContract.getStats(getIntent());
+        config = QuizSessionContract.getConfig(getIntent());
+
+        if (stats != null) {
+            score = stats.getCorrect();
+            total = Math.max(stats.getTotal(), 1);
+        }
 
         int wrongAnswers = Math.max(total - score, 0);
         int percentage = Math.round((score * 100f) / total);
@@ -51,15 +62,17 @@ public class QuizzCPCResult extends AppCompatActivity {
         tvResultTitle.setText(getTitleByPerformance(percentage));
         tvCorrectCount.setText(String.valueOf(score));
         tvWrongCount.setText(String.valueOf(wrongAnswers));
-        tvTime.setText(formatElapsedTime(elapsedMillis));
-        tvRecommendation.setText(getRecommendation(percentage));
+        tvTime.setText(stats == null ? formatElapsedTime(elapsedMillis)
+                : getString(R.string.quiz_points_format, stats.getScore()));
+        tvRecommendation.setText(stats == null ? getRecommendation(percentage)
+                : getRecommendation(percentage) + "\n" + getString(R.string.quiz_streak_format, stats.getBestStreak()));
         configureReviewAction(incorrectAnswers);
 
         circularScore.setMax(100);
         circularScore.setProgress(percentage);
 
         findViewById(R.id.btnRetry).setOnClickListener(v -> {
-            startActivity(new Intent(this, QuizzCPCStartScreen.class));
+            startActivity(QuizSessionContract.createQuestionIntent(this, config.forAnotherRound()));
             finish();
         });
 
@@ -101,12 +114,8 @@ public class QuizzCPCResult extends AppCompatActivity {
                     R.string.quiz_cpc_review_card_description,
                     errorCount
             ));
-            card.setOnClickListener(view -> startActivity(QuizSessionContract.createReviewIntent(
-                    this,
-                    score,
-                    total,
-                    elapsedMillis,
-                    incorrectAnswers
+            card.setOnClickListener(view -> startActivity(QuizSessionContract.createQuestionIntent(
+                    this, QuizSessionConfig.previousErrors().withSessionErrorIds(sessionErrorIds(incorrectAnswers))
             )));
             return;
         }
@@ -126,6 +135,19 @@ public class QuizzCPCResult extends AppCompatActivity {
             title.setText(R.string.quiz_cpc_review_errors);
             summary.setText(R.string.quiz_cpc_review_unavailable);
         }
+    }
+
+    private List<String> sessionErrorIds(List<QuizAnswerResult> answers) {
+        List<String> ids = new ArrayList<>();
+        for (QuizAnswerResult answer : answers) {
+            for (QuestionModel question : QuestionBank.getQuestions(this)) {
+                if (answer.getQuestionText().equals(question.getQuestionText())) {
+                    ids.add(QuizQuestionIdentity.forQuestion(question));
+                    break;
+                }
+            }
+        }
+        return ids;
     }
 
     private String formatElapsedTime(long elapsedMs) {

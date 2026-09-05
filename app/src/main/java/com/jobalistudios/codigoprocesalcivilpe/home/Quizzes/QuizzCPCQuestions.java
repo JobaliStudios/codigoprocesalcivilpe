@@ -37,6 +37,8 @@ public class QuizzCPCQuestions extends AppCompatActivity {
     private TextView tvPercentage;
     private TextView tvArticle;
     private TextView tvAnswerFeedback;
+    private TextView tvQuizStreak;
+    private TextView tvQuizPoints;
     private MaterialCardView cardFeedback;
     private MaterialButton btnNext;
     private LinearLayout optionsContainer;
@@ -61,6 +63,8 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         tvPercentage = findViewById(R.id.tvPercentage);
         tvArticle = findViewById(R.id.tvArticle);
         tvAnswerFeedback = findViewById(R.id.tvAnswerFeedback);
+        tvQuizStreak = findViewById(R.id.tvQuizStreak);
+        tvQuizPoints = findViewById(R.id.tvQuizPoints);
         cardFeedback = findViewById(R.id.cardFeedback);
         btnNext = findViewById(R.id.btnNext);
         optionsContainer = findViewById(R.id.optionsContainer);
@@ -69,11 +73,17 @@ public class QuizzCPCQuestions extends AppCompatActivity {
                 ? savedInstanceState.getLong(STATE_START_TIME, System.currentTimeMillis())
                 : System.currentTimeMillis();
 
-        int questionCount = savedInstanceState != null
-                ? savedInstanceState.getInt(STATE_QUESTION_COUNT, getIntent().getIntExtra("QUESTION_COUNT", 10))
-                : getIntent().getIntExtra("QUESTION_COUNT", 10);
-
-        viewModel.initQuestions(questionCount);
+        QuizSessionConfig config = QuizSessionContract.getConfig(getIntent());
+        if (getIntent().hasExtra("QUESTION_COUNT")) {
+            config = new QuizSessionConfig(QuizPracticeMode.ALL, null,
+                    getIntent().getIntExtra("QUESTION_COUNT", 10), true, new ArrayList<>());
+        }
+        QuizSelection selection = QuizSelectorFactory.create(this).select(config);
+        if (!selection.isAvailable()) {
+            finish();
+            return;
+        }
+        viewModel.initSession(config, selection.getQuestions());
 
         progressBar.setMax(viewModel.getTotalQuestions());
 
@@ -117,6 +127,7 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         tvProgressText.setText(getString(R.string.quiz_cpc_progress_text, currentQuestionNumber, totalQuestions));
         int percentage = Math.round((currentQuestionNumber * 100f) / totalQuestions);
         tvPercentage.setText(getString(R.string.quiz_cpc_percentage_format, percentage));
+        renderStats();
 
         optionsContainer.removeAllViews();
         optionCards.clear();
@@ -198,6 +209,7 @@ public class QuizzCPCQuestions extends AppCompatActivity {
         playAnswerSound(isCorrect);
 
         showSelectedAnswer(question, selectedIndex, isCorrect);
+        renderStats();
     }
 
     private void showSelectedAnswer(
@@ -232,24 +244,26 @@ public class QuizzCPCQuestions extends AppCompatActivity {
             }
         }
 
-        showAnswerFeedback(isCorrect, question.getRelatedArticle());
+        showAnswerFeedback(isCorrect, question);
         btnNext.setEnabled(true);
     }
 
-    private void showAnswerFeedback(boolean isCorrect, String article) {
+    private void showAnswerFeedback(boolean isCorrect, QuestionModel question) {
         cardFeedback.setVisibility(View.VISIBLE);
         if (isCorrect) {
             cardFeedback.setCardBackgroundColor(getColor(R.color.quiz_feedback_success_bg));
             cardFeedback.setStrokeColor(getColor(R.color.quiz_correct));
             tvAnswerFeedback.setTextColor(getColor(R.color.quiz_correct));
-            tvAnswerFeedback.setText(getString(R.string.quiz_cpc_feedback_correct));
+            tvAnswerFeedback.setText(getString(R.string.quiz_feedback_correct_points,
+                    viewModel.getCurrentAnswerPoints(), viewModel.getStats().getCurrentStreak()));
             return;
         }
 
         cardFeedback.setCardBackgroundColor(getColor(R.color.quiz_feedback_error_bg));
         cardFeedback.setStrokeColor(getColor(R.color.quiz_wrong));
         tvAnswerFeedback.setTextColor(getColor(R.color.quiz_wrong));
-        tvAnswerFeedback.setText(getString(R.string.quiz_cpc_feedback_wrong_with_article, article));
+        String correctAnswer = question.getOptions().get(question.getCorrectAnswerIndex());
+        tvAnswerFeedback.setText(getString(R.string.quiz_feedback_wrong_answer, correctAnswer));
     }
 
     private String formatArticle(String relatedArticle) {
@@ -262,8 +276,8 @@ public class QuizzCPCQuestions extends AppCompatActivity {
     private void showResult() {
         Intent intent = QuizSessionContract.createResultIntent(
                 this,
-                viewModel.getScore(),
-                viewModel.getTotalQuestions(),
+                viewModel.getStats(),
+                viewModel.getConfig() == null ? QuizSessionConfig.all() : viewModel.getConfig(),
                 System.currentTimeMillis() - startTimeMillis,
                 viewModel.getIncorrectAnswers()
         );
@@ -317,6 +331,11 @@ public class QuizzCPCQuestions extends AppCompatActivity {
 
     private int dp(int value) {
         return Math.round(getResources().getDisplayMetrics().density * value);
+    }
+
+    private void renderStats() {
+        tvQuizStreak.setText(getString(R.string.quiz_streak_format, viewModel.getStats().getCurrentStreak()));
+        tvQuizPoints.setText(getString(R.string.quiz_points_format, viewModel.getStats().getScore()));
     }
 
     private int dimensionPixelSize(int resourceId) {

@@ -12,29 +12,32 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(qualifiers = "night")
 public class QuizzCPCStartScreenThemeTest {
 
     @Test
-    public void changingQuestionCount_keepsNightPaletteForSelectedAndDefaultCards() {
+    public void practiceCardsKeepNightPaletteAndQuickReviewStartsTenQuestionMode() {
         QuizzCPCStartScreen activity = Robolectric
                 .buildActivity(QuizzCPCStartScreen.class)
                 .setup()
                 .get();
-        MaterialCardView option5 = activity.findViewById(R.id.option5);
-        MaterialCardView option10 = activity.findViewById(R.id.option10);
+        MaterialCardView all = activity.findViewById(R.id.cardQuizAll);
+        MaterialCardView favorites = activity.findViewById(R.id.cardQuizFavorites);
 
-        option5.performClick();
+        activity.findViewById(R.id.btnQuickReview).performClick();
 
         assertEquals(
-                ContextCompat.getColor(activity, R.color.quiz_option_selected_bg),
-                option5.getCardBackgroundColor().getDefaultColor()
+                ContextCompat.getColor(activity, R.color.quiz_card_surface),
+                all.getCardBackgroundColor().getDefaultColor()
         );
         assertEquals(
-                ContextCompat.getColor(activity, R.color.quiz_option_default_bg),
-                option10.getCardBackgroundColor().getDefaultColor()
+                ContextCompat.getColor(activity, R.color.quiz_card_surface),
+                favorites.getCardBackgroundColor().getDefaultColor()
         );
+        assertEquals(QuizPracticeMode.QUICK_REVIEW,
+                QuizSessionContract.getConfig(shadowOf(activity).getNextStartedActivity()).getMode());
     }
 }
