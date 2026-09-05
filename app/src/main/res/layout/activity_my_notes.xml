@@ -10,10 +10,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorSurface"
-        android:title="@string/my_notes_title"
+        app:title="@string/my_notes_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationContentDescription="@string/my_notes_back_accessibility"
         app:navigationIcon="@drawable/baseline_arrow_back_24" />
 
     <LinearLayout

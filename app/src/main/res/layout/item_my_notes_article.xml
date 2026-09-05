@@ -58,31 +58,19 @@
                 app:tint="@color/colorPrimary" />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
             android:id="@+id/myNotesFavorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_s"
+            android:drawablePadding="@dimen/space_s"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:text="@string/my_notes_favorite_label"
+            android:textAppearance="@style/App.Text.Body.M"
+            android:textStyle="bold"
             android:visibility="gone"
-            tools:visibility="visible">
-
-            <ImageView
-                android:layout_width="@dimen/icon_s"
-                android:layout_height="@dimen/icon_s"
-                android:contentDescription="@null"
-                android:src="@drawable/baseline_star_24"
-                app:tint="@color/colorPrimary" />
-
-            <TextView
-                style="@style/App.Text.Body.M"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_s"
-                android:text="@string/my_notes_favorite_label"
-                android:textStyle="bold" />
-        </LinearLayout>
+            app:drawableStartCompat="@drawable/baseline_star_24"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/myNotesContent"

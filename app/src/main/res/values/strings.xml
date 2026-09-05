@@ -875,6 +875,7 @@
 
     <!-- Mis apuntes -->
     <string name="my_notes_title">Mis apuntes</string>
+    <string name="my_notes_back_accessibility">Volver</string>
     <string name="my_notes_subtitle">Tus artículos guardados, resaltados y notas, organizados para estudiar.</string>
     <string name="my_notes_open_action">Mis apuntes</string>
     <string name="my_notes_open_accessibility">Abrir Mis apuntes</string>
