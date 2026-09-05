@@ -872,4 +872,22 @@
     <string name="go_to_article_error_empty">Ingresa un número de artículo.</string>
     <string name="go_to_article_error_invalid">Ingresa un número de artículo válido.</string>
     <string name="go_to_article_error_not_found">No encontramos el artículo %1$s.</string>
+
+    <!-- Mis apuntes -->
+    <string name="my_notes_title">Mis apuntes</string>
+    <string name="my_notes_subtitle">Tus artículos guardados, resaltados y notas, organizados para estudiar.</string>
+    <string name="my_notes_open_action">Mis apuntes</string>
+    <string name="my_notes_open_accessibility">Abrir Mis apuntes</string>
+    <string name="my_notes_share_action">Compartir apuntes</string>
+    <string name="my_notes_share_accessibility">Compartir mis apuntes</string>
+    <string name="my_notes_share_chooser">Compartir mis apuntes</string>
+    <string name="my_notes_empty_title">Aún no tienes apuntes</string>
+    <string name="my_notes_empty_body">Guarda artículos, realiza resaltados o añade notas mientras estudias.</string>
+    <string name="my_notes_article_number">Artículo %1$s</string>
+    <string name="my_notes_article_accessibility">Artículo %1$s, %2$s</string>
+    <string name="my_notes_article_unavailable">Este artículo ya no está disponible.</string>
+    <string name="my_notes_favorite_label">Favorito</string>
+    <string name="my_notes_highlight_label">Resaltado</string>
+    <string name="my_notes_personal_note_label">Mi nota</string>
+    <string name="my_notes_article_note_label">Nota del artículo</string>
 </resources>

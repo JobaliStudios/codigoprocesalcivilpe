@@ -25,10 +25,21 @@
             android:orientation="vertical"
             android:padding="@dimen/space_m">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonMyNotes"
+                style="@style/App.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/my_notes_open_accessibility"
+                android:text="@string/my_notes_open_action"
+                app:icon="@drawable/baseline_note_24"
+                app:iconGravity="textStart" />
+
             <SearchView
                 android:id="@+id/favoriteSearchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
                 android:background="@drawable/bg_search_field"
                 android:iconifiedByDefault="false"
                 android:minHeight="@dimen/touch_target_min"

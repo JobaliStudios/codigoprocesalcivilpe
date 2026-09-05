@@ -36,6 +36,16 @@ public final class ArticleQuickNotes {
         return ID_PREFIX + articleNumber;
     }
 
+    /** Recupera la identidad estable del artículo sin depender de offsets antiguos. */
+    @Nullable
+    public static String articleNumberFromId(@Nullable String highlightId) {
+        if (highlightId == null || !highlightId.startsWith(ID_PREFIX)) {
+            return null;
+        }
+        String number = highlightId.substring(ID_PREFIX.length()).trim();
+        return number.isEmpty() ? null : number;
+    }
+
     @Nullable
     public Highlight get(@NonNull Article article) {
         return manager.find(blockKey, idFor(article.number));

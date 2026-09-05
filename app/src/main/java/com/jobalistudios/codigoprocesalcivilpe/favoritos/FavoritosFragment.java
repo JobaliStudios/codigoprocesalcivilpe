@@ -1,5 +1,6 @@
 package com.jobalistudios.codigoprocesalcivilpe.favoritos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.apuntes.MyNotesActivity;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentFavoritosBinding;
 
 import java.util.List;
@@ -195,6 +197,9 @@ public class FavoritosFragment extends Fragment {
     }
 
     private void setupCta() {
+        binding.buttonMyNotes.setOnClickListener(view ->
+                startActivity(new Intent(requireContext(), MyNotesActivity.class))
+        );
         binding.buttonExplorarCodigos.setOnClickListener(view ->
                 Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main)
                         .navigate(R.id.navigation_home)
