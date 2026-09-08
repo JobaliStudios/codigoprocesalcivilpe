@@ -39,7 +39,7 @@ public class SectionContentActivityCrossReferenceTest {
     }
 
     @Test
-    public void realArticle495_showsLinksAndRelatedChipsWithSafeBackStackIntent() {
+    public void realArticle495_relatedArticleReplacesContentWithoutStartingAnotherReader() {
         Application application = ApplicationProvider.getApplicationContext();
         ArticleNavigationResolver.Target source =
                 ArticleNavigationResolver.resolve(application, "495");
@@ -67,16 +67,59 @@ public class SectionContentActivityCrossReferenceTest {
         assertEquals("Art. 424", ((Chip) chips.getChildAt(0)).getText().toString());
 
         chips.getChildAt(0).performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
         Intent started = Shadows.shadowOf(activity).getNextStartedActivity();
-        assertNotNull(started);
-        assertEquals(
-                ArticleNavigationResolver.resolve(application, "424").getOffsetInBlock(),
-                started.getIntExtra(SectionContentActivity.EXTRA_SCROLL_TO_OFFSET, -1)
-        );
-        int destructiveFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_NEW_TASK;
-        assertEquals(0, started.getFlags() & destructiveFlags);
+        assertEquals(null, started);
+        assertEquals("Artículo 424",
+                ((TextView) activity.findViewById(R.id.currentArticleNumber)).getText().toString());
+        assertFalse(activity.isFinishing());
+    }
+
+    @Test
+    public void onNewIntent_reusesReaderAndUpdatesDestination() {
+        Application application = ApplicationProvider.getApplicationContext();
+        ArticleNavigationResolver.Target source =
+                ArticleNavigationResolver.resolve(application, "330");
+        ArticleNavigationResolver.Target target =
+                ArticleNavigationResolver.resolve(application, "424");
+        assertNotNull(source);
+        assertNotNull(target);
+        controller = Robolectric.buildActivity(
+                SectionContentActivity.class,
+                source.createIntent(application)
+        ).create().start().resume().visible();
+
+        SectionContentActivity sameActivity = controller.get();
+        controller.newIntent(target.createIntent(application));
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        assertEquals(sameActivity, controller.get());
+        assertEquals("Artículo 424", ((TextView) sameActivity.findViewById(
+                R.id.currentArticleNumber)).getText().toString());
+    }
+
+    @Test
+    public void crossReference_keepsLogicalHistoryInsideSameReader() {
+        Application application = ApplicationProvider.getApplicationContext();
+        ArticleNavigationResolver.Target source =
+                ArticleNavigationResolver.resolve(application, "330");
+        assertNotNull(source);
+        controller = Robolectric.buildActivity(
+                SectionContentActivity.class,
+                source.createIntent(application)
+        ).create().start().resume().visible();
+        SectionContentActivity activity = controller.get();
+
+        activity.openArticleReference("424");
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+        assertEquals("Artículo 424", ((TextView) activity.findViewById(
+                R.id.currentArticleNumber)).getText().toString());
+
+        activity.getOnBackPressedDispatcher().onBackPressed();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        assertEquals("Artículo 330", ((TextView) activity.findViewById(
+                R.id.currentArticleNumber)).getText().toString());
         assertFalse(activity.isFinishing());
     }
 }

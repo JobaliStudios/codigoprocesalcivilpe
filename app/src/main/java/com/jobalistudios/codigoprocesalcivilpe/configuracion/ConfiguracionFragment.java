@@ -70,8 +70,7 @@ public class ConfiguracionFragment extends Fragment {
         binding.switchModoOscuro.setOnCheckedChangeListener((buttonView, isChecked) -> {
             ThemePreferenceManager.setDarkModeEnabled(requireContext(), isChecked);
             AppCompatDelegate.setDefaultNightMode(
-                    isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
-            );
+                    ThemePreferenceManager.getAppNightMode(requireContext()));
         });
     }
 

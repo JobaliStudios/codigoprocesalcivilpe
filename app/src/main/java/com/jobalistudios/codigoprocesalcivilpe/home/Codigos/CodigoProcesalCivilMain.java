@@ -1,8 +1,9 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Codigos;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
@@ -10,7 +11,7 @@ import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository;
 
-public class CodigoProcesalCivilMain extends AppCompatActivity {
+public class CodigoProcesalCivilMain extends AppBaseActivity {
 
     private AdView adView;
 

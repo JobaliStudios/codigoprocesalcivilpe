@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.text.style.RelativeSizeSpan;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -147,6 +148,37 @@ public class SectionTextFormatterTest {
                 referenceStart + 1,
                 NormativeCalloutSpan.class
         ).length > 0);
+    }
+
+    @Test
+    public void readerTypography_scalesHeadingAndNormativeCalloutWithoutChangingLegalText() {
+        Context context = ApplicationProvider.getApplicationContext();
+        String note = "* Artículo modificado por la Ley 32377, publicada el 7 de junio de 2025.";
+        String original = "Artículo 834.- Inclusión de otro heredero\n\nTexto normal.\n\n" + note;
+        ReaderTypography normal = ReaderTypography.create(20f, 1f);
+        ReaderTypography enlarged = ReaderTypography.create(20f, 1.5f);
+
+        SpannableString normalText = SectionTextFormatter.buildFormattedText(
+                context, original, normal);
+        SpannableString enlargedText = SectionTextFormatter.buildFormattedText(
+                context, original, enlarged);
+
+        assertEquals(original, normalText.toString());
+        assertEquals(original, enlargedText.toString());
+        RelativeSizeSpan[] headings = enlargedText.getSpans(
+                0, "Artículo 834".length(), RelativeSizeSpan.class);
+        assertEquals(1, headings.length);
+        assertEquals(ReaderTypography.HEADING_SCALE,
+                headings[0].getSizeChange(), 0.001f);
+        int noteStart = original.indexOf(note);
+        NormativeCalloutSpan normalCallout = normalText.getSpans(
+                noteStart, original.length(), NormativeCalloutSpan.class)[0];
+        NormativeCalloutSpan enlargedCallout = enlargedText.getSpans(
+                noteStart, original.length(), NormativeCalloutSpan.class)[0];
+        assertEquals(normalCallout.getTitleTextSizePx() * 1.5f,
+                enlargedCallout.getTitleTextSizePx(), 0.001f);
+        assertEquals(normalCallout.getSummaryTextSizePx() * 1.5f,
+                enlargedCallout.getSummaryTextSizePx(), 0.001f);
     }
 
     private boolean hasCalloutAt(SpannableString text, int offset) {

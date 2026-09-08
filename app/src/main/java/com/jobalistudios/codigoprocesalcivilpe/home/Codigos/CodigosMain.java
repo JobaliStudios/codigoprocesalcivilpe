@@ -1,17 +1,18 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Codigos;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.card.MaterialCardView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
-public class CodigosMain extends AppCompatActivity {
+public class CodigosMain extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

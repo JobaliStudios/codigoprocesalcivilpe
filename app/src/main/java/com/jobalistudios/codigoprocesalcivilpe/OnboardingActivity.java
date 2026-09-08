@@ -9,11 +9,10 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends AppBaseActivity {
 
     private static final String STATE_CURRENT_PAGE = "current_page";
 

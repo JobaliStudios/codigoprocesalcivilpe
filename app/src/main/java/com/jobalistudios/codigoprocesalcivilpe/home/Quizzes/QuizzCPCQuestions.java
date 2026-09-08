@@ -1,5 +1,7 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
@@ -12,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class QuizzCPCQuestions extends AppCompatActivity {
+public class QuizzCPCQuestions extends AppBaseActivity {
     private MediaPlayer correctSound;
     private MediaPlayer wrongSound;
     private QuizzCPCViewModel viewModel;

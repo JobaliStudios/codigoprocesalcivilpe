@@ -1,18 +1,19 @@
 package com.jobalistudios.codigoprocesalcivilpe.privacidad;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.ActivityPrivacyCenterBinding;
 
-public class PrivacyCenterActivity extends AppCompatActivity {
+public class PrivacyCenterActivity extends AppBaseActivity {
 
     private ActivityPrivacyCenterBinding binding;
     private LocalDataManager localDataManager;

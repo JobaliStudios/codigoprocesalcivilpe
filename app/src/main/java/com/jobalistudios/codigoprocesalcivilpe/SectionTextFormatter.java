@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.TypedValue;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.TtsSpan;
 
@@ -33,9 +33,19 @@ public final class SectionTextFormatter {
     }
 
     public static SpannableString buildFormattedText(Context context, String content) {
+        ReaderTypography typography = ReaderTypography.create(
+                context.getResources().getDimension(R.dimen.text_body), 1f);
+        return buildFormattedText(context, content, typography);
+    }
+
+    public static SpannableString buildFormattedText(
+            Context context,
+            String content,
+            ReaderTypography typography
+    ) {
         SpannableString spannable = new SpannableString(content);
         applyArticleTitleFormatting(context, spannable);
-        applyNormativeAnnotationFormatting(context, spannable);
+        applyNormativeAnnotationFormatting(context, spannable, typography);
         return spannable;
     }
 
@@ -53,6 +63,8 @@ public final class SectionTextFormatter {
             int end = articleMatcher.end();
             spannable.setSpan(new ForegroundColorSpan(colorArticulo), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new RelativeSizeSpan(ReaderTypography.HEADING_SCALE),
+                    start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
     }
@@ -60,6 +72,15 @@ public final class SectionTextFormatter {
     public static void applyNormativeAnnotationFormatting(
             Context context,
             SpannableString spannable
+    ) {
+        applyNormativeAnnotationFormatting(context, spannable, ReaderTypography.create(
+                context.getResources().getDimension(R.dimen.text_body), 1f));
+    }
+
+    public static void applyNormativeAnnotationFormatting(
+            Context context,
+            SpannableString spannable,
+            ReaderTypography typography
     ) {
         int backgroundColor = ContextCompat.getColor(context, R.color.legal_update_background);
         int borderColor = ContextCompat.getColor(context, R.color.legal_update_border);
@@ -69,16 +90,8 @@ public final class SectionTextFormatter {
         float borderWidth = context.getResources().getDimension(R.dimen.stroke_width_thin);
         int horizontalPadding = context.getResources().getDimensionPixelSize(R.dimen.space_m);
         int verticalPadding = context.getResources().getDimensionPixelSize(R.dimen.space_s);
-        float titleTextSize = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_SP,
-                11,
-                context.getResources().getDisplayMetrics()
-        );
-        float summaryTextSize = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_SP,
-                12,
-                context.getResources().getDisplayMetrics()
-        );
+        float titleTextSize = typography.getAnnotationTitleSizePx();
+        float summaryTextSize = typography.getAnnotationSummarySizePx();
 
         for (NormativeAnnotation annotation
                 : NORMATIVE_ANNOTATION_PARSER.parse(spannable.toString())) {

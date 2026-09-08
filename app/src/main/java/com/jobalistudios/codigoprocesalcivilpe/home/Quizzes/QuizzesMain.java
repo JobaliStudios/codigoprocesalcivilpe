@@ -1,15 +1,16 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.card.MaterialCardView;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.ActivityQuizzesMainBinding;
 
-public class QuizzesMain extends AppCompatActivity {
+public class QuizzesMain extends AppBaseActivity {
 
     private ActivityQuizzesMainBinding binding;
 

@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 
 @SuppressLint("CustomSplashScreen")
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends AppBaseActivity {
 
     private static final int MIN_SPLASH_TIME_MS = 3000;
 

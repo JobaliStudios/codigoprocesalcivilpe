@@ -3,6 +3,7 @@ package com.jobalistudios.codigoprocesalcivilpe.navigation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,8 @@ public class ArticleNavigationResolverTest {
         assertEquals("506-A", target.getNumber());
         Intent intent = target.createIntent(context);
         assertEquals(SectionContentActivity.class.getName(), intent.getComponent().getClassName());
+        assertTrue((intent.getFlags() & Intent.FLAG_ACTIVITY_SINGLE_TOP) != 0);
+        assertTrue((intent.getFlags() & Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) != 0);
         assertEquals(target.getOffsetInBlock(), intent.getIntExtra(
                 SectionContentActivity.EXTRA_SCROLL_TO_OFFSET, -1));
         assertNotNull(intent.getStringExtra(LegalHierarchyRepository.EXTRA_NODE_ID));

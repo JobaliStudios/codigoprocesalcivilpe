@@ -81,6 +81,14 @@ public final class NormativeCalloutSpan implements
         return actionLabel;
     }
 
+    public float getTitleTextSizePx() {
+        return titleTextSize;
+    }
+
+    public float getSummaryTextSizePx() {
+        return summaryTextSize;
+    }
+
     @Override
     public int getLeadingMargin(boolean first) {
         return Math.round(borderWidth) + horizontalPadding;

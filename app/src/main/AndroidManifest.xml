@@ -31,7 +31,9 @@
 
         <activity
             android:name=".SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -41,49 +43,89 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_main2" />
+            android:label="@string/title_activity_main2"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
         <activity
             android:name=".OnboardingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
         <activity
             android:name=".home.Codigos.CodigosMain"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
         <activity
             android:name=".home.Codigos.CodigoProcesalCivilMain"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
         <activity
             android:name=".home.Quizzes.QuizzesMain"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
         <activity
             android:name=".home.Quizzes.QuizzCPCStartScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
         <activity
             android:name=".home.Quizzes.QuizzCPCQuestions"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
         <activity
             android:name=".home.Quizzes.QuizzCPCResult"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
         <activity
             android:name=".home.Quizzes.QuizzCPCReviewErrors"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
         <activity
             android:name=".SectionContentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
         <activity
             android:name=".navigation.SectionListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
         <activity
             android:name=".privacidad.PrivacyCenterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
         <activity
             android:name=".apuntes.MyNotesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
+        </activity>
 
     </application>
 

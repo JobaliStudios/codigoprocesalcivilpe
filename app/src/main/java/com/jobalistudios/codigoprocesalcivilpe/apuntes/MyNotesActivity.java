@@ -1,11 +1,12 @@
 package com.jobalistudios.codigoprocesalcivilpe.apuntes;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -17,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 /** Consulta y comparte el contenido personal existente, sin editarlo ni persistir copias. */
-public final class MyNotesActivity extends AppCompatActivity {
+public final class MyNotesActivity extends AppBaseActivity {
     private ActivityMyNotesBinding binding;
     private UserNotesAggregator aggregator;
     private MyNotesAdapter adapter;

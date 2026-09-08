@@ -1,5 +1,7 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -7,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class QuizzCPCResult extends AppCompatActivity {
+public class QuizzCPCResult extends AppBaseActivity {
     private int score;
     private int total;
     private long elapsedMillis;

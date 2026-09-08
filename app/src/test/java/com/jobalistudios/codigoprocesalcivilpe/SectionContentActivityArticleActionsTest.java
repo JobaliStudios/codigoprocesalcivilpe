@@ -225,17 +225,17 @@ public class SectionContentActivityArticleActionsTest {
     }
 
     @Test
-    public void crossingBlockBoundary_startsResolvedDestinationAndFinishesReader() {
+    public void crossingBlockBoundary_replacesContentInSameReader() {
         ArticleRepository.Location[] boundary = firstBlockBoundary();
         SectionContentActivity activity = launchArticle(boundary[0].article.number);
 
         activity.findViewById(R.id.btnNextArticle).performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
 
         Intent started = Shadows.shadowOf(activity).getNextStartedActivity();
-        assertNotNull(started);
-        assertEquals(boundary[1].article.offsetInBlock, started.getIntExtra(
-                SectionContentActivity.EXTRA_SCROLL_TO_OFFSET, -1));
-        assertTrue(activity.isFinishing());
+        assertEquals(null, started);
+        assertHeader(activity, boundary[1].article);
+        assertFalse(activity.isFinishing());
     }
 
     private SectionContentActivity launchArticle(String number) {

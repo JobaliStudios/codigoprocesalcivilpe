@@ -21,8 +21,8 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
@@ -55,12 +55,14 @@ import com.jobalistudios.codigoprocesalcivilpe.referencias.RelatedArticlesResolv
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ResolvedArticleCrossReference;
 
 import java.util.Collections;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class SectionContentActivity extends AppCompatActivity {
+public class SectionContentActivity extends AppBaseActivity {
 
     public static final String EXTRA_LAYOUT_RES_ID = "EXTRA_LAYOUT_RES_ID";
     public static final String EXTRA_TEXT_RES_ID = "EXTRA_TEXT_RES_ID";
@@ -83,6 +85,10 @@ public class SectionContentActivity extends AppCompatActivity {
     private static final long HISTORY_SCROLL_SETTLE_DELAY_MS = 350L;
     private static final String STATE_CURRENT_ARTICLE_NUMBER = "currentArticleNumber";
     private static final int MAX_RELATED_ARTICLES = 6;
+
+    private final Deque<Intent> logicalArticleHistory = new ArrayDeque<>();
+    private int currentTextResId;
+    private ReaderTypography readerTypography;
 
     private HighlightController highlightController;
     private SectionSearchController searchController;
@@ -137,6 +143,7 @@ public class SectionContentActivity extends AppCompatActivity {
             @StringRes int subtitleResId
     ) {
         return new Intent(context, SectionContentActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                 .putExtra(EXTRA_LAYOUT_RES_ID, layoutResId)
                 .putExtra(EXTRA_TEXT_RES_ID, textResId)
                 .putExtra(EXTRA_TITLE, titleResId)
@@ -148,10 +155,26 @@ public class SectionContentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int layoutResId = getIntent().getIntExtra(EXTRA_LAYOUT_RES_ID, R.layout.activity_section_content);
-        int textResId = getIntent().getIntExtra(EXTRA_TEXT_RES_ID, 0);
-        int titleResId = getIntent().getIntExtra(EXTRA_TITLE, 0);
-        int subtitleResId = getIntent().getIntExtra(EXTRA_SUBTITLE, 0);
+        applyKeepScreenOnPreference();
+        articleShareFormatter = new ArticleShareFormatter(getString(R.string.app_name));
+        favoritesManager = new FavoritesManager(this);
+        installLogicalBackNavigation();
+        String restoredArticleNumber = savedInstanceState == null
+                ? null
+                : savedInstanceState.getString(STATE_CURRENT_ARTICLE_NUMBER);
+        renderDestination(getIntent(), restoredArticleNumber);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void renderDestination(Intent intent, @Nullable String restoredArticleNumber) {
+        tearDownCurrentDestination();
+        setIntent(intent);
+
+        int layoutResId = intent.getIntExtra(EXTRA_LAYOUT_RES_ID, R.layout.activity_section_content);
+        int textResId = intent.getIntExtra(EXTRA_TEXT_RES_ID, 0);
+        int titleResId = intent.getIntExtra(EXTRA_TITLE, 0);
+        int subtitleResId = intent.getIntExtra(EXTRA_SUBTITLE, 0);
+        currentTextResId = textResId;
 
         setContentView(layoutResId);
 
@@ -170,9 +193,6 @@ public class SectionContentActivity extends AppCompatActivity {
             return;
         }
 
-        applyKeepScreenOnPreference();
-        articleShareFormatter = new ArticleShareFormatter(getString(R.string.app_name));
-        favoritesManager = new FavoritesManager(this);
         baseContentTextSizePx = contentView.getTextSize();
         applyFontScale(contentView, ReadingPreferenceManager.getContentFontScale(this));
 
@@ -188,13 +208,10 @@ public class SectionContentActivity extends AppCompatActivity {
         setupArticleActions();
         setupInPageSearch(contentView, textResId);
 
-        String restoredArticleNumber = savedInstanceState == null
-                ? null
-                : savedInstanceState.getString(STATE_CURRENT_ARTICLE_NUMBER);
         Article restoredArticle = findArticleInTrackedBlock(restoredArticleNumber);
         int scrollToOffset = restoredArticle != null
                 ? restoredArticle.offsetInBlock
-                : getIntent().getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
+                : intent.getIntExtra(EXTRA_SCROLL_TO_OFFSET, -1);
         if (scrollToOffset >= 0) {
             Article directArticle = restoredArticle != null
                     ? restoredArticle
@@ -205,6 +222,52 @@ public class SectionContentActivity extends AppCompatActivity {
         } else {
             contentView.post(this::scheduleVisibleArticleRegistration);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        logicalArticleHistory.clear();
+        renderDestination(intent, null);
+    }
+
+    private void installLogicalBackNavigation() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent previous = logicalArticleHistory.pollLast();
+                if (previous != null) {
+                    stopArticleSpeech();
+                    renderDestination(previous, null);
+                    return;
+                }
+                setEnabled(false);
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+    }
+
+    private void tearDownCurrentDestination() {
+        if (trackedContentView != null) {
+            trackedContentView.removeCallbacks(updateVisibleArticle);
+        }
+        if (trackedScrollView != null) {
+            trackedScrollView.setOnScrollChangeListener((View.OnScrollChangeListener) null);
+        }
+        if (articleSpeechController != null) {
+            articleSpeechController.stop();
+            articleSpeechController.release();
+        }
+        articleSpeechController = null;
+        searchController = null;
+        highlightController = null;
+        trackedArticleBlock = null;
+        trackedContentView = null;
+        trackedScrollView = null;
+        currentVisibleArticle = null;
+        preferredProgrammaticArticle = null;
+        currentSequence = null;
+        renderedRelatedArticleNumber = null;
     }
 
     @Override
@@ -591,14 +654,18 @@ public class SectionContentActivity extends AppCompatActivity {
                     target.getNumber(),
                     title
             ));
-            chip.setOnClickListener(view -> openArticleReference(target.getNumber()));
+            chip.setOnClickListener(view -> navigateToArticle(target.getNumber(), false));
             relatedArticlesChipGroup.addView(chip);
         }
         relatedArticlesContainer.setVisibility(visibleCount > 0 ? View.VISIBLE : View.GONE);
     }
 
-    /** Navegación compartida por spans y chips, siempre con una nueva entrada normal. */
+    /** Las referencias cruzadas conservan un único nivel lógico de regreso dentro del lector. */
     void openArticleReference(String articleNumber) {
+        navigateToArticle(articleNumber, true);
+    }
+
+    private void navigateToArticle(String articleNumber, boolean rememberOrigin) {
         ArticleNavigationResolver.Target target =
                 ArticleNavigationResolver.resolve(this, articleNumber);
         if (target == null) {
@@ -608,8 +675,40 @@ public class SectionContentActivity extends AppCompatActivity {
         InterstitialAdCoordinator.getInstance().navigate(
                 this,
                 getString(R.string.admob_interstitial_ad_unit_id),
-                () -> startActivity(target.createIntent(this))
+                () -> replaceCurrentDestination(target, rememberOrigin)
         );
+    }
+
+    private void replaceCurrentDestination(
+            ArticleNavigationResolver.Target target,
+            boolean rememberOrigin
+    ) {
+        if (rememberOrigin) {
+            Intent origin = intentForCurrentArticle();
+            if (origin != null) {
+                logicalArticleHistory.addLast(origin);
+            }
+        }
+        ArticleRepository.Location location = ArticleRepository.findArticle(
+                this, target.getNumber()).get(0);
+        if (trackedArticleBlock != null
+                && trackedArticleBlock.key.equals(location.block.key)
+                && trackedContentView != null) {
+            scrollToOffset(trackedContentView, location.article.offsetInBlock, location.article);
+            return;
+        }
+        renderDestination(target.createIntent(this), null);
+    }
+
+    @Nullable
+    private Intent intentForCurrentArticle() {
+        Article article = currentVisibleArticle != null
+                ? currentVisibleArticle
+                : findCurrentlyVisibleArticle();
+        ArticleNavigationResolver.Target target = article == null
+                ? null
+                : ArticleNavigationResolver.resolve(this, article.number);
+        return target == null ? null : target.createIntent(this);
     }
 
     /** Abre una capa informativa sin navegar ni modificar el artículo visible. */
@@ -650,10 +749,7 @@ public class SectionContentActivity extends AppCompatActivity {
             InterstitialAdCoordinator.getInstance().navigate(
                     this,
                     getString(R.string.admob_interstitial_ad_unit_id),
-                    () -> {
-                        startActivity(navigationTarget.createIntent(this));
-                        finish();
-                    }
+                    () -> replaceCurrentDestination(navigationTarget, false)
             );
         }
     }
@@ -944,7 +1040,21 @@ public class SectionContentActivity extends AppCompatActivity {
     }
 
     private void applyFontScale(TextView contentView, float scale) {
-        contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, baseContentTextSizePx * scale);
+        Article anchor = currentVisibleArticle != null
+                ? currentVisibleArticle
+                : findCurrentlyVisibleArticle();
+        readerTypography = ReaderTypography.create(baseContentTextSizePx, scale);
+        contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, readerTypography.getBodySizePx());
+        contentView.setLineSpacing(readerTypography.getLineSpacingExtraPx(), 1f);
+        if (highlightController != null && currentTextResId != 0) {
+            refreshContent(contentView, currentTextResId);
+            if (anchor != null) {
+                Article restored = findArticleInTrackedBlock(anchor.number);
+                if (restored != null) {
+                    scrollToOffset(contentView, restored.offsetInBlock, restored);
+                }
+            }
+        }
         scheduleVisibleArticleRegistration();
     }
 
@@ -994,7 +1104,10 @@ public class SectionContentActivity extends AppCompatActivity {
     /** Texto base con formato de artículos y los resaltados guardados del usuario. */
     private SpannableString buildText(@StringRes int textResId) {
         String content = ArticleRepository.getContentText(this, textResId);
-        SpannableString text = SectionTextFormatter.buildFormattedText(this, content);
+        ReaderTypography typography = readerTypography == null
+                ? ReaderTypography.create(baseContentTextSizePx, 1f)
+                : readerTypography;
+        SpannableString text = SectionTextFormatter.buildFormattedText(this, content, typography);
         String blockKey = getResources().getResourceEntryName(textResId);
         ArticleBlock block = ArticleRepository.getBlock(this, blockKey);
         List<ResolvedArticleCrossReference> references = block == null

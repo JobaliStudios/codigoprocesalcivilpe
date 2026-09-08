@@ -6,6 +6,8 @@ import android.content.pm.ApplicationInfo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -13,8 +15,6 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Precarga y presenta intersticiales solo en transiciones naturales. Si no hay red,
@@ -28,6 +28,8 @@ public final class InterstitialAdCoordinator {
 
     private final InterstitialFrequencyPolicy frequencyPolicy =
             new InterstitialFrequencyPolicy();
+    private final InterstitialNavigationCoordinator navigationCoordinator =
+            new InterstitialNavigationCoordinator();
     @Nullable private InterstitialAd loadedAd;
     private boolean loading;
 
@@ -49,56 +51,71 @@ public final class InterstitialAdCoordinator {
         frequencyPolicy.recordNavigation();
     }
 
-    /** Ejecuta destination exactamente una vez, con o sin anuncio. */
+    /** Serializa el anuncio y ejecuta únicamente el último destino pendiente. */
     public void navigate(
             @NonNull Activity activity,
             @NonNull String productionAdUnitId,
             @NonNull Runnable destination
     ) {
+        activity.runOnUiThread(() -> navigationCoordinator.requestNavigation(
+                destination,
+                listener -> showIfAvailable(activity, productionAdUnitId, listener)
+        ));
+    }
+
+    private boolean showIfAvailable(
+            @NonNull Activity activity,
+            @NonNull String productionAdUnitId,
+            @NonNull InterstitialNavigationCoordinator.AdEventListener listener
+    ) {
         InterstitialAd adToShow;
         synchronized (this) {
             frequencyPolicy.recordNavigation();
-            boolean usableActivity = !activity.isFinishing() && !activity.isDestroyed();
-            if (!usableActivity
+            if (!isResumedAndUsable(activity)
                     || loadedAd == null
                     || !frequencyPolicy.canShow(System.currentTimeMillis())) {
-                adToShow = null;
-            } else {
-                adToShow = loadedAd;
-                loadedAd = null;
-                frequencyPolicy.recordShown(System.currentTimeMillis());
-            }
-        }
-
-        if (adToShow == null) {
-            destination.run();
-            preload(activity.getApplicationContext(), productionAdUnitId);
-            return;
-        }
-
-        AtomicBoolean completed = new AtomicBoolean(false);
-        Runnable completeNavigation = () -> {
-            if (completed.compareAndSet(false, true)) {
-                destination.run();
                 preload(activity.getApplicationContext(), productionAdUnitId);
+                return false;
             }
-        };
+            adToShow = loadedAd;
+            loadedAd = null;
+            frequencyPolicy.recordShown(System.currentTimeMillis());
+        }
+
+        adToShow.setImmersiveMode(false);
         adToShow.setFullScreenContentCallback(new FullScreenContentCallback() {
             @Override
+            public void onAdShowedFullScreenContent() {
+                listener.onAdShowed();
+            }
+
+            @Override
             public void onAdDismissedFullScreenContent() {
-                completeNavigation.run();
+                listener.onAdDismissed();
+                preload(activity.getApplicationContext(), productionAdUnitId);
             }
 
             @Override
             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                completeNavigation.run();
+                listener.onAdFailedToShow();
+                preload(activity.getApplicationContext(), productionAdUnitId);
             }
         });
         try {
             adToShow.show(activity);
         } catch (RuntimeException ignored) {
-            completeNavigation.run();
+            listener.onAdFailedToShow();
+            preload(activity.getApplicationContext(), productionAdUnitId);
         }
+        return true;
+    }
+
+    private boolean isResumedAndUsable(@NonNull Activity activity) {
+        return !activity.isFinishing()
+                && !activity.isDestroyed()
+                && activity instanceof LifecycleOwner
+                && ((LifecycleOwner) activity).getLifecycle().getCurrentState()
+                .isAtLeast(Lifecycle.State.RESUMED);
     }
 
     public void preload(@NonNull Context context, @NonNull String productionAdUnitId) {

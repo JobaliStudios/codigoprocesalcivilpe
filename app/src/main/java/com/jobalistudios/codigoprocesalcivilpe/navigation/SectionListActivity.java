@@ -1,5 +1,7 @@
 package com.jobalistudios.codigoprocesalcivilpe.navigation;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +19,7 @@ import com.jobalistudios.codigoprocesalcivilpe.anuncios.BannerAdHelper;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.NodeFavorites;
 
-public class SectionListActivity extends AppCompatActivity {
+public class SectionListActivity extends AppBaseActivity {
 
     private AdView adView;
 

@@ -1,12 +1,13 @@
 package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
+import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.jobalistudios.codigoprocesalcivilpe.R;
@@ -16,7 +17,7 @@ import com.jobalistudios.codigoprocesalcivilpe.navigation.RelatedArticleNumberEx
 
 import java.util.ArrayList;
 
-public class QuizzCPCReviewErrors extends AppCompatActivity {
+public class QuizzCPCReviewErrors extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
