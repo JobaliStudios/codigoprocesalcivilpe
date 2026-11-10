@@ -93,6 +93,7 @@ public class SectionContentActivity extends AppBaseActivity {
     private HighlightController highlightController;
     private SectionSearchController searchController;
     private float baseContentTextSizePx;
+    private float appliedContentFontScale = Float.NaN;
     private ReadingHistoryManager readingHistoryManager;
     private ArticleBlock trackedArticleBlock;
     private TextView trackedContentView;
@@ -297,6 +298,11 @@ public class SectionContentActivity extends AppBaseActivity {
     protected void onResume() {
         super.onResume();
         applyKeepScreenOnPreference();
+        float savedFontScale = ReadingPreferenceManager.getContentFontScale(this);
+        if (trackedContentView != null
+                && Math.abs(appliedContentFontScale - savedFontScale) > 0.001f) {
+            applyFontScale(trackedContentView, savedFontScale);
+        }
         renderCurrentArticleState();
     }
 
@@ -1067,6 +1073,7 @@ public class SectionContentActivity extends AppBaseActivity {
                 ? currentVisibleArticle
                 : findCurrentlyVisibleArticle();
         readerTypography = ReaderTypography.create(baseContentTextSizePx, scale);
+        appliedContentFontScale = scale;
         contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, readerTypography.getBodySizePx());
         contentView.setLineSpacing(readerTypography.getLineSpacingExtraPx(), 1f);
         if (highlightController != null && currentTextResId != 0) {

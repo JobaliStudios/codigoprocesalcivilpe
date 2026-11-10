@@ -35,6 +35,20 @@ public class ReadingPreferenceManagerTest {
     }
 
     @Test
+    public void viewModel_refreshesAfterDeletingAllPreferencesWithoutRestart() {
+        ReadingPreferenceManager.setKeepScreenOnEnabled(application, true);
+        ConfiguracionViewModel viewModel = new ConfiguracionViewModel(application);
+        assertTrue(Boolean.TRUE.equals(viewModel.getModoLectura().getValue()));
+
+        new com.jobalistudios.codigoprocesalcivilpe.privacidad.LocalDataManager(application)
+                .clearAllLocalData();
+        viewModel.refreshModoLectura();
+
+        assertFalse(Boolean.TRUE.equals(viewModel.getModoLectura().getValue()));
+        assertFalse(ReadingPreferenceManager.isKeepScreenOnEnabled(application));
+    }
+
+    @Test
     public void viewModel_persistsAndRestoresReadingMode() {
         ConfiguracionViewModel firstViewModel = new ConfiguracionViewModel(application);
         assertFalse(Boolean.TRUE.equals(firstViewModel.getModoLectura().getValue()));
