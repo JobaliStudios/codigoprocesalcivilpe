@@ -82,9 +82,13 @@ public class PrivacyCenterActivity extends AppBaseActivity {
                 R.string.privacy_clear_all_done,
                 () -> {
                     localDataManager.clearAllLocalData();
-                    // El tema se restablece inmediatamente; los interruptores se sincronizan
-                    // al volver a Configuración sin necesidad de cerrar la aplicación.
-                    ThemePreferenceManager.applySavedTheme(this);
+                    // La actualización DayNight puede recrear esta Activity. Posponerla hasta
+                    // que se cierre el diálogo evita recrear la pantalla desde su callback.
+                    binding.getRoot().post(() -> {
+                        if (!isFinishing() && !isDestroyed()) {
+                            ThemePreferenceManager.applySavedTheme(this);
+                        }
+                    });
                 }));
     }
 
