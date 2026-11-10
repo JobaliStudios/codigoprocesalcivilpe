@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
-import androidx.appcompat.app.AppCompatDelegate;
-
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
@@ -64,14 +62,26 @@ public class ConfiguracionFragment extends Fragment {
 
 
     private void setupDarkModeSwitch() {
-        boolean darkModeEnabled = ThemePreferenceManager.isDarkModeEnabled(requireContext());
-        binding.switchModoOscuro.setChecked(darkModeEnabled);
+        refreshDarkModeSwitch();
+    }
 
+    private void refreshDarkModeSwitch() {
+        if (binding == null) return;
+        // Actualizar la vista sin disparar el listener ni guardar de nuevo el valor antiguo.
+        binding.switchModoOscuro.setOnCheckedChangeListener(null);
+        binding.switchModoOscuro.setChecked(ThemePreferenceManager.isDarkModeEnabled(requireContext()));
         binding.switchModoOscuro.setOnCheckedChangeListener((buttonView, isChecked) -> {
             ThemePreferenceManager.setDarkModeEnabled(requireContext(), isChecked);
-            AppCompatDelegate.setDefaultNightMode(
-                    ThemePreferenceManager.getAppNightMode(requireContext()));
+            ThemePreferenceManager.applySavedTheme(requireContext());
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (binding == null) return;
+        configuracionViewModel.refreshModoLectura();
+        refreshDarkModeSwitch();
     }
 
     @Override

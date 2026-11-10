@@ -10,6 +10,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.configuracion.ThemePreferenceManager;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.GoogleMobileAdsConsentManager;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.ActivityPrivacyCenterBinding;
 
@@ -79,7 +80,12 @@ public class PrivacyCenterActivity extends AppBaseActivity {
                 R.string.privacy_clear_all,
                 R.string.privacy_clear_all_confirm,
                 R.string.privacy_clear_all_done,
-                localDataManager::clearAllLocalData));
+                () -> {
+                    localDataManager.clearAllLocalData();
+                    // El tema se restablece inmediatamente; los interruptores se sincronizan
+                    // al volver a Configuración sin necesidad de cerrar la aplicación.
+                    ThemePreferenceManager.applySavedTheme(this);
+                }));
     }
 
     private void confirmDeletion(@StringRes int title, @StringRes int message,

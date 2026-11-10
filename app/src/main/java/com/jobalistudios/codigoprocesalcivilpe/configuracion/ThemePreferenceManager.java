@@ -31,6 +31,11 @@ public class ThemePreferenceManager {
                 : AppCompatDelegate.MODE_NIGHT_NO;
     }
 
+    /** Aplica las preferencias guardadas también después de un borrado, sin reiniciar la app. */
+    public static void applySavedTheme(Context context) {
+        AppCompatDelegate.setDefaultNightMode(getAppNightMode(context));
+    }
+
     private static SharedPreferences getPreferences(Context context) {
         return context.getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }

@@ -42,6 +42,22 @@ public class ThemePreferenceManagerTest {
     }
 
     @Test
+    public void applySavedThemeImmediatelyRestoresLightThemeAfterClearAll() {
+        ThemePreferenceManager.setDarkModeEnabled(context, true);
+        ThemePreferenceManager.applySavedTheme(context);
+        assertEquals(AppCompatDelegate.MODE_NIGHT_YES,
+                AppCompatDelegate.getDefaultNightMode());
+
+        new com.jobalistudios.codigoprocesalcivilpe.privacidad.LocalDataManager(context)
+                .clearAllLocalData();
+        ThemePreferenceManager.applySavedTheme(context);
+
+        assertFalse(ThemePreferenceManager.isDarkModeEnabled(context));
+        assertEquals(AppCompatDelegate.MODE_NIGHT_NO,
+                AppCompatDelegate.getDefaultNightMode());
+    }
+
+    @Test
     public void appNightMode_neverFollowsSystemTheme() {
         ThemePreferenceManager.setDarkModeEnabled(context, false);
         assertEquals(AppCompatDelegate.MODE_NIGHT_NO,

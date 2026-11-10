@@ -27,4 +27,12 @@ public class ConfiguracionViewModel extends AndroidViewModel {
         modoLectura.setValue(activado);
     }
 
+    /** Recarga valores que pueden haberse borrado desde otra pantalla. */
+    public void refreshModoLectura() {
+        boolean enabled = ReadingPreferenceManager.isKeepScreenOnEnabled(getApplication());
+        if (!Boolean.valueOf(enabled).equals(modoLectura.getValue())) {
+            modoLectura.setValue(enabled);
+        }
+    }
+
 }
