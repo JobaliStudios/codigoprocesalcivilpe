@@ -102,6 +102,7 @@
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/switch_modo_lectura"
+                            android:saveEnabled="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/config_reading_title"
@@ -159,6 +160,7 @@
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/switch_modo_oscuro"
+                            android:saveEnabled="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/config_dark_mode_title"

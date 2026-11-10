@@ -67,6 +67,9 @@ public class ConfiguracionFragment extends Fragment {
 
     private void refreshDarkModeSwitch() {
         if (binding == null) return;
+        // Los interruptores no guardan su estado de vista: la fuente persistente
+        // es app_settings. Evita que Android restaure el valor oscuro previo durante
+        // la recreación de Activity y dispare el listener que lo vuelve a escribir.
         // Actualizar la vista sin disparar el listener ni guardar de nuevo el valor antiguo.
         binding.switchModoOscuro.setOnCheckedChangeListener(null);
         binding.switchModoOscuro.setChecked(ThemePreferenceManager.isDarkModeEnabled(requireContext()));
