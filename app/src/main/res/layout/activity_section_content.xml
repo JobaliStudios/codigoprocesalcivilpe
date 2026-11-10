@@ -25,6 +25,13 @@
             android:orientation="vertical"
             android:padding="@dimen/space_m">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBackToIndex"
+                style="@style/App.Button.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reader_back_to_index" />
+
             <TextView
                 android:id="@+id/sectionTitle"
                 style="@style/App.Text.Caption"

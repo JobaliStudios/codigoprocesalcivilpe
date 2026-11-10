@@ -477,6 +477,21 @@ public final class LegalHierarchyRepository {
     }
 
     @Nullable
+    public static Node findParentNode(String childId) {
+        return findParent(getTree(), childId);
+    }
+
+    @Nullable
+    private static Node findParent(Node parent, String childId) {
+        for (Node child : parent.children) {
+            if (child.id.equals(childId)) return parent;
+            Node found = findParent(child, childId);
+            if (found != null) return found;
+        }
+        return null;
+    }
+
+    @Nullable
     public static Node findNodeById(String nodeId) {
         return findNode(getTree(), nodeId);
     }

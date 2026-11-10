@@ -178,6 +178,29 @@ public class SectionContentActivity extends AppBaseActivity {
 
         setContentView(layoutResId);
 
+        View backToIndex = findViewById(R.id.btnBackToIndex);
+        com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository.Node leaf =
+                com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository.findNodeByTextRes(textResId);
+        com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository.Node parent = leaf == null ? null :
+                com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository.findParentNode(leaf.id);
+        if (backToIndex != null) {
+            backToIndex.setVisibility(parent == null ? View.GONE : View.VISIBLE);
+            backToIndex.setOnClickListener(view -> {
+                if (parent == null) return;
+                stopArticleSpeech();
+                InterstitialAdCoordinator.getInstance().navigateAtNaturalBreak(this,
+                        getString(R.string.admob_interstitial_ad_unit_id),
+                        com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialPlacement.READER_TO_INDEX,
+                        () -> {
+                            Intent index = com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository
+                                    .buildIntentForNode(this, parent);
+                            index.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(index);
+                            finish();
+                        });
+            });
+        }
+
         TextView titleView = findViewById(R.id.sectionTitle);
         TextView subtitleView = findViewById(R.id.sectionSubtitle);
         TextView contentView = findViewById(R.id.textView2);

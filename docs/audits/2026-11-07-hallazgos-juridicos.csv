@@ -1,0 +1,8 @@
+id,estado,articulo,impacto,propuesta,fuente,decision_propietario
+JUR-007,APROBADO,122,Excepcion incompleta para decretos,Sustituir solo el parrafo posterior al numeral 7 por la redaccion de Ley 27524,https://www.leyes.congreso.gob.pe/Documentos/Leyes/27524.pdf,Aprobacion expresa del propietario 2026-11-09
+JUR-005,APROBADO,90,Omision de regla sobre impugnacion,Insertar La decision es apelable sin efecto suspensivo al final del tercer parrafo,https://www.leyes.congreso.gob.pe/Documentos/DecretosLegislativos/00768.pdf,Aprobacion expresa del propietario 2026-11-09
+JUR-006,APROBADO,558,Sumilla anterior,Reemplazar sumilla por Tramite de los recursos de apelacion,https://busquedas.elperuano.pe/dispositivo/NL/2063845-3,Aprobacion expresa del propietario 2026-11-09
+JUR-004,APROBADO,364,Precision del organo revisor,Insertar superior entre jurisdiccional y examine,https://diariooficial.elperuano.pe/Normas/obtenerDocumento?idNorma=120007,Aprobacion expresa del propietario
+JUR-001,OBSERVADO,Corpus completo,Verificacion incompleta,Mantener fecha hasta completar cotejo,https://diariooficial.elperuano.pe/Normas/obtenerDocumento?idNorma=120007,PENDIENTE
+JUR-002,OBSERVADO,Ejecucion alimentaria,Posible tramite legislativo,Rastrear promulgacion antes de modificar,https://comunicaciones.congreso.gob.pe/noticias/comision-de-justicia-aprueba-dictamenes-sobre-pension-de-alimentos-y-derechos-ciudadanos/,PENDIENTE
+JUR-003,APROBADO,561 numerales 7 y 8,Editorial bajo,Armonizar conectores y puntuacion con Ley 32266,https://api.congreso.gob.pe/spley-portal-service/archivo/MjY5MjM3/pdf,Aprobacion expresa del propietario 2026-11-08

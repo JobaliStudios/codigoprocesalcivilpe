@@ -21,14 +21,15 @@ public class QuizzNavigationTest {
 
     @Test
     public void backFromQuestionsReturnsToStartScreen() {
-        ActivityScenario.launch(QuizzCPCStartScreen.class);
+        try (ActivityScenario<QuizzCPCStartScreen> scenario =
+                     ActivityScenario.launch(QuizzCPCStartScreen.class)) {
+            onView(withId(R.id.btnQuickReview)).perform(scrollTo(), click());
+            onView(withId(R.id.tvQuestion)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.option5)).perform(click());
-        onView(withId(R.id.btnStartQuiz)).perform(scrollTo(), click());
-        onView(withId(R.id.tvQuestion)).check(matches(isDisplayed()));
+            pressBack();
 
-        pressBack();
-
-        onView(withId(R.id.option10)).check(matches(isDisplayed()));
+            onView(withId(R.id.btnQuickReview)).check(matches(isDisplayed()));
+            onView(withId(R.id.cardQuizAll)).check(matches(isDisplayed()));
+        }
     }
 }

@@ -43,6 +43,7 @@ public final class LocalDataManager {
         clearFavorites();
         clearHighlightsAndNotes();
         clearReadingHistory();
+        new com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizErrorStore(appContext).clear();
         appContext.getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE)
                 .edit()
                 .clear()
