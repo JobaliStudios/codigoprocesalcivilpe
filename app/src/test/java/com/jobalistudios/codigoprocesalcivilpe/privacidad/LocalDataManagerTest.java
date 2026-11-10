@@ -26,6 +26,7 @@ public class LocalDataManagerTest {
         clear("codigoprocesalcivil_highlights");
         clear("reading_history");
         clear("app_settings");
+        clear("quiz_error_review");
         manager = new LocalDataManager(context);
     }
 
@@ -40,6 +41,18 @@ public class LocalDataManagerTest {
         assertFalse(has("busqueda_prefs", "recent_queries"));
         assertTrue(has("codigoprocesalcivil_favorites", "items"));
         assertTrue(has("reading_history", "recent_articles"));
+    }
+
+    @Test
+    public void clearAllLocalData_deletesPendingQuizReview() {
+        context.getSharedPreferences("quiz_error_review", Context.MODE_PRIVATE)
+                .edit().putStringSet("question_ids", java.util.Collections.singleton("question-1"))
+                .commit();
+
+        manager.clearAllLocalData();
+
+        assertTrue(new com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizErrorStore(context)
+                .getQuestionIds().isEmpty());
     }
 
     @Test

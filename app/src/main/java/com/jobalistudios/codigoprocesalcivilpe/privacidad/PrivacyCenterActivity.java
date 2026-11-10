@@ -36,6 +36,8 @@ public class PrivacyCenterActivity extends AppBaseActivity {
         refreshConsentOptions();
         binding.buttonManageAdsConsent.setOnClickListener(v ->
                 consentManager.showPrivacyOptionsForm(this, formError -> {
+                    com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator
+                            .getInstance().invalidateForPrivacyChange();
                     if (formError != null) {
                         Toast.makeText(this, R.string.config_privacy_error,
                                 Toast.LENGTH_SHORT).show();

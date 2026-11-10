@@ -1,0 +1,863 @@
+﻿articulo,sumilla_local,candidatos_extraidos,resultado_automatizado
+1,Órganos y alcances de la potestad jurisdiccional civil,2,IGUALDAD_NORMALIZADA_PARCIAL
+2,Ejercicio y alcances,3,IGUALDAD_NORMALIZADA_PARCIAL
+3,Regulación de los derechos de acción y contradicción,1,IGUALDAD_NORMALIZADA_PARCIAL
+4,Consecuencias del ejercicio irregular del derecho de acción civil,1,REQUIERE_COTEJO_CONTEXTUAL
+5,Competencia civil,1,IGUALDAD_NORMALIZADA_PARCIAL
+6,Principio de legalidad e irrenunciabilidad de la competencia*,1,IGUALDAD_NORMALIZADA_PARCIAL
+7,Indelegabilidad de la competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+8,Determinación de la competencia*,1,IGUALDAD_NORMALIZADA_PARCIAL
+9,Competencia por materia,1,IGUALDAD_NORMALIZADA_PARCIAL
+10,Competencia por cuantía*,1,REQUIERE_COTEJO_CONTEXTUAL
+11,Cálculo de la cuantía*,1,IGUALDAD_NORMALIZADA_PARCIAL
+12,Cuantía en las pretensiones sobre inmueble,1,IGUALDAD_NORMALIZADA_PARCIAL
+13,"Costas, costos y multa por exceso en la cuantía",1,IGUALDAD_NORMALIZADA_PARCIAL
+14,Reglas generales de la competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+15,Acumulación subjetiva pasiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+16,Acumulación subjetiva de pretensiones,1,IGUALDAD_NORMALIZADA_PARCIAL
+17,Personas jurídicas*,1,IGUALDAD_NORMALIZADA_PARCIAL
+18,Persona jurídica irregular,1,IGUALDAD_NORMALIZADA_PARCIAL
+19,Sucesiones,2,IGUALDAD_NORMALIZADA_PARCIAL
+20,Expropiación,1,IGUALDAD_NORMALIZADA_PARCIAL
+21,Regulación de la capacidad jurídica*,1,REQUIERE_COTEJO_CONTEXTUAL
+22,[Derogado]*,1,REQUIERE_COTEJO_CONTEXTUAL
+23,Proceso no contencioso,1,IGUALDAD_NORMALIZADA_PARCIAL
+24,Competencia facultativa*,1,REQUIERE_COTEJO_CONTEXTUAL
+25,Prórroga convencional de la competencia territorial,1,IGUALDAD_NORMALIZADA_PARCIAL
+26,Prórroga tácita de la competencia territorial,2,IGUALDAD_NORMALIZADA_PARCIAL
+27,Competencia del Estado,1,IGUALDAD_NORMALIZADA_PARCIAL
+28,Determinación de la competencia funcional,1,IGUALDAD_NORMALIZADA_PARCIAL
+29,Casos de prevención*,1,IGUALDAD_NORMALIZADA_PARCIAL
+30,Efectos de la prevención*,1,IGUALDAD_NORMALIZADA_PARCIAL
+31,Prevención de la competencia funcional,1,IGUALDAD_NORMALIZADA_PARCIAL
+32,"Pretensiones de garantía, accesorias y complementarias",1,IGUALDAD_NORMALIZADA_PARCIAL
+33,Medida cautelar y prueba anticipada,1,IGUALDAD_NORMALIZADA_PARCIAL
+34,Procesos de ejecución,2,REQUIERE_COTEJO_CONTEXTUAL
+35,Incompetencia*,1,IGUALDAD_NORMALIZADA_PARCIAL
+36,Efectos de la incompetencia*,1,IGUALDAD_NORMALIZADA_PARCIAL
+37,Cuestionamiento exclusivo*,1,IGUALDAD_NORMALIZADA_PARCIAL
+38,Contienda de competencia*,1,REQUIERE_COTEJO_CONTEXTUAL
+39,Reconocimiento de incompetencia*,1,IGUALDAD_NORMALIZADA_PARCIAL
+40,Conflicto de competencia*,1,IGUALDAD_NORMALIZADA_PARCIAL
+41,Resolución de la contienda ante el superior*,1,IGUALDAD_NORMALIZADA_PARCIAL
+42,Conservación de la eficacia cautelar*,1,IGUALDAD_NORMALIZADA_PARCIAL
+43,Continuación del proceso principal*,1,IGUALDAD_NORMALIZADA_PARCIAL
+44,Convalidación de la medida cautelar*,1,IGUALDAD_NORMALIZADA_PARCIAL
+45,Costas y costos*,1,IGUALDAD_NORMALIZADA_PARCIAL
+46,Multas*,1,IGUALDAD_NORMALIZADA_PARCIAL
+47,Competencia del Juez peruano,2,REQUIERE_COTEJO_CONTEXTUAL
+48,Finalidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+49,Órganos judiciales en el área civil*,1,REQUIERE_COTEJO_CONTEXTUAL
+50,Deberes*,1,IGUALDAD_NORMALIZADA_PARCIAL
+51,Facultades genéricas,1,IGUALDAD_NORMALIZADA_PARCIAL
+52,Facultades disciplinarias del Juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+53,Facultades coercitivas del Juez,1,REQUIERE_COTEJO_CONTEXTUAL
+54,Auxiliares de la jurisdicción civil*,1,IGUALDAD_NORMALIZADA_PARCIAL
+55,Órganos de auxilio judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+56,Deberes y responsabilidades de los auxiliares jurisdiccionales,1,REQUIERE_COTEJO_CONTEXTUAL
+57,Capacidad para ser parte material en un proceso*,1,IGUALDAD_NORMALIZADA_PARCIAL
+58,Capacidad para comparecer en un proceso*,2,IGUALDAD_NORMALIZADA_PARCIAL
+59,El Estado como parte,1,IGUALDAD_NORMALIZADA_PARCIAL
+60,Sustitución procesal,2,IGUALDAD_NORMALIZADA_PARCIAL
+61,Curadoría procesal*,1,REQUIERE_COTEJO_CONTEXTUAL
+62,Supletoriedad de la representación civil,1,REQUIERE_COTEJO_CONTEXTUAL
+63,Necesidad de la representación procesal,1,IGUALDAD_NORMALIZADA_PARCIAL
+64,Representación procesal de la persona jurídica,1,IGUALDAD_NORMALIZADA_PARCIAL
+65,Representación Procesal del Patrimonio Autónomo*,1,IGUALDAD_NORMALIZADA_PARCIAL
+66,"Falta, ausencia o impedimento del representante de la persona con capacidad de ejercicio restringida*",1,IGUALDAD_NORMALIZADA_PARCIAL
+67,Representación de personas jurídicas extranjeras,2,REQUIERE_COTEJO_CONTEXTUAL
+68,Designación de apoderado judicial*,1,IGUALDAD_NORMALIZADA_PARCIAL
+69,Apoderados de las entidades de derecho público,1,IGUALDAD_NORMALIZADA_PARCIAL
+70,Requisitos del apoderado,1,IGUALDAD_NORMALIZADA_PARCIAL
+71,Aceptación del poder,1,IGUALDAD_NORMALIZADA_PARCIAL
+72,Clases de poder atendiendo a la formalidad empleada*,1,IGUALDAD_NORMALIZADA_PARCIAL
+73,Poder otorgado en el extranjero,1,IGUALDAD_NORMALIZADA_PARCIAL
+74,Facultades generales,1,IGUALDAD_NORMALIZADA_PARCIAL
+75,Facultades especiales*,1,IGUALDAD_NORMALIZADA_PARCIAL
+76,Apoderado común*,1,IGUALDAD_NORMALIZADA_PARCIAL
+77,Sustitución y delegación del poder,1,IGUALDAD_NORMALIZADA_PARCIAL
+78,Cese de la representación judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+79,Efectos del cese de la representación*,1,IGUALDAD_NORMALIZADA_PARCIAL
+80,Representación judicial por Abogado*,1,IGUALDAD_NORMALIZADA_PARCIAL
+81,Procuración oficiosa*,1,IGUALDAD_NORMALIZADA_PARCIAL
+82,Patrocinio de intereses difusos*,1,IGUALDAD_NORMALIZADA_PARCIAL
+83,Pluralidad de pretensiones y personas*,1,IGUALDAD_NORMALIZADA_PARCIAL
+84,Conexidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+85,Requisitos de la acumulación objetiva*,2,IGUALDAD_NORMALIZADA_PARCIAL
+86,Requisitos de la acumulación subjetiva de pretensiones*,1,IGUALDAD_NORMALIZADA_PARCIAL
+87,Acumulación objetiva originaria*,1,IGUALDAD_NORMALIZADA_PARCIAL
+88,Acumulación objetiva sucesiva*,1,IGUALDAD_NORMALIZADA_PARCIAL
+89,Acumulación subjetiva de pretensiones originaria y sucesiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+90,Requisitos y trámite de la acumulación sucesiva de procesos*,1,IGUALDAD_NORMALIZADA_PARCIAL
+91,Desacumulación,1,REQUIERE_COTEJO_CONTEXTUAL
+92,Litisconsorcio activo y pasivo,2,IGUALDAD_NORMALIZADA_PARCIAL
+93,Litisconsorcio necesario*,1,IGUALDAD_NORMALIZADA_PARCIAL
+94,Litisconsorcio facultativo,1,IGUALDAD_NORMALIZADA_PARCIAL
+95,Facultades del Juez respecto del litisconsorcio necesario*,1,IGUALDAD_NORMALIZADA_PARCIAL
+96,Audiencia complementaria,2,REQUIERE_COTEJO_CONTEXTUAL
+97,Intervención coadyuvante,1,IGUALDAD_NORMALIZADA_PARCIAL
+98,Intervención litisconsorcial,1,IGUALDAD_NORMALIZADA_PARCIAL
+99,Intervención excluyente principal*,1,IGUALDAD_NORMALIZADA_PARCIAL
+100,Intervención excluyente de propiedad o de derecho preferente,1,IGUALDAD_NORMALIZADA_PARCIAL
+101,Requisitos y trámite común de las intervenciones*,1,IGUALDAD_NORMALIZADA_PARCIAL
+102,Denuncia civil,1,IGUALDAD_NORMALIZADA_PARCIAL
+103,Trámite y efectos de la denuncia,1,IGUALDAD_NORMALIZADA_PARCIAL
+104,Aseguramiento de pretensión futura,2,IGUALDAD_NORMALIZADA_PARCIAL
+105,Llamamiento posesorio*,1,IGUALDAD_NORMALIZADA_PARCIAL
+106,Llamamiento en caso de fraude o colusión,2,IGUALDAD_NORMALIZADA_PARCIAL
+107,Extromisión,1,IGUALDAD_NORMALIZADA_PARCIAL
+108,Sucesión procesal*,2,IGUALDAD_NORMALIZADA_PARCIAL
+109,"Deberes de las partes, Abogados y apoderados",2,IGUALDAD_NORMALIZADA_PARCIAL
+110,"Responsabilidad patrimonial de las partes, sus Abogados, sus apoderados y los terceros legitimados",2,IGUALDAD_NORMALIZADA_PARCIAL
+111,Responsabilidad de los Abogados,1,IGUALDAD_NORMALIZADA_PARCIAL
+112,Temeridad o mala fe*,1,IGUALDAD_NORMALIZADA_PARCIAL
+113,Atribuciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+114,Dictamen,1,IGUALDAD_NORMALIZADA_PARCIAL
+115,Plazos,1,IGUALDAD_NORMALIZADA_PARCIAL
+116,Oportunidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+117,Causales de excusación y abstención,1,IGUALDAD_NORMALIZADA_PARCIAL
+118,Responsabilidad,1,REQUIERE_COTEJO_CONTEXTUAL
+119,Forma de los actos procesales,1,IGUALDAD_NORMALIZADA_PARCIAL
+119-A,Derecho a ajustes en el proceso*,1,IGUALDAD_NORMALIZADA_PARCIAL
+120,Resoluciones,2,IGUALDAD_NORMALIZADA_PARCIAL
+121,"Decretos, autos y sentencias",2,IGUALDAD_NORMALIZADA_PARCIAL
+122,Contenido y suscripción de las resoluciones*,2,REQUIERE_COTEJO_CONTEXTUAL
+123,Cosa Juzgada*,1,IGUALDAD_NORMALIZADA_PARCIAL
+124,Plazos máximos para expedir resoluciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+125,Numeración,1,IGUALDAD_NORMALIZADA_PARCIAL
+126,Indelegabilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+127,Actuaciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+128,Admisibilidad y Procedencia,1,REQUIERE_COTEJO_CONTEXTUAL
+129,Consecuencias,1,IGUALDAD_NORMALIZADA_PARCIAL
+130,Forma del escrito*,1,IGUALDAD_NORMALIZADA_PARCIAL
+131,Firma*,1,IGUALDAD_NORMALIZADA_PARCIAL
+132,Defensa cautiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+133,Copia de escrito y anexo*,1,IGUALDAD_NORMALIZADA_PARCIAL
+134,Entrega de copias,1,IGUALDAD_NORMALIZADA_PARCIAL
+135,Constancia de recepción*,1,REQUIERE_COTEJO_CONTEXTUAL
+136,Expedientes,1,IGUALDAD_NORMALIZADA_PARCIAL
+137,Custodia del expediente*,1,IGUALDAD_NORMALIZADA_PARCIAL
+138,Examen de los autos,1,IGUALDAD_NORMALIZADA_PARCIAL
+139,Expedición de copias*,1,IGUALDAD_NORMALIZADA_PARCIAL
+140,Recomposición de expedientes,1,REQUIERE_COTEJO_CONTEXTUAL
+141,Días y horas hábiles,1,IGUALDAD_NORMALIZADA_PARCIAL
+142,Habilitación,1,IGUALDAD_NORMALIZADA_PARCIAL
+143,Habilitación implícita,2,IGUALDAD_NORMALIZADA_PARCIAL
+144,Actuación diferida,1,IGUALDAD_NORMALIZADA_PARCIAL
+145,Falta grave,1,IGUALDAD_NORMALIZADA_PARCIAL
+146,Perentoriedad del plazo,1,IGUALDAD_NORMALIZADA_PARCIAL
+147,Cómputo,1,REQUIERE_COTEJO_CONTEXTUAL
+148,Oficios a otros poderes y a funcionarios públicos*,2,IGUALDAD_NORMALIZADA_PARCIAL
+149,Trámite y certificación del envío del oficio*,1,IGUALDAD_NORMALIZADA_PARCIAL
+150,Oficios al exterior,1,IGUALDAD_NORMALIZADA_PARCIAL
+151,Exhortos,1,IGUALDAD_NORMALIZADA_PARCIAL
+152,Contenido del exhorto,2,IGUALDAD_NORMALIZADA_PARCIAL
+153,Trámite del exhorto,1,IGUALDAD_NORMALIZADA_PARCIAL
+154,Intervención de las partes,1,REQUIERE_COTEJO_CONTEXTUAL
+155,Objeto de la notificación,1,IGUALDAD_NORMALIZADA_PARCIAL
+156,[Derogado]*,1,REQUIERE_COTEJO_CONTEXTUAL
+157,La notificación de las resoluciones judiciales*,1,IGUALDAD_NORMALIZADA_PARCIAL
+158,Contenido y entrega de la cédula*,1,IGUALDAD_NORMALIZADA_PARCIAL
+159,Diligenciamiento de la cédula,1,IGUALDAD_NORMALIZADA_PARCIAL
+160,Entrega de la cédula al interesado,1,IGUALDAD_NORMALIZADA_PARCIAL
+161,Entrega de la cédula a personas distintas,1,IGUALDAD_NORMALIZADA_PARCIAL
+162,Notificación por comisión*,1,IGUALDAD_NORMALIZADA_PARCIAL
+163,"Notificación por telegrama o facsímil, correo electrónico u otro medio*",1,IGUALDAD_NORMALIZADA_PARCIAL
+164,"Diligenciamiento de la notificación por facsímil, correo electrónico u otro medio*",1,IGUALDAD_NORMALIZADA_PARCIAL
+165,Notificación por edictos,1,IGUALDAD_NORMALIZADA_PARCIAL
+166,Notificación especial por edictos,1,IGUALDAD_NORMALIZADA_PARCIAL
+167,Notificación por edictos*,1,IGUALDAD_NORMALIZADA_PARCIAL
+168,Forma de los edictos,1,IGUALDAD_NORMALIZADA_PARCIAL
+169,Notificación por radiodifusión,1,IGUALDAD_NORMALIZADA_PARCIAL
+170,Nulidad infundada,1,REQUIERE_COTEJO_CONTEXTUAL
+171,Principio de Legalidad y Trascendencia de la nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+172,"Principios de Convalidación, Subsanación o Integración*",1,IGUALDAD_NORMALIZADA_PARCIAL
+173,Extensión de la nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+174,Interés para pedir la nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+175,Inadmisibilidad o improcedencia del pedido de nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+176,Oportunidad y trámite,1,IGUALDAD_NORMALIZADA_PARCIAL
+177,Contenido de la resolución que declara la nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+178,Nulidad de Cosa Juzgada Fraudulenta*,1,IGUALDAD_NORMALIZADA_PARCIAL
+179,Titular del Auxilio,1,REQUIERE_COTEJO_CONTEXTUAL
+180,Requisitos del Auxilio,1,REQUIERE_COTEJO_CONTEXTUAL
+181,Procedimiento,3,REQUIERE_COTEJO_CONTEXTUAL
+182,Efectos del Auxilio,2,REQUIERE_COTEJO_CONTEXTUAL
+183,Apoderado del auxiliado,1,REQUIERE_COTEJO_CONTEXTUAL
+184,"Impedimento, recusación y abstención del apoderado",1,IGUALDAD_NORMALIZADA_PARCIAL
+185,Facultades del apoderado,1,IGUALDAD_NORMALIZADA_PARCIAL
+186,Responsabilidad del apoderado,2,IGUALDAD_NORMALIZADA_PARCIAL
+187,Fin del auxilio durante el proceso,1,REQUIERE_COTEJO_CONTEXTUAL
+188,Finalidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+189,Oportunidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+190,Pertinencia e improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+191,Legalidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+192,Medios probatorios típicos,1,IGUALDAD_NORMALIZADA_PARCIAL
+193,Medios probatorios atípicos,1,IGUALDAD_NORMALIZADA_PARCIAL
+194,Pruebas de oficio,1,IGUALDAD_NORMALIZADA_PARCIAL
+195,Intérprete,2,IGUALDAD_NORMALIZADA_PARCIAL
+196,Carga de la prueba,1,IGUALDAD_NORMALIZADA_PARCIAL
+197,Valoración de la prueba,1,IGUALDAD_NORMALIZADA_PARCIAL
+198,Eficacia de la prueba en otro proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+199,Ineficacia de la prueba,1,IGUALDAD_NORMALIZADA_PARCIAL
+200,Improbanza de la pretensión,2,IGUALDAD_NORMALIZADA_PARCIAL
+201,Defecto de forma,1,REQUIERE_COTEJO_CONTEXTUAL
+202,Dirección,1,IGUALDAD_NORMALIZADA_PARCIAL
+203,Citación y concurrencia personal de los convocados,1,IGUALDAD_NORMALIZADA_PARCIAL
+204,El acta de la audiencia,1,REQUIERE_COTEJO_CONTEXTUAL
+205,Actuación fuera del local del Juzgado,1,IGUALDAD_NORMALIZADA_PARCIAL
+206,Unidad de la audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+207,Capacidad de ejercicio restringida circunstancial,1,IGUALDAD_NORMALIZADA_PARCIAL
+208,Actuación de pruebas,1,REQUIERE_COTEJO_CONTEXTUAL
+209,Confrontación,1,IGUALDAD_NORMALIZADA_PARCIAL
+210,Intervención de los Abogados,1,IGUALDAD_NORMALIZADA_PARCIAL
+211,Conclusión de la audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+212,Alegatos,1,REQUIERE_COTEJO_CONTEXTUAL
+213,Admisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+214,Contenido,1,IGUALDAD_NORMALIZADA_PARCIAL
+215,Divisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+216,Irrevocabilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+217,Forma del interrogatorio,1,IGUALDAD_NORMALIZADA_PARCIAL
+218,Forma y contenido de las respuestas,1,IGUALDAD_NORMALIZADA_PARCIAL
+219,Declaración fuera del lugar del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+220,Exención de respuestas,1,IGUALDAD_NORMALIZADA_PARCIAL
+221,Declaración asimilada,1,REQUIERE_COTEJO_CONTEXTUAL
+222,Aptitud,1,IGUALDAD_NORMALIZADA_PARCIAL
+223,Requisitos,1,IGUALDAD_NORMALIZADA_PARCIAL
+224,Actuación,1,IGUALDAD_NORMALIZADA_PARCIAL
+225,Límites de la declaración testimonial,1,IGUALDAD_NORMALIZADA_PARCIAL
+226,Número de testigos,1,IGUALDAD_NORMALIZADA_PARCIAL
+227,Repreguntas y contrapreguntas,1,IGUALDAD_NORMALIZADA_PARCIAL
+228,Improcedencia de las preguntas,1,IGUALDAD_NORMALIZADA_PARCIAL
+229,Prohibiciones,1,REQUIERE_COTEJO_CONTEXTUAL
+230,Aplicación supletoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+231,Gastos,1,IGUALDAD_NORMALIZADA_PARCIAL
+232,Efectos de la incomparecencia,1,REQUIERE_COTEJO_CONTEXTUAL
+233,Documento,1,IGUALDAD_NORMALIZADA_PARCIAL
+234,Clases de documentos,1,IGUALDAD_NORMALIZADA_PARCIAL
+235,Documento público,1,IGUALDAD_NORMALIZADA_PARCIAL
+236,Documento privado,1,IGUALDAD_NORMALIZADA_PARCIAL
+237,Documento y acto,1,IGUALDAD_NORMALIZADA_PARCIAL
+238,Principio de prueba escrita,1,IGUALDAD_NORMALIZADA_PARCIAL
+239,Informes,1,IGUALDAD_NORMALIZADA_PARCIAL
+240,Expedientes,1,IGUALDAD_NORMALIZADA_PARCIAL
+241,Documentos en otro idioma,1,IGUALDAD_NORMALIZADA_PARCIAL
+242,Ineficacia por falsedad de documento,1,IGUALDAD_NORMALIZADA_PARCIAL
+243,Ineficacia por nulidad de documento,1,IGUALDAD_NORMALIZADA_PARCIAL
+244,Falsedad o inexistencia de la matriz,1,IGUALDAD_NORMALIZADA_PARCIAL
+245,Fecha cierta,1,IGUALDAD_NORMALIZADA_PARCIAL
+246,Reconocimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+247,Desconocimiento de documento,1,IGUALDAD_NORMALIZADA_PARCIAL
+248,Firma a ruego y reconocimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+249,Forma del reconocimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+250,Reconocimiento por representantes,1,IGUALDAD_NORMALIZADA_PARCIAL
+251,Reconocimiento de impresos,1,IGUALDAD_NORMALIZADA_PARCIAL
+252,Reconocimiento de documentos no escritos,1,IGUALDAD_NORMALIZADA_PARCIAL
+253,Muerte del otorgante o autor,1,IGUALDAD_NORMALIZADA_PARCIAL
+254,Falta de reconocimiento por terceros,1,IGUALDAD_NORMALIZADA_PARCIAL
+255,Cotejo de documento público,1,IGUALDAD_NORMALIZADA_PARCIAL
+256,Cotejo de copias y documento privado,2,IGUALDAD_NORMALIZADA_PARCIAL
+257,Cotejo de documentos escritos,1,IGUALDAD_NORMALIZADA_PARCIAL
+258,Normas adicionales al cotejo,1,IGUALDAD_NORMALIZADA_PARCIAL
+259,Exhibición por terceros,1,IGUALDAD_NORMALIZADA_PARCIAL
+260,Exhibición de documentos de personas jurídicas y comerciantes,1,IGUALDAD_NORMALIZADA_PARCIAL
+261,Incumplimiento de exhibición,1,REQUIERE_COTEJO_CONTEXTUAL
+262,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+263,Requisitos,1,IGUALDAD_NORMALIZADA_PARCIAL
+264,Perito de parte,1,IGUALDAD_NORMALIZADA_PARCIAL
+265,Actuación,1,IGUALDAD_NORMALIZADA_PARCIAL
+266,Observaciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+267,Concurrencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+268,Nombramiento de peritos,1,IGUALDAD_NORMALIZADA_PARCIAL
+269,Aceptación del cargo,1,REQUIERE_COTEJO_CONTEXTUAL
+270,Daños y perjuicios,1,IGUALDAD_NORMALIZADA_PARCIAL
+271,Honorario,1,IGUALDAD_NORMALIZADA_PARCIAL
+272,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+273,Asistencia de peritos y testigos,1,IGUALDAD_NORMALIZADA_PARCIAL
+274,Contenido del acta,1,REQUIERE_COTEJO_CONTEXTUAL
+275,Finalidad de los sucedáneos,1,IGUALDAD_NORMALIZADA_PARCIAL
+276,Indicio,1,IGUALDAD_NORMALIZADA_PARCIAL
+277,Presunción,2,IGUALDAD_NORMALIZADA_PARCIAL
+278,Presunción legal absoluta,1,IGUALDAD_NORMALIZADA_PARCIAL
+279,Presunción legal relativa,1,IGUALDAD_NORMALIZADA_PARCIAL
+280,Duda sobre el carácter de una presunción legal,1,IGUALDAD_NORMALIZADA_PARCIAL
+281,Presunción judicial,2,IGUALDAD_NORMALIZADA_PARCIAL
+282,Presunción y conducta procesal de las partes,1,IGUALDAD_NORMALIZADA_PARCIAL
+283,Ficción legal,1,REQUIERE_COTEJO_CONTEXTUAL
+284,Disposición general,1,IGUALDAD_NORMALIZADA_PARCIAL
+285,Admisibilidad y procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+286,Procedimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+287,Emplazamiento y actuación sin citación,1,IGUALDAD_NORMALIZADA_PARCIAL
+288,Habilitación de día y hora,1,IGUALDAD_NORMALIZADA_PARCIAL
+289,Irrecusabilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+290,Pericia,1,IGUALDAD_NORMALIZADA_PARCIAL
+291,Testigos,1,IGUALDAD_NORMALIZADA_PARCIAL
+292,Reconocimiento de documentos privados,2,IGUALDAD_NORMALIZADA_PARCIAL
+293,Exhibición,1,IGUALDAD_NORMALIZADA_PARCIAL
+294,Absolución de posiciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+295,Inspección judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+296,Apercibimientos,1,IGUALDAD_NORMALIZADA_PARCIAL
+297,Competencia y trámite,1,IGUALDAD_NORMALIZADA_PARCIAL
+298,Oposición,1,IGUALDAD_NORMALIZADA_PARCIAL
+299,Entrega del expediente,1,REQUIERE_COTEJO_CONTEXTUAL
+300,Admisibilidad de la tacha y de la oposición,1,IGUALDAD_NORMALIZADA_PARCIAL
+301,Tramitación,1,IGUALDAD_NORMALIZADA_PARCIAL
+302,Conocimiento sobreviniente,1,IGUALDAD_NORMALIZADA_PARCIAL
+303,Tacha de testigos,1,IGUALDAD_NORMALIZADA_PARCIAL
+304,Multa,1,REQUIERE_COTEJO_CONTEXTUAL
+305,Causales de impedimento,1,REQUIERE_COTEJO_CONTEXTUAL
+306,Trámite del Impedimento,1,IGUALDAD_NORMALIZADA_PARCIAL
+307,Causales de recusación,1,IGUALDAD_NORMALIZADA_PARCIAL
+308,Oportunidad de la recusación,1,IGUALDAD_NORMALIZADA_PARCIAL
+309,Improcedencia de la recusación,2,IGUALDAD_NORMALIZADA_PARCIAL
+310,Formulación y trámite de la recusación,1,IGUALDAD_NORMALIZADA_PARCIAL
+311,"Impedimento, recusación y abstención",1,IGUALDAD_NORMALIZADA_PARCIAL
+312,Recusación por impedimento,1,IGUALDAD_NORMALIZADA_PARCIAL
+313,Abstención por decoro,1,IGUALDAD_NORMALIZADA_PARCIAL
+314,Rechazo liminar de la recusación,1,IGUALDAD_NORMALIZADA_PARCIAL
+315,Órganos auxiliares,1,IGUALDAD_NORMALIZADA_PARCIAL
+316,Sanción al recusante,1,REQUIERE_COTEJO_CONTEXTUAL
+317,Interrupción del plazo o diferimiento del término para realizar un acto procesal,1,IGUALDAD_NORMALIZADA_PARCIAL
+318,Suspensión del proceso o del acto procesal,1,IGUALDAD_NORMALIZADA_PARCIAL
+319,Suspensión convencional,1,IGUALDAD_NORMALIZADA_PARCIAL
+320,Suspensión legal y judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+321,Conclusión del proceso sin declaración sobre el fondo,1,IGUALDAD_NORMALIZADA_PARCIAL
+322,Conclusión del proceso con declaración sobre el fondo,1,REQUIERE_COTEJO_CONTEXTUAL
+323,Oportunidad de la conciliación,1,IGUALDAD_NORMALIZADA_PARCIAL
+324,Formalidad de la conciliación,1,IGUALDAD_NORMALIZADA_PARCIAL
+325,Requisito de fondo de la conciliación,1,IGUALDAD_NORMALIZADA_PARCIAL
+326,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+327,Conciliación y proceso,1,REQUIERE_COTEJO_CONTEXTUAL
+328,Efecto de la conciliación,1,IGUALDAD_NORMALIZADA_PARCIAL
+329,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+330,Allanamiento y Reconocimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+331,Oportunidad del allanamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+332,Improcedencia del allanamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+333,Efecto del allanamiento,2,REQUIERE_COTEJO_CONTEXTUAL
+334,Oportunidad de la transacción,1,IGUALDAD_NORMALIZADA_PARCIAL
+335,Requisitos de la transacción,1,IGUALDAD_NORMALIZADA_PARCIAL
+336,Transacción del Estado y otras personas de derecho público,1,IGUALDAD_NORMALIZADA_PARCIAL
+337,Homologación de la transacción,1,IGUALDAD_NORMALIZADA_PARCIAL
+338,Normatividad supletoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+339,Acto jurídico posterior a la sentencia,1,REQUIERE_COTEJO_CONTEXTUAL
+340,Clases de desistimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+341,Aspectos generales del desistimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+342,Oportunidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+343,Desistimiento del proceso o del acto procesal,1,IGUALDAD_NORMALIZADA_PARCIAL
+344,Desistimiento de la pretensión,2,IGUALDAD_NORMALIZADA_PARCIAL
+345,Desistimiento de pretensión no resuelta,2,REQUIERE_COTEJO_CONTEXTUAL
+346,Abandono del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+347,Medidas cautelares,1,IGUALDAD_NORMALIZADA_PARCIAL
+348,Naturaleza del abandono,1,IGUALDAD_NORMALIZADA_PARCIAL
+349,Paralización que no produce abandono,1,IGUALDAD_NORMALIZADA_PARCIAL
+350,Improcedencia del abandono,1,IGUALDAD_NORMALIZADA_PARCIAL
+351,Efectos del abandono del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+352,Las pruebas en el proceso abandonado,1,IGUALDAD_NORMALIZADA_PARCIAL
+353,Recursos de apelación,1,REQUIERE_COTEJO_CONTEXTUAL
+354,Abandono y prescripción extintiva,2,REQUIERE_COTEJO_CONTEXTUAL
+355,Medios impugnatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+356,Clases de medios impugnatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+357,Requisitos de admisibilidad de los medios impugnatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+358,Requisitos de procedencia de los medios impugnatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+359,Incumplimiento de los requisitos,1,IGUALDAD_NORMALIZADA_PARCIAL
+360,Prohibición de doble recurso,1,IGUALDAD_NORMALIZADA_PARCIAL
+361,Renuncia a recurrir,1,REQUIERE_COTEJO_CONTEXTUAL
+362,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+363,Trámite,1,REQUIERE_COTEJO_CONTEXTUAL
+364,Objeto,1,IGUALDAD_NORMALIZADA_PARCIAL
+365,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+366,Fundamentación del agravio,1,IGUALDAD_NORMALIZADA_PARCIAL
+367,Admisibilidad e improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+368,Efectos,1,IGUALDAD_NORMALIZADA_PARCIAL
+369,Apelación diferida,1,IGUALDAD_NORMALIZADA_PARCIAL
+370,Competencia del juez superior,1,IGUALDAD_NORMALIZADA_PARCIAL
+371,Procedencia de la apelación con efecto suspensivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+372,Procedencia de la apelación sin efecto suspensivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+373,Plazo y trámite de la apelación de sentencias,1,IGUALDAD_NORMALIZADA_PARCIAL
+374,Medios probatorios en la apelación de sentencias,1,IGUALDAD_NORMALIZADA_PARCIAL
+375,Vista de la causa e informe oral,1,IGUALDAD_NORMALIZADA_PARCIAL
+376,Plazo y trámite de la apelación de autos con efecto suspensivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+377,Trámite de la apelación sin efecto suspensivo,1,REQUIERE_COTEJO_CONTEXTUAL
+378,Actos contra la sentencia expedida en segunda instancia,1,IGUALDAD_NORMALIZADA_PARCIAL
+379,Cumplimiento de la sentencia de segunda instancia,1,IGUALDAD_NORMALIZADA_PARCIAL
+380,Nulidad o revocación de una resolución apelada sin efecto suspensivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+381,Costas y costos en segunda instancia,1,IGUALDAD_NORMALIZADA_PARCIAL
+382,Apelación y nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+383,Devolución del expediente,1,REQUIERE_COTEJO_CONTEXTUAL
+384,Fines de la casación,1,IGUALDAD_NORMALIZADA_PARCIAL
+385,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+386,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+387,Procedencia excepcional,1,IGUALDAD_NORMALIZADA_PARCIAL
+388,Causales,1,IGUALDAD_NORMALIZADA_PARCIAL
+389,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+390,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+391,Interposición y admisión,1,IGUALDAD_NORMALIZADA_PARCIAL
+392,Efecto del recurso de casación,1,IGUALDAD_NORMALIZADA_PARCIAL
+392-A,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+393,Improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+394,Preparación y audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+395,Actividad probatoria de las partes,1,IGUALDAD_NORMALIZADA_PARCIAL
+396,Competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+397,Sentencia fundada y efectos del recurso,1,IGUALDAD_NORMALIZADA_PARCIAL
+398,Sentencia infundada,1,IGUALDAD_NORMALIZADA_PARCIAL
+399,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+400,Precedente judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+401,Objeto del recurso de queja,1,REQUIERE_COTEJO_CONTEXTUAL
+402,Admisibilidad y Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+403,Interposición,1,IGUALDAD_NORMALIZADA_PARCIAL
+404,Tramitación del recurso,1,IGUALDAD_NORMALIZADA_PARCIAL
+405,Efectos de la interposición del recurso,1,REQUIERE_COTEJO_CONTEXTUAL
+406,Aclaración,1,IGUALDAD_NORMALIZADA_PARCIAL
+407,Corrección,1,REQUIERE_COTEJO_CONTEXTUAL
+408,Procedencia de la consulta,1,REQUIERE_COTEJO_CONTEXTUAL
+409,Trámite de la consulta,1,REQUIERE_COTEJO_CONTEXTUAL
+410,Costas,1,IGUALDAD_NORMALIZADA_PARCIAL
+411,Costos,1,IGUALDAD_NORMALIZADA_PARCIAL
+412,Principios de la condena en costas y costos,1,IGUALDAD_NORMALIZADA_PARCIAL
+413,Exención y exoneración de Costas y Costos,1,IGUALDAD_NORMALIZADA_PARCIAL
+414,Pluralidad de sujetos y condena en costas y costos,1,IGUALDAD_NORMALIZADA_PARCIAL
+415,Acuerdo sobre reembolso de las costas y costos en la transacción y conciliación,1,IGUALDAD_NORMALIZADA_PARCIAL
+416,Condena en costas y costos en el desistimiento y el abandono,1,IGUALDAD_NORMALIZADA_PARCIAL
+417,Liquidación de las costas,1,IGUALDAD_NORMALIZADA_PARCIAL
+418,Procedencia de los costos,1,IGUALDAD_NORMALIZADA_PARCIAL
+419,Reembolso de las costas y costos,2,IGUALDAD_NORMALIZADA_PARCIAL
+420,Literalidad de la multa,1,REQUIERE_COTEJO_CONTEXTUAL
+421,Unidad de pago aplicable a la multa,1,IGUALDAD_NORMALIZADA_PARCIAL
+422,Liquidación y procedimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+423,Pago de multa,1,IGUALDAD_NORMALIZADA_PARCIAL
+424,Requisitos de la demanda,1,REQUIERE_COTEJO_CONTEXTUAL
+425,Anexos de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+426,Inadmisibilidad de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+427,Improcedencia de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+428,Modificación y ampliación de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+429,Medios probatorios extemporáneos,1,IGUALDAD_NORMALIZADA_PARCIAL
+430,Traslado de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+431,Emplazamiento del demandado domiciliado en la competencia territorial del Juzgado,1,IGUALDAD_NORMALIZADA_PARCIAL
+432,Emplazamiento del demandado domiciliado fuera de la competencia territorial del Juzgado,1,IGUALDAD_NORMALIZADA_PARCIAL
+433,Emplazamiento fuera del país,1,IGUALDAD_NORMALIZADA_PARCIAL
+434,Emplazamiento de demandados con domicilios distintos,1,IGUALDAD_NORMALIZADA_PARCIAL
+435,Emplazamiento a demandado indeterminado o incierto o con domicilio o residencia ignorados,1,IGUALDAD_NORMALIZADA_PARCIAL
+436,Emplazamiento del apoderado,1,IGUALDAD_NORMALIZADA_PARCIAL
+437,Nulidad de emplazamiento defectuoso,1,REQUIERE_COTEJO_CONTEXTUAL
+438,Efectos del emplazamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+439,Ineficacia de la interrupción,1,IGUALDAD_NORMALIZADA_PARCIAL
+440,Hechos no invocados en la demanda,3,IGUALDAD_NORMALIZADA_PARCIAL
+441,Sanción por juramento falso,1,REQUIERE_COTEJO_CONTEXTUAL
+442,Requisitos y contenido de la contestación a la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+443,Plazo de la contestación y reconvención,1,IGUALDAD_NORMALIZADA_PARCIAL
+444,Anexos de la contestación a la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+445,Reconvención,1,IGUALDAD_NORMALIZADA_PARCIAL
+446,Excepciones proponibles,1,REQUIERE_COTEJO_CONTEXTUAL
+447,Plazo y forma de proponer excepciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+448,Medios probatorios de las excepciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+449,Contenido del auto que resuelve la excepción,1,IGUALDAD_NORMALIZADA_PARCIAL
+450,Decisión y recurso en las excepciones,1,REQUIERE_COTEJO_CONTEXTUAL
+451,Efectos de las excepciones,1,REQUIERE_COTEJO_CONTEXTUAL
+452,Procesos idénticos,1,IGUALDAD_NORMALIZADA_PARCIAL
+453,"Amparo de las excepciones de litispendencia, cosa juzgada, desistimiento de la pretensión o conclusión del proceso por conciliación o transacción",1,IGUALDAD_NORMALIZADA_PARCIAL
+454,Improcedencia de la excepción como nulidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+455,Propuesta y trámite de las defensas previas,1,IGUALDAD_NORMALIZADA_PARCIAL
+456,Efectos del amparo de una defensa previa,1,IGUALDAD_NORMALIZADA_PARCIAL
+457,"Costas, costos y multas de las excepciones y defensas previas",1,REQUIERE_COTEJO_CONTEXTUAL
+458,Presupuesto para la declaración de rebeldía,1,IGUALDAD_NORMALIZADA_PARCIAL
+459,Notificación de la rebeldía,1,IGUALDAD_NORMALIZADA_PARCIAL
+460,Proceso y rebeldía,1,IGUALDAD_NORMALIZADA_PARCIAL
+461,Efecto de la declaración de rebeldía,1,IGUALDAD_NORMALIZADA_PARCIAL
+462,Ingreso del rebelde al proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+463,Rebeldía y medidas cautelares,1,IGUALDAD_NORMALIZADA_PARCIAL
+464,Costas y costos de la rebeldía,1,REQUIERE_COTEJO_CONTEXTUAL
+465,Saneamiento del proceso,2,IGUALDAD_NORMALIZADA_PARCIAL
+466,Efectos del saneamiento del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+467,Efectos de la declaración de invalidez de la relación procesal,1,REQUIERE_COTEJO_CONTEXTUAL
+468,Fijación de puntos controvertidos y saneamiento probatorio,1,IGUALDAD_NORMALIZADA_PARCIAL
+469,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+470,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+471,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+472,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+473,Juzgamiento anticipado del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+474,Conclusión del proceso,1,REQUIERE_COTEJO_CONTEXTUAL
+475,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+476,Requisitos de la actividad procesal,1,IGUALDAD_NORMALIZADA_PARCIAL
+477,Fijación del proceso por el Juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+478,Plazos,1,REQUIERE_COTEJO_CONTEXTUAL
+479,Plazo especial del emplazamiento,1,REQUIERE_COTEJO_CONTEXTUAL
+480,Tramitación,1,IGUALDAD_NORMALIZADA_PARCIAL
+481,Intervención del Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+482,Variación de la pretensión,1,IGUALDAD_NORMALIZADA_PARCIAL
+483,Acumulación originaria de pretensiones,1,IGUALDAD_NORMALIZADA_PARCIAL
+484,Acumulación sucesiva,1,REQUIERE_COTEJO_CONTEXTUAL
+485,Medidas cautelares,1,REQUIERE_COTEJO_CONTEXTUAL
+486,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+487,Fijación del proceso por el Juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+488,Competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+489,Normatividad supletoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+490,Reconvención,1,IGUALDAD_NORMALIZADA_PARCIAL
+491,Plazos,1,REQUIERE_COTEJO_CONTEXTUAL
+492,Plazo especial del emplazamiento,1,REQUIERE_COTEJO_CONTEXTUAL
+493,Abreviación del procedimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+494,Apelación,1,REQUIERE_COTEJO_CONTEXTUAL
+495,Requisitos y anexos especiales,1,REQUIERE_COTEJO_CONTEXTUAL
+496,Legitimidad pasiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+497,Improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+498,Prestación desconocida,1,IGUALDAD_NORMALIZADA_PARCIAL
+499,Requisito especial de la contestación,1,IGUALDAD_NORMALIZADA_PARCIAL
+500,Improcedencia especial de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+501,Carga probatoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+502,Conclusión especial del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+503,Acumulación sucesiva de procesos,1,REQUIERE_COTEJO_CONTEXTUAL
+504,Tramitación,1,IGUALDAD_NORMALIZADA_PARCIAL
+505,Requisitos especiales,1,IGUALDAD_NORMALIZADA_PARCIAL
+506,Emplazamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+506-A,Emplazamiento excepcional,1,REQUIERE_COTEJO_CONTEXTUAL
+507,Intervención del Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+508,Consulta,1,REQUIERE_COTEJO_CONTEXTUAL
+509,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+510,Presunción de dolo o culpa inexcusable,1,IGUALDAD_NORMALIZADA_PARCIAL
+511,Competencia de grado,1,IGUALDAD_NORMALIZADA_PARCIAL
+512,Dictamen previo del Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+513,Agotamiento de medios impugnatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+514,Plazo,1,IGUALDAD_NORMALIZADA_PARCIAL
+515,Regulación de la responsabilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+516,Obligados al resarcimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+517,Efectos de la sentencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+518,Demanda maliciosa,1,REQUIERE_COTEJO_CONTEXTUAL
+519,Competencia por materia,1,IGUALDAD_NORMALIZADA_PARCIAL
+520,Requisitos de la demanda.,1,IGUALDAD_NORMALIZADA_PARCIAL
+521,Emplazamiento de tercero al proceso.,1,IGUALDAD_NORMALIZADA_PARCIAL
+522,Requisitos de la contestación,1,IGUALDAD_NORMALIZADA_PARCIAL
+523,Reconvención,1,IGUALDAD_NORMALIZADA_PARCIAL
+523-A,Contradicción,1,IGUALDAD_NORMALIZADA_PARCIAL
+524,Efectos de la declaración de rebeldía,1,IGUALDAD_NORMALIZADA_PARCIAL
+525,Medios Probatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+526,Contenido del acta de conciliación,1,IGUALDAD_NORMALIZADA_PARCIAL
+527,Audiencia de Pruebas,1,REQUIERE_COTEJO_CONTEXTUAL
+528,Ejecución de la sentencia,1,REQUIERE_COTEJO_CONTEXTUAL
+529,Pretensión de tercero,1,IGUALDAD_NORMALIZADA_PARCIAL
+530,Posesión Provisoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+531,Caducidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+532,Reversión,1,IGUALDAD_NORMALIZADA_PARCIAL
+533,Fundamento,2,IGUALDAD_NORMALIZADA_PARCIAL
+534,Oportunidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+535,Inadmisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+536,Efectos de la tercería de propiedad,1,IGUALDAD_NORMALIZADA_PARCIAL
+537,Efectos de la tercería de derecho preferente,1,IGUALDAD_NORMALIZADA_PARCIAL
+538,Connivencia y malicia,1,IGUALDAD_NORMALIZADA_PARCIAL
+539,Suspensión de la medida cautelar sin tercería,1,REQUIERE_COTEJO_CONTEXTUAL
+540,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+541,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+542,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+543,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+544,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+545,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+546,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+547,Competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+548,Normatividad supletoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+549,Fijación del proceso por el Juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+550,Plazos especiales del emplazamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+551,Inadmisibilidad o improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+552,Excepciones y defensas previas,1,IGUALDAD_NORMALIZADA_PARCIAL
+553,Cuestiones probatorias,1,IGUALDAD_NORMALIZADA_PARCIAL
+554,Audiencia única,1,REQUIERE_COTEJO_CONTEXTUAL
+555,Actuación,1,IGUALDAD_NORMALIZADA_PARCIAL
+556,Apelación,1,IGUALDAD_NORMALIZADA_PARCIAL
+557,Regulación supletoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+558,Trámite de los recursos de apelación,1,IGUALDAD_NORMALIZADA_PARCIAL
+559,Improcedencias,1,IGUALDAD_NORMALIZADA_PARCIAL
+560,Competencia especial,1,IGUALDAD_NORMALIZADA_PARCIAL
+561,Representación procesal,1,REQUIERE_COTEJO_CONTEXTUAL
+562,Exoneración del pago de Tasas Judiciales,1,IGUALDAD_NORMALIZADA_PARCIAL
+563,Prohibición de ausentarse,1,REQUIERE_COTEJO_CONTEXTUAL
+564,Acceso de oficio a información en línea sobre la capacidad económica del demandado,1,REQUIERE_COTEJO_CONTEXTUAL
+565,Anexo especial de la contestación,1,IGUALDAD_NORMALIZADA_PARCIAL
+565-A,Requisito especial de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+566,Ejecución anticipada y ejecución forzada,1,REQUIERE_COTEJO_CONTEXTUAL
+566-A,Apercibimiento y remisión al Fiscal,1,REQUIERE_COTEJO_CONTEXTUAL
+567,Intereses y actualización del valor,1,IGUALDAD_NORMALIZADA_PARCIAL
+568,Liquidación,1,IGUALDAD_NORMALIZADA_PARCIAL
+569,Demanda infundada,1,IGUALDAD_NORMALIZADA_PARCIAL
+570,Prorrateo,1,IGUALDAD_NORMALIZADA_PARCIAL
+571,Aplicación extensiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+572,Garantía,1,REQUIERE_COTEJO_CONTEXTUAL
+573,Aplicación supletoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+574,Intervención del Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+575,Requisito especial de la demanda,1,IGUALDAD_NORMALIZADA_PARCIAL
+576,Anticipación de tutela,1,IGUALDAD_NORMALIZADA_PARCIAL
+577,Representación especial,1,IGUALDAD_NORMALIZADA_PARCIAL
+578,Revocación,1,IGUALDAD_NORMALIZADA_PARCIAL
+579,Contenido de la sentencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+580,Divorcio,1,IGUALDAD_NORMALIZADA_PARCIAL
+581,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+582,Anexos específicos,1,IGUALDAD_NORMALIZADA_PARCIAL
+583,Caso especial,1,IGUALDAD_NORMALIZADA_PARCIAL
+584,Rehabilitación,1,REQUIERE_COTEJO_CONTEXTUAL
+585,Procedimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+586,Sujetos activo y pasivo en el desalojo,1,IGUALDAD_NORMALIZADA_PARCIAL
+587,Tercero con título o sin él,1,IGUALDAD_NORMALIZADA_PARCIAL
+588,Falta de legitimidad pasiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+589,Notificación,1,IGUALDAD_NORMALIZADA_PARCIAL
+590,Desalojo accesorio,1,IGUALDAD_NORMALIZADA_PARCIAL
+591,Limitación de medios probatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+592,Requerimiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+593,Lanzamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+594,Sentencia con condena de futuro,1,IGUALDAD_NORMALIZADA_PARCIAL
+595,Pago de mejoras,1,IGUALDAD_NORMALIZADA_PARCIAL
+596,Restitución de otros bienes,1,REQUIERE_COTEJO_CONTEXTUAL
+597,Competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+598,Legitimación activa,1,IGUALDAD_NORMALIZADA_PARCIAL
+599,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+600,Requisitos y anexos,1,IGUALDAD_NORMALIZADA_PARCIAL
+601,Prescripción extintiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+602,Acumulación de pretensiones,1,IGUALDAD_NORMALIZADA_PARCIAL
+603,Interdicto de recobrar,1,IGUALDAD_NORMALIZADA_PARCIAL
+604,Demanda fundada e interdicto de recobrar,1,IGUALDAD_NORMALIZADA_PARCIAL
+605,Despojo judicial y procedimiento especial,1,IGUALDAD_NORMALIZADA_PARCIAL
+606,Interdicto de retener,1,IGUALDAD_NORMALIZADA_PARCIAL
+607,Sentencia fundada e interdicto de retener,1,REQUIERE_COTEJO_CONTEXTUAL
+608,"Juez competente, oportunidad y finalidad",1,IGUALDAD_NORMALIZADA_PARCIAL
+609,Sustitución del Juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+610,Requisitos de la solicitud,1,IGUALDAD_NORMALIZADA_PARCIAL
+611,Contenido de la decisión cautelar,1,IGUALDAD_NORMALIZADA_PARCIAL
+612,Características de la medida cautelar,1,IGUALDAD_NORMALIZADA_PARCIAL
+613,Contracautela y discrecionalidad del juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+614,Exceptuados de contracautela,1,IGUALDAD_NORMALIZADA_PARCIAL
+615,Caso especial de procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+616,Casos especiales de improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+617,Variación,1,IGUALDAD_NORMALIZADA_PARCIAL
+618,Medida anticipada,1,IGUALDAD_NORMALIZADA_PARCIAL
+619,Eficacia de la medida cautelar,1,IGUALDAD_NORMALIZADA_PARCIAL
+620,Cancelación de la contracautela,1,IGUALDAD_NORMALIZADA_PARCIAL
+621,Sanciones por medida cautelar innecesaria o maliciosa,1,IGUALDAD_NORMALIZADA_PARCIAL
+622,Deterioro o pérdida de bien afecto a medida cautelar,1,IGUALDAD_NORMALIZADA_PARCIAL
+623,Afectación de bien de tercero,1,IGUALDAD_NORMALIZADA_PARCIAL
+624,Responsabilidad por afectación de bien de tercero,1,IGUALDAD_NORMALIZADA_PARCIAL
+625,Extinción de la medida cautelar concedida con el Código Derogado,1,IGUALDAD_NORMALIZADA_PARCIAL
+626,Responsabilidad del Juez y del Secretario,1,REQUIERE_COTEJO_CONTEXTUAL
+627,Medida innecesaria,1,IGUALDAD_NORMALIZADA_PARCIAL
+628,Sustitución de la medida,1,IGUALDAD_NORMALIZADA_PARCIAL
+629,Medida cautelar genérica,1,IGUALDAD_NORMALIZADA_PARCIAL
+630,Cancelación de la medida,1,IGUALDAD_NORMALIZADA_PARCIAL
+631,Pluralidad de órganos de auxilio judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+632,Derechos del órgano de auxilio judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+633,Veedor especial,1,IGUALDAD_NORMALIZADA_PARCIAL
+634,Derechos y responsabilidades del veedor,1,REQUIERE_COTEJO_CONTEXTUAL
+635,Autonomía del proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+636,Medida cautelar fuera de proceso,1,IGUALDAD_NORMALIZADA_PARCIAL
+637,Trámite de la medida,1,IGUALDAD_NORMALIZADA_PARCIAL
+638,Ejecución por terceros y auxilio policial,1,IGUALDAD_NORMALIZADA_PARCIAL
+639,Concurrencia de medidas cautelares,1,IGUALDAD_NORMALIZADA_PARCIAL
+640,Formación del cuaderno cautelar,1,IGUALDAD_NORMALIZADA_PARCIAL
+641,Ejecución de la medida,1,REQUIERE_COTEJO_CONTEXTUAL
+642,Embargo,1,IGUALDAD_NORMALIZADA_PARCIAL
+643,Secuestro,1,IGUALDAD_NORMALIZADA_PARCIAL
+644,Identificación de los bienes embargados o secuestrados,1,IGUALDAD_NORMALIZADA_PARCIAL
+645,Extensión del embargo,1,IGUALDAD_NORMALIZADA_PARCIAL
+646,Embargo de bien en régimen de copropiedad,1,IGUALDAD_NORMALIZADA_PARCIAL
+647,Secuestro de vehículo,1,IGUALDAD_NORMALIZADA_PARCIAL
+647-A,Secuestro conservativo sobre bienes informáticos,1,REQUIERE_COTEJO_CONTEXTUAL
+648,Bienes inembargables,1,REQUIERE_COTEJO_CONTEXTUAL
+649,Embargo en forma de depósito y secuestro sobre bienes muebles,1,REQUIERE_COTEJO_CONTEXTUAL
+650,Embargo de inmueble sin inscripción registral o inscrito a nombre de tercera persona,1,IGUALDAD_NORMALIZADA_PARCIAL
+651,Secuestro de bienes dentro de una unidad de producción o de comercio,1,IGUALDAD_NORMALIZADA_PARCIAL
+652,Secuestro de títulos de crédito,1,IGUALDAD_NORMALIZADA_PARCIAL
+653,Cateo en el embargo en depósito o en el secuestro,1,IGUALDAD_NORMALIZADA_PARCIAL
+654,Retribución del custodio,1,IGUALDAD_NORMALIZADA_PARCIAL
+655,Obligaciones del depositario y del custodio,1,IGUALDAD_NORMALIZADA_PARCIAL
+656,Embargo en forma de inscripción,1,IGUALDAD_NORMALIZADA_PARCIAL
+657,Embargo en forma de retención,1,IGUALDAD_NORMALIZADA_PARCIAL
+658,Ejecución de la retención,1,IGUALDAD_NORMALIZADA_PARCIAL
+659,Falsa declaración del retenedor,1,IGUALDAD_NORMALIZADA_PARCIAL
+660,Doble pago,1,IGUALDAD_NORMALIZADA_PARCIAL
+661,Embargo en forma de intervención en recaudación,1,IGUALDAD_NORMALIZADA_PARCIAL
+662,Obligaciones del interventor recaudador,1,IGUALDAD_NORMALIZADA_PARCIAL
+663,Obligación especial,1,IGUALDAD_NORMALIZADA_PARCIAL
+664,Conversión de la recaudación a secuestro,2,REQUIERE_COTEJO_CONTEXTUAL
+665,Embargo en forma de intervención en información,1,IGUALDAD_NORMALIZADA_PARCIAL
+666,Obligaciones del interventor informador,1,IGUALDAD_NORMALIZADA_PARCIAL
+667,Ejecución de la intervención,1,IGUALDAD_NORMALIZADA_PARCIAL
+668,Responsabilidad en la intervención,1,IGUALDAD_NORMALIZADA_PARCIAL
+669,Embargo en forma de administración de bienes,1,IGUALDAD_NORMALIZADA_PARCIAL
+670,Conversión de la recaudación a administración de unidad de producción o comercio,1,REQUIERE_COTEJO_CONTEXTUAL
+671,Obligaciones del administrador,1,IGUALDAD_NORMALIZADA_PARCIAL
+672,Ejecución de la conversión a administración,1,IGUALDAD_NORMALIZADA_PARCIAL
+673,Anotación de demanda en los Registros Públicos,1,REQUIERE_COTEJO_CONTEXTUAL
+674,Medida temporal sobre el fondo,1,IGUALDAD_NORMALIZADA_PARCIAL
+675,Asignación anticipada de alimentos,1,IGUALDAD_NORMALIZADA_PARCIAL
+676,Asignación anticipada y sentencia desfavorable,2,REQUIERE_COTEJO_CONTEXTUAL
+677,Asuntos de familia e interés de menores,1,IGUALDAD_NORMALIZADA_PARCIAL
+678,Administración de bienes,1,IGUALDAD_NORMALIZADA_PARCIAL
+679,Desalojo,1,IGUALDAD_NORMALIZADA_PARCIAL
+680,Separación y divorcio,1,IGUALDAD_NORMALIZADA_PARCIAL
+681,Devolución de bien en el despojo,1,REQUIERE_COTEJO_CONTEXTUAL
+682,Medida Innovativa,1,IGUALDAD_NORMALIZADA_PARCIAL
+683,Interdicción,1,IGUALDAD_NORMALIZADA_PARCIAL
+684,Cautela posesoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+685,Abuso de derecho,1,IGUALDAD_NORMALIZADA_PARCIAL
+686,"Derecho a la intimidad, a la imagen y a la voz",1,REQUIERE_COTEJO_CONTEXTUAL
+687,Prohibición de Innovar,1,IGUALDAD_NORMALIZADA_PARCIAL
+688,Títulos ejecutivos,1,IGUALDAD_NORMALIZADA_PARCIAL
+689,Requisitos comunes,1,IGUALDAD_NORMALIZADA_PARCIAL
+690,Legitimación y derecho de tercero,1,REQUIERE_COTEJO_CONTEXTUAL
+690-A,Demanda,1,REQUIERE_COTEJO_CONTEXTUAL
+690-B,Competencia,1,REQUIERE_COTEJO_CONTEXTUAL
+690-C,Mandato Ejecutivo,1,REQUIERE_COTEJO_CONTEXTUAL
+690-D,Contradicción,1,REQUIERE_COTEJO_CONTEXTUAL
+690-E,Trámite,1,REQUIERE_COTEJO_CONTEXTUAL
+690-F,Denegación de la ejecución,1,REQUIERE_COTEJO_CONTEXTUAL
+691,Auto y apelación,1,IGUALDAD_NORMALIZADA_PARCIAL
+692,Limitación cautelar,1,IGUALDAD_NORMALIZADA_PARCIAL
+692-A,Señalamiento de bien libre y procedimiento de declaración de deudor judicial moroso,1,REQUIERE_COTEJO_CONTEXTUAL
+693,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+694,– Admisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+695,Ejecución de obligación de dar suma de dinero,1,IGUALDAD_NORMALIZADA_PARCIAL
+696,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+697,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+698,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+699,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+700,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+701,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+702,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+703,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+704,Procedencia,1,REQUIERE_COTEJO_CONTEXTUAL
+705,Mandato Ejecutivo,1,REQUIERE_COTEJO_CONTEXTUAL
+705-A,Ejecución de la obligación,1,REQUIERE_COTEJO_CONTEXTUAL
+706,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+707,Mandato Ejecutivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+708,"Ejecución de la obligación, por un tercero",1,IGUALDAD_NORMALIZADA_PARCIAL
+709,Obligación de Formalizar,1,IGUALDAD_NORMALIZADA_PARCIAL
+710,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+711,Mandato Ejecutivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+712,Ejecución de la obligación por un tercero,1,IGUALDAD_NORMALIZADA_PARCIAL
+713,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+714,[Derogado],0,RANGO_DEROGADO_VERIFICADO
+715,Mandato de Ejecución,1,IGUALDAD_NORMALIZADA_PARCIAL
+716,Ejecución de suma líquida,1,REQUIERE_COTEJO_CONTEXTUAL
+717,Ejecución de suma ilíquida,1,IGUALDAD_NORMALIZADA_PARCIAL
+718,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+719,Resoluciones judiciales y arbitrales extranjeras,1,IGUALDAD_NORMALIZADA_PARCIAL
+720,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+721,Mandato de ejecución,1,IGUALDAD_NORMALIZADA_PARCIAL
+722,Contradicción,1,IGUALDAD_NORMALIZADA_PARCIAL
+723,Orden de Remate,1,IGUALDAD_NORMALIZADA_PARCIAL
+724,Saldo deudor,1,IGUALDAD_NORMALIZADA_PARCIAL
+725,Formas,1,IGUALDAD_NORMALIZADA_PARCIAL
+726,Intervención de otro acreedor,1,IGUALDAD_NORMALIZADA_PARCIAL
+727,Conclusión de la ejecución forzada,1,REQUIERE_COTEJO_CONTEXTUAL
+728,Tasación,1,IGUALDAD_NORMALIZADA_PARCIAL
+729,Tasación convencional,1,IGUALDAD_NORMALIZADA_PARCIAL
+730,Observación y aprobación,1,IGUALDAD_NORMALIZADA_PARCIAL
+731,Convocatoria,1,REQUIERE_COTEJO_CONTEXTUAL
+732,Retribución del martillero,1,IGUALDAD_NORMALIZADA_PARCIAL
+733,Publicidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+734,Contenido del aviso,1,IGUALDAD_NORMALIZADA_PARCIAL
+735,Requisito para ser postor,1,IGUALDAD_NORMALIZADA_PARCIAL
+736,Reglas comunes al remate,1,IGUALDAD_NORMALIZADA_PARCIAL
+737,Acto de remate,1,IGUALDAD_NORMALIZADA_PARCIAL
+738,Acta de remate,1,IGUALDAD_NORMALIZADA_PARCIAL
+739,Transferencia de inmueble y destino del dinero obtenido,1,IGUALDAD_NORMALIZADA_PARCIAL
+740,Transferencia de mueble y destino del dinero obtenido,1,IGUALDAD_NORMALIZADA_PARCIAL
+741,Incumplimiento del adjudicatario,1,IGUALDAD_NORMALIZADA_PARCIAL
+742,Segunda Convocatoria,1,IGUALDAD_NORMALIZADA_PARCIAL
+743,Nulidad del remate,1,REQUIERE_COTEJO_CONTEXTUAL
+744,Adjudicación en Pago,1,IGUALDAD_NORMALIZADA_PARCIAL
+745,Concurrencia de adjudicatarios,1,REQUIERE_COTEJO_CONTEXTUAL
+746,Liquidación,1,REQUIERE_COTEJO_CONTEXTUAL
+747,Pago al ejecutante,1,IGUALDAD_NORMALIZADA_PARCIAL
+748,Concurrencia de acreedores,1,REQUIERE_COTEJO_CONTEXTUAL
+749,Procedimiento,1,REQUIERE_COTEJO_CONTEXTUAL
+750,Competencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+751,Requisitos y anexos de la solicitud,2,IGUALDAD_NORMALIZADA_PARCIAL
+752,Inadmisibilidad o improcedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+753,Contradicción,1,IGUALDAD_NORMALIZADA_PARCIAL
+754,Trámite,1,IGUALDAD_NORMALIZADA_PARCIAL
+755,Procedencia de la apelación,1,REQUIERE_COTEJO_CONTEXTUAL
+756,Trámite de la apelación con efecto suspensivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+757,Trámite de la apelación sin efecto suspensivo,1,IGUALDAD_NORMALIZADA_PARCIAL
+758,Plazos especiales del emplazamiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+759,Intervención del Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+760,Regulación supletoria,1,REQUIERE_COTEJO_CONTEXTUAL
+761,Improcedencias,1,IGUALDAD_NORMALIZADA_PARCIAL
+762,Ejecución,1,REQUIERE_COTEJO_CONTEXTUAL
+763,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+764,Audiencia de inventario,1,IGUALDAD_NORMALIZADA_PARCIAL
+765,Inclusión de bienes,1,IGUALDAD_NORMALIZADA_PARCIAL
+766,Exclusión de bienes,1,IGUALDAD_NORMALIZADA_PARCIAL
+767,Valorización,1,IGUALDAD_NORMALIZADA_PARCIAL
+768,Protocolización y efectos,1,REQUIERE_COTEJO_CONTEXTUAL
+769,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+770,Objeto,1,IGUALDAD_NORMALIZADA_PARCIAL
+771,Legitimidad activa,1,IGUALDAD_NORMALIZADA_PARCIAL
+772,Nombramiento,1,IGUALDAD_NORMALIZADA_PARCIAL
+773,Atribuciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+774,Obligaciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+775,Prohibiciones,1,IGUALDAD_NORMALIZADA_PARCIAL
+776,Autorización judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+777,Subrogación,1,IGUALDAD_NORMALIZADA_PARCIAL
+778,Retribución,1,IGUALDAD_NORMALIZADA_PARCIAL
+779,Conclusión de la administración,1,IGUALDAD_NORMALIZADA_PARCIAL
+780,Norma especial,1,REQUIERE_COTEJO_CONTEXTUAL
+781,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+782,Admisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+783,Audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+784,Ejecución,1,IGUALDAD_NORMALIZADA_PARCIAL
+785,Ineficacia de la adopción,1,REQUIERE_COTEJO_CONTEXTUAL
+786,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+787,Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+788,Medios probatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+789,Formalización de la autorización,1,REQUIERE_COTEJO_CONTEXTUAL
+790,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+791,Requisitos especiales,1,IGUALDAD_NORMALIZADA_PARCIAL
+792,Notificación,1,IGUALDAD_NORMALIZADA_PARCIAL
+793,Sentencia fundada,1,IGUALDAD_NORMALIZADA_PARCIAL
+794,Reconocimiento de presencia y existencia,2,REQUIERE_COTEJO_CONTEXTUAL
+795,Legitimación activa y beneficiarios,2,IGUALDAD_NORMALIZADA_PARCIAL
+796,Admisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+797,Notificación edictal,1,IGUALDAD_NORMALIZADA_PARCIAL
+798,Ministerio Público,1,IGUALDAD_NORMALIZADA_PARCIAL
+799,Audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+800,Modificación y extinción,1,IGUALDAD_NORMALIZADA_PARCIAL
+801,Formalización,1,REQUIERE_COTEJO_CONTEXTUAL
+802,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+803,Requisitos y anexos del ofrecimiento judicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+804,Forma del ofrecimiento judicial de pago,1,IGUALDAD_NORMALIZADA_PARCIAL
+805,Falta de contradicción y audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+806,Caso excepcional,1,IGUALDAD_NORMALIZADA_PARCIAL
+807,Consignación,1,IGUALDAD_NORMALIZADA_PARCIAL
+808,Venta,1,IGUALDAD_NORMALIZADA_PARCIAL
+809,Contradicción y audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+810,Contradicción parcial,1,IGUALDAD_NORMALIZADA_PARCIAL
+811,Ofrecimiento extrajudicial,1,IGUALDAD_NORMALIZADA_PARCIAL
+812,Consignaciones periódicas o sucesivas,1,IGUALDAD_NORMALIZADA_PARCIAL
+813,Improcedencia en las consignaciones periódicas o sucesivas,1,IGUALDAD_NORMALIZADA_PARCIAL
+814,Consignación judicial sin efecto de pago,1,IGUALDAD_NORMALIZADA_PARCIAL
+815,Costas y costos,2,IGUALDAD_NORMALIZADA_PARCIAL
+816,Retiro de la consignación,1,REQUIERE_COTEJO_CONTEXTUAL
+817,Procedencia y Legitimación activa,1,IGUALDAD_NORMALIZADA_PARCIAL
+818,Requisitos y anexos,1,IGUALDAD_NORMALIZADA_PARCIAL
+819,Presentación y constatación previa,1,IGUALDAD_NORMALIZADA_PARCIAL
+820,Emplazamiento complementario,1,IGUALDAD_NORMALIZADA_PARCIAL
+821,Medios probatorios,1,IGUALDAD_NORMALIZADA_PARCIAL
+822,Improcedencia de contradicción,1,IGUALDAD_NORMALIZADA_PARCIAL
+823,Resolución y efectos de la misma,1,IGUALDAD_NORMALIZADA_PARCIAL
+824,Solicitud rechazada,1,IGUALDAD_NORMALIZADA_PARCIAL
+825,Disposiciones especiales,1,REQUIERE_COTEJO_CONTEXTUAL
+826,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+827,Legitimidad activa,1,REQUIERE_COTEJO_CONTEXTUAL
+828,Publicación,1,IGUALDAD_NORMALIZADA_PARCIAL
+829,Trámite especial,1,REQUIERE_COTEJO_CONTEXTUAL
+830,Procedencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+831,Admisibilidad,1,IGUALDAD_NORMALIZADA_PARCIAL
+832,Legitimación pasiva,1,IGUALDAD_NORMALIZADA_PARCIAL
+833,Notificación edictal e inscripción registral,1,IGUALDAD_NORMALIZADA_PARCIAL
+834,Inclusión de otro heredero y audiencia,1,IGUALDAD_NORMALIZADA_PARCIAL
+835,[Derogado],1,REQUIERE_COTEJO_CONTEXTUAL
+836,Ejecución,1,REQUIERE_COTEJO_CONTEXTUAL
+837,Competencia,1,REQUIERE_COTEJO_CONTEXTUAL
+838,Presunción relativa,1,IGUALDAD_NORMALIZADA_PARCIAL
+839,Exclusión,1,IGUALDAD_NORMALIZADA_PARCIAL
+840,Entrega de copia certificada del expediente,1,REQUIERE_COTEJO_CONTEXTUAL
+841,Trámite,1,IGUALDAD_NORMALIZADA_PARCIAL
+842,Solicitudes de apoyos y salvaguardias,1,IGUALDAD_NORMALIZADA_PARCIAL
+843,Solicitud por cualquier persona,1,IGUALDAD_NORMALIZADA_PARCIAL
+844,Solicitante con discapacidad,1,REQUIERE_COTEJO_CONTEXTUAL
+845,Deber del Juez,1,IGUALDAD_NORMALIZADA_PARCIAL
+846,Contenido de la solicitud,1,IGUALDAD_NORMALIZADA_PARCIAL
+847,Contenido de la resolución final,1,REQUIERE_COTEJO_CONTEXTUAL

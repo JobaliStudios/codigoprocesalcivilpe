@@ -32,6 +32,13 @@ public final class InterstitialAdCoordinator {
             new InterstitialNavigationCoordinator();
     @Nullable private InterstitialAd loadedAd;
     private boolean loading;
+    private final AdRequestGeneration requestGeneration = new AdRequestGeneration();
+
+    public synchronized void invalidateForPrivacyChange() {
+        requestGeneration.invalidate();
+        loadedAd = null;
+        loading = false;
+    }
 
     private InterstitialAdCoordinator() {
     }
@@ -57,9 +64,24 @@ public final class InterstitialAdCoordinator {
             @NonNull String productionAdUnitId,
             @NonNull Runnable destination
     ) {
+        activity.runOnUiThread(() -> {
+            recordNavigationWithoutInterruption();
+            destination.run();
+            preload(activity.getApplicationContext(), productionAdUnitId);
+        });
+    }
+
+    public void navigateAtNaturalBreak(
+            @NonNull Activity activity,
+            @NonNull String productionAdUnitId,
+            @NonNull InterstitialPlacement placement,
+            @NonNull Runnable destination
+    ) {
         activity.runOnUiThread(() -> navigationCoordinator.requestNavigation(
                 destination,
-                listener -> showIfAvailable(activity, productionAdUnitId, listener)
+                listener -> placement.tryShow(
+                        GoogleMobileAdsConsentManager.getInstance(activity).canRequestAds(),
+                        () -> showIfAvailable(activity, productionAdUnitId, listener))
         ));
     }
 
@@ -69,6 +91,8 @@ public final class InterstitialAdCoordinator {
             @NonNull InterstitialNavigationCoordinator.AdEventListener listener
     ) {
         InterstitialAd adToShow;
+        final InterstitialImpressionTracker impressionTracker =
+                new InterstitialImpressionTracker(frequencyPolicy);
         synchronized (this) {
             frequencyPolicy.recordNavigation();
             if (!isResumedAndUsable(activity)
@@ -79,13 +103,14 @@ public final class InterstitialAdCoordinator {
             }
             adToShow = loadedAd;
             loadedAd = null;
-            frequencyPolicy.recordShown(System.currentTimeMillis());
         }
 
         adToShow.setImmersiveMode(false);
         adToShow.setFullScreenContentCallback(new FullScreenContentCallback() {
             @Override
             public void onAdShowedFullScreenContent() {
+                // Un intento fallido no consume el límite ni reinicia los 10 minutos.
+                impressionTracker.onImpressionConfirmed(System.currentTimeMillis());
                 listener.onAdShowed();
             }
 
@@ -126,11 +151,13 @@ public final class InterstitialAdCoordinator {
             return;
         }
         consentManager.initializeAdsIfAllowed(context);
+        final long generation;
         synchronized (this) {
             if (loadedAd != null || loading) {
                 return;
             }
             loading = true;
+            generation = requestGeneration.current();
         }
         String adUnitId = resolveAdUnitId(isDebuggableBuild(context), productionAdUnitId);
         InterstitialAd.load(
@@ -141,6 +168,7 @@ public final class InterstitialAdCoordinator {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                         synchronized (InterstitialAdCoordinator.this) {
+                            if (!requestGeneration.isCurrent(generation)) return;
                             loadedAd = interstitialAd;
                             loading = false;
                         }
@@ -149,6 +177,7 @@ public final class InterstitialAdCoordinator {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         synchronized (InterstitialAdCoordinator.this) {
+                            if (!requestGeneration.isCurrent(generation)) return;
                             loadedAd = null;
                             loading = false;
                         }

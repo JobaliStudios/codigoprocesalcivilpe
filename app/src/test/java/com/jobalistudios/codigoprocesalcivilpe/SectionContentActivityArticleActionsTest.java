@@ -62,6 +62,18 @@ public class SectionContentActivityArticleActionsTest {
     }
 
     @Test
+    public void backToIndex_opensCorrectParentAndRecreatesExistingIndex() {
+        SectionContentActivity activity = launchArticle("506-A");
+        activity.findViewById(R.id.btnBackToIndex).performClick();
+        Intent index = Shadows.shadowOf(activity).getNextStartedActivity();
+        assertNotNull(index);
+        assertEquals("com.jobalistudios.codigoprocesalcivilpe.navigation.SectionListActivity",
+                index.getComponent().getClassName());
+        assertEquals(0, index.getFlags() & Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        assertTrue(activity.isFinishing());
+    }
+
+    @Test
     public void copy_usesExactDirectlyOpenedAlphanumericArticle() {
         SectionContentActivity activity = launchArticle("506-A");
         Article article = findArticle("506-A");

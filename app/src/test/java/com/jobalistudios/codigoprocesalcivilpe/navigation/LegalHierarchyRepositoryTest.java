@@ -17,6 +17,13 @@ import java.util.Set;
  */
 public class LegalHierarchyRepositoryTest {
 
+    @Test public void parentIndex_resolvesImmediateBranchAndRejectsUnknownNodes() {
+        assertEquals("sec_1_tit_2", LegalHierarchyRepository.findParentNode("sec_1_tit_2_cap_1").id);
+        assertEquals("sec_1", LegalHierarchyRepository.findParentNode("sec_1_tit_1").id);
+        assertTrue(LegalHierarchyRepository.findParentNode("missing") == null);
+        assertTrue(LegalHierarchyRepository.findParentNode(LegalHierarchyRepository.ROOT_ID) == null);
+    }
+
     @Test
     public void lasHojasDelArbolCoincidenUnoAUnoConElCatalogo() {
         List<Integer> treeTextRes = new ArrayList<>();

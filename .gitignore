@@ -28,3 +28,6 @@ keystore.properties
 *.keystore
 *.p12
 *.pfx
+
+# Local planning companions and execution ledgers.
+/.superpowers/

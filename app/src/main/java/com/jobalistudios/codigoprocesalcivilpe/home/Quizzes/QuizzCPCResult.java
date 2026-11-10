@@ -77,10 +77,15 @@ public class QuizzCPCResult extends AppBaseActivity {
             finish();
         });
 
-        findViewById(R.id.btnBackToStart).setOnClickListener(v -> {
+        findViewById(R.id.btnBackToStart).setOnClickListener(v ->
+                com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator
+                .getInstance().navigateAtNaturalBreak(this,
+                        getString(R.string.admob_interstitial_ad_unit_id),
+                        com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialPlacement.QUIZ_RESULT_EXIT,
+                        () -> {
             startActivity(new Intent(this, QuizzCPCStartScreen.class));
             finish();
-        });
+        }));
 
         findViewById(R.id.btnShareScore).setOnClickListener(v -> {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
