@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowAlertDialog;
+import org.robolectric.shadows.ShadowDialog;
 
 /** La prueba corre en Robolectric; jamás borra datos de un teléfono real. */
 @RunWith(RobolectricTestRunner.class)
@@ -54,7 +54,7 @@ public class PrivacyCenterThemeResetTest {
         assertTrue(ThemePreferenceManager.isDarkModeEnabled(context));
         activity.findViewById(R.id.buttonClearAll).performClick();
 
-        AlertDialog dialog = (AlertDialog) ShadowAlertDialog.getLatestAlertDialog();
+        AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         assertTrue(dialog.isShowing());
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
         Shadows.shadowOf(Looper.getMainLooper()).idle();
