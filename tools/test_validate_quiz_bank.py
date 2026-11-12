@@ -25,7 +25,12 @@ def valid_fixture():
 
 class BankValidatorTests(unittest.TestCase):
     def test_legacy_prefix_is_immutable_even_when_questions_are_appended(self):
-        original, _ = valid_fixture()
+        fixture, _ = valid_fixture()
+        original = []
+        for index in range(31):
+            question = copy.deepcopy(fixture[0])
+            question["questionText"] = f"Pregunta original {index + 1}"
+            original.append(question)
         new_question = copy.deepcopy(original[0])
         new_question["questionText"] = "Otra pregunta"
         self.assertEqual([], verify_legacy_questions(original + [new_question], original))
