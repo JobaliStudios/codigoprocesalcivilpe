@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionBank;
@@ -40,6 +41,13 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
             }
         });
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
+        findViewById(R.id.btnQuizResumeDraft).setOnClickListener(view -> {
+            if (new QuizDraftStore(this).load() != null) {
+                startActivity(QuizSessionContract.createResumeQuestionIntent(this));
+            } else {
+                bindDraft();
+            }
+        });
         findViewById(R.id.btnQuickReview).setOnClickListener(view -> start(QuizSessionConfig.quickReview()));
         findViewById(R.id.cardQuizAll).setOnClickListener(view -> start(QuizSessionConfig.all()));
         findViewById(R.id.cardQuizFavorites).setOnClickListener(view -> start(QuizSessionConfig.favorites()));
@@ -47,7 +55,7 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
         findViewById(R.id.cardQuizSection).setOnClickListener(view -> showSections());
     }
 
-    @Override protected void onResume() { super.onResume(); bindCards(); }
+    @Override protected void onResume() { super.onResume(); bindCards(); bindDraft(); }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -56,6 +64,19 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
 
     private static int restoredCount(int count) {
         return count == 5 || count == 20 ? count : 10;
+    }
+
+    private void bindDraft() {
+        QuizDraftStore.Draft draft = new QuizDraftStore(this).load();
+        View card = findViewById(R.id.cardQuizDraft);
+        if (draft == null) {
+            card.setVisibility(View.GONE);
+            return;
+        }
+        ((TextView) findViewById(R.id.tvQuizDraftProgress)).setText(getString(
+                R.string.quiz_draft_resume_summary,
+                draft.getAnsweredCount(), draft.getQuestions().size()));
+        card.setVisibility(View.VISIBLE);
     }
 
     private void bindCards() {
@@ -83,8 +104,23 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
         QuizSessionConfig sized = config.withQuestionCount(selectedQuestionCount);
         QuizSelection selection = selector().select(sized);
         if (!selection.isAvailable()) { showEmpty(selection.getEmptyReason()); return; }
+        if (new QuizDraftStore(this).load() != null) {
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.quiz_draft_new_title)
+                    .setMessage(R.string.quiz_draft_new_message)
+                    .setPositiveButton(R.string.quiz_draft_new_confirm,
+                            (dialog, which) -> startNewSession(sized))
+                    .setNegativeButton(R.string.quiz_draft_keep_saved, null)
+                    .show();
+            return;
+        }
+        startNewSession(sized);
+    }
+
+    private void startNewSession(QuizSessionConfig config) {
+        new QuizDraftStore(this).clear();
         status.setVisibility(View.GONE);
-        startActivity(QuizSessionContract.createQuestionIntent(this, sized));
+        startActivity(QuizSessionContract.createQuestionIntent(this, config));
     }
 
     private void showSections() {

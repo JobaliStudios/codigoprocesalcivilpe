@@ -57,6 +57,67 @@ public class QuizzCPCViewModel extends AndroidViewModel {
         updateCurrentQuestion();
     }
 
+    /**
+     * Reconstruye el puntaje y la racha sin volver a modificar la lista de errores.
+     * La selección y las respuestas son verificadas previamente por QuizDraftStore.
+     */
+    public void restoreDraft(QuizDraftStore.Draft draft) {
+        if (questionsLiveData.getValue() != null) {
+            return;
+        }
+        List<QuestionModel> savedQuestions = draft.getQuestions();
+        List<Integer> choices = draft.getSelectedAnswers();
+        config = draft.getConfig();
+        totalQuestions = savedQuestions.size();
+        stats = new QuizSessionStats(totalQuestions);
+        answersByPosition.clear();
+        currentAnswerPoints = 0;
+
+        for (int index = 0; index < choices.size(); index++) {
+            QuestionModel question = savedQuestions.get(index);
+            int selected = choices.get(index);
+            int correctIndex = question.getCorrectAnswerIndex();
+            boolean correct = selected == correctIndex;
+            question.setCorrect(correct);
+            int awarded = stats.recordAnswer(correct);
+            answersByPosition.put(index, new QuizAnswerResult(
+                    question.getQuestionText(),
+                    selected,
+                    question.getOptions().get(selected),
+                    correctIndex,
+                    question.getOptions().get(correctIndex),
+                    question.getRelatedArticle(),
+                    index,
+                    correct
+            ));
+            if (index == draft.getCurrentIndex()) {
+                currentAnswerPoints = awarded;
+            }
+        }
+
+        questionsLiveData.setValue(new ArrayList<>(savedQuestions));
+        currentQuestionIndex.setValue(draft.getCurrentIndex());
+        updateCurrentQuestion();
+    }
+
+    public List<QuestionModel> getSessionQuestions() {
+        List<QuestionModel> questions = questionsLiveData.getValue();
+        return questions == null ? new ArrayList<>() : new ArrayList<>(questions);
+    }
+
+    /** Las respuestas son un prefijo consecutivo, nunca se salta una pregunta. */
+    public List<Integer> getSelectedAnswers() {
+        List<Integer> choices = new ArrayList<>();
+        for (int index = 0; index < answersByPosition.size(); index++) {
+            QuizAnswerResult answer = answersByPosition.get(index);
+            if (answer == null) {
+                break;
+            }
+            choices.add(answer.getSelectedAnswerIndex());
+        }
+        return choices;
+    }
+
     public LiveData<QuestionModel> getCurrentQuestionLiveData() {
         return currentQuestionLiveData;
     }

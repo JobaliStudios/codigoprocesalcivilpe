@@ -12,11 +12,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.jobalistudios.codigoprocesalcivilpe.R;
@@ -33,6 +35,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
     private MediaPlayer correctSound;
     private MediaPlayer wrongSound;
     private QuizzCPCViewModel viewModel;
+    private QuizDraftStore draftStore;
 
     private LinearProgressIndicator progressBar;
     private TextView tvQuestion;
@@ -60,6 +63,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         setContentView(R.layout.activity_quizz_cpcquestions);
 
         viewModel = new ViewModelProvider(this).get(QuizzCPCViewModel.class);
+        draftStore = new QuizDraftStore(this);
 
         progressBar = findViewById(R.id.progressBar);
         tvQuestion = findViewById(R.id.tvQuestion);
@@ -74,27 +78,43 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         btnStudyArticle = findViewById(R.id.btnStudyArticle);
         optionsContainer = findViewById(R.id.optionsContainer);
 
-        startTimeMillis = savedInstanceState != null
-                ? savedInstanceState.getLong(STATE_START_TIME, System.currentTimeMillis())
-                : System.currentTimeMillis();
+        boolean restoringActivity = savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_QUESTION_COUNT);
+        if (restoringActivity
+                || getIntent().getBooleanExtra(QuizSessionContract.EXTRA_RESUME_DRAFT, false)) {
+            QuizDraftStore.Draft draft = draftStore.load();
+            if (draft == null) {
+                finish();
+                return;
+            }
+            startTimeMillis = savedInstanceState != null
+                    ? savedInstanceState.getLong(STATE_START_TIME, System.currentTimeMillis())
+                    : System.currentTimeMillis() - draft.getElapsedMillis();
+            viewModel.restoreDraft(draft);
+        } else {
+            startTimeMillis = savedInstanceState != null
+                    ? savedInstanceState.getLong(STATE_START_TIME, System.currentTimeMillis())
+                    : System.currentTimeMillis();
 
-        QuizSessionConfig config = QuizSessionContract.getConfig(getIntent());
-        if (getIntent().hasExtra("QUESTION_COUNT")) {
-            config = new QuizSessionConfig(QuizPracticeMode.ALL, null,
-                    getIntent().getIntExtra("QUESTION_COUNT", 10), true, new ArrayList<>());
+            QuizSessionConfig config = QuizSessionContract.getConfig(getIntent());
+            if (getIntent().hasExtra("QUESTION_COUNT")) {
+                config = new QuizSessionConfig(QuizPracticeMode.ALL, null,
+                        getIntent().getIntExtra("QUESTION_COUNT", 10), true, new ArrayList<>());
+            }
+            QuizSelection selection = QuizSelectorFactory.create(this).select(config);
+            if (!selection.isAvailable()) {
+                finish();
+                return;
+            }
+            viewModel.initSession(config, selection.getQuestions());
         }
-        QuizSelection selection = QuizSelectorFactory.create(this).select(config);
-        if (!selection.isAvailable()) {
-            finish();
-            return;
-        }
-        viewModel.initSession(config, selection.getQuestions());
+        saveDraft();
 
         progressBar.setMax(viewModel.getTotalQuestions());
 
         viewModel.getCurrentQuestionLiveData().observe(this, this::renderQuestion);
 
-        findViewById(R.id.btnClose).setOnClickListener(v -> finish());
+        findViewById(R.id.btnClose).setOnClickListener(v -> confirmExit());
 
         btnNext.setOnClickListener(v -> {
             if (!answered) {
@@ -102,6 +122,8 @@ public class QuizzCPCQuestions extends AppBaseActivity {
             }
             if (!viewModel.moveToNextQuestion()) {
                 showResult();
+            } else {
+                saveDraft();
             }
         });
         btnNext.setEnabled(false);
@@ -109,9 +131,38 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                finish();
+                confirmExit();
             }
         });
+    }
+
+    private void confirmExit() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.quiz_draft_exit_title)
+                .setMessage(R.string.quiz_draft_exit_message)
+                .setPositiveButton(R.string.quiz_draft_save_exit, (dialog, which) -> {
+                    if (saveDraft()) {
+                        finish();
+                    } else {
+                        Toast.makeText(this, R.string.quiz_draft_save_error,
+                                Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNeutralButton(R.string.quiz_draft_discard, (dialog, which) -> {
+                    draftStore.clear();
+                    finish();
+                })
+                .setNegativeButton(R.string.quiz_draft_continue, null)
+                .show();
+    }
+
+    private boolean saveDraft() {
+        if (viewModel.getConfig() == null || viewModel.getTotalQuestions() < 1) {
+            return false;
+        }
+        return draftStore.save(viewModel.getConfig(), viewModel.getSessionQuestions(),
+                viewModel.getSelectedAnswers(), viewModel.getCurrentQuestionIndex(),
+                Math.max(0L, System.currentTimeMillis() - startTimeMillis));
     }
 
     private void renderQuestion(QuestionModel currentQuestion) {
@@ -217,6 +268,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
 
         showSelectedAnswer(question, selectedIndex, isCorrect);
         renderStats();
+        saveDraft();
     }
 
     private void showSelectedAnswer(
@@ -297,6 +349,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
     }
 
     private void showResult() {
+        draftStore.clear();
         Intent intent = QuizSessionContract.createResultIntent(
                 this,
                 viewModel.getStats(),

@@ -19,6 +19,7 @@ public final class QuizSessionContract {
     public static final String EXTRA_INCORRECT_ANSWERS = "INCORRECT_ANSWERS";
     public static final String EXTRA_CONFIG = "QUIZ_SESSION_CONFIG";
     public static final String EXTRA_STATS = "QUIZ_SESSION_STATS";
+    public static final String EXTRA_RESUME_DRAFT = "QUIZ_RESUME_LOCAL_DRAFT";
 
     private QuizSessionContract() {
     }
@@ -26,6 +27,12 @@ public final class QuizSessionContract {
     @NonNull
     public static Intent createQuestionIntent(@NonNull Context context, @NonNull QuizSessionConfig config) {
         return new Intent(context, QuizzCPCQuestions.class).putExtra(EXTRA_CONFIG, config);
+    }
+
+    @NonNull
+    public static Intent createResumeQuestionIntent(@NonNull Context context) {
+        return new Intent(context, QuizzCPCQuestions.class)
+                .putExtra(EXTRA_RESUME_DRAFT, true);
     }
 
     @NonNull

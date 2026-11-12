@@ -4,6 +4,46 @@
         <com.google.android.material.button.MaterialButton android:id="@+id/btnBack" style="@style/Widget.MaterialComponents.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/back" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_m" android:text="@string/quiz_gamified_title" android:textColor="@color/quiz_text_title" android:textSize="@dimen/text_title_l" android:textStyle="bold" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_s" android:text="@string/quiz_gamified_question" android:textColor="@color/quiz_text_secondary" android:textSize="@dimen/text_body_l" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardQuizDraft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/quiz_info_card_bg"
+            app:cardCornerRadius="@dimen/radius_l"
+            app:strokeColor="@color/quiz_info_card_stroke"
+            app:strokeWidth="@dimen/stroke_width_thin">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_l">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quiz_draft_resume_title"
+                    android:textColor="@color/quiz_text_title"
+                    android:textSize="@dimen/text_title_m"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvQuizDraftProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:textColor="@color/quiz_text_body"
+                    android:textSize="@dimen/text_body_l" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuizResumeDraft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:minHeight="@dimen/touch_target_min"
+                    android:text="@string/quiz_draft_resume_action"
+                    android:textAllCaps="false"
+                    app:icon="@drawable/baseline_history_24" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
