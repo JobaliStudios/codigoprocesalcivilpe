@@ -70,6 +70,11 @@ public final class QuizSessionConfig implements Parcelable {
                 true, Collections.emptyList());
     }
 
+    /** Cambia solo el tamaño de la sesión sin perder modo, sección ni IDs de repaso. */
+    @NonNull public QuizSessionConfig withQuestionCount(int questionCount) {
+        return new QuizSessionConfig(mode, sectionId, questionCount, shuffle, sessionErrorIds);
+    }
+
     @NonNull public QuizSessionConfig withSessionErrorIds(@NonNull List<String> ids) {
         return new QuizSessionConfig(mode, sectionId, requestedQuestionCount, shuffle, ids);
     }
