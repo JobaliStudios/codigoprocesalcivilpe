@@ -15,14 +15,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.button.MaterialButton;
@@ -81,7 +79,6 @@ public class SectionContentActivity extends AppBaseActivity {
     public static final String EXTRA_PREVIOUS_DESTINATION_ID = "EXTRA_PREVIOUS_DESTINATION_ID";
     public static final String EXTRA_NEXT_DESTINATION_ID = "EXTRA_NEXT_DESTINATION_ID";
 
-    private static final float FONT_SCALE_STEP = 0.05f;
     private static final long HISTORY_SCROLL_SETTLE_DELAY_MS = 350L;
     private static final String STATE_CURRENT_ARTICLE_NUMBER = "currentArticleNumber";
     private static final int MAX_RELATED_ARTICLES = 6;
@@ -1088,43 +1085,9 @@ public class SectionContentActivity extends AppBaseActivity {
         scheduleVisibleArticleRegistration();
     }
 
-    /** Diálogo de tamaño de letra; el cambio se aplica en vivo y queda guardado. */
+    /** El diálogo conserva la preferencia Aa y delega el render al lector activo. */
     private void showFontSizeDialog(TextView contentView) {
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_font_size, null);
-        TextView valueLabel = dialogView.findViewById(R.id.fontSizeValue);
-        SeekBar seekBar = dialogView.findViewById(R.id.fontSizeSeekBar);
-
-        float current = ReadingPreferenceManager.getContentFontScale(this);
-        seekBar.setProgress(Math.round((current - ReadingPreferenceManager.MIN_FONT_SCALE) / FONT_SCALE_STEP));
-        valueLabel.setText(getString(R.string.font_size_value, Math.round(current * 100)));
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar bar, int progress, boolean fromUser) {
-                float scale = ReadingPreferenceManager.MIN_FONT_SCALE + FONT_SCALE_STEP * progress;
-                valueLabel.setText(getString(R.string.font_size_value, Math.round(scale * 100)));
-                applyFontScale(contentView, scale);
-                ReadingPreferenceManager.setContentFontScale(SectionContentActivity.this, scale);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar bar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar bar) {
-            }
-        });
-
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.font_size_title)
-                .setView(dialogView)
-                .setPositiveButton(android.R.string.ok, null)
-                .setNeutralButton(R.string.font_size_reset, (dialog, which) -> {
-                    ReadingPreferenceManager.setContentFontScale(this, ReadingPreferenceManager.DEFAULT_FONT_SCALE);
-                    applyFontScale(contentView, ReadingPreferenceManager.DEFAULT_FONT_SCALE);
-                })
-                .show();
+        ReaderFontSizeDialog.show(this, scale -> applyFontScale(contentView, scale));
     }
 
     private void renderContent(TextView contentView, @StringRes int textResId) {
