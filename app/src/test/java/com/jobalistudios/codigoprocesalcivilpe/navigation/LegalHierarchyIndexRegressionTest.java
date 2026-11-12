@@ -99,6 +99,29 @@ public class LegalHierarchyIndexRegressionTest {
     }
 
     @Test
+    public void allSectionRowsKeepTheirOriginalOrderAndMetadata() {
+        List<LegalHierarchyRepository.Node> nodes = new ArrayList<>();
+        collect(LegalHierarchyRepository.getTree(), nodes);
+
+        for (LegalHierarchyRepository.Node node : nodes) {
+            List<SectionGroup> groups = LegalHierarchyRepository.buildGroups(node);
+            assertEquals("Cantidad de grupos distinta para " + node.id, 1, groups.size());
+            SectionGroup group = groups.get(0);
+            assertEquals(node.children.size(), group.getArticleCount());
+            assertEquals(node.children.size(), group.getItems().size());
+
+            for (int i = 0; i < node.children.size(); i++) {
+                LegalHierarchyRepository.Node child = node.children.get(i);
+                SectionItem item = group.getItems().get(i);
+                assertEquals(child.id, item.getNodeId());
+                assertEquals(child.title, item.getTitle());
+                assertEquals(child.subtitle, item.getSubtitle());
+                assertEquals(child.articleRange, item.getRange());
+            }
+        }
+    }
+
+    @Test
     public void unknownAndRootLookupsRetainNullSemantics() {
         assertNull(LegalHierarchyRepository.findNodeById("nonexistent-node-id"));
         assertNull(LegalHierarchyRepository.findNodeById(null));
