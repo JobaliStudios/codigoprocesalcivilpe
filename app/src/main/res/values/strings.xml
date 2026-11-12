@@ -716,6 +716,7 @@
     <string name="support_clipboard_label">Correo de soporte</string>
     <string name="support_email_copied">Correo copiado al portapapeles</string>
     <string name="about_screen_title">Acerca de la app</string>
+    <string name="navigation_back">Volver</string>
     <string name="about_developer_title">Desarrollador</string>
     <string name="about_developer_name">Jobali Studios</string>
     <string name="about_features_title">Funciones principales</string>
