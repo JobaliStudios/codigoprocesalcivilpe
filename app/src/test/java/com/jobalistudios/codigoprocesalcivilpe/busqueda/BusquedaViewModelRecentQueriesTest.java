@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -13,10 +15,12 @@ import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 public class BusquedaViewModelRecentQueriesTest {
@@ -29,7 +33,13 @@ public class BusquedaViewModelRecentQueriesTest {
         application.getSharedPreferences(BusquedaViewModel.PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().clear().commit();
         new FavoritesManager(application).clearAll();
-        viewModel = new BusquedaViewModel(application);
+        viewModel = new BusquedaViewModel(application, Runnable::run,
+                new Handler(Looper.getMainLooper()));
+    }
+
+    @After
+    public void tearDown() {
+        viewModel.onCleared();
     }
 
     @Test
@@ -126,6 +136,7 @@ public class BusquedaViewModelRecentQueriesTest {
     }
 
     private BusquedaViewModel.BusquedaUiState state() {
+        ShadowLooper.idleMainLooper();
         return viewModel.getUiState().getValue();
     }
 }

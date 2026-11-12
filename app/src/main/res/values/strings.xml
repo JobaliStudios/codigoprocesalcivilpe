@@ -681,6 +681,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Inicio</string>
     <string name="title_busqueda">Búsqueda</string>
+    <string name="busqueda_search_error_title">No se pudo completar la búsqueda</string>
+    <string name="busqueda_search_error_body">Ocurrió un problema al consultar los artículos. Inténtalo nuevamente.</string>
+    <string name="busqueda_loading_description">Buscando artículos</string>
     <string name="title_favoritos">Favoritos</string>
     <string name="title_configuracion">Configuración</string>
     <string name="config_title">Ajusta la app a tu medida</string>

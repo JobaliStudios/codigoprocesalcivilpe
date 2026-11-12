@@ -3,7 +3,10 @@ package com.jobalistudios.codigoprocesalcivilpe.busqueda;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,28 +24,71 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-/** Coordina el estado del buscador; el índice y ranking viven en {@link LegalSearchEngine}. */
+/**
+ * Coordina la búsqueda en el hilo principal, pero carga el índice y consulta los
+ * artículos exclusivamente en un ejecutor de fondo. No altera el ranking ni los filtros.
+ */
 public class BusquedaViewModel extends AndroidViewModel {
+    private static final String TAG = "BusquedaViewModel";
     static final String PREFS_NAME = "busqueda_prefs";
     static final String PREF_RECENT = "recent_queries";
     static final int MAX_RECENT = 8;
+    static final long SEARCH_DEBOUNCE_MS = 275L;
 
     private final SharedPreferences sharedPreferences;
-    private final LegalSearchEngine searchEngine;
     private final FavoritesManager favoritesManager;
     private final Set<String> selectedSections = new HashSet<>();
     private final MutableLiveData<BusquedaUiState> uiState = new MutableLiveData<>();
+    private final Executor backgroundExecutor;
+    @Nullable private final ExecutorService ownedExecutor;
+    private final Handler mainHandler;
+
+    // El motor se inicializa una sola vez, en el ejecutor serial de búsqueda.
+    @Nullable private LegalSearchEngine searchEngine;
+    @Nullable private Runnable pendingSearch;
+    private volatile int requestGeneration;
+    private volatile boolean disposed;
 
     private String currentQuery = "";
     private SearchFilter currentFilter = SearchFilter.ALL;
 
     public BusquedaViewModel(@NonNull Application application) {
+        this(application, Executors.newSingleThreadExecutor(),
+                new Handler(Looper.getMainLooper()), true);
+    }
+
+    /** Permite probar debounce y solicitudes obsoletas sin depender de hilos reales. */
+    BusquedaViewModel(@NonNull Application application, @NonNull Executor executor,
+                      @NonNull Handler handler) {
+        this(application, executor, handler, false);
+    }
+
+    private BusquedaViewModel(@NonNull Application application, @NonNull Executor executor,
+                             @NonNull Handler handler, boolean ownsExecutor) {
         super(application);
         sharedPreferences = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        searchEngine = LegalSearchEngine.create(application);
         favoritesManager = new FavoritesManager(application);
-        refreshState();
+        backgroundExecutor = executor;
+        ownedExecutor = ownsExecutor ? (ExecutorService) executor : null;
+        mainHandler = handler;
+
+        // El estado inicial es visible al instante, incluso mientras se prepara el índice.
+        uiState.setValue(new BusquedaUiState(currentQuery, Collections.emptyList(),
+                getRecentQueries(), currentFilter, selectedSections, EmptyState.PROMPT, false));
+        backgroundExecutor.execute(() -> {
+            if (!disposed) {
+                try {
+                    getOrCreateEngine();
+                } catch (RuntimeException error) {
+                    // Se informa al solicitar una búsqueda; el inicio nunca se bloquea.
+                    Log.e(TAG, "No se pudo precalcular el índice jurídico", error);
+                }
+            }
+        });
     }
 
     public LiveData<BusquedaUiState> getUiState() {
@@ -50,15 +96,21 @@ public class BusquedaViewModel extends AndroidViewModel {
     }
 
     public void updateQuery(String query) {
-        // Conserva los espacios mientras el usuario escribe consultas de varias palabras.
-        // El motor y la persistencia ya recortan la entrada en sus respectivos límites.
-        currentQuery = query == null ? "" : query;
-        refreshState();
+        // Conserva los espacios mientras se escriben consultas de varias palabras.
+        String nextQuery = query == null ? "" : query;
+        if (currentQuery.equals(nextQuery)) {
+            return;
+        }
+        currentQuery = nextQuery;
+        scheduleSearch(!currentQuery.trim().isEmpty());
     }
 
     public void setFilter(@NonNull SearchFilter filter) {
+        if (currentFilter == filter) {
+            return;
+        }
         currentFilter = filter;
-        refreshState();
+        scheduleSearch(false);
     }
 
     public void toggleSection(String sectionName) {
@@ -67,28 +119,29 @@ public class BusquedaViewModel extends AndroidViewModel {
         } else {
             selectedSections.add(sectionName);
         }
-        refreshState();
+        scheduleSearch(false);
     }
 
     public void clearFilters() {
         currentFilter = SearchFilter.ALL;
         selectedSections.clear();
-        refreshState();
+        scheduleSearch(false);
     }
 
     public void submitCurrentQuery() {
         persistRecentQuery(currentQuery);
-        refreshState();
+        // Enter ejecuta inmediatamente, incluso si había un debounce pendiente.
+        scheduleSearch(false);
     }
 
     public void recordResultOpened() {
         persistRecentQuery(currentQuery);
-        refreshState();
+        refreshRecentQueries();
     }
 
     public void useRecentQuery(String query) {
         currentQuery = query == null ? "" : query.trim();
-        refreshState();
+        scheduleSearch(false);
     }
 
     public void removeRecentQuery(String query) {
@@ -96,17 +149,17 @@ public class BusquedaViewModel extends AndroidViewModel {
         String normalized = SearchTextNormalizer.normalizePlain(query);
         recents.removeIf(item -> SearchTextNormalizer.normalizePlain(item).equals(normalized));
         saveRecentQueries(recents);
-        refreshState();
+        refreshRecentQueries();
     }
 
     public void clearAllRecentQueries() {
         clearRecentQueries(getApplication());
-        refreshState();
+        refreshRecentQueries();
     }
 
     /** Refresca el set de favoritos después de volver desde la pantalla de lectura. */
     public void refreshFavorites() {
-        refreshState();
+        scheduleSearch(false);
     }
 
     /** Elimina únicamente el historial de búsquedas recientes, también desde Privacidad. */
@@ -123,26 +176,93 @@ public class BusquedaViewModel extends AndroidViewModel {
         return ArticleNumberQueryParser.extract(query);
     }
 
-    private void refreshState() {
-        Set<String> favoriteNumbers = favoriteArticleNumbers();
-        LegalSearchEngine.SearchResponse response = searchEngine.search(
-                currentQuery,
-                currentFilter,
-                selectedSections,
-                favoriteNumbers
-        );
-        EmptyState emptyState = resolveEmptyState(response, favoriteNumbers);
-        uiState.setValue(new BusquedaUiState(
-                currentQuery,
-                response.results,
-                getRecentQueries(),
-                currentFilter,
-                selectedSections,
-                emptyState
-        ));
+    private void refreshRecentQueries() {
+        BusquedaUiState previous = uiState.getValue();
+        if (previous != null) {
+            uiState.setValue(new BusquedaUiState(previous.query, previous.results,
+                    getRecentQueries(), previous.filter, previous.selectedSections,
+                    previous.emptyState, previous.isLoading));
+        }
     }
 
-    private EmptyState resolveEmptyState(
+    private void scheduleSearch(boolean debounce) {
+        if (disposed) {
+            return;
+        }
+        if (pendingSearch != null) {
+            mainHandler.removeCallbacks(pendingSearch);
+            pendingSearch = null;
+        }
+
+        int generation = ++requestGeneration;
+        String query = currentQuery;
+        SearchFilter filter = currentFilter;
+        Set<String> sections = new HashSet<>(selectedSections);
+
+        // Con la consulta vacía mantenemos el estado inicial sin esperar al índice.
+        if (query.trim().isEmpty() && filter != SearchFilter.FAVORITES) {
+            uiState.setValue(new BusquedaUiState(query, Collections.emptyList(),
+                    getRecentQueries(), filter, sections, EmptyState.PROMPT, false));
+            return;
+        }
+
+        // Limpia los resultados anteriores; nunca muestra resultados de otro filtro
+        // ni un estado vacío falso mientras se está calculando.
+        uiState.setValue(new BusquedaUiState(query, Collections.emptyList(),
+                getRecentQueries(), filter, sections, EmptyState.NONE, true));
+
+        Runnable dispatch = () -> backgroundExecutor.execute(() -> {
+            if (disposed || generation != requestGeneration) {
+                return;
+            }
+            try {
+                LegalSearchEngine engine = getOrCreateEngine();
+                if (disposed || generation != requestGeneration) {
+                    return;
+                }
+                Set<String> favoriteNumbers = favoriteArticleNumbers();
+                LegalSearchEngine.SearchResponse response = engine.search(
+                        query, filter, sections, favoriteNumbers);
+                EmptyState emptyState = resolveEmptyState(
+                        query, filter, sections, response, favoriteNumbers);
+
+                mainHandler.post(() -> {
+                    if (disposed || generation != requestGeneration) {
+                        return;
+                    }
+                    uiState.setValue(new BusquedaUiState(query, response.results,
+                            getRecentQueries(), filter, sections, emptyState, false));
+                });
+            } catch (RuntimeException error) {
+                Log.e(TAG, "No se pudo completar la búsqueda jurídica", error);
+                mainHandler.post(() -> {
+                    if (disposed || generation != requestGeneration) {
+                        return;
+                    }
+                    uiState.setValue(new BusquedaUiState(query, Collections.emptyList(),
+                            getRecentQueries(), filter, sections, EmptyState.SEARCH_ERROR, false));
+                });
+            }
+        });
+        pendingSearch = dispatch;
+        if (debounce) {
+            mainHandler.postDelayed(dispatch, SEARCH_DEBOUNCE_MS);
+        } else {
+            dispatch.run();
+        }
+    }
+
+    private LegalSearchEngine getOrCreateEngine() {
+        if (searchEngine == null) {
+            searchEngine = LegalSearchEngine.create(getApplication());
+        }
+        return searchEngine;
+    }
+
+    private static EmptyState resolveEmptyState(
+            String query,
+            SearchFilter filter,
+            Set<String> sections,
             LegalSearchEngine.SearchResponse response,
             Set<String> favoriteNumbers
     ) {
@@ -152,16 +272,16 @@ public class BusquedaViewModel extends AndroidViewModel {
         if (response.invalidNumberQuery) {
             return EmptyState.INVALID_NUMBER;
         }
-        if (currentFilter == SearchFilter.FAVORITES && currentQuery.trim().isEmpty()) {
+        if (filter == SearchFilter.FAVORITES && query.trim().isEmpty()) {
             if (favoriteNumbers.isEmpty()) {
                 return EmptyState.NO_FAVORITES;
             }
             return EmptyState.FILTERED_NO_RESULTS;
         }
-        if (currentQuery.trim().isEmpty()) {
+        if (query.trim().isEmpty()) {
             return EmptyState.PROMPT;
         }
-        if (!selectedSections.isEmpty() || currentFilter != SearchFilter.ALL) {
+        if (!sections.isEmpty() || filter != SearchFilter.ALL) {
             return EmptyState.FILTERED_NO_RESULTS;
         }
         return EmptyState.NO_RESULTS;
@@ -183,7 +303,7 @@ public class BusquedaViewModel extends AndroidViewModel {
         if (value == null || value.isEmpty()) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(Arrays.asList(value.split("\\n")));
+        return new ArrayList<>(Arrays.asList(value.split("\n")));
     }
 
     private void persistRecentQuery(String query) {
@@ -211,13 +331,30 @@ public class BusquedaViewModel extends AndroidViewModel {
         }
     }
 
+    @Override
+    protected void onCleared() {
+        disposed = true;
+        ++requestGeneration;
+        if (pendingSearch != null) {
+            mainHandler.removeCallbacks(pendingSearch);
+            pendingSearch = null;
+        }
+        if (ownedExecutor != null) {
+            // No interrumpir la lectura de articles.json: el repositorio comparte su
+            // caché con el lector y una interrupción podría activar su ruta de respaldo.
+            ownedExecutor.shutdown();
+        }
+        super.onCleared();
+    }
+
     public enum EmptyState {
         NONE,
         PROMPT,
         NO_RESULTS,
         INVALID_NUMBER,
         NO_FAVORITES,
-        FILTERED_NO_RESULTS
+        FILTERED_NO_RESULTS,
+        SEARCH_ERROR
     }
 
     public static final class BusquedaUiState {
@@ -227,6 +364,7 @@ public class BusquedaViewModel extends AndroidViewModel {
         @NonNull public final SearchFilter filter;
         @NonNull public final Set<String> selectedSections;
         @NonNull public final EmptyState emptyState;
+        public final boolean isLoading;
 
         BusquedaUiState(
                 @NonNull String query,
@@ -234,14 +372,16 @@ public class BusquedaViewModel extends AndroidViewModel {
                 @NonNull List<String> recentQueries,
                 @NonNull SearchFilter filter,
                 @NonNull Set<String> selectedSections,
-                @NonNull EmptyState emptyState
+                @NonNull EmptyState emptyState,
+                boolean isLoading
         ) {
             this.query = query;
-            this.results = results;
+            this.results = Collections.unmodifiableList(new ArrayList<>(results));
             this.recentQueries = Collections.unmodifiableList(new ArrayList<>(recentQueries));
             this.filter = filter;
             this.selectedSections = Collections.unmodifiableSet(new HashSet<>(selectedSections));
             this.emptyState = emptyState;
+            this.isLoading = isLoading;
         }
 
         public boolean hasActiveFilters() {

@@ -154,7 +154,7 @@ public class BusquedaFragment extends Fragment {
 
     private void render(BusquedaViewModel.BusquedaUiState state) {
         adapter.submitList(state.results);
-        binding.progressLoading.setVisibility(View.GONE);
+        binding.progressLoading.setVisibility(state.isLoading ? View.VISIBLE : View.GONE);
 
         renderingFilterState = true;
         binding.chipGroupSearchType.check(chipForFilter(state.filter));
@@ -205,8 +205,8 @@ public class BusquedaFragment extends Fragment {
     }
 
     private void renderResultCount(BusquedaViewModel.BusquedaUiState state) {
-        boolean visible = !state.query.trim().isEmpty()
-                || state.filter == SearchFilter.FAVORITES;
+        boolean visible = !state.isLoading && (!state.query.trim().isEmpty()
+                || state.filter == SearchFilter.FAVORITES);
         binding.textResultCount.setVisibility(visible ? View.VISIBLE : View.GONE);
         if (visible) {
             int count = state.results.size();
@@ -216,9 +216,11 @@ public class BusquedaFragment extends Fragment {
     }
 
     private void renderEmptyState(BusquedaViewModel.BusquedaUiState state) {
-        boolean empty = state.emptyState != BusquedaViewModel.EmptyState.NONE;
+        boolean empty = !state.isLoading
+                && state.emptyState != BusquedaViewModel.EmptyState.NONE;
         binding.emptyStateBusqueda.setVisibility(empty ? View.VISIBLE : View.GONE);
-        binding.recyclerResultados.setVisibility(empty ? View.GONE : View.VISIBLE);
+        binding.recyclerResultados.setVisibility(
+                state.isLoading || empty ? View.GONE : View.VISIBLE);
         if (!empty) {
             return;
         }
@@ -241,6 +243,10 @@ public class BusquedaFragment extends Fragment {
                 break;
             case FILTERED_NO_RESULTS:
                 body = getString(R.string.busqueda_filtered_no_results);
+                break;
+            case SEARCH_ERROR:
+                title = R.string.busqueda_search_error_title;
+                body = getString(R.string.busqueda_search_error_body);
                 break;
             default:
                 body = getString(R.string.busqueda_no_results, state.query);
