@@ -951,4 +951,12 @@
         <item quantity="one">Practica nuevamente la pregunta que fallaste en esta sesión.</item>
         <item quantity="other">Practica nuevamente las %1$d preguntas que fallaste en esta sesión.</item>
     </plurals>
+    <!-- Fase 5 / Misión 3, Lote 2: refuerzo específico sin historial nuevo -->
+    <string name="quiz_focus_section_title">Sección para reforzar</string>
+    <string name="quiz_focus_section_action">Practicar esta sección</string>
+    <string name="quiz_focus_section_action_accessibility">Practicar preguntas de %1$s</string>
+    <plurals name="quiz_focus_section_summary">
+        <item quantity="one">En esta sesión tuviste %1$d error en %2$s. Puedes practicar más preguntas de esta sección.</item>
+        <item quantity="other">En esta sesión tuviste %1$d errores en %2$s. Puedes practicar más preguntas de esta sección.</item>
+    </plurals>
 </resources>

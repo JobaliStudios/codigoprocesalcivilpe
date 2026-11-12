@@ -70,6 +70,7 @@ public class QuizzCPCResult extends AppBaseActivity {
                 : getRecommendation(percentage) + "\n" + getString(R.string.quiz_streak_format, stats.getBestStreak()));
         configureReviewAction(incorrectAnswers);
         configureDetailedReviewAction(incorrectAnswers);
+        configureFocusSectionAction(incorrectAnswers);
 
         circularScore.setMax(100);
         circularScore.setProgress(percentage);
@@ -96,6 +97,30 @@ public class QuizzCPCResult extends AppBaseActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.quiz_cpc_share_text, score, total));
             startActivity(Intent.createChooser(shareIntent, getString(R.string.quiz_cpc_share_chooser_title)));
         });
+    }
+
+    private void configureFocusSectionAction(ArrayList<QuizAnswerResult> incorrectAnswers) {
+        MaterialCardView card = findViewById(R.id.cardFocusSection);
+        MaterialButton practice = findViewById(R.id.btnPracticeFocusSection);
+        QuizSectionFocusAdvisor.Focus focus =
+                QuizSectionFocusAdvisor.recommend(this, incorrectAnswers);
+        if (focus == null) {
+            card.setVisibility(View.GONE);
+            practice.setOnClickListener(null);
+            return;
+        }
+
+        QuizSection section = focus.getSection();
+        int count = focus.getIncorrectCount();
+        TextView summary = findViewById(R.id.tvFocusSectionSummary);
+        summary.setText(getResources().getQuantityString(
+                R.plurals.quiz_focus_section_summary, count, count, section.getLabel()));
+        practice.setContentDescription(getString(
+                R.string.quiz_focus_section_action_accessibility, section.getLabel()));
+        practice.setOnClickListener(v -> startActivity(
+                QuizSessionContract.createQuestionIntent(this,
+                        QuizSessionConfig.section(section.getId()))));
+        card.setVisibility(View.VISIBLE);
     }
 
     private void configureDetailedReviewAction(ArrayList<QuizAnswerResult> incorrectAnswers) {

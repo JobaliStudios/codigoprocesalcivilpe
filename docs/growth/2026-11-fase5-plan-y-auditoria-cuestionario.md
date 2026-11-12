@@ -92,8 +92,14 @@ Se incorporaron **25 preguntas nuevas**, de forma que el banco integrado en `mai
 
 La Misión 2 alcanzó su meta cuantitativa y queda condicionada a las verificaciones jurídicas y de publicación descritas. Quedan **80 preguntas adicionales** si se decidiera perseguir la meta ampliada de 200; no son un requisito de cierre de la meta mínima.
 
-## Misión 3 — Lote 1: aprendizaje guiado y revisión de errores
+## Misión 3 — Lote 1: aprendizaje guiado y revisión de errores (fusionado, PR #70)
 
 Se propone separar **revisión detallada** y **nueva práctica** de errores, y permitir la consulta directa del artículo CPC tras responder sin abandonar la sesión. Un acierto sobre una pregunta ya registrada en errores la resuelve en cualquier modo de práctica. El detalle, los límites jurídicos y las comprobaciones están en [Misión 3 / Lote 1](2026-11-fase5-mision3-aprendizaje-guiado-lote1.md).
 
-El cambio reutiliza el lector, los resultados y el almacén local; no incorpora un nuevo sistema de métricas, red, contenido normativo, anuncios ni dependencias. **Pendiente de CI, prueba física y decisión de fusión**; la Misión 3 no se considera terminada por este primer lote.
+El cambio reutiliza el lector, los resultados y el almacén local; no incorpora un nuevo sistema de métricas, red, contenido normativo, anuncios ni dependencias. **Fusionado mediante PR #70**; las pruebas físicas y la aceptación final siguen siendo obligaciones previas a cualquier publicación. La Misión 3 continúa abierta.
+
+## Misión 3 — Lote 2: refuerzo por sección (PR pendiente)
+
+La pantalla final puede sugerir la **sección con mayor cantidad de errores de la sesión** y ofrecer una práctica de esa sección con el selector existente. Los empates siguen el orden del CPC; en caso de sesión perfecta o artículos no resolubles no se muestra recomendación. Este cálculo es efímero y no crea historial nuevo ni una medición de rendimiento global. Ver [registro de Lote 2](2026-11-fase5-mision3-lote2-refuerzo-por-seccion.md).
+
+Sin alteraciones de las 120 preguntas, textos legales, anuncios, preferencias, versión candidata 1.08 ni Google Play. **Pendiente de CI, prueba física y decisión del propietario sobre la fusión.**

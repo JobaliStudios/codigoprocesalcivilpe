@@ -72,6 +72,23 @@ public class QuizzCPCResultTest {
         );
         assertEquals(QuizPracticeMode.PREVIOUS_ERRORS,
                 QuizSessionContract.getConfig(reviewIntent).getMode());
+
+        MaterialCardView focusCard = activity.findViewById(R.id.cardFocusSection);
+        assertEquals(View.VISIBLE, focusCard.getVisibility());
+        TextView focusSummary = activity.findViewById(R.id.tvFocusSectionSummary);
+        String sectionId = QuizSectionCatalog.resolveSectionId(context, "Artículo 6");
+        assertNotNull(sectionId);
+        MaterialButton practiceSection = activity.findViewById(R.id.btnPracticeFocusSection);
+        practiceSection.performClick();
+
+        Intent focusedIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+        assertNotNull(focusedIntent);
+        assertEquals(QuizzCPCQuestions.class.getName(),
+                focusedIntent.getComponent().getClassName());
+        assertEquals(QuizPracticeMode.SECTION,
+                QuizSessionContract.getConfig(focusedIntent).getMode());
+        assertEquals(sectionId, QuizSessionContract.getConfig(focusedIntent).getSectionId());
+        assertFalse(focusSummary.getText().toString().isEmpty());
     }
 
     @Test
@@ -99,9 +116,25 @@ public class QuizzCPCResultTest {
         );
         assertFalse(reviewCard.isClickable());
         assertEquals(View.GONE, activity.findViewById(R.id.btnReviewDetails).getVisibility());
+        assertEquals(View.GONE, activity.findViewById(R.id.cardFocusSection).getVisibility());
         assertEquals(View.GONE, activity.findViewById(R.id.ivQuickReviewChevron).getVisibility());
         reviewCard.performClick();
         assertNull(Shadows.shadowOf(activity).getNextStartedActivity());
+    }
+
+    @Test
+    public void unknownArticleErrorHidesOnlyFocusSectionNotDetailedReview() {
+        Context context = ApplicationProvider.getApplicationContext();
+        QuizAnswerResult unknown = new QuizAnswerResult(
+                "Pregunta con referencia desconocida", 0, "A", 1, "B",
+                "Artículo 9999", 0, false);
+        Intent intent = QuizSessionContract.createResultIntent(
+                context, 0, 1, 900L, List.of(unknown));
+        QuizzCPCResult activity = Robolectric.buildActivity(QuizzCPCResult.class, intent)
+                .setup().get();
+
+        assertEquals(View.GONE, activity.findViewById(R.id.cardFocusSection).getVisibility());
+        assertEquals(View.VISIBLE, activity.findViewById(R.id.btnReviewDetails).getVisibility());
     }
 
     private QuizAnswerResult errorAnswer() {

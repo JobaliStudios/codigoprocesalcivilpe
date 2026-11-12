@@ -22,7 +22,13 @@ public final class QuizSectionCatalog {
 
     @Nullable
     public static String resolveSectionId(@NonNull Context context, @NonNull QuestionModel question) {
-        String articleNumber = RelatedArticleNumberExtractor.extract(question.getRelatedArticle());
+        return resolveSectionId(context, question.getRelatedArticle());
+    }
+
+    /** Permite clasificar también respuestas históricas sin reconstruir QuestionModel. */
+    @Nullable
+    public static String resolveSectionId(@NonNull Context context, @Nullable String relatedArticle) {
+        String articleNumber = RelatedArticleNumberExtractor.extract(relatedArticle);
         if (articleNumber == null) {
             return null;
         }
