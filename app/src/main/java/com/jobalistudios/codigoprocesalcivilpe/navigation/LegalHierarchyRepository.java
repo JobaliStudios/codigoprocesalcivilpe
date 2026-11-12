@@ -24,7 +24,11 @@ public final class LegalHierarchyRepository {
     public static final String ROOT_ID = "cpc_root";
     public static final String EXTRA_NODE_ID = "EXTRA_NODE_ID";
 
-    private static volatile Node cachedTree;
+    // Java publica el árbol y sus índices de forma atómica y segura.
+    // El catálogo mantiene exactamente el mismo orden y contenido.
+    private static final class IndexHolder {
+        static final LegalHierarchyIndex INDEX = LegalHierarchyIndex.from(buildTree());
+    }
 
     private LegalHierarchyRepository() {}
 
@@ -77,10 +81,7 @@ public final class LegalHierarchyRepository {
     }
 
     public static Node getTree() {
-        if (cachedTree == null) {
-            cachedTree = buildTree();
-        }
-        return cachedTree;
+        return IndexHolder.INDEX.root();
     }
 
     private static Node buildTree() {
@@ -478,46 +479,18 @@ public final class LegalHierarchyRepository {
 
     @Nullable
     public static Node findParentNode(String childId) {
-        return findParent(getTree(), childId);
-    }
-
-    @Nullable
-    private static Node findParent(Node parent, String childId) {
-        for (Node child : parent.children) {
-            if (child.id.equals(childId)) return parent;
-            Node found = findParent(child, childId);
-            if (found != null) return found;
-        }
-        return null;
+        return IndexHolder.INDEX.findParent(childId);
     }
 
     @Nullable
     public static Node findNodeById(String nodeId) {
-        return findNode(getTree(), nodeId);
-    }
-
-    private static Node findNode(Node root, String nodeId) {
-        if (root.id.equals(nodeId)) return root;
-        for (Node child : root.children) {
-            Node found = findNode(child, nodeId);
-            if (found != null) return found;
-        }
-        return null;
+        return IndexHolder.INDEX.findNodeById(nodeId);
     }
 
     /** Nodo hoja cuyo contenido usa el string dado (para resultados de búsqueda y favoritos). */
     @Nullable
     public static Node findNodeByTextRes(@StringRes int textRes) {
-        return findByTextRes(getTree(), textRes);
-    }
-
-    private static Node findByTextRes(Node root, int textRes) {
-        if (root.content != null && root.content.textRes == textRes) return root;
-        for (Node child : root.children) {
-            Node found = findByTextRes(child, textRes);
-            if (found != null) return found;
-        }
-        return null;
+        return IndexHolder.INDEX.findNodeByTextRes(textRes);
     }
 
     public static Intent buildIntentForNode(Context context, Node node) {
