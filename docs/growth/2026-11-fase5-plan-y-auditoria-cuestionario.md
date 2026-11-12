@@ -110,8 +110,20 @@ El usuario podrá elegir **5, 10 o 20 preguntas** antes de empezar cualquiera de
 
 La funcionalidad, pruebas y criterios de aceptación se describen en [Misión 3 / Lote 3](2026-11-fase5-mision3-lote3-sesiones-personalizadas.md). No altera el banco de 120 preguntas, la normativa, los identificadores ni los datos permanentes de los estudiantes. **Fusionado en `main` mediante PR #72;** sin publicación en Google Play. Las pruebas físicas y la verificación jurídica siguen siendo requisitos antes del lanzamiento.
 
-## Misión 3 — Lote 4: continuidad de cuestionario (PR pendiente)
+## Misión 3 — Lote 4: continuidad de cuestionario (fusionado, PR #73)
 
 Se añade un **único borrador local** para continuar una ronda después de salir, con confirmación para guardar, descartar o seguir practicando. La pantalla inicial ofrece retomar las respuestas y el orden anterior; el cálculo de puntos, racha y posición se reconstruye sin reescribir errores pasados. La sesión guardada se elimina al terminar, descartarla, sustituirla expresamente o usar el borrado total de datos. Se actualiza la política de privacidad local para declarar este almacenamiento privado y la posibilidad de copia de Android. Detalle y aceptación: [Misión 3 / Lote 4](2026-11-fase5-mision3-lote4-continuidad-cuestionario.md).
 
-No altera las 120 preguntas, el corpus jurídico ni la versión candidata 1.08. **Pendiente de CI, revisión y prueba física; no publicar ni fusionar automáticamente.**
+No altera las 120 preguntas, el corpus jurídico ni la versión candidata 1.08. **Fusionado en `main` mediante PR #73, con CI aprobado**; queda pendiente la prueba física antes de publicar.
+
+## Misión 4 — Valoraciones y métricas responsables (PR pendiente)
+
+La pantalla de resultados puede mostrar una invitación **voluntaria y neutral** a abrir la ficha Google Play solo tras al menos tres rondas terminadas, hasta dos veces por instalación y con 90 días mínimos entre invitaciones. No depende de los aciertos, no incentiva reseñas y permite ignorar o suprimir futuras invitaciones.
+
+La pantalla inicial de práctica añade un **registro voluntario de estadísticas agregadas del dispositivo** (sesiones completadas, preguntas respondidas y porcentaje de aciertos acumulados). Está **desactivado por defecto**; al desactivar se eliminan los totales anteriores. El Centro de privacidad borra además cualquier estado local de invitaciones. La política de privacidad en el repositorio documenta todo el proceso.
+
+Consulta los criterios y pruebas en [Misión 4 — Valoraciones y métricas responsables](2026-11-fase5-mision4-valoraciones-y-metricas-responsables.md). Sin nuevos SDKs, telemetría, edición del corpus CPC, cambios de los 120 ítems o cambios de versión **1.08 (13)**. **CI, prueba física y revisión de privacidad pendientes; no publicar.**
+
+## Siguiente etapa prevista
+
+**Misión 5 — Descubrimiento y continuidad:** auditar ficha y presencia pública en Play, optimizar propuestas editoriales, establecer la verificación periódica jurídica con fuentes primarias y completar la preparación de lanzamiento solo tras aprobación del propietario.
