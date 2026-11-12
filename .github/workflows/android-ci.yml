@@ -197,7 +197,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
-          target: google_apis
+          target: default
           arch: x86_64
           profile: pixel_6
           disable-animations: true
@@ -213,13 +213,7 @@ jobs:
             adb shell cmd statusbar collapse
             echo "Ventana enfocada antes de instrumentación:"
             adb shell dumpsys window | grep -E 'mCurrentFocus|mFocusedApp|mTopFocusedDisplayId' || true
-            ./gradlew connectedDebugAndroidTest --console=plain || {
-              echo "Diagnóstico de foco del emulador tras las pruebas:"
-              adb shell dumpsys window | grep -E 'mCurrentFocus|mFocusedApp|mTopFocusedDisplayId|mInputMethodTarget' || true
-              adb shell dumpsys activity activities | grep -E 'topResumedActivity|mResumedActivity|mFocusedRootTask' || true
-              adb exec-out screencap -p > emulator-instrumentation-failure.png || true
-              exit 1
-            }
+            ./gradlew connectedDebugAndroidTest --console=plain || (echo "Diagnóstico de foco del emulador tras las pruebas:"; adb shell dumpsys window | grep -E 'mCurrentFocus|mFocusedApp|mTopFocusedDisplayId|mInputMethodTarget' || true; adb shell dumpsys activity activities | grep -E 'topResumedActivity|mResumedActivity|mFocusedRootTask' || true; adb exec-out screencap -p > emulator-instrumentation-failure.png || true; exit 1)
 
       - name: Conservar evidencia de regresión en emulador
         if: always()
