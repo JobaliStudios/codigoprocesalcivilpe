@@ -2,7 +2,7 @@
 import copy
 import unittest
 
-from validate_quiz_bank import article_number, validate_bank
+from validate_quiz_bank import article_number, validate_bank, verify_legacy_questions
 
 
 def valid_fixture():
@@ -24,6 +24,15 @@ def valid_fixture():
 
 
 class BankValidatorTests(unittest.TestCase):
+    def test_legacy_prefix_is_immutable_even_when_questions_are_appended(self):
+        original, _ = valid_fixture()
+        new_question = copy.deepcopy(original[0])
+        new_question["questionText"] = "Otra pregunta"
+        self.assertEqual([], verify_legacy_questions(original + [new_question], original))
+        modified = copy.deepcopy(original + [new_question])
+        modified[0]["options"][1] = "Respuesta modificada"
+        self.assertNotEqual([], verify_legacy_questions(modified, original))
+
     def test_happy_path(self):
         questions, corpus = valid_fixture()
         errors, stats = validate_bank(questions, corpus)
