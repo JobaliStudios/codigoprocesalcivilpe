@@ -1,11 +1,17 @@
 package com.jobalistudios.codigoprocesalcivilpe.configuracion;
 
+import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,16 +44,41 @@ public class ConfiguracionFragment extends Fragment {
 
         setupDarkModeSwitch();
 
-        binding.cardSoporte.setOnClickListener(v -> Toast.makeText(requireContext(),
-                R.string.config_contact_message, Toast.LENGTH_SHORT).show());
+        binding.cardSoporte.setOnClickListener(v -> openEmailSupport());
 
-        binding.cardAcercaDe.setOnClickListener(v -> Toast.makeText(requireContext(),
-                R.string.config_about_message, Toast.LENGTH_SHORT).show());
+        binding.cardAcercaDe.setOnClickListener(v -> startActivity(
+                new Intent(requireContext(), AboutActivity.class)));
 
         binding.cardPrivacidad.setOnClickListener(v -> startActivity(
                 new Intent(requireContext(), PrivacyCenterActivity.class)));
 
         return root;
+    }
+
+    private void openEmailSupport() {
+        Intent emailIntent = SupportEmailIntentFactory.create(requireContext());
+        try {
+            startActivity(emailIntent);
+        } catch (ActivityNotFoundException noEmailClient) {
+            // No requiere instalar una aplicación ni enviar el mensaje automáticamente.
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.support_no_email_title)
+                    .setMessage(getString(R.string.support_no_email_message,
+                            getString(R.string.support_email_address)))
+                    .setNegativeButton(R.string.highlight_cancel, null)
+                    .setPositiveButton(R.string.support_copy_email, (dialog, which) -> {
+                        ClipboardManager clipboard = (ClipboardManager) requireContext()
+                                .getSystemService(Context.CLIPBOARD_SERVICE);
+                        if (clipboard != null) {
+                            clipboard.setPrimaryClip(ClipData.newPlainText(
+                                    getString(R.string.support_clipboard_label),
+                                    getString(R.string.support_email_address)));
+                            Toast.makeText(requireContext(), R.string.support_email_copied,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .show();
+        }
     }
 
     private void setupSwitchObserver(SwitchMaterial switchMaterial,
