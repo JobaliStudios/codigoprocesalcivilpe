@@ -39,14 +39,31 @@ public class HighlightsManager {
         this.noteCipher = noteCipher;
     }
 
+    /**
+     * Lee los resaltados utilizables sin arriesgar el contenido cifrado que no se
+     * pueda descifrar con la clave actual (o con una futura versión del formato).
+     */
     public List<Highlight> getForBlock(String blockKey) {
+        return readBlock(blockKey).highlights;
+    }
+
+    private ReadResult readBlock(String blockKey) {
+        String raw = sharedPreferences.getString(blockKey, "[]");
+        final JSONArray array;
+        try {
+            array = new JSONArray(raw);
+        } catch (JSONException exception) {
+            // Los datos originales permanecen en SharedPreferences para recuperación.
+            return new ReadResult(new ArrayList<>(), false);
+        }
+
         List<Highlight> result = new ArrayList<>();
-        JSONArray array = getArray(blockKey);
         boolean containsLegacyPlaintext = false;
-        boolean decryptionFailed = false;
+        boolean safeToWrite = true;
         for (int i = 0; i < array.length(); i++) {
             JSONObject json = array.optJSONObject(i);
             if (json == null) {
+                safeToWrite = false;
                 continue;
             }
             String note = null;
@@ -54,7 +71,8 @@ public class HighlightsManager {
                 try {
                     note = decryptNote(json);
                 } catch (GeneralSecurityException | IllegalArgumentException e) {
-                    decryptionFailed = true;
+                    // Nunca serializar de nuevo un registro que perdió acceso a su nota.
+                    safeToWrite = false;
                 }
             } else if (json.has("note")) {
                 note = json.optString("note", "");
@@ -63,23 +81,44 @@ public class HighlightsManager {
             Highlight highlight = Highlight.fromJson(json, note);
             if (highlight != null) {
                 result.add(highlight);
+            } else {
+                safeToWrite = false;
             }
         }
-        if (containsLegacyPlaintext && !decryptionFailed) {
+
+        // No migrar notas antiguas si eso borraría notas cifradas ilegibles.
+        if (containsLegacyPlaintext && safeToWrite) {
             save(blockKey, result);
         }
-        return result;
+        return new ReadResult(result, safeToWrite);
+    }
+
+    private static final class ReadResult {
+        final List<Highlight> highlights;
+        final boolean safeToWrite;
+
+        ReadResult(List<Highlight> highlights, boolean safeToWrite) {
+            this.highlights = highlights;
+            this.safeToWrite = safeToWrite;
+        }
     }
 
     public void add(String blockKey, Highlight highlight) {
-        List<Highlight> highlights = getForBlock(blockKey);
-        highlights.add(highlight);
-        save(blockKey, highlights);
+        ReadResult stored = readBlock(blockKey);
+        if (!stored.safeToWrite) {
+            return;
+        }
+        stored.highlights.add(highlight);
+        save(blockKey, stored.highlights);
     }
 
     /** Reemplaza el resaltado con el mismo id (para editar nota o color). */
     public void update(String blockKey, Highlight highlight) {
-        List<Highlight> highlights = getForBlock(blockKey);
+        ReadResult stored = readBlock(blockKey);
+        if (!stored.safeToWrite) {
+            return;
+        }
+        List<Highlight> highlights = stored.highlights;
         for (int i = 0; i < highlights.size(); i++) {
             if (highlights.get(i).getId().equals(highlight.getId())) {
                 highlights.set(i, highlight);
@@ -90,7 +129,11 @@ public class HighlightsManager {
     }
 
     public void remove(String blockKey, String highlightId) {
-        List<Highlight> highlights = getForBlock(blockKey);
+        ReadResult stored = readBlock(blockKey);
+        if (!stored.safeToWrite) {
+            return;
+        }
+        List<Highlight> highlights = stored.highlights;
         boolean removed = false;
         for (int i = highlights.size() - 1; i >= 0; i--) {
             if (highlights.get(i).getId().equals(highlightId)) {
@@ -140,15 +183,6 @@ public class HighlightsManager {
             return new int[]{index, index + snippet.length()};
         }
         return null;
-    }
-
-    private JSONArray getArray(String blockKey) {
-        String raw = sharedPreferences.getString(blockKey, "[]");
-        try {
-            return new JSONArray(raw);
-        } catch (JSONException e) {
-            return new JSONArray();
-        }
     }
 
     private void save(String blockKey, List<Highlight> highlights) {
