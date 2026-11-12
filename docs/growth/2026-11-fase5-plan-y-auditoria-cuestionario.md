@@ -1,7 +1,7 @@
 # Código Procesal Civil PE — Fase 5: crecimiento y aprendizaje
 
 **Inicio:** 12 de noviembre de 2026.  
-**Estado:** Misión 2 con objetivo mínimo de 120 preguntas integrado; Misión 3 en desarrollo sin publicación.  
+**Estado:** Misiones 1–4 implementadas y fusionadas; Misión 5 en preparación; sin actualización pública.  
 **Versión de desarrollo:** `1.08 (versionCode 13)`; **no publicar ni distribuir como actualización**.
 
 ## Objetivo
@@ -116,14 +116,22 @@ Se añade un **único borrador local** para continuar una ronda después de sali
 
 No altera las 120 preguntas, el corpus jurídico ni la versión candidata 1.08. **Fusionado en `main` mediante PR #73, con CI aprobado**; queda pendiente la prueba física antes de publicar.
 
-## Misión 4 — Valoraciones y métricas responsables (PR pendiente)
+## Misión 4 — Valoraciones y métricas responsables (fusionada, PR #74)
 
 La pantalla de resultados puede mostrar una invitación **voluntaria y neutral** a abrir la ficha Google Play solo tras al menos tres rondas terminadas, hasta dos veces por instalación y con 90 días mínimos entre invitaciones. No depende de los aciertos, no incentiva reseñas y permite ignorar o suprimir futuras invitaciones.
 
 La pantalla inicial de práctica añade un **registro voluntario de estadísticas agregadas del dispositivo** (sesiones completadas, preguntas respondidas y porcentaje de aciertos acumulados). Está **desactivado por defecto**; al desactivar se eliminan los totales anteriores. El Centro de privacidad borra además cualquier estado local de invitaciones. La política de privacidad en el repositorio documenta todo el proceso.
 
-Consulta los criterios y pruebas en [Misión 4 — Valoraciones y métricas responsables](2026-11-fase5-mision4-valoraciones-y-metricas-responsables.md). Sin nuevos SDKs, telemetría, edición del corpus CPC, cambios de los 120 ítems o cambios de versión **1.08 (13)**. **CI, prueba física y revisión de privacidad pendientes; no publicar.**
+Consulta los criterios y pruebas en [Misión 4 — Valoraciones y métricas responsables](2026-11-fase5-mision4-valoraciones-y-metricas-responsables.md). Sin nuevos SDKs, telemetría, edición del corpus CPC, cambios de los 120 ítems o cambios de versión **1.08 (13)**. **Fusionado en `main` mediante PR #74, con CI aprobado**; faltan pruebas físicas y cierre de privacidad/release. No publicar.
 
-## Siguiente etapa prevista
+## Misión 5 — Descubrimiento y continuidad (PR pendiente)
 
-**Misión 5 — Descubrimiento y continuidad:** auditar ficha y presencia pública en Play, optimizar propuestas editoriales, establecer la verificación periódica jurídica con fuentes primarias y completar la preparación de lanzamiento solo tras aprobación del propietario.
+La ficha pública de Play contiene una promesa no demostrada de **actualizaciones legislativas automáticas** y la presentación de la edición de 2025 necesita un corte explícito. Se propone copy es-PE para la **candidata 1.08**, sin aplicar cambios a producción; incorpora pruebas automáticas de longitud, lenguaje de vigencia, corpus real de 120 preguntas y paquete Android.
+
+Se prepara una landing informativa **solo como prototipo sin alojamiento**, un aviso visible en «Acerca de» con el corte del TUO oficial **07/06/2025** y un enlace al catálogo vigente de fuentes de El Peruano; no se crean SDKs, redes ni permisos nuevos. La continuidad jurídica se documenta con registro de alertas, control mensual de fuentes primarias, responsables y puerta de aprobación específica por reforma. Ver [expediente de Misión 5](2026-11-fase5-mision5-descubrimiento-continuidad.md).
+
+**Pendiente:** CI y revisión del PR, comprobación en Android y validación editorial/jurídica de las propuestas. **No se publica Google Play, web ni norma por esta misión.**
+
+## Cierre previsto de Fase 5
+
+Las cinco misiones son entregables de desarrollo y preparación de crecimiento. **La finalización del código no equivale a autorización de lanzamiento de 1.08 (13)**. La lista de pruebas MAN-01 a MAN-12, salvedades normativas, AAB firmado, política de privacidad pública, pista interna y autorización de producción se gestionan como bloqueantes de release independientes.
