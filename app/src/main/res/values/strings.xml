@@ -966,6 +966,7 @@
     <string name="quiz_draft_exit_title">¿Salir del cuestionario?</string>
     <string name="quiz_draft_exit_message">Puedes guardar esta sesión para continuarla después. Si la descartas, perderás el progreso de esta ronda, pero conservarás los errores pendientes de repaso.</string>
     <string name="quiz_draft_save_exit">Guardar y salir</string>
+    <string name="quiz_draft_save_error">No se pudo guardar el cuestionario. Inténtalo nuevamente.</string>
     <string name="quiz_draft_discard">Descartar sesión</string>
     <string name="quiz_draft_continue">Seguir estudiando</string>
     <string name="quiz_draft_resume_title">Tienes un cuestionario pendiente</string>
