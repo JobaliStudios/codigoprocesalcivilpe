@@ -1,0 +1,1021 @@
+[
+  {
+    "questionText": "¿Qué artículo establece que la competencia civil no puede renunciarse?",
+    "options": [
+      "Artículo 5",
+      "Artículo 6",
+      "Artículo 10"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 6 modificado por D-L 25940"
+  },
+  {
+    "questionText": "Si una demanda es desestimada por irregularidad del derecho de acción, ¿qué puede hacer el demandado?",
+    "options": [
+      "Apelar la decisión",
+      "Solicitar la nulidad del proceso",
+      "Demandar resarcimiento por daños y perjuicios",
+      "Pedir la revisión del caso por otro juez"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 4"
+  },
+  {
+    "questionText": "¿Puede demandarse en una sucursal si el hecho ocurrió allí?",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 17 modificado por D-L 25940"
+  },
+  {
+    "questionText": "Si el demandado carece de domicilio conocido, ¿dónde se puede demandar?",
+    "options": [
+      "Último domicilio en Perú",
+      "Domicilio del abogado",
+      "Lugar donde se encuentre o domicilio del demandante",
+      "Corte Superior de Lima"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 14"
+  },
+  {
+    "questionText": "¿Qué juez es competente para designar apoyos a personas con discapacidad?",
+    "options": [
+      "Juez del demandante",
+      "Juez de la sede empresarial",
+      "Juez del lugar de la persona",
+      "Juez de última instancia"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 21 modificado por DL 1384"
+  },
+  {
+    "questionText": "En materia sucesoria, la competencia es:",
+    "options": [
+      "Prorrogable",
+      "Improrrogable",
+      "Modificable por acuerdo",
+      "Determinada por el juez"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 19"
+  },
+  {
+    "questionText": "¿Se incluyen daños futuros en el cálculo de cuantía?",
+    "options": [
+      "Verdadero",
+      "Falso"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 11 modificado por DL 25940"
+  },
+  {
+    "questionText": "¿Cuántos días hay para interponer contienda de competencia?",
+    "options": [
+      "3 días",
+      "5 días",
+      "10 días",
+      "15 días"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 38"
+  },
+  {
+    "questionText": "La competencia civil es irrenunciable porque:",
+    "options": [
+      "Lo establece la ley",
+      "Lo deciden las partes",
+      "Es potestad del juez",
+      "Depende de la cuantía"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 6 modificado por DL 25940"
+  },
+  {
+    "questionText": "La competencia por cuantía se determina:",
+    "options": [
+      "Solo por el objeto principal",
+      "Sumando valores devengados",
+      "Con valores futuros",
+      "Según criterio del demandado"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 10 modificado por DL 25940"
+  },
+  {
+    "questionText": "¿Qué juez es competente en expropiación de bienes no inscritos?",
+    "options": [
+      "Juez del lugar de inscripción",
+      "Juez donde está el bien",
+      "Juez del demandante"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 20"
+  },
+  {
+    "questionText": "El artículo 22 del CPC se refiere a:",
+    "options": [
+      "Competencia funcional",
+      "Derechos reales",
+      "Artículo derogado"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 22"
+  },
+  {
+    "questionText": "En procesos no contenciosos, ¿dónde es competente el juez?",
+    "options": [
+      "Domicilio del demandado",
+      "Domicilio del promotor",
+      "Lugar del hecho"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 23"
+  },
+  {
+    "questionText": "¿En qué casos puede elegir el demandante el juez competente?",
+    "options": [
+      "Solo en alimentos",
+      "En 7 supuestos específicos",
+      "Nunca"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 24"
+  },
+  {
+    "questionText": "La prórroga de competencia territorial debe ser:",
+    "options": [
+      "Verbal",
+      "Escrita",
+      "Tácita"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 25"
+  },
+  {
+    "questionText": "¿Cuándo se produce prórroga tácita de competencia?",
+    "options": [
+      "Al apelar",
+      "Al contestar sin reservas",
+      "Al presentar excepciones"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 26"
+  },
+  {
+    "questionText": "En demandas contra el Estado, ¿dónde es competente el juez?",
+    "options": [
+      "Sede de la entidad",
+      "Corte Suprema",
+      "Juzgado de Paz"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 27"
+  },
+  {
+    "questionText": "La competencia funcional se rige por:",
+    "options": [
+      "Reglamento Interno",
+      "Constitución y LOPJ",
+      "Código Penal"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 28"
+  },
+  {
+    "questionText": "¿Qué significa el principio de prevención en competencia?",
+    "options": [
+      "Primer juez en conocer",
+      "Último juez en resolver",
+      "Juez superior"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 29"
+  },
+  {
+    "questionText": "La prevención convierte la competencia en:",
+    "options": [
+      "Exclusiva",
+      "Compartida",
+      "Improcedente"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 30"
+  },
+  {
+    "questionText": "En segunda instancia, la prevención se determina por:",
+    "options": [
+      "Primera notificación",
+      "Fecha de demanda",
+      "Azar"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 31"
+  },
+  {
+    "questionText": "Las pretensiones accesorias las conoce:",
+    "options": [
+      "Juez diferente",
+      "Juez de la principal",
+      "Sala Superior"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 32"
+  },
+  {
+    "questionText": "¿Quién puede dictar medidas cautelares previas al proceso?",
+    "options": [
+      "Juez competente",
+      "Fiscal",
+      "Secretario"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 33"
+  },
+  {
+    "questionText": "Los procesos de ejecución siguen reglas de:",
+    "options": [
+      "Competencia especial",
+      "Competencia general",
+      "Arbitraje"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 34"
+  },
+  {
+    "questionText": "La incompetencia puede declararse:",
+    "options": [
+      "Solo a pedido de parte",
+      "De oficio",
+      "En segunda instancia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 35"
+  },
+  {
+    "questionText": "Si dos jueces se declaran incompetentes:",
+    "options": [
+      "Se archiva",
+      "Interviene Corte Superior",
+      "Se sortea"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 36"
+  },
+  {
+    "questionText": "La competencia de Jueces de Paz se cuestiona mediante:",
+    "options": [
+      "Apelación",
+      "Excepción",
+      "Recurso extraordinario"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 37"
+  },
+  {
+    "questionText": "Si el juez reconoce incompetencia:",
+    "options": [
+      "Remite expediente",
+      "Continúa proceso",
+      "Archiva caso"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 39"
+  },
+  {
+    "questionText": "En conflicto de competencia se remite a:",
+    "options": [
+      "Corte Superior",
+      "Juez Penal",
+      "Árbitro"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 40"
+  },
+  {
+    "questionText": "La contienda entre jueces de distintos distritos la resuelve:",
+    "options": [
+      "Corte Suprema",
+      "Corte Superior",
+      "Jurado Nacional"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 41"
+  },
+  {
+    "questionText": "Las medidas cautelares previas:",
+    "options": [
+      "Pierden efecto",
+      "Mantienen eficacia",
+      "Se anulan"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 42"
+  },
+  {
+    "questionText": "¿Qué órganos ejercen la justicia civil según el artículo 49 del CPC?",
+    "options": [
+      "Solo los Juzgados Civiles",
+      "Jueces de Paz, Paz Letrados, Civiles, Cortes Superiores y Corte Suprema",
+      "Únicamente el Ministerio Público",
+      "Solo los tribunales arbitrales"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 49"
+  },
+  {
+    "questionText": "¿Cuál es un deber del juez durante el proceso civil?",
+    "options": [
+      "Impedir la paralización del proceso y procurar la economía procesal",
+      "Aceptar cualquier petición sin examinarla",
+      "Delegar siempre la emisión de sentencias",
+      "Impedir que el demandado ejerza su defensa"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 50"
+  },
+  {
+    "questionText": "¿Qué puede ordenar el juez frente a expresiones ofensivas en una actuación judicial?",
+    "options": [
+      "Que se supriman las palabras ofensivas o vejatorias",
+      "La conclusión automática del proceso",
+      "La sustitución de las pruebas por una multa",
+      "La suspensión definitiva del derecho de defensa"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 52"
+  },
+  {
+    "questionText": "¿Quiénes pueden ser parte material en un proceso civil?",
+    "options": [
+      "Solo las personas naturales",
+      "Las personas naturales o jurídicas y las formas de patrimonio autónomo previstas",
+      "Únicamente los abogados habilitados",
+      "Solo los órganos del Poder Judicial"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 57"
+  },
+  {
+    "questionText": "¿Cómo se denomina la acumulación de varias pretensiones en un proceso?",
+    "options": [
+      "Acumulación subjetiva",
+      "Acumulación objetiva",
+      "Litisconsorcio pasivo necesario",
+      "Reconvención obligatoria"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 83"
+  },
+  {
+    "questionText": "¿Cómo deben escribirse, por regla del artículo 119, las fechas y cantidades en las actuaciones judiciales?",
+    "options": [
+      "Solo mediante cifras",
+      "Con letras",
+      "Con números romanos",
+      "Con abreviaturas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 119"
+  },
+  {
+    "questionText": "¿Cuáles son los tipos de resoluciones señalados en el artículo 120?",
+    "options": [
+      "Actas, oficios y exhortos",
+      "Providencias, contratos y mandatos",
+      "Decretos, autos y sentencias",
+      "Demandas, contestaciones y alegatos"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 120"
+  },
+  {
+    "questionText": "¿Para qué se utilizan los decretos, según el artículo 121?",
+    "options": [
+      "Para impulsar actos procesales de simple trámite",
+      "Para resolver definitivamente el fondo de la controversia",
+      "Para declarar una condena penal",
+      "Para reemplazar la demanda"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 121"
+  },
+  {
+    "questionText": "¿Cuál es la finalidad de los medios probatorios en el proceso civil?",
+    "options": [
+      "Acreditar hechos, producir certeza sobre puntos controvertidos y fundamentar decisiones",
+      "Sustituir la sentencia del juez",
+      "Determinar automáticamente quién paga los costos",
+      "Impedir que las partes contradigan los hechos"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 188"
+  },
+  {
+    "questionText": "¿Cuándo deben ofrecerse, por regla general, los medios probatorios?",
+    "options": [
+      "Solo después de la sentencia",
+      "En los actos postulatorios, salvo disposición distinta",
+      "Exclusivamente durante la apelación",
+      "Únicamente al ejecutar la sentencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 189"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes es un medio probatorio típico reconocido por el CPC?",
+    "options": [
+      "Una opinión publicada en una red social",
+      "Una conjetura personal sin sustento",
+      "La pericia",
+      "Un comentario anónimo sin verificar"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 192"
+  },
+  {
+    "questionText": "¿Qué caracteriza a los medios probatorios atípicos del artículo 193?",
+    "options": [
+      "Son auxilios técnicos o científicos no previstos entre los medios típicos",
+      "Son únicamente documentos notariales",
+      "Son pruebas prohibidas en todos los casos",
+      "Son siempre declaraciones de testigos"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 193"
+  },
+  {
+    "questionText": "Salvo disposición legal diferente, ¿a quién corresponde la carga de probar?",
+    "options": [
+      "Siempre al juez",
+      "Solo al demandado, aunque no alegue hechos nuevos",
+      "A quien afirma los hechos de su pretensión o los contradice alegando nuevos hechos",
+      "Al secretario judicial"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 196"
+  },
+  {
+    "questionText": "¿Cómo valora el juez los medios probatorios según el artículo 197?",
+    "options": [
+      "Por separado y sin motivación",
+      "En forma conjunta, usando una apreciación razonada",
+      "Únicamente por el número de documentos presentados",
+      "Solo en función de la declaración del demandante"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 197"
+  },
+  {
+    "questionText": "¿Cuál es el objeto del recurso de apelación?",
+    "options": [
+      "Que el órgano superior examine una resolución que causa agravio para anularla o revocarla total o parcialmente",
+      "Que el mismo juez dicte una norma nueva",
+      "Que se reemplacen automáticamente todos los medios probatorios",
+      "Que una parte obtenga sentencia favorable sin examen judicial"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 364"
+  },
+  {
+    "questionText": "¿Qué comprenden las costas procesales definidas en el artículo 410?",
+    "options": [
+      "Solo los honorarios del abogado de la parte vencedora",
+      "Los daños morales reclamados en la demanda",
+      "Tasas judiciales, honorarios de órganos de auxilio judicial y demás gastos judiciales",
+      "Únicamente las multas impuestas a los abogados"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 410"
+  },
+  {
+    "questionText": "¿Cómo debe formularse el petitorio en una demanda civil?",
+    "options": [
+      "De forma genérica y sin precisar lo solicitado",
+      "Con determinación clara y concreta de lo que se pide",
+      "Solo oralmente ante el secretario",
+      "Sin relación con los hechos expuestos"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 424"
+  },
+  {
+    "questionText": "¿Qué anexo se exige cuando la materia del proceso requiere conciliación extrajudicial previa?",
+    "options": [
+      "Una sentencia penal firme",
+      "Un informe de auditoría financiera",
+      "La copia certificada del acta de conciliación extrajudicial",
+      "Un contrato de arbitraje sin firmas"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 425"
+  },
+  {
+    "questionText": "¿Cuál es una causal de inadmisibilidad de la demanda?",
+    "options": [
+      "No acompañar los anexos exigidos por ley",
+      "Que la pretensión sea jurídicamente imposible",
+      "Que el demandante carezca manifiestamente de interés para obrar",
+      "Que exista caducidad del derecho"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 426"
+  },
+  {
+    "questionText": "¿Cuál es una causal de improcedencia de la demanda?",
+    "options": [
+      "Olvidar un anexo que puede subsanarse",
+      "Que no exista conexión lógica entre los hechos y el petitorio",
+      "Omitir la copia del documento de identidad",
+      "No precisar un domicilio procesal subsanable"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 427"
+  },
+  {
+    "questionText": "¿Qué cuantía patrimonial contempla el artículo 475 para el proceso de conocimiento?",
+    "options": [
+      "Hasta cien Unidades de Referencia Procesal",
+      "Más de cien y hasta mil Unidades de Referencia Procesal",
+      "Más de mil Unidades de Referencia Procesal",
+      "Exactamente diez Unidades de Referencia Procesal"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 475"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes asuntos se tramita en proceso abreviado según el artículo 486?",
+    "options": [
+      "El trámite general de alimentos",
+      "El retracto",
+      "Toda medida cautelar",
+      "La inscripción no contenciosa de partidas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 486"
+  },
+  {
+    "questionText": "¿Qué pretensión se tramita por proceso sumarísimo según el artículo 546?",
+    "options": [
+      "Alimentos",
+      "Recurso de casación",
+      "Reconocimiento de laudo extranjero",
+      "Nulidad de sentencia por fraude como regla general"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 546"
+  },
+  {
+    "questionText": "¿Por qué vía se tramita la restitución de un predio conforme al artículo 585?",
+    "options": [
+      "Por el proceso de conocimiento en todos los casos",
+      "Con arreglo al proceso sumarísimo y las precisiones del subcapítulo de desalojo",
+      "Por casación directa",
+      "Únicamente por proceso no contencioso"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 585"
+  },
+  {
+    "questionText": "¿Cuál es la finalidad de una medida cautelar según el artículo 608?",
+    "options": [
+      "Sustituir el contenido de la sentencia definitiva",
+      "Imponer sanciones penales a las partes",
+      "Garantizar el cumplimiento de la decisión definitiva",
+      "Declarar definitivamente la propiedad del bien"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 608"
+  },
+  {
+    "questionText": "¿Qué debe ofrecer quien solicita una medida cautelar conforme al artículo 610?",
+    "options": [
+      "Contracautela",
+      "Una sentencia de casación",
+      "La conformidad escrita del demandado en todos los casos",
+      "Un laudo arbitral obligatorio"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 610"
+  },
+  {
+    "questionText": "¿Cuál de estos documentos es un título ejecutivo mencionado en el artículo 688?",
+    "options": [
+      "Cualquier conversación informal",
+      "Un laudo arbitral firme",
+      "Una carta sin obligaciones exigibles",
+      "Una propuesta de transacción no aceptada"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 688"
+  },
+  {
+    "questionText": "¿Qué asunto se tramita mediante proceso no contencioso según el artículo 749?",
+    "options": [
+      "Una apelación contra sentencia",
+      "Una demanda de retracto",
+      "Un inventario",
+      "Una contienda de competencia entre jueces"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 749"
+  },
+  {
+    "questionText": "¿A qué requisitos remite el artículo 751 para la solicitud en un proceso no contencioso?",
+    "options": [
+      "Solo a los requisitos de apelación",
+      "A los requisitos y anexos de los artículos 424 y 425",
+      "Exclusivamente a normas penales",
+      "A la autorización previa del Ministerio Público en todos los casos"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 751"
+  },
+  {
+    "questionText": "¿En qué plazo puede formular contradicción el emplazado en un proceso no contencioso?",
+    "options": [
+      "Dentro de cinco días desde la notificación de la resolución admisoria",
+      "Dentro de treinta días desde la sentencia",
+      "Solo en el acto de remate judicial",
+      "Después de que quede consentida la resolución final"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 753"
+  },
+  {
+    "questionText": "¿Cuándo procede notificar al Ministerio Público en la sucesión intestada, según el artículo 759?",
+    "options": [
+      "En todas las sucesiones intestadas sin excepción",
+      "Nunca, incluso si existen herederos menores",
+      "Si entre los herederos existen menores de edad o un Consejo de Familia constituido previamente",
+      "Solo cuando todos los herederos sean mayores de edad"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 759"
+  },
+  {
+    "questionText": "¿Qué dispone el artículo 834 si pasan quince días desde el último aviso sin apersonamiento ni contradicción?",
+    "options": [
+      "Se debe convocar obligatoriamente a audiencia en todos los casos",
+      "El juez resuelve sin citar a audiencia, atendiendo a la solicitud del presunto heredero",
+      "Se archiva automáticamente la sucesión intestada",
+      "Se remite necesariamente el expediente a la Corte Suprema"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 834"
+  },
+  {
+    "questionText": "¿Qué puede hacer el juez respecto de la vía procedimental de la demanda, cuando sea factible?",
+    "options": [
+      "Modificar de oficio el Código Procesal Civil",
+      "Adaptar la demanda a la vía procedimental apropiada",
+      "Declarar fundada la demanda sin trámite",
+      "Impedir que las partes ejerzan defensa"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 51"
+  },
+  {
+    "questionText": "¿Qué medida coercitiva contempla el artículo 53 para hacer cumplir un mandato judicial?",
+    "options": [
+      "Una multa compulsiva y progresiva",
+      "La modificación automática del petitorio",
+      "La caducidad de cualquier acción",
+      "La supresión del derecho de apelación"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 53"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes es un órgano de auxilio judicial?",
+    "options": [
+      "El demandante",
+      "El perito",
+      "El abogado defensor de una parte",
+      "El testigo de la audiencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 55"
+  },
+  {
+    "questionText": "¿A qué régimen se somete el Estado cuando interviene como parte en un proceso civil?",
+    "options": [
+      "A una jurisdicción exclusivamente administrativa",
+      "Al Poder Judicial, con los privilegios expresamente previstos en el Código",
+      "A un procedimiento privado sin control judicial",
+      "A la jurisdicción arbitral obligatoria en todo caso"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 59"
+  },
+  {
+    "questionText": "¿Cuándo existe litisconsorcio conforme al artículo 92?",
+    "options": [
+      "Cuando dos o más personas litigan conjuntamente como demandantes o demandados en los supuestos previstos",
+      "Cuando un juez conoce dos expedientes no relacionados",
+      "Cuando solo participa una persona en todo el proceso",
+      "Cuando se acumulan exclusivamente documentos"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 92"
+  },
+  {
+    "questionText": "¿Qué exige, por regla general, el litisconsorcio necesario para una decisión válida?",
+    "options": [
+      "Que ningún litisconsorte sea notificado",
+      "Que solo comparezca el abogado del demandante",
+      "Que comparezcan o sean emplazados todos los litisconsortes afectados uniformemente",
+      "Que la controversia pase de inmediato a arbitraje"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 93"
+  },
+  {
+    "questionText": "¿Cuándo puede adquirir cosa juzgada una resolución, según el artículo 123?",
+    "options": [
+      "Siempre que una parte manifieste desacuerdo",
+      "Cuando ya no procedan otros medios impugnatorios distintos de los resueltos, entre otros supuestos legales",
+      "Al presentarse la demanda, antes de cualquier resolución",
+      "Únicamente cuando exista una medida cautelar"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 123"
+  },
+  {
+    "questionText": "¿Cómo se numeran las resoluciones judiciales según el artículo 125?",
+    "options": [
+      "De manera correlativa en el día de su expedición",
+      "Con un número elegido libremente por cada parte",
+      "Solo al finalizar todas las instancias",
+      "Sin ningún orden identificable"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 125"
+  },
+  {
+    "questionText": "¿Qué diferencia establece el artículo 128 entre inadmisibilidad e improcedencia?",
+    "options": [
+      "Ambas se declaran únicamente por defectos de forma",
+      "La inadmisibilidad corresponde a defectos formales y la improcedencia a defectos de fondo",
+      "La inadmisibilidad requiere sentencia firme y la improcedencia no",
+      "No existe diferencia entre ambas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 128"
+  },
+  {
+    "questionText": "Según el artículo 191, ¿los medios de prueba no tipificados pueden servir a la finalidad probatoria?",
+    "options": [
+      "No, porque se excluyen automáticamente",
+      "Sí, los medios y sus sucedáneos pueden ser idóneos aunque no estén tipificados",
+      "Solo si los propone el Ministerio Público",
+      "Únicamente si reemplazan una sentencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 191"
+  },
+  {
+    "questionText": "¿En qué situación puede el juez ordenar excepcionalmente pruebas de oficio conforme al artículo 194?",
+    "options": [
+      "Cuando quiera sustituir a las partes en su carga probatoria",
+      "Cuando sean insuficientes los medios ofrecidos y se cumplan los límites y garantías del artículo",
+      "Cada vez que una parte no esté de acuerdo con la demanda",
+      "Solo después de ejecutar la sentencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 194"
+  },
+  {
+    "questionText": "¿Qué prueba carece de eficacia probatoria por la forma en que se obtuvo?",
+    "options": [
+      "Una prueba presentada por un perito designado legalmente",
+      "Una prueba documental ofrecida oportunamente",
+      "Una prueba obtenida mediante intimidación o soborno",
+      "Una declaración testimonial admitida por el juez"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 199"
+  },
+  {
+    "questionText": "¿Qué sucede si una parte no acredita los hechos que afirmó en su demanda o reconvención?",
+    "options": [
+      "Se consideran automáticamente verdaderos",
+      "Se declara fundada la demanda por presunción absoluta",
+      "No se tienen por verdaderos y su demanda se declara infundada",
+      "La apelación se concede sin una resolución previa"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 200"
+  },
+  {
+    "questionText": "¿Qué finalidad tienen los medios impugnatorios?",
+    "options": [
+      "Solicitar la anulación o revocación total o parcial de un acto procesal presuntamente viciado o erróneo",
+      "Sustituir todos los actos probatorios por un contrato",
+      "Iniciar obligatoriamente una causa penal",
+      "Modificar por sí mismos el contenido del Código"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 355"
+  },
+  {
+    "questionText": "¿Contra qué tipo de acto se formulan los remedios del artículo 356?",
+    "options": [
+      "Solo contra sentencias definitivas",
+      "Contra actos procesales no contenidos en resoluciones, dentro de los casos previstos",
+      "Exclusivamente contra resoluciones de casación",
+      "Solo contra el pago de costas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 356"
+  },
+  {
+    "questionText": "¿Ante qué órgano se interponen, como regla, los medios impugnatorios?",
+    "options": [
+      "Ante el órgano jurisdiccional que cometió el vicio o error, salvo disposición distinta",
+      "Ante cualquier entidad administrativa",
+      "Directamente ante el Registro Público",
+      "Solo ante una notaría"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 357"
+  },
+  {
+    "questionText": "¿Hasta qué momento puede el demandante modificar la demanda conforme al artículo 428?",
+    "options": [
+      "Hasta después de la sentencia firme",
+      "Solo durante la audiencia de pruebas",
+      "Antes de que la demanda sea notificada",
+      "Únicamente luego de formular apelación"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 428"
+  },
+  {
+    "questionText": "¿Qué hace el juez cuando califica positivamente una demanda?",
+    "options": [
+      "Ordena su archivo de inmediato",
+      "Da por ofrecidos los medios probatorios y corre traslado al demandado",
+      "Dicta sentencia sin emplazamiento",
+      "Rechaza toda prueba sin examinarla"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 430"
+  },
+  {
+    "questionText": "¿Cómo debe responder el demandado respecto de los hechos narrados en la demanda?",
+    "options": [
+      "De manera precisa, pronunciándose sobre cada uno de los hechos",
+      "Solo mediante una negativa genérica obligatoria",
+      "Sin referirse a los hechos de la demanda",
+      "Presentando únicamente un recurso de casación"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 442"
+  },
+  {
+    "questionText": "¿Cómo se relacionan los plazos para contestar la demanda y para reconvenir?",
+    "options": [
+      "El de reconvención empieza cuando termina el de contestación",
+      "El plazo es el mismo y simultáneo",
+      "La reconvención solo procede después de sentencia",
+      "La contestación carece de plazo"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 443"
+  },
+  {
+    "questionText": "¿Qué anexos deben acompañarse a la contestación de la demanda?",
+    "options": [
+      "Ningún anexo, aunque la ley lo exija",
+      "Únicamente una declaración oral del demandado",
+      "Los previstos para la demanda en el artículo 425, en lo que corresponda",
+      "Solo la constancia de pago de las costas"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 444"
+  },
+  {
+    "questionText": "¿Cuándo se propone la reconvención según el artículo 445?",
+    "options": [
+      "En un proceso nuevo e independiente de forma obligatoria",
+      "En el mismo escrito en que se contesta la demanda, con los requisitos aplicables",
+      "Solo después de concluir la ejecución",
+      "Únicamente ante el tribunal de casación"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 445"
+  },
+  {
+    "questionText": "¿Qué medios probatorios se admiten para sustentar o absolver excepciones, según el artículo 448?",
+    "options": [
+      "Cualquier prueba presentada oralmente en segunda instancia",
+      "Solo pericias judiciales de oficio",
+      "Los documentales ofrecidos en el escrito de excepción o absolución",
+      "Únicamente declaraciones de testigos"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 448"
+  },
+  {
+    "questionText": "En el proceso sumarísimo, ¿cuánto tiempo prevé el artículo 551 para subsanar una demanda inadmisible?",
+    "options": [
+      "Tres días",
+      "Diez días",
+      "Treinta días",
+      "Un año"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 551"
+  },
+  {
+    "questionText": "¿En qué momento se interponen las excepciones y defensas previas en el proceso sumarísimo?",
+    "options": [
+      "Antes de presentar la demanda",
+      "Al contestarse la demanda",
+      "Después de quedar firme la sentencia",
+      "Solo al ejecutar la resolución"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 552"
+  },
+  {
+    "questionText": "¿Qué plazo para contestar la demanda establece el artículo 554 en el proceso sumarísimo?",
+    "options": [
+      "Quince días",
+      "Diez días",
+      "Cinco días",
+      "Treinta días"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 554"
+  },
+  {
+    "questionText": "¿Cuál de las siguientes actuaciones no procede en el proceso sumarísimo, según el artículo 559?",
+    "options": [
+      "La contestación de la demanda",
+      "La actuación de pruebas admitidas",
+      "La audiencia única",
+      "La reconvención"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 559"
+  },
+  {
+    "questionText": "¿Quién elige entre el domicilio del demandante y el del demandado para la competencia territorial en alimentos?",
+    "options": [
+      "El demandante",
+      "El demandado",
+      "El secretario judicial",
+      "El perito designado"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 560"
+  },
+  {
+    "questionText": "¿Quién puede representar procesalmente al menor alimentista en ausencia de quien ejerce la tenencia, bajo el supuesto del artículo 561?",
+    "options": [
+      "Solo una persona jurídica extranjera",
+      "El abuelo, el tío o el hermano mayor que tiene la responsabilidad de cuidarlo",
+      "Cualquier testigo sin relación con el menor",
+      "Exclusivamente el demandado"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 561"
+  },
+  {
+    "questionText": "¿Qué límite señala el artículo 562 para exonerar al demandante del pago de tasas judiciales en alimentos?",
+    "options": [
+      "Hasta veinte Unidades de Referencia Procesal de la pensión demandada",
+      "Hasta mil Unidades de Referencia Procesal",
+      "Cualquier monto, sin límite",
+      "Solo cuando el demandado lo autorice"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 562"
+  },
+  {
+    "questionText": "¿Dentro de qué plazo general debe realizarse la audiencia de actuación y declaración judicial tras admitirse la solicitud no contenciosa?",
+    "options": [
+      "Dentro de quince días, salvo la excepción prevista en el Código",
+      "Siempre dentro de seis meses",
+      "Únicamente después de una apelación",
+      "No existe ningún plazo"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 754"
+  },
+  {
+    "questionText": "¿Qué actuación declara improcedente el artículo 761 en los procesos no contenciosos?",
+    "options": [
+      "La presentación de una solicitud",
+      "La actuación de los anexos de la solicitud",
+      "La reconvención",
+      "La emisión de una resolución final"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 761"
+  }
+]
