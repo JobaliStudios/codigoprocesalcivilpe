@@ -21,11 +21,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowDialog;
 
 /** La prueba corre en Robolectric; jamás borra datos de un teléfono real. */
 @RunWith(RobolectricTestRunner.class)
+// Una actividad con el modo nocturno ya activo evita recreaciones recursivas
+// de AppCompat antes de que el test pulse «Borrar todos los datos».
+@Config(sdk = 30, qualifiers = "night")
 public class PrivacyCenterThemeResetTest {
     private Context context;
 
