@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionBank;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
@@ -30,6 +31,12 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
         setContentView(R.layout.activity_quizz_cpcstart_gamified);
         questions = QuestionBank.getQuestions(this);
         status = findViewById(R.id.tvQuizStartStatus);
+        SwitchMaterial metricsOptIn = findViewById(R.id.switchQuizLocalMetrics);
+        metricsOptIn.setChecked(new QuizLocalMetricsStore(this).isEnabled());
+        metricsOptIn.setOnCheckedChangeListener((button, enabled) -> {
+            new QuizLocalMetricsStore(this).setEnabled(enabled);
+            bindMetrics();
+        });
         selectedQuestionCount = restoredCount(state == null ? 10 : state.getInt(STATE_QUESTION_COUNT, 10));
         MaterialButtonToggleGroup sizeGroup = findViewById(R.id.quizQuestionCountGroup);
         sizeGroup.check(selectedQuestionCount == 5 ? R.id.btnQuizCount5
@@ -55,7 +62,7 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
         findViewById(R.id.cardQuizSection).setOnClickListener(view -> showSections());
     }
 
-    @Override protected void onResume() { super.onResume(); bindCards(); bindDraft(); }
+    @Override protected void onResume() { super.onResume(); bindCards(); bindDraft(); bindMetrics(); }
 
     @Override protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -64,6 +71,25 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
 
     private static int restoredCount(int count) {
         return count == 5 || count == 20 ? count : 10;
+    }
+
+    private void bindMetrics() {
+        QuizLocalMetricsStore store = new QuizLocalMetricsStore(this);
+        SwitchMaterial toggle = findViewById(R.id.switchQuizLocalMetrics);
+        toggle.setChecked(store.isEnabled());
+        TextView summary = findViewById(R.id.tvQuizMetricsSummary);
+        if (!store.isEnabled()) {
+            summary.setText(R.string.quiz_metrics_disabled);
+            return;
+        }
+        QuizLocalMetricsStore.Snapshot snapshot = store.snapshot();
+        if (snapshot.getSessions() == 0L) {
+            summary.setText(R.string.quiz_metrics_empty);
+        } else {
+            summary.setText(getString(R.string.quiz_metrics_summary,
+                    snapshot.getSessions(), snapshot.getAnswered(),
+                    snapshot.getAccuracyPercent()));
+        }
     }
 
     private void bindDraft() {

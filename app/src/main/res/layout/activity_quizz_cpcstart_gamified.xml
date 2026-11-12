@@ -44,6 +44,44 @@
                     app:icon="@drawable/baseline_history_24" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            app:cardBackgroundColor="@color/quiz_card_surface"
+            app:cardCornerRadius="@dimen/radius_l"
+            app:strokeColor="@color/quiz_card_stroke"
+            app:strokeWidth="@dimen/stroke_width_thin">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_l">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quiz_metrics_title"
+                    android:textColor="@color/quiz_text_title"
+                    android:textSize="@dimen/text_title_m"
+                    android:textStyle="bold" />
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchQuizLocalMetrics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:minHeight="@dimen/touch_target_min"
+                    android:text="@string/quiz_metrics_enable"
+                    android:textColor="@color/quiz_text_primary" />
+                <TextView
+                    android:id="@+id/tvQuizMetricsSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/quiz_metrics_disabled"
+                    android:textColor="@color/quiz_text_secondary"
+                    android:textSize="@dimen/text_body_m" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

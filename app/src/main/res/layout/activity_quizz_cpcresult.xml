@@ -323,6 +323,63 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardQuizRatingInvite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/quiz_card_surface"
+                app:cardCornerRadius="@dimen/radius_l"
+                app:strokeColor="@color/quiz_card_stroke"
+                app:strokeWidth="@dimen/stroke_width_thin">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_l">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quiz_review_invite_title"
+                        android:textColor="@color/quiz_text_title"
+                        android:textSize="@dimen/text_title_m"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_s"
+                        android:text="@string/quiz_review_invite_detail"
+                        android:textColor="@color/quiz_text_secondary"
+                        android:textSize="@dimen/text_body_m" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnQuizRatePlay"
+                        style="@style/App.Button.Outlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_m"
+                        android:minHeight="@dimen/touch_target_min"
+                        android:text="@string/quiz_review_open_play"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/baseline_star_24" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnQuizRateLater"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/touch_target_min"
+                        android:text="@string/quiz_review_later"
+                        android:textAllCaps="false" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnQuizRateNever"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/touch_target_min"
+                        android:text="@string/quiz_review_never"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
