@@ -150,6 +150,36 @@ public class SectionContentActivityArticleActionsTest {
     }
 
     @Test
+    public void shareAfterScrollingUsesNewlyVisibleArticleNotPreviouslyOpenedArticle() {
+        SectionContentActivity activity = launchArticle("560");
+        Article article560 = findArticle("560");
+        Article article562 = findArticle("562");
+
+        scrollProbeInside(activity, article560);
+        activity.findViewById(R.id.btnShareArticle).performClick();
+        Intent firstChooser = Shadows.shadowOf(activity).getNextStartedActivity();
+        Intent firstShare = IntentCompat.getParcelableExtra(
+                firstChooser, Intent.EXTRA_INTENT, Intent.class);
+        assertNotNull(firstShare);
+
+        scrollProbeInside(activity, article562);
+        activity.findViewById(R.id.btnShareArticle).performClick();
+        Intent secondChooser = Shadows.shadowOf(activity).getNextStartedActivity();
+        Intent secondShare = IntentCompat.getParcelableExtra(
+                secondChooser, Intent.EXTRA_INTENT, Intent.class);
+        assertNotNull(secondShare);
+
+        ArticleShareFormatter formatter = new ArticleShareFormatter(
+                application.getString(R.string.app_name));
+        assertEquals(formatter.format(article560), firstShare.getStringExtra(Intent.EXTRA_TEXT));
+        assertEquals(formatter.format(article562), secondShare.getStringExtra(Intent.EXTRA_TEXT));
+        assertEquals(application.getString(R.string.article_share_subject, "562"),
+                secondShare.getStringExtra(Intent.EXTRA_SUBJECT));
+        assertNotEquals(firstShare.getStringExtra(Intent.EXTRA_TEXT),
+                secondShare.getStringExtra(Intent.EXTRA_TEXT));
+    }
+
+    @Test
     public void dynamicHeader_andSameBlockNavigation_followVisibleArticleImmediately() {
         SectionContentActivity activity = launchArticle("564");
         Article article564 = findArticle("564");
