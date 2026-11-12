@@ -1,7 +1,7 @@
 # Código Procesal Civil PE — Fase 5: crecimiento y aprendizaje
 
 **Inicio:** 12 de noviembre de 2026.  
-**Estado:** en ejecución, Misión 1 en PR independiente.  
+**Estado:** Misión 2 en ejecución, tercer lote de 25 preguntas pendiente de CI, revisión y fusión.  
 **Versión de desarrollo:** `1.08 (versionCode 13)`; **no publicar ni distribuir como actualización**.
 
 ## Objetivo
@@ -74,10 +74,20 @@ Se han preparado **32 preguntas adicionales**, sin modificar las **31 originales
 
 La meta de 120–200 preguntas requiere lotes adicionales, sin alterar las IDs de errores de preguntas originales ni publicar prematuramente la versión 1.08.
 
-## Misión 2 — Segundo lote de 32 preguntas (PR en revisión)
+## Misión 2 — Segundo lote de 32 preguntas (fusionado en main, PR #68)
 
 El segundo lote amplía el banco de **63 a 95 preguntas** y de **62 a 94 artículos diferentes**. La ampliación cubre cinco secciones adicionales a la Primera y mantiene el acceso por sección, favoritos y repaso de errores; las **63 preguntas preexistentes quedan congeladas** mediante un nuevo baseline automático. El detalle de las 32 respuestas, referencias y límites jurídicos se documenta en [Lote 2 — 32 preguntas](2026-11-fase5-lote2-32-preguntas.md).
 
 **Progreso hacia el objetivo mínimo de 120 preguntas:** 95/120 = **79,2 %**, pendientes 25 preguntas. La meta ampliada de 200 requiere 105 preguntas adicionales. La revisión de vigencia normativa posterior al TUO oficial de junio de 2025 y una discrepancia textual identificada en el artículo 551 permanecen como asuntos jurídicos de revisión independiente, **no resueltos ni publicados**.
 
 Esta adición **no cambia** el corpus del CPC ni la versión candidata 1.08.
+
+## Misión 2 — Tercer lote de 25 preguntas (en PR, sin fusionar)
+
+Se incorporan **25 preguntas nuevas**, de forma que la rama del Lote 3 pasa de **95 a 120 preguntas** y de **94 a 119 artículos distintos**. Se amplían las seis secciones del CPC (I: 3, II: 4, III: 6, IV: 4, V: 5 y VI: 3), con conceptos cotejados frente al TUO oficial compilado al 07/06/2025 y `assets/articles.json`; ver [registro editorial de Lote 3](2026-11-fase5-lote3-25-preguntas.md).
+
+**Preservación:** las 95 entradas anteriores quedan inalteradas y protegidas mediante `tools/quiz_bank_legacy_95.json`, manteniéndose los baselines anteriores de 31 y 63 y las IDs de repaso. Se añaden pruebas del banco de **120 preguntas / 119 artículos**, cobertura de secciones y persistencia del repaso de errores.
+
+**Estado:** meta mínima **alcanzada en la rama de trabajo**, pero pendiente de CI, revisión jurídica temporal posterior a junio 2025, pruebas físicas, aceptación del propietario y fusión. No se modifica la versión candidata 1.08 ni se prepara actualización para Google Play.
+
+La Misión 2 podrá cerrarse tras la aceptación de este lote. Quedan **80 preguntas adicionales** si se decidiera perseguir la meta ampliada de 200; no son un requisito de cierre de la meta mínima.

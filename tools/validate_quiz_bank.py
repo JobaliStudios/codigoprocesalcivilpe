@@ -21,6 +21,7 @@ CANONICAL_NUMBER_RE = re.compile(r"^\d+(?:-[A-Z])?$")
 REQUIRED_FIELDS = {"questionText", "options", "correctAnswerIndex", "relatedArticle"}
 LEGACY_QUESTIONS_PATH = ROOT / "tools/quiz_bank_legacy_31.json"
 SECOND_BATCH_BASELINE_PATH = ROOT / "tools/quiz_bank_legacy_63.json"
+THIRD_BATCH_BASELINE_PATH = ROOT / "tools/quiz_bank_legacy_95.json"
 
 
 def normalized(value: str) -> str:
@@ -128,6 +129,7 @@ def main() -> int:
         corpus = json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
         baseline = json.loads(LEGACY_QUESTIONS_PATH.read_text(encoding="utf-8"))
         baseline_63 = json.loads(SECOND_BATCH_BASELINE_PATH.read_text(encoding="utf-8"))
+        baseline_95 = json.loads(THIRD_BATCH_BASELINE_PATH.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError) as error:
         print(f"ERROR: no se pudo leer el banco/corpus: {error}", file=sys.stderr)
         return 2
@@ -135,6 +137,7 @@ def main() -> int:
     issues, stats = validate_bank(questions, corpus)
     issues.extend(verify_legacy_questions(questions, baseline))
     issues.extend(verify_legacy_questions(questions, baseline_63, expected_count=63))
+    issues.extend(verify_legacy_questions(questions, baseline_95, expected_count=95))
     if issues:
         print(f"Banco de preguntas inválido ({len(issues)} problemas):", file=sys.stderr)
         for issue in issues:
