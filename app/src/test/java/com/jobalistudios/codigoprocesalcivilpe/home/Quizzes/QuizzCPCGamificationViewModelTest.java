@@ -46,6 +46,22 @@ public class QuizzCPCGamificationViewModelTest {
     }
 
     @Test
+    public void correctAnswerInAnyModeResolvesOnlyTheMatchingPendingError() {
+        QuestionModel anotherError = new QuestionModel(
+                "Otra pregunta", Arrays.asList("Sí", "No"), 0, "Artículo 93");
+        errorStore.recordIncorrect(question);
+        errorStore.recordIncorrect(anotherError);
+
+        QuizzCPCViewModel viewModel = new QuizzCPCViewModel(application, errorStore);
+        viewModel.initSession(QuizSessionConfig.all(), Collections.singletonList(question));
+
+        assertTrue(viewModel.submitAnswer(1));
+        assertFalse(errorStore.contains(question));
+        assertTrue(errorStore.contains(anotherError));
+        assertEquals(1, viewModel.getStats().getCorrect());
+    }
+
+    @Test
     public void correctPreviousErrorIsResolvedWhileWrongAnswerIsPersisted() {
         errorStore.recordIncorrect(question);
         QuizzCPCViewModel reviewModel = new QuizzCPCViewModel(application, errorStore);
