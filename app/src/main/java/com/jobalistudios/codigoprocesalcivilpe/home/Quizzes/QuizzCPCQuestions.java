@@ -348,8 +348,17 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         return relatedArticle.toUpperCase(Locale.getDefault());
     }
 
+    private boolean resultOpened;
+
     private void showResult() {
+        if (resultOpened) {
+            return;
+        }
+        resultOpened = true;
         draftStore.clear();
+        new QuizReviewPromptPolicy(this).onSessionCompleted();
+        new QuizLocalMetricsStore(this).recordCompleted(
+                viewModel.getStats().getCorrect(), viewModel.getStats().getTotal());
         Intent intent = QuizSessionContract.createResultIntent(
                 this,
                 viewModel.getStats(),
