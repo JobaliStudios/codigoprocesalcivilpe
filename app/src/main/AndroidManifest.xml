@@ -114,6 +114,11 @@
         </activity>
 
         <activity
+            android:name=".configuracion.AboutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".privacidad.PrivacyCenterActivity"
             android:exported="false"
             android:screenOrientation="portrait">

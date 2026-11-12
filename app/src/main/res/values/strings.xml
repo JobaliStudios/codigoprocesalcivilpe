@@ -700,13 +700,34 @@
     <string name="config_icon_support">Ícono de soporte</string>
     <string name="config_support_title">Ayuda y soporte</string>
     <string name="config_support_desc">Cuéntanos si necesitas algo y te responderemos a la brevedad.</string>
-    <string name="config_contact_message">Pronto podrás escribirnos directamente desde aquí.</string>
     <string name="config_icon_about">Ícono de acerca de</string>
     <string name="config_about_title">Acerca de la app</string>
     <string name="config_about_desc">Conoce el objetivo del proyecto y las últimas mejoras.</string>
-    <string name="config_about_message">Muy pronto verás más detalles de la app en esta sección.</string>
     <string name="config_version_value">Versión %1$s · Código Procesal Civil PE</string>
     <string name="config_version_default">N/D</string>
+    <string name="support_email_address">studiosjobali@gmail.com</string>
+    <string name="support_email_subject">Consulta de soporte — Código Procesal Civil PE</string>
+    <string name="support_no_email_title">No hay una aplicación de correo disponible</string>
+    <string name="support_no_email_message">No encontramos una aplicación de correo para abrir el mensaje. Puedes copiar esta dirección y escribir desde otra app: %1$s</string>
+    <string name="support_copy_email">Copiar correo</string>
+    <string name="support_clipboard_label">Correo de soporte</string>
+    <string name="support_email_copied">Correo copiado al portapapeles</string>
+    <string name="about_screen_title">Acerca de la app</string>
+    <string name="about_developer_title">Desarrollador</string>
+    <string name="about_developer_name">Jobali Studios</string>
+    <string name="about_features_title">Funciones principales</string>
+    <string name="about_features_body">Consulta del Código Procesal Civil sin conexión, búsqueda por texto y número de artículo, favoritos, notas, resaltados, historial, lectura en voz alta, cuestionarios y modos claro y oscuro.</string>
+    <string name="about_independence_title">Aplicación independiente</string>
+    <string name="about_independence_body">Código Procesal Civil PE no representa, está afiliada, autorizada ni respaldada por el Gobierno del Perú, el Poder Judicial ni otra entidad pública. No es una fuente oficial y no sustituye el asesoramiento legal profesional.</string>
+    <string name="about_sources_title">Fuentes oficiales para consultar la normativa</string>
+    <string name="about_sources_explanation">Antes de usar el contenido en decisiones o trámites jurídicos, verifica la vigencia y la redacción de cada disposición en fuentes oficiales. Los textos incluidos solo cambian al instalar una nueva versión de la aplicación.</string>
+    <string name="about_source_el_peruano">Texto Único Ordenado del CPC — El Peruano</string>
+    <string name="about_source_spij">SPIJ — Ministerio de Justicia</string>
+    <string name="about_privacy_title">Privacidad</string>
+    <string name="about_privacy_explanation">Las notas y los datos de lectura se guardan en el dispositivo. Los servicios de anuncios pueden tratar datos conforme a la política de privacidad.</string>
+    <string name="about_privacy_open">Leer política de privacidad</string>
+    <string name="about_link_unavailable">No se encontró una aplicación para abrir el enlace.</string>
+
 
     <string name="icono_codigoprocesalcivl">Código Procesal Civil</string>
 

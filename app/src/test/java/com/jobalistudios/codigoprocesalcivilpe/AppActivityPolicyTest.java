@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.jobalistudios.codigoprocesalcivilpe.apuntes.MyNotesActivity;
+import com.jobalistudios.codigoprocesalcivilpe.configuracion.AboutActivity;
 import com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigoProcesalCivilMain;
 import com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigosMain;
 import com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizzCPCQuestions;
@@ -41,6 +42,7 @@ public class AppActivityPolicyTest {
             SectionContentActivity.class,
             SectionListActivity.class,
             PrivacyCenterActivity.class,
+            AboutActivity.class,
             MyNotesActivity.class
     };
 
