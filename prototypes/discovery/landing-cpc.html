@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Vista previa no publicada de la web informativa de Código Procesal Civil PE, aplicación independiente de consulta y estudio.">
+  <title>Código Procesal Civil PE | Prototipo informativo</title>
+  <style>
+    :root { color-scheme: light; --ink:#182f45; --muted:#425b6e; --accent:#185c9a; --border:#d5e1e9; --bg:#f7fafc; --surface:#fff; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin:0; font: 16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+    a { color:var(--accent); text-underline-offset:3px; }
+    a:focus-visible { outline:3px solid #e19d3c; outline-offset:3px; }
+    .wrap { width:min(1060px,calc(100% - 40px)); margin-inline:auto; }
+    .preview { background:#fff1d6; color:#654300; padding:10px 0; font-size:.9rem; border-bottom:1px solid #e8c67b; }
+    header { background:var(--surface); border-bottom:1px solid var(--border); }
+    .head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px; padding:17px 0; }
+    .brand { font-weight:750; text-decoration:none; color:var(--ink); }
+    nav { display:flex; flex-wrap:wrap; gap:18px; }
+    .hero { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(250px,1fr); gap:30px; padding:72px 0; align-items:center; }
+    .eyebrow { color:#305f84; font-weight:650; letter-spacing:.08em; text-transform:uppercase; font-size:.83rem; }
+    h1 { font-size:clamp(2rem,4.3vw,3.5rem); line-height:1.12; letter-spacing:-.035em; margin:15px 0; }
+    h2 { font-size:1.55rem; line-height:1.25; margin:0 0 12px; }
+    p { margin-top:0; }
+    .lead { font-size:1.15rem; color:var(--muted); max-width:60ch; }
+    .btn { display:inline-block; background:var(--accent); color:white; font-weight:650; padding:12px 20px; border-radius:12px; text-decoration:none; }
+    .btn:hover { background:#104471; }
+    .surface, .feature { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; }
+    .mock { border-top:6px solid var(--accent); }
+    .mock strong { display:block; font-size:1.1rem; }
+    .mock .line { margin-top:14px; border:1px solid var(--border); border-radius:9px; padding:8px 12px; color:var(--muted); }
+    section { padding:28px 0 50px; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .feature h3 { margin:0 0 8px; font-size:1.1rem; }
+    .feature p { color:var(--muted); margin:0; }
+    .sources { background:#edf4f8; border-block:1px solid var(--border); }
+    .small { color:var(--muted); font-size:.95rem; }
+    footer { padding:30px 0 50px; border-top:1px solid var(--border); }
+    @media (max-width:760px) { .hero { grid-template-columns:1fr; padding:44px 0; } .grid { grid-template-columns:1fr; } .head { align-items:flex-start; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; } }
+  </style>
+</head>
+<body>
+  <div class="preview"><div class="wrap"><strong>Prototipo de diseño.</strong> Página no publicada; no acredita una actualización de Google Play.</div></div>
+  <header>
+    <div class="wrap head">
+      <span class="brand">Código Procesal Civil PE</span>
+      <nav aria-label="Secciones de la página">
+        <a href="#funciones">Funciones</a>
+        <a href="#fuentes">Fuentes y vigencia</a>
+        <a href="#contacto">Soporte</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">Consulta y estudio del CPC peruano</p>
+        <h1>El Código Procesal Civil, a tu alcance</h1>
+        <p class="lead">Busca artículos, organiza tus lecturas y estudia desde tu teléfono, incluso sin conexión. Una herramienta independiente, sin afirmar que sustituye las fuentes oficiales.</p>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.jobalistudios.codigoprocesalcivilpe" target="_blank" rel="noopener noreferrer">Ver versión publicada en Google Play</a>
+        <p class="small" style="margin-top:15px">La versión candidata 1.08 con funciones adicionales está en preparación; aún no se ha publicado.</p>
+      </div>
+      <aside class="surface mock" aria-label="Ejemplo ilustrativo de funciones, no captura de la aplicación">
+        <strong>Estudia a tu manera</strong>
+        <div class="line">Buscar artículo o palabra clave</div>
+        <div class="line">Guardar favorito y tomar apuntes</div>
+        <div class="line">Practicar con cuestionarios</div>
+        <p class="small" style="margin:16px 0 0">Representación conceptual. Sustituir por capturas auténticas antes de publicar.</p>
+      </aside>
+    </div>
+    <section id="funciones" class="wrap" aria-labelledby="title-features">
+      <h2 id="title-features">Herramientas para consultar y aprender</h2>
+      <div class="grid">
+        <article class="feature"><h3>Consulta sin conexión</h3><p>Accede al contenido jurídico disponible en la versión instalada y busca por número o término.</p></article>
+        <article class="feature"><h3>Tu espacio de lectura</h3><p>Favoritos, historial, resaltados, notas y lectura en voz alta.</p></article>
+        <article class="feature"><h3>Práctica guiada</h3><p>Preguntas y repaso de errores. La candidata 1.08 incorpora un banco de 120 preguntas y sesiones personalizables.</p></article>
+      </div>
+    </section>
+    <section id="fuentes" class="sources" aria-labelledby="title-sources">
+      <div class="wrap">
+        <h2 id="title-sources">Fuentes oficiales y vigencia jurídica</h2>
+        <p>La referencia oficial documentada es el Texto Único Ordenado del Código Procesal Civil publicado por El Peruano, edición actualizada al <strong>7 de junio de 2025</strong>. La revisión documental posterior contiene salvedades: <strong>no certifica la vigencia íntegra de los artículos a noviembre de 2026</strong>. La app no aplica automáticamente cambios legislativos; el texto local requiere nuevas versiones.</p>
+        <p>Antes de tomar decisiones legales o presentar escritos, comprueba las normas aplicables en fuentes oficiales. Esta aplicación no sustituye la asesoría jurídica.</p>
+        <p><a href="https://diariooficial.elperuano.pe/Normas/obtenerDocumento?idNorma=120007" target="_blank" rel="noopener noreferrer">Consultar el TUO del CPC en El Peruano</a> · <a href="https://diariooficial.elperuano.pe/normas/normasactualizadas" target="_blank" rel="noopener noreferrer">Catálogo de normas actualizadas</a> · <a href="https://spij.minjus.gob.pe/" target="_blank" rel="noopener noreferrer">SPIJ — Ministerio de Justicia</a></p>
+      </div>
+    </section>
+    <section id="contacto" class="wrap" aria-labelledby="title-contact">
+      <h2 id="title-contact">Desarrollada por Jobali Studios</h2>
+      <p>Proyecto informativo independiente, no afiliado ni respaldado por el Gobierno del Perú, el Poder Judicial ni otra entidad pública.</p>
+      <p><a href="mailto:studiosjobali@gmail.com">Soporte: studiosjobali@gmail.com</a> · <a href="https://jobalistudios.github.io/privacy-policy/" target="_blank" rel="noopener noreferrer">Política de privacidad</a></p>
+    </section>
+  </main>
+  <footer><div class="wrap small">Código Procesal Civil PE · Prototipo informativo no publicado · Sin analítica ni cookies añadidas en esta página.</div></footer>
+</body>
+</html>
