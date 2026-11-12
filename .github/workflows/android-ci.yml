@@ -202,5 +202,33 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-          script: ./gradlew connectedDebugAndroidTest --console=plain
+          script: |
+            # La ventana del emulador puede quedar bloqueada o detrás del launcher.
+            adb shell svc power stayon true
+            adb shell input keyevent 224
+            adb shell wm dismiss-keyguard
+            adb shell input keyevent 82
+            adb shell input keyevent 3
+            adb shell settings put system screen_off_timeout 1800000
+            adb shell cmd statusbar collapse
+            echo "Ventana enfocada antes de instrumentación:"
+            adb shell dumpsys window | grep -E 'mCurrentFocus|mFocusedApp|mTopFocusedDisplayId' || true
+            ./gradlew connectedDebugAndroidTest --console=plain || {
+              echo "Diagnóstico de foco del emulador tras las pruebas:"
+              adb shell dumpsys window | grep -E 'mCurrentFocus|mFocusedApp|mTopFocusedDisplayId|mInputMethodTarget' || true
+              adb shell dumpsys activity activities | grep -E 'topResumedActivity|mResumedActivity|mFocusedRootTask' || true
+              adb exec-out screencap -p > emulator-instrumentation-failure.png || true
+              exit 1
+            }
+
+      - name: Conservar evidencia de regresión en emulador
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fase2-candidata-android15-instrumentacion
+          path: |
+            emulator-instrumentation-failure.png
+            app/build/outputs/androidTest-results/connected/
+            app/build/reports/androidTests/connected/
+          if-no-files-found: ignore
 
