@@ -720,7 +720,7 @@
     <string name="about_independence_title">Aplicación independiente</string>
     <string name="about_independence_body">Código Procesal Civil PE no representa, está afiliada, autorizada ni respaldada por el Gobierno del Perú, el Poder Judicial ni otra entidad pública. No es una fuente oficial y no sustituye el asesoramiento legal profesional.</string>
     <string name="about_sources_title">Fuentes oficiales para consultar la normativa</string>
-    <string name="about_sources_explanation">Antes de usar el contenido en decisiones o trámites jurídicos, verifica la vigencia y la redacción de cada disposición en fuentes oficiales. El contenido de esta app no se actualiza automáticamente.</string>
+    <string name="about_sources_explanation">Antes de usar el contenido en decisiones o trámites jurídicos, verifica la vigencia y la redacción de cada disposición en fuentes oficiales. Los textos incluidos solo cambian al instalar una nueva versión de la aplicación.</string>
     <string name="about_source_el_peruano">Texto Único Ordenado del CPC — El Peruano</string>
     <string name="about_source_spij">SPIJ — Ministerio de Justicia</string>
     <string name="about_privacy_title">Privacidad</string>
