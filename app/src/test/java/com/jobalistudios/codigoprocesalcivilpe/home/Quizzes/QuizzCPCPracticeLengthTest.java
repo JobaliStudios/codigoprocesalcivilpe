@@ -11,6 +11,8 @@ import androidx.test.core.app.ActivityScenario;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
+import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -19,6 +21,14 @@ import org.robolectric.Shadows;
 
 @RunWith(RobolectricTestRunner.class)
 public class QuizzCPCPracticeLengthTest {
+    @Before public void clearOldDraft() {
+        new QuizDraftStore(androidx.test.core.app.ApplicationProvider.getApplicationContext()).clear();
+    }
+
+    @After public void clearDraftAfterTest() {
+        new QuizDraftStore(androidx.test.core.app.ApplicationProvider.getApplicationContext()).clear();
+    }
+
     @Test
     public void defaultIsTenAndTwentyQuestionsReachTheFullBankSelector() {
         QuizzCPCStartScreen activity = Robolectric
