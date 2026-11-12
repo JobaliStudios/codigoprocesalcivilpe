@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Primera ampliación: la cobertura legal se extiende a las seis secciones,
+ * Primera y segunda ampliaciones: cobertura legal en las seis secciones,
  * sin alterar las IDs de las preguntas de repaso ni necesitar una conexión.
  */
 @RunWith(RobolectricTestRunner.class)
@@ -30,9 +30,9 @@ public class QuizExpansionCoverageTest {
     private final Context context = ApplicationProvider.getApplicationContext();
 
     @Test
-    public void expansionKeepsOriginalQuestionsAndAddsThirtyTwoDistinctArticles() {
+    public void secondExpansionPreservesEarlierBankAndAddsThirtyTwoMoreArticles() {
         List<QuestionModel> questions = QuestionBank.getQuestions(context);
-        assertTrue("El banco debe contener al menos 63 preguntas", questions.size() >= 63);
+        assertTrue("El banco debe contener al menos 95 preguntas", questions.size() >= 95);
 
         Set<String> numbers = new HashSet<>();
         for (QuestionModel q : questions) {
@@ -40,13 +40,17 @@ public class QuizExpansionCoverageTest {
             assertNotNull(number);
             numbers.add(number);
         }
-        assertTrue("El banco ampliado debe incluir al menos 62 artículos",
-                numbers.size() >= 62);
+        assertTrue("El banco ampliado debe incluir al menos 94 artículos",
+                numbers.size() >= 94);
         for (String newNumber : new String[]{
                 "49", "50", "52", "57", "83", "119", "120", "121", "188", "189",
                 "192", "193", "196", "197", "364", "410", "424", "425", "426",
                 "427", "475", "486", "546", "585", "608", "610", "688", "749",
-                "751", "753", "759", "834"}) {
+                "751", "753", "759", "834",
+                "51", "53", "55", "59", "92", "93", "123", "125", "128",
+                "191", "194", "199", "200", "355", "356", "357", "428",
+                "430", "442", "443", "444", "445", "448", "551", "552",
+                "554", "559", "560", "561", "562", "754", "761"}) {
             assertTrue("Sin pregunta nueva para artículo " + newNumber,
                     numbers.contains(newNumber));
         }
@@ -77,7 +81,7 @@ public class QuizExpansionCoverageTest {
         context.getSharedPreferences("quiz_error_review", Context.MODE_PRIVATE)
                 .edit().clear().commit();
         List<QuestionModel> questions = QuestionBank.getQuestions(context);
-        QuestionModel newQuestion = questions.get(31);
+        QuestionModel newQuestion = questions.get(63);
         QuizErrorStore before = new QuizErrorStore(context);
         before.recordIncorrect(newQuestion);
 

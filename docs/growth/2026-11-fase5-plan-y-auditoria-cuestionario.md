@@ -73,3 +73,11 @@ Antes de agregar preguntas en la Misión 2:
 Se han preparado **32 preguntas adicionales**, sin modificar las **31 originales**, para un total de **63 preguntas y 62 artículos distintos**. Están distribuidas por las cinco secciones que antes no tenían cobertura. Las preguntas nuevas se han cotejado con el TUO del CPC del Diario Oficial El Peruano actualizado al **7 de junio de 2025**, y los artículos 759 y 834 con la Ley N.° 32377. **No se certifica por ello la vigencia normativa hasta noviembre de 2026**. Para el inventario de artículos, fuentes, respuestas y comprobaciones pendientes, consultar [lote 1 — 32 preguntas](2026-11-fase5-lote1-32-preguntas.md).
 
 La meta de 120–200 preguntas requiere lotes adicionales, sin alterar las IDs de errores de preguntas originales ni publicar prematuramente la versión 1.08.
+
+## Misión 2 — Segundo lote de 32 preguntas (PR en revisión)
+
+El segundo lote amplía el banco de **63 a 95 preguntas** y de **62 a 94 artículos diferentes**. La ampliación cubre cinco secciones adicionales a la Primera y mantiene el acceso por sección, favoritos y repaso de errores; las **63 preguntas preexistentes quedan congeladas** mediante un nuevo baseline automático. El detalle de las 32 respuestas, referencias y límites jurídicos se documenta en [Lote 2 — 32 preguntas](2026-11-fase5-lote2-32-preguntas.md).
+
+**Progreso hacia el objetivo mínimo de 120 preguntas:** 95/120 = **79,2 %**, pendientes 25 preguntas. La meta ampliada de 200 requiere 105 preguntas adicionales. La revisión de vigencia normativa posterior al TUO oficial de junio de 2025 y una discrepancia textual identificada en el artículo 551 permanecen como asuntos jurídicos de revisión independiente, **no resueltos ni publicados**.
+
+Esta adición **no cambia** el corpus del CPC ni la versión candidata 1.08.
