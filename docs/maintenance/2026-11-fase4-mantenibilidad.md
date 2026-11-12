@@ -84,3 +84,23 @@ Facilitar cambios futuros, reducir el riesgo de regresiones y mejorar la separac
 - [ ] CI `test`, `lint`, `assembleDebug`, `testReleaseUnitTest`, `minifyReleaseWithR8` verde.
 - [ ] Revisar PR y fusionar a `main`.
 - [ ] En dispositivo, copiar artículo 506-A y compartir el 835, comprobar texto completo y nota jurídica; cambiar de artículo por desplazamiento y volver a probar ambos botones.
+
+## Ejecución de Misión 3 — Índice de navegación y catálogo jurídico
+
+**Diagnóstico:** `LegalHierarchyRepository` implementaba tres recorridos recursivos independientes para localizar (1) nodo por ID, (2) padre inmediato por ID y (3) hoja por `textRes`. Se repetía el recorrido completo del árbol por cada consulta y `cachedTree` usaba inicialización diferida no sincronizada.
+
+**Cambio implementado:**
+- `LegalHierarchyIndex` construye una vez, en orden original del árbol, mapas de consulta por ID, padre y recurso de texto.
+- `LegalHierarchyRepository` delega esas tres operaciones; el árbol y los mapas se inicializan de manera segura mediante un holder de clase Java. Las búsquedas pasan de recorrido proporcional al número de nodos a consulta esperada de mapa, **sin afirmar una ganancia medida en milisegundos**.
+- Se conservan las referencias originales de cada `Node`, las claves de navegación, el orden y los títulos. **No se ha reescrito `buildTree`, `buildIntentForNode`, `buildGroups` ni `LegalContentCatalog`.**
+- Los índices solo se exponen para lectura; no se modifica el modelo público `Node`.
+
+**Cobertura de equivalencia:** nueva prueba `LegalHierarchyIndexRegressionTest` que compara, para **cada nodo existente**, el resultado indexado con los algoritmos recursivos anteriores; también valida todas las hojas de `LegalContentCatalog`, todos los `Intent` con su clase destino y extras, el orden y metadatos de filas y búsquedas negativas. Permanecen las pruebas de identidad de recursos, IDs únicos y cobertura de catálogo.
+
+**Sin cambios a:** `articles.json`, 862 artículos, recursos de texto, mapas de contenido, preferencias, notas/favoritos, anuncios, UMP, dependencias ni `versionName=1.08`/`versionCode=13`.
+
+**Puerta de aceptación:**
+- [ ] `test`, `lint`, `assembleDebug`, `testReleaseUnitTest`, `minifyReleaseWithR8` verdes.
+- [ ] PR revisado y fusionado en `main`.
+- [ ] Prueba manual: navegar desde Código Procesal Civil por las seis secciones, abrir títulos/capítulos/subcapítulos; abrir un artículo desde Búsqueda y desde Favoritos; volver al índice; verificar que ninguna ruta cambió.
+- [ ] Mantener la versión 1.08 sin publicar hasta autorización independiente.
