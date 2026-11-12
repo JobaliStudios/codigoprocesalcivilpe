@@ -665,5 +665,357 @@
     ],
     "correctAnswerIndex": 1,
     "relatedArticle": "Artículo 834"
+  },
+  {
+    "questionText": "¿Qué puede hacer el juez respecto de la vía procedimental de la demanda, cuando sea factible?",
+    "options": [
+      "Modificar de oficio el Código Procesal Civil",
+      "Adaptar la demanda a la vía procedimental apropiada",
+      "Declarar fundada la demanda sin trámite",
+      "Impedir que las partes ejerzan defensa"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 51"
+  },
+  {
+    "questionText": "¿Qué medida coercitiva contempla el artículo 53 para hacer cumplir un mandato judicial?",
+    "options": [
+      "Una multa compulsiva y progresiva",
+      "La modificación automática del petitorio",
+      "La caducidad de cualquier acción",
+      "La supresión del derecho de apelación"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 53"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes es un órgano de auxilio judicial?",
+    "options": [
+      "El demandante",
+      "El perito",
+      "El abogado defensor de una parte",
+      "El testigo de la audiencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 55"
+  },
+  {
+    "questionText": "¿A qué régimen se somete el Estado cuando interviene como parte en un proceso civil?",
+    "options": [
+      "A una jurisdicción exclusivamente administrativa",
+      "Al Poder Judicial, con los privilegios expresamente previstos en el Código",
+      "A un procedimiento privado sin control judicial",
+      "A la jurisdicción arbitral obligatoria en todo caso"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 59"
+  },
+  {
+    "questionText": "¿Cuándo existe litisconsorcio conforme al artículo 92?",
+    "options": [
+      "Cuando dos o más personas litigan conjuntamente como demandantes o demandados en los supuestos previstos",
+      "Cuando un juez conoce dos expedientes no relacionados",
+      "Cuando solo participa una persona en todo el proceso",
+      "Cuando se acumulan exclusivamente documentos"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 92"
+  },
+  {
+    "questionText": "¿Qué exige, por regla general, el litisconsorcio necesario para una decisión válida?",
+    "options": [
+      "Que ningún litisconsorte sea notificado",
+      "Que solo comparezca el abogado del demandante",
+      "Que comparezcan o sean emplazados todos los litisconsortes afectados uniformemente",
+      "Que la controversia pase de inmediato a arbitraje"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 93"
+  },
+  {
+    "questionText": "¿Cuándo puede adquirir cosa juzgada una resolución, según el artículo 123?",
+    "options": [
+      "Siempre que una parte manifieste desacuerdo",
+      "Cuando ya no procedan otros medios impugnatorios distintos de los resueltos, entre otros supuestos legales",
+      "Al presentarse la demanda, antes de cualquier resolución",
+      "Únicamente cuando exista una medida cautelar"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 123"
+  },
+  {
+    "questionText": "¿Cómo se numeran las resoluciones judiciales según el artículo 125?",
+    "options": [
+      "De manera correlativa en el día de su expedición",
+      "Con un número elegido libremente por cada parte",
+      "Solo al finalizar todas las instancias",
+      "Sin ningún orden identificable"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 125"
+  },
+  {
+    "questionText": "¿Qué diferencia establece el artículo 128 entre inadmisibilidad e improcedencia?",
+    "options": [
+      "Ambas se declaran únicamente por defectos de forma",
+      "La inadmisibilidad corresponde a defectos formales y la improcedencia a defectos de fondo",
+      "La inadmisibilidad requiere sentencia firme y la improcedencia no",
+      "No existe diferencia entre ambas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 128"
+  },
+  {
+    "questionText": "Según el artículo 191, ¿los medios de prueba no tipificados pueden servir a la finalidad probatoria?",
+    "options": [
+      "No, porque se excluyen automáticamente",
+      "Sí, los medios y sus sucedáneos pueden ser idóneos aunque no estén tipificados",
+      "Solo si los propone el Ministerio Público",
+      "Únicamente si reemplazan una sentencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 191"
+  },
+  {
+    "questionText": "¿En qué situación puede el juez ordenar excepcionalmente pruebas de oficio conforme al artículo 194?",
+    "options": [
+      "Cuando quiera sustituir a las partes en su carga probatoria",
+      "Cuando sean insuficientes los medios ofrecidos y se cumplan los límites y garantías del artículo",
+      "Cada vez que una parte no esté de acuerdo con la demanda",
+      "Solo después de ejecutar la sentencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 194"
+  },
+  {
+    "questionText": "¿Qué prueba carece de eficacia probatoria por la forma en que se obtuvo?",
+    "options": [
+      "Una prueba presentada por un perito designado legalmente",
+      "Una prueba documental ofrecida oportunamente",
+      "Una prueba obtenida mediante intimidación o soborno",
+      "Una declaración testimonial admitida por el juez"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 199"
+  },
+  {
+    "questionText": "¿Qué sucede si una parte no acredita los hechos que afirmó en su demanda o reconvención?",
+    "options": [
+      "Se consideran automáticamente verdaderos",
+      "Se declara fundada la demanda por presunción absoluta",
+      "No se tienen por verdaderos y su demanda se declara infundada",
+      "La apelación se concede sin una resolución previa"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 200"
+  },
+  {
+    "questionText": "¿Qué finalidad tienen los medios impugnatorios?",
+    "options": [
+      "Solicitar la anulación o revocación total o parcial de un acto procesal presuntamente viciado o erróneo",
+      "Sustituir todos los actos probatorios por un contrato",
+      "Iniciar obligatoriamente una causa penal",
+      "Modificar por sí mismos el contenido del Código"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 355"
+  },
+  {
+    "questionText": "¿Contra qué tipo de acto se formulan los remedios del artículo 356?",
+    "options": [
+      "Solo contra sentencias definitivas",
+      "Contra actos procesales no contenidos en resoluciones, dentro de los casos previstos",
+      "Exclusivamente contra resoluciones de casación",
+      "Solo contra el pago de costas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 356"
+  },
+  {
+    "questionText": "¿Ante qué órgano se interponen, como regla, los medios impugnatorios?",
+    "options": [
+      "Ante el órgano jurisdiccional que cometió el vicio o error, salvo disposición distinta",
+      "Ante cualquier entidad administrativa",
+      "Directamente ante el Registro Público",
+      "Solo ante una notaría"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 357"
+  },
+  {
+    "questionText": "¿Hasta qué momento puede el demandante modificar la demanda conforme al artículo 428?",
+    "options": [
+      "Hasta después de la sentencia firme",
+      "Solo durante la audiencia de pruebas",
+      "Antes de que la demanda sea notificada",
+      "Únicamente luego de formular apelación"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 428"
+  },
+  {
+    "questionText": "¿Qué hace el juez cuando califica positivamente una demanda?",
+    "options": [
+      "Ordena su archivo de inmediato",
+      "Da por ofrecidos los medios probatorios y corre traslado al demandado",
+      "Dicta sentencia sin emplazamiento",
+      "Rechaza toda prueba sin examinarla"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 430"
+  },
+  {
+    "questionText": "¿Cómo debe responder el demandado respecto de los hechos narrados en la demanda?",
+    "options": [
+      "De manera precisa, pronunciándose sobre cada uno de los hechos",
+      "Solo mediante una negativa genérica obligatoria",
+      "Sin referirse a los hechos de la demanda",
+      "Presentando únicamente un recurso de casación"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 442"
+  },
+  {
+    "questionText": "¿Cómo se relacionan los plazos para contestar la demanda y para reconvenir?",
+    "options": [
+      "El de reconvención empieza cuando termina el de contestación",
+      "El plazo es el mismo y simultáneo",
+      "La reconvención solo procede después de sentencia",
+      "La contestación carece de plazo"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 443"
+  },
+  {
+    "questionText": "¿Qué anexos deben acompañarse a la contestación de la demanda?",
+    "options": [
+      "Ningún anexo, aunque la ley lo exija",
+      "Únicamente una declaración oral del demandado",
+      "Los previstos para la demanda en el artículo 425, en lo que corresponda",
+      "Solo la constancia de pago de las costas"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 444"
+  },
+  {
+    "questionText": "¿Cuándo se propone la reconvención según el artículo 445?",
+    "options": [
+      "En un proceso nuevo e independiente de forma obligatoria",
+      "En el mismo escrito en que se contesta la demanda, con los requisitos aplicables",
+      "Solo después de concluir la ejecución",
+      "Únicamente ante el tribunal de casación"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 445"
+  },
+  {
+    "questionText": "¿Qué medios probatorios se admiten para sustentar o absolver excepciones, según el artículo 448?",
+    "options": [
+      "Cualquier prueba presentada oralmente en segunda instancia",
+      "Solo pericias judiciales de oficio",
+      "Los documentales ofrecidos en el escrito de excepción o absolución",
+      "Únicamente declaraciones de testigos"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 448"
+  },
+  {
+    "questionText": "En el proceso sumarísimo, ¿cuánto tiempo prevé el artículo 551 para subsanar una demanda inadmisible?",
+    "options": [
+      "Tres días",
+      "Diez días",
+      "Treinta días",
+      "Un año"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 551"
+  },
+  {
+    "questionText": "¿En qué momento se interponen las excepciones y defensas previas en el proceso sumarísimo?",
+    "options": [
+      "Antes de presentar la demanda",
+      "Al contestarse la demanda",
+      "Después de quedar firme la sentencia",
+      "Solo al ejecutar la resolución"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 552"
+  },
+  {
+    "questionText": "¿Qué plazo para contestar la demanda establece el artículo 554 en el proceso sumarísimo?",
+    "options": [
+      "Quince días",
+      "Diez días",
+      "Cinco días",
+      "Treinta días"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 554"
+  },
+  {
+    "questionText": "¿Cuál de las siguientes actuaciones no procede en el proceso sumarísimo, según el artículo 559?",
+    "options": [
+      "La contestación de la demanda",
+      "La actuación de pruebas admitidas",
+      "La audiencia única",
+      "La reconvención"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 559"
+  },
+  {
+    "questionText": "¿Quién elige entre el domicilio del demandante y el del demandado para la competencia territorial en alimentos?",
+    "options": [
+      "El demandante",
+      "El demandado",
+      "El secretario judicial",
+      "El perito designado"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 560"
+  },
+  {
+    "questionText": "¿Quién puede representar procesalmente al menor alimentista en ausencia de quien ejerce la tenencia, bajo el supuesto del artículo 561?",
+    "options": [
+      "Solo una persona jurídica extranjera",
+      "El abuelo, el tío o el hermano mayor que tiene la responsabilidad de cuidarlo",
+      "Cualquier testigo sin relación con el menor",
+      "Exclusivamente el demandado"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 561"
+  },
+  {
+    "questionText": "¿Qué límite señala el artículo 562 para exonerar al demandante del pago de tasas judiciales en alimentos?",
+    "options": [
+      "Hasta veinte Unidades de Referencia Procesal de la pensión demandada",
+      "Hasta mil Unidades de Referencia Procesal",
+      "Cualquier monto, sin límite",
+      "Solo cuando el demandado lo autorice"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 562"
+  },
+  {
+    "questionText": "¿Dentro de qué plazo general debe realizarse la audiencia de actuación y declaración judicial tras admitirse la solicitud no contenciosa?",
+    "options": [
+      "Dentro de quince días, salvo la excepción prevista en el Código",
+      "Siempre dentro de seis meses",
+      "Únicamente después de una apelación",
+      "No existe ningún plazo"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 754"
+  },
+  {
+    "questionText": "¿Qué actuación declara improcedente el artículo 761 en los procesos no contenciosos?",
+    "options": [
+      "La presentación de una solicitud",
+      "La actuación de los anexos de la solicitud",
+      "La reconvención",
+      "La emisión de una resolución final"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 761"
   }
 ]
