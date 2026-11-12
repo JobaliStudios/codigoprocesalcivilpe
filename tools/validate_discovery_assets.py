@@ -6,6 +6,7 @@ No realiza consultas de red ni edita la ficha de Google Play.
 from __future__ import annotations
 
 import csv
+from datetime import date
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -116,21 +117,52 @@ def validate_register(csv_text: str) -> list[str]:
                 "responsable_revision", "decision_juridica", "pr_correccion"}
     if not rows or not required.issubset(set(rows[0])):
         return ["Registro legal vacío o encabezados insuficientes"]
+
     errors: list[str] = []
     seen: set[str] = set()
+    stages = {"PENDIENTE", "EVIDENCIA_OBTENIDA", "REVISADO",
+              "DECISION_APROBADA", "IMPLEMENTADO"}
     for row in rows:
         identifier = row["id"]
         if not identifier or identifier in seen:
             errors.append("ID de alerta ausente o duplicado")
         seen.add(identifier)
-        if row["estado"] != "PENDIENTE":
-            errors.append(f"{identifier}: cambiar estado requiere acta de evidencia aprobada")
+        status = row["estado"]
+        if status not in stages:
+            errors.append(f"{identifier}: estado jurídico desconocido: {status}")
         if not row["fuente_primaria"].startswith("https://"):
             errors.append(f"{identifier}: falta fuente primaria HTTPS")
         if not row["hallazgo_pendiente"]:
             errors.append(f"{identifier}: falta pregunta verificable")
-        if row["decision_juridica"] or row["pr_correccion"]:
-            errors.append(f"{identifier}: no declarar decisiones ni PRs sin revisión")
+
+        for field in ("fecha_publicacion_norma", "fecha_ultima_consulta_nueva",
+                      "fecha_vigencia_efectiva"):
+            value = row[field]
+            if value:
+                try:
+                    date.fromisoformat(value)
+                except ValueError:
+                    errors.append(f"{identifier}: fecha no ISO en {field}")
+
+        # Las alertas iniciales pueden permanecer pendientes sin simular una revisión.
+        if status == "PENDIENTE":
+            if row["decision_juridica"] or row["pr_correccion"]:
+                errors.append(f"{identifier}: no declarar decisión o PR en estado PENDIENTE")
+            continue
+
+        # Cualquier avance exige consulta fechada y un responsable identificable.
+        if not row["fecha_ultima_consulta_nueva"] or not row["responsable_revision"]:
+            errors.append(f"{identifier}: avance sin consulta fechada y responsable")
+        if status in ("REVISADO", "DECISION_APROBADA", "IMPLEMENTADO"):
+            if not row["decision_juridica"]:
+                errors.append(f"{identifier}: falta evaluación jurídica documentada")
+        if status in ("DECISION_APROBADA", "IMPLEMENTADO"):
+            if not re.search(r"https://|#\\d+", row["decision_juridica"]):
+                errors.append(f"{identifier}: falta referencia rastreable de aprobación")
+        if status == "IMPLEMENTADO" and not row["pr_correccion"].startswith(
+                "https://github.com/"):
+            errors.append(f"{identifier}: falta PR documentado de la implementación")
+
     for critical in ("LEG-ADECUACION-32377", "CPC-551-DIF", "LEG-VENTANA-2025-2026"):
         if critical not in seen:
             errors.append(f"Falta alerta jurídica crítica: {critical}")
