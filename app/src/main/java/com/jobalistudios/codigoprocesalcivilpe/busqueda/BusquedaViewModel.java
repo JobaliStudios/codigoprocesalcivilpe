@@ -340,7 +340,9 @@ public class BusquedaViewModel extends AndroidViewModel {
             pendingSearch = null;
         }
         if (ownedExecutor != null) {
-            ownedExecutor.shutdownNow();
+            // No interrumpir la lectura de articles.json: el repositorio comparte su
+            // caché con el lector y una interrupción podría activar su ruta de respaldo.
+            ownedExecutor.shutdown();
         }
         super.onCleared();
     }
