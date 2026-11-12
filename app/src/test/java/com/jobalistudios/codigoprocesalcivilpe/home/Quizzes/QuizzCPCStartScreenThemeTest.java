@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.card.MaterialCardView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 
+import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -17,6 +19,14 @@ import static org.robolectric.Shadows.shadowOf;
 @RunWith(RobolectricTestRunner.class)
 @Config(qualifiers = "night")
 public class QuizzCPCStartScreenThemeTest {
+    @Before public void clearOldDraft() {
+        new QuizDraftStore(androidx.test.core.app.ApplicationProvider.getApplicationContext()).clear();
+    }
+
+    @After public void clearDraftAfterTest() {
+        new QuizDraftStore(androidx.test.core.app.ApplicationProvider.getApplicationContext()).clear();
+    }
+
 
     @Test
     public void practiceCardsKeepNightPaletteAndQuickReviewStartsTenQuestionMode() {
