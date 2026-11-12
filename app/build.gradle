@@ -37,8 +37,8 @@ android {
         applicationId 'com.jobalistudios.codigoprocesalcivilpe'
         minSdk 30
         targetSdk 36
-        versionCode 12
-        versionName "1.07"
+        versionCode 13
+        versionName "1.08"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
