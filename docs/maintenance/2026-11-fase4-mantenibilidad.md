@@ -1,6 +1,6 @@
 # Código Procesal Civil PE — Fase 4: mantenibilidad y calidad técnica
 
-**Inicio:** noviembre de 2026 · **Estado:** en ejecución · **Base:** `main` tras la integración de Fase 2 / candidata 1.08 (`versionCode=13`).
+**Inicio:** noviembre de 2026 · **Estado:** misiones 1–4 fusionadas; cierre técnico de Misión 5 en revisión · **Base:** `main` tras la integración de Fase 2 / candidata 1.08 (`versionCode=13`).
 
 ## Objetivo
 Facilitar cambios futuros, reducir el riesgo de regresiones y mejorar la separación de responsabilidades sin cambiar la experiencia de los usuarios. La Fase 4 **no es una actualización Android** ni autoriza publicar o sustituir la versión de Google Play.
@@ -137,3 +137,9 @@ Facilitar cambios futuros, reducir el riesgo de regresiones y mejorar la separac
 - [ ] PR revisado y fusionado a `main`.
 - [ ] En teléfono, guardar una nota y un resaltado, cerrar/reabrir la aplicación, editar y borrar uno; verificar que favoritos, historial y búsqueda permanezcan funcionales.
 - [ ] No publicar una actualización 1.08 sin revisión del lanzamiento independiente.
+
+## Misión 5 — Auditoría final y cierre propuesto
+
+El detalle completo, las evidencias automáticas verificables, el mapa de arquitectura, los riesgos que permanecen y la matriz de pruebas físicas se encuentran en [2026-11-fase4-cierre-tecnico.md](2026-11-fase4-cierre-tecnico.md).
+
+**Estado documental:** PRs #61, #62, #63 y #64 fusionados con CI verde. El cierre de la Misión 5 queda condicionado al resultado de CI de su PR, fusión y revisión física correspondiente. **No se concede autorización para publicar la 1.08.**
