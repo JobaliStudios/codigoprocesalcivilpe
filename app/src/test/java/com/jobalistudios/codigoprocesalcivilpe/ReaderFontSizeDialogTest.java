@@ -24,6 +24,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 public class ReaderFontSizeDialogTest {
@@ -66,6 +67,7 @@ public class ReaderFontSizeDialogTest {
                 value.getText().toString());
 
         dialog.getButton(DialogInterface.BUTTON_NEUTRAL).performClick();
+        ShadowLooper.idleMainLooper(); // El callback de los botones se despacha por Handler.
         assertEquals(ReadingPreferenceManager.DEFAULT_FONT_SCALE,
                 ReadingPreferenceManager.getContentFontScale(activity), 0.001f);
     }
