@@ -3,6 +3,9 @@ package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
 
 import android.content.Intent;
+import android.content.ActivityNotFoundException;
+import android.net.Uri;
+import android.widget.Toast;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +30,8 @@ public class QuizzCPCResult extends AppBaseActivity {
     private int total;
     private long elapsedMillis;
     private QuizSessionConfig config;
+    private static final String STATE_REVIEW_VISIBLE = "review_invite_visible";
+    private boolean reviewVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,7 @@ public class QuizzCPCResult extends AppBaseActivity {
         configureReviewAction(incorrectAnswers);
         configureDetailedReviewAction(incorrectAnswers);
         configureFocusSectionAction(incorrectAnswers);
+        configureOptionalReviewAction(savedInstanceState, stats != null);
 
         circularScore.setMax(100);
         circularScore.setProgress(percentage);
@@ -97,6 +103,56 @@ public class QuizzCPCResult extends AppBaseActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.quiz_cpc_share_text, score, total));
             startActivity(Intent.createChooser(shareIntent, getString(R.string.quiz_cpc_share_chooser_title)));
         });
+    }
+
+    private void configureOptionalReviewAction(Bundle savedState, boolean completedSession) {
+        MaterialCardView card = findViewById(R.id.cardQuizRatingInvite);
+        reviewVisible = savedState != null
+                ? savedState.getBoolean(STATE_REVIEW_VISIBLE, false)
+                : completedSession && new QuizReviewPromptPolicy(this)
+                        .claimIfEligible(System.currentTimeMillis());
+        card.setVisibility(reviewVisible ? View.VISIBLE : View.GONE);
+        if (!reviewVisible) {
+            return;
+        }
+        findViewById(R.id.btnQuizRatePlay).setOnClickListener(v -> {
+            hideReviewInvite();
+            openPlayListing();
+        });
+        findViewById(R.id.btnQuizRateLater).setOnClickListener(v -> hideReviewInvite());
+        findViewById(R.id.btnQuizRateNever).setOnClickListener(v -> {
+            new QuizReviewPromptPolicy(this).neverAskAgain();
+            hideReviewInvite();
+        });
+    }
+
+    private void hideReviewInvite() {
+        reviewVisible = false;
+        findViewById(R.id.cardQuizRatingInvite).setVisibility(View.GONE);
+    }
+
+    private void openPlayListing() {
+        String packageName = getPackageName();
+        Intent market = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("market://details?id=" + packageName));
+        market.setPackage("com.android.vending");
+        try {
+            startActivity(market);
+        } catch (ActivityNotFoundException missingStore) {
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id="
+                                + packageName)));
+            } catch (ActivityNotFoundException missingBrowser) {
+                Toast.makeText(this, R.string.quiz_review_no_store, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putBoolean(STATE_REVIEW_VISIBLE, reviewVisible);
     }
 
     private void configureFocusSectionAction(ArrayList<QuizAnswerResult> incorrectAnswers) {
