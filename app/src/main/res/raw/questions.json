@@ -313,5 +313,357 @@
     ],
     "correctAnswerIndex": 1,
     "relatedArticle": "Artículo 42"
+  },
+  {
+    "questionText": "¿Qué órganos ejercen la justicia civil según el artículo 49 del CPC?",
+    "options": [
+      "Solo los Juzgados Civiles",
+      "Jueces de Paz, Paz Letrados, Civiles, Cortes Superiores y Corte Suprema",
+      "Únicamente el Ministerio Público",
+      "Solo los tribunales arbitrales"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 49"
+  },
+  {
+    "questionText": "¿Cuál es un deber del juez durante el proceso civil?",
+    "options": [
+      "Impedir la paralización del proceso y procurar la economía procesal",
+      "Aceptar cualquier petición sin examinarla",
+      "Delegar siempre la emisión de sentencias",
+      "Impedir que el demandado ejerza su defensa"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 50"
+  },
+  {
+    "questionText": "¿Qué puede ordenar el juez frente a expresiones ofensivas en una actuación judicial?",
+    "options": [
+      "Que se supriman las palabras ofensivas o vejatorias",
+      "La conclusión automática del proceso",
+      "La sustitución de las pruebas por una multa",
+      "La suspensión definitiva del derecho de defensa"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 52"
+  },
+  {
+    "questionText": "¿Quiénes pueden ser parte material en un proceso civil?",
+    "options": [
+      "Solo las personas naturales",
+      "Las personas naturales o jurídicas y las formas de patrimonio autónomo previstas",
+      "Únicamente los abogados habilitados",
+      "Solo los órganos del Poder Judicial"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 57"
+  },
+  {
+    "questionText": "¿Cómo se denomina la acumulación de varias pretensiones en un proceso?",
+    "options": [
+      "Acumulación subjetiva",
+      "Acumulación objetiva",
+      "Litisconsorcio pasivo necesario",
+      "Reconvención obligatoria"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 83"
+  },
+  {
+    "questionText": "¿Cómo deben escribirse, por regla del artículo 119, las fechas y cantidades en las actuaciones judiciales?",
+    "options": [
+      "Solo mediante cifras",
+      "Con letras",
+      "Con números romanos",
+      "Con abreviaturas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 119"
+  },
+  {
+    "questionText": "¿Cuáles son los tipos de resoluciones señalados en el artículo 120?",
+    "options": [
+      "Actas, oficios y exhortos",
+      "Providencias, contratos y mandatos",
+      "Decretos, autos y sentencias",
+      "Demandas, contestaciones y alegatos"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 120"
+  },
+  {
+    "questionText": "¿Para qué se utilizan los decretos, según el artículo 121?",
+    "options": [
+      "Para impulsar actos procesales de simple trámite",
+      "Para resolver definitivamente el fondo de la controversia",
+      "Para declarar una condena penal",
+      "Para reemplazar la demanda"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 121"
+  },
+  {
+    "questionText": "¿Cuál es la finalidad de los medios probatorios en el proceso civil?",
+    "options": [
+      "Acreditar hechos, producir certeza sobre puntos controvertidos y fundamentar decisiones",
+      "Sustituir la sentencia del juez",
+      "Determinar automáticamente quién paga los costos",
+      "Impedir que las partes contradigan los hechos"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 188"
+  },
+  {
+    "questionText": "¿Cuándo deben ofrecerse, por regla general, los medios probatorios?",
+    "options": [
+      "Solo después de la sentencia",
+      "En los actos postulatorios, salvo disposición distinta",
+      "Exclusivamente durante la apelación",
+      "Únicamente al ejecutar la sentencia"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 189"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes es un medio probatorio típico reconocido por el CPC?",
+    "options": [
+      "Una opinión publicada en una red social",
+      "Una conjetura personal sin sustento",
+      "La pericia",
+      "Un comentario anónimo sin verificar"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 192"
+  },
+  {
+    "questionText": "¿Qué caracteriza a los medios probatorios atípicos del artículo 193?",
+    "options": [
+      "Son auxilios técnicos o científicos no previstos entre los medios típicos",
+      "Son únicamente documentos notariales",
+      "Son pruebas prohibidas en todos los casos",
+      "Son siempre declaraciones de testigos"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 193"
+  },
+  {
+    "questionText": "Salvo disposición legal diferente, ¿a quién corresponde la carga de probar?",
+    "options": [
+      "Siempre al juez",
+      "Solo al demandado, aunque no alegue hechos nuevos",
+      "A quien afirma los hechos de su pretensión o los contradice alegando nuevos hechos",
+      "Al secretario judicial"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 196"
+  },
+  {
+    "questionText": "¿Cómo valora el juez los medios probatorios según el artículo 197?",
+    "options": [
+      "Por separado y sin motivación",
+      "En forma conjunta, usando una apreciación razonada",
+      "Únicamente por el número de documentos presentados",
+      "Solo en función de la declaración del demandante"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 197"
+  },
+  {
+    "questionText": "¿Cuál es el objeto del recurso de apelación?",
+    "options": [
+      "Que el órgano superior examine una resolución que causa agravio para anularla o revocarla total o parcialmente",
+      "Que el mismo juez dicte una norma nueva",
+      "Que se reemplacen automáticamente todos los medios probatorios",
+      "Que una parte obtenga sentencia favorable sin examen judicial"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 364"
+  },
+  {
+    "questionText": "¿Qué comprenden las costas procesales definidas en el artículo 410?",
+    "options": [
+      "Solo los honorarios del abogado de la parte vencedora",
+      "Los daños morales reclamados en la demanda",
+      "Tasas judiciales, honorarios de órganos de auxilio judicial y demás gastos judiciales",
+      "Únicamente las multas impuestas a los abogados"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 410"
+  },
+  {
+    "questionText": "¿Cómo debe formularse el petitorio en una demanda civil?",
+    "options": [
+      "De forma genérica y sin precisar lo solicitado",
+      "Con determinación clara y concreta de lo que se pide",
+      "Solo oralmente ante el secretario",
+      "Sin relación con los hechos expuestos"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 424"
+  },
+  {
+    "questionText": "¿Qué anexo se exige cuando la materia del proceso requiere conciliación extrajudicial previa?",
+    "options": [
+      "Una sentencia penal firme",
+      "Un informe de auditoría financiera",
+      "La copia certificada del acta de conciliación extrajudicial",
+      "Un contrato de arbitraje sin firmas"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 425"
+  },
+  {
+    "questionText": "¿Cuál es una causal de inadmisibilidad de la demanda?",
+    "options": [
+      "No acompañar los anexos exigidos por ley",
+      "Que la pretensión sea jurídicamente imposible",
+      "Que el demandante carezca manifiestamente de interés para obrar",
+      "Que exista caducidad del derecho"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 426"
+  },
+  {
+    "questionText": "¿Cuál es una causal de improcedencia de la demanda?",
+    "options": [
+      "Olvidar un anexo que puede subsanarse",
+      "Que no exista conexión lógica entre los hechos y el petitorio",
+      "Omitir la copia del documento de identidad",
+      "No precisar un domicilio procesal subsanable"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 427"
+  },
+  {
+    "questionText": "¿Qué cuantía patrimonial contempla el artículo 475 para el proceso de conocimiento?",
+    "options": [
+      "Hasta cien Unidades de Referencia Procesal",
+      "Más de cien y hasta mil Unidades de Referencia Procesal",
+      "Más de mil Unidades de Referencia Procesal",
+      "Exactamente diez Unidades de Referencia Procesal"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 475"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes asuntos se tramita en proceso abreviado según el artículo 486?",
+    "options": [
+      "El trámite general de alimentos",
+      "El retracto",
+      "Toda medida cautelar",
+      "La inscripción no contenciosa de partidas"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 486"
+  },
+  {
+    "questionText": "¿Qué pretensión se tramita por proceso sumarísimo según el artículo 546?",
+    "options": [
+      "Alimentos",
+      "Recurso de casación",
+      "Reconocimiento de laudo extranjero",
+      "Nulidad de sentencia por fraude como regla general"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 546"
+  },
+  {
+    "questionText": "¿Por qué vía se tramita la restitución de un predio conforme al artículo 585?",
+    "options": [
+      "Por el proceso de conocimiento en todos los casos",
+      "Con arreglo al proceso sumarísimo y las precisiones del subcapítulo de desalojo",
+      "Por casación directa",
+      "Únicamente por proceso no contencioso"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 585"
+  },
+  {
+    "questionText": "¿Cuál es la finalidad de una medida cautelar según el artículo 608?",
+    "options": [
+      "Sustituir el contenido de la sentencia definitiva",
+      "Imponer sanciones penales a las partes",
+      "Garantizar el cumplimiento de la decisión definitiva",
+      "Declarar definitivamente la propiedad del bien"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 608"
+  },
+  {
+    "questionText": "¿Qué debe ofrecer quien solicita una medida cautelar conforme al artículo 610?",
+    "options": [
+      "Contracautela",
+      "Una sentencia de casación",
+      "La conformidad escrita del demandado en todos los casos",
+      "Un laudo arbitral obligatorio"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 610"
+  },
+  {
+    "questionText": "¿Cuál de estos documentos es un título ejecutivo mencionado en el artículo 688?",
+    "options": [
+      "Cualquier conversación informal",
+      "Un laudo arbitral firme",
+      "Una carta sin obligaciones exigibles",
+      "Una propuesta de transacción no aceptada"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 688"
+  },
+  {
+    "questionText": "¿Qué asunto se tramita mediante proceso no contencioso según el artículo 749?",
+    "options": [
+      "Una apelación contra sentencia",
+      "Una demanda de retracto",
+      "Un inventario",
+      "Una contienda de competencia entre jueces"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 749"
+  },
+  {
+    "questionText": "¿A qué requisitos remite el artículo 751 para la solicitud en un proceso no contencioso?",
+    "options": [
+      "Solo a los requisitos de apelación",
+      "A los requisitos y anexos de los artículos 424 y 425",
+      "Exclusivamente a normas penales",
+      "A la autorización previa del Ministerio Público en todos los casos"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 751"
+  },
+  {
+    "questionText": "¿En qué plazo puede formular contradicción el emplazado en un proceso no contencioso?",
+    "options": [
+      "Dentro de cinco días desde la notificación de la resolución admisoria",
+      "Dentro de treinta días desde la sentencia",
+      "Solo en el acto de remate judicial",
+      "Después de que quede consentida la resolución final"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 753"
+  },
+  {
+    "questionText": "¿Cuándo procede notificar al Ministerio Público en la sucesión intestada, según el artículo 759?",
+    "options": [
+      "En todas las sucesiones intestadas sin excepción",
+      "Nunca, incluso si existen herederos menores",
+      "Si entre los herederos existen menores de edad o un Consejo de Familia constituido previamente",
+      "Solo cuando todos los herederos sean mayores de edad"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 759"
+  },
+  {
+    "questionText": "¿Qué dispone el artículo 834 si pasan quince días desde el último aviso sin apersonamiento ni contradicción?",
+    "options": [
+      "Se debe convocar obligatoriamente a audiencia en todos los casos",
+      "El juez resuelve sin citar a audiencia, atendiendo a la solicitud del presunto heredero",
+      "Se archiva automáticamente la sucesión intestada",
+      "Se remite necesariamente el expediente a la Corte Suprema"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 834"
   }
 ]
