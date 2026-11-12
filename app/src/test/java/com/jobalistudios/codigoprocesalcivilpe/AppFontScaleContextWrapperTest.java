@@ -15,7 +15,7 @@ import org.robolectric.RobolectricTestRunner;
 public class AppFontScaleContextWrapperTest {
 
     @Test
-    public void wrap_normalizesOnlyFontScaleForEveryDeviceSetting() {
+    public void wrap_preservesSystemFontScaleAndDensity() {
         Context base = ApplicationProvider.getApplicationContext();
         int densityDpi = base.getResources().getConfiguration().densityDpi;
 
@@ -26,7 +26,7 @@ public class AppFontScaleContextWrapperTest {
 
             Context wrapped = AppFontScaleContextWrapper.wrap(deviceContext);
 
-            assertEquals(1f, wrapped.getResources().getConfiguration().fontScale, 0.001f);
+            assertEquals(deviceScale, wrapped.getResources().getConfiguration().fontScale, 0.001f);
             assertEquals(densityDpi, wrapped.getResources().getConfiguration().densityDpi);
         }
     }
