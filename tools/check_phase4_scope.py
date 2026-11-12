@@ -79,14 +79,6 @@ def main() -> int:
             print(f"ERROR: se perdió el contrato {label}", file=sys.stderr)
             return 1
 
-    core_paths = {
-        "app/src/main/assets/articles.json",
-        "app/build.gradle",
-        "app/src/main/AndroidManifest.xml",
-        "app/src/main/res/values/strings.xml",
-        "app/src/main/java/com/jobalistudios/codigoprocesalcivilpe/anuncios",
-        "app/src/main/java/com/jobalistudios/codigoprocesalcivilpe/privacidad",
-    }
     print(f"Baseline Fase 4: {BASELINE}")
     print(f"HEAD validado: {head}")
     print(f"Archivos modificados desde el baseline: {len(paths)}")
