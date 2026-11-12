@@ -68,6 +68,31 @@ class DiscoveryAssetValidationTest(unittest.TestCase):
         writer.writerows(rows)
         self.assertTrue(validate_register(writer_buffer.getvalue()))
 
+    def test_legal_register_can_progress_with_dated_evidence_and_explicit_approval(self):
+        rows = list(csv.DictReader(io.StringIO(self.register)))
+        first = rows[0]
+        first["fecha_ultima_consulta_nueva"] = "2026-11-12"
+        first["responsable_revision"] = "Revisor jurídico"
+        first["estado"] = "EVIDENCIA_OBTENIDA"
+
+        def validate_current():
+            buffer = io.StringIO()
+            writer = csv.DictWriter(buffer, fieldnames=list(first))
+            writer.writeheader()
+            writer.writerows(rows)
+            return validate_register(buffer.getvalue())
+
+        self.assertEqual([], validate_current())
+        first["estado"] = "REVISADO"
+        first["decision_juridica"] = "Se comparó fuente oficial; se requiere autorización"
+        self.assertEqual([], validate_current())
+        first["estado"] = "DECISION_APROBADA"
+        first["decision_juridica"] = "APROBADO - acta https://example.org/acta"
+        self.assertEqual([], validate_current())
+        first["estado"] = "IMPLEMENTADO"
+        first["pr_correccion"] = "https://github.com/JobaliStudios/codigoprocesalcivilpe/pull/999"
+        self.assertEqual([], validate_current())
+
     def test_empty_register_is_rejected(self):
         self.assertTrue(validate_register("id,articulos\n"))
 
