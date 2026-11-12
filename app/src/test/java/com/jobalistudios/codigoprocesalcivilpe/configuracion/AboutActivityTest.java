@@ -34,6 +34,17 @@ public class AboutActivityTest {
     }
 
     @Test
+    public void exposesSourceCutoffAndExplicitlyUncertifiedCurrency() {
+        AboutActivity activity = Robolectric.buildActivity(AboutActivity.class)
+                .setup().get();
+        TextView scope = activity.findViewById(R.id.aboutLegalScope);
+        String notice = scope.getText().toString();
+        assertTrue(notice.contains("7 de junio de 2025"));
+        assertTrue(notice.contains("no certifica la vigencia íntegra"));
+        assertTrue(notice.contains("fuentes oficiales"));
+    }
+
+    @Test
     public void officialSourceAndPrivacyButtonsOpenCorrectWebsites() {
         AboutActivity activity = Robolectric.buildActivity(AboutActivity.class)
                 .setup().get();
@@ -46,6 +57,12 @@ public class AboutActivityTest {
         activity.findViewById(R.id.buttonSpij).performClick();
         Intent second = shadowOf(activity).getNextStartedActivity();
         assertTrue(second.getDataString().startsWith("https://spij.minjus.gob.pe/"));
+
+        activity.findViewById(R.id.buttonUpdatedNorms).performClick();
+        Intent catalog = shadowOf(activity).getNextStartedActivity();
+        assertEquals(Intent.ACTION_VIEW, catalog.getAction());
+        assertEquals("https://diariooficial.elperuano.pe/normas/normasactualizadas",
+                catalog.getDataString());
 
         activity.findViewById(R.id.buttonPrivacyPolicy).performClick();
         Intent third = shadowOf(activity).getNextStartedActivity();

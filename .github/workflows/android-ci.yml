@@ -152,6 +152,11 @@ jobs:
           python3 tools/validate_quiz_bank.py
           python3 -m unittest discover -s tools -p 'test_validate_quiz_bank.py' -v
 
+      - name: Validar fichas de descubrimiento y continuidad jurídica
+        run: |
+          python3 tools/validate_discovery_assets.py
+          python3 -m unittest discover -s tools -p 'test_validate_discovery_assets.py' -v
+
       - name: Configurar Java 17
         uses: actions/setup-java@v5
         with:

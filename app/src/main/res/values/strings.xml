@@ -727,6 +727,9 @@
     <string name="about_sources_explanation">Antes de usar el contenido en decisiones o trámites jurídicos, verifica la vigencia y la redacción de cada disposición en fuentes oficiales. Los textos incluidos solo cambian al instalar una nueva versión de la aplicación.</string>
     <string name="about_source_el_peruano">Texto Único Ordenado del CPC — El Peruano</string>
     <string name="about_source_spij">SPIJ — Ministerio de Justicia</string>
+    <string name="about_legal_scope_title">Alcance de la revisión jurídica</string>
+    <string name="about_legal_scope_body">Fuente oficial de referencia: TUO del Código Procesal Civil publicado por El Peruano, edición actualizada al 7 de junio de 2025. La auditoría documental posterior revisó el corpus con salvedades y no certifica la vigencia íntegra de los artículos a noviembre de 2026. Consulta las fuentes oficiales para comprobar modificaciones posteriores antes de tomar decisiones jurídicas.</string>
+    <string name="about_source_updated_norms">Consultar normas legales actualizadas — El Peruano</string>
     <string name="about_privacy_title">Privacidad</string>
     <string name="about_privacy_explanation">Las notas y los datos de lectura se guardan en el dispositivo. Los servicios de anuncios pueden tratar datos conforme a la política de privacidad.</string>
     <string name="about_privacy_open">Leer política de privacidad</string>

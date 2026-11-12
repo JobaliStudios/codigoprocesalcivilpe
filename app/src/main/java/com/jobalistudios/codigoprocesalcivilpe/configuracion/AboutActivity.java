@@ -18,6 +18,8 @@ public class AboutActivity extends AppBaseActivity {
     private static final String OFFICIAL_CPC_URL =
             "https://diariooficial.elperuano.pe/Normas/obtenerDocumento?idNorma=120007";
     private static final String SPIJ_URL = "https://spij.minjus.gob.pe/";
+    private static final String UPDATED_NORMS_URL =
+            "https://diariooficial.elperuano.pe/normas/normasactualizadas";
     private static final String PRIVACY_URL = "https://jobalistudios.github.io/privacy-policy/";
 
     private ActivityAboutBinding binding;
@@ -33,6 +35,7 @@ public class AboutActivity extends AppBaseActivity {
                 installedVersion()));
         binding.buttonElPeruano.setOnClickListener(v -> openUrl(OFFICIAL_CPC_URL));
         binding.buttonSpij.setOnClickListener(v -> openUrl(SPIJ_URL));
+        binding.buttonUpdatedNorms.setOnClickListener(v -> openUrl(UPDATED_NORMS_URL));
         binding.buttonPrivacyPolicy.setOnClickListener(v -> openUrl(PRIVACY_URL));
     }
 
