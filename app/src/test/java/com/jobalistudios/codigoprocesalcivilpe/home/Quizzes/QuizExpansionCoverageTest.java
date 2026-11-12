@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Primera y segunda ampliaciones: cobertura legal en las seis secciones,
+ * Tres ampliaciones: cobertura legal en las seis secciones,
  * sin alterar las IDs de las preguntas de repaso ni necesitar una conexión.
  */
 @RunWith(RobolectricTestRunner.class)
@@ -57,6 +57,27 @@ public class QuizExpansionCoverageTest {
     }
 
     @Test
+    public void thirdExpansionReaches120QuestionsAnd119DistinctArticles() {
+        List<QuestionModel> questions = QuestionBank.getQuestions(context);
+        assertEquals("La tercera ampliación debe alcanzar la meta mínima", 120, questions.size());
+
+        Set<String> numbers = new HashSet<>();
+        for (QuestionModel question : questions) {
+            String number = RelatedArticleNumberExtractor.extract(question.getRelatedArticle());
+            assertNotNull(number);
+            numbers.add(number);
+        }
+        assertEquals("Se esperan 119 artículos distintos", 119, numbers.size());
+        for (String expected : new String[]{
+                "1", "2", "7", "54", "64", "70", "94", "129", "142",
+                "155", "202", "358", "420", "431", "447", "458", "468",
+                "481", "548", "590", "612", "689", "760", "762", "763"}) {
+            assertTrue("Falta pregunta nueva para el artículo " + expected,
+                    numbers.contains(expected));
+        }
+    }
+
+    @Test
     public void everyLegalSectionHasSelectableStudyQuestionsAfterExpansion() {
         List<QuestionModel> questions = QuestionBank.getQuestions(context);
         List<QuizSection> sections = QuizSectionCatalog.getAvailableSections(context, questions);
@@ -74,6 +95,35 @@ public class QuizExpansionCoverageTest {
                         QuizSectionCatalog.resolveSectionId(context, chosen));
             }
         }
+    }
+
+    @Test
+    public void thirdBatchQuestionKeepsItsReviewErrorIdentityAfterReopening() {
+        context.getSharedPreferences("quiz_error_review", Context.MODE_PRIVATE)
+                .edit().clear().commit();
+
+        List<QuestionModel> questions = QuestionBank.getQuestions(context);
+        assertEquals(120, questions.size());
+        QuestionModel thirdBatchQuestion = questions.get(95);
+        assertEquals("96.ª pregunta del banco: artículo 1",
+                "1", RelatedArticleNumberExtractor.extract(thirdBatchQuestion.getRelatedArticle()));
+
+        QuizErrorStore initial = new QuizErrorStore(context);
+        initial.recordIncorrect(thirdBatchQuestion);
+        QuizErrorStore reopened = new QuizErrorStore(context);
+        assertTrue(reopened.contains(thirdBatchQuestion));
+
+        QuizSelection errors = QuizSelectorFactory.create(context)
+                .select(QuizSessionConfig.previousErrors());
+        assertTrue(errors.isAvailable());
+        assertTrue(errors.getQuestions().stream().anyMatch(q ->
+                QuizQuestionIdentity.forQuestion(q)
+                        .equals(QuizQuestionIdentity.forQuestion(thirdBatchQuestion))));
+
+        reopened.resolve(thirdBatchQuestion);
+        assertFalse(new QuizErrorStore(context).contains(thirdBatchQuestion));
+        context.getSharedPreferences("quiz_error_review", Context.MODE_PRIVATE)
+                .edit().clear().commit();
     }
 
     @Test
