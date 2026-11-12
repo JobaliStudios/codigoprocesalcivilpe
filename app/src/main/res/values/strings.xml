@@ -962,4 +962,17 @@
     <!-- Fase 5 / Misión 3, Lote 3: tamaño de práctica controlado por el estudiante -->
     <string name="quiz_cpc_count_label">¿Cuántas preguntas quieres practicar?</string>
     <string name="quiz_cpc_count_accessibility">Practicar %1$d preguntas por sesión</string>
+    <!-- Fase 5 / Misión 3, Lote 4: borrador local del cuestionario -->
+    <string name="quiz_draft_exit_title">¿Salir del cuestionario?</string>
+    <string name="quiz_draft_exit_message">Puedes guardar esta sesión para continuarla después. Si la descartas, perderás el progreso de esta ronda, pero conservarás los errores pendientes de repaso.</string>
+    <string name="quiz_draft_save_exit">Guardar y salir</string>
+    <string name="quiz_draft_discard">Descartar sesión</string>
+    <string name="quiz_draft_continue">Seguir estudiando</string>
+    <string name="quiz_draft_resume_title">Tienes un cuestionario pendiente</string>
+    <string name="quiz_draft_resume_action">Retomar cuestionario</string>
+    <string name="quiz_draft_resume_summary">%1$d de %2$d preguntas respondidas</string>
+    <string name="quiz_draft_new_title">¿Comenzar otro cuestionario?</string>
+    <string name="quiz_draft_new_message">Tienes una sesión guardada. Al comenzar otra se descartará ese progreso.</string>
+    <string name="quiz_draft_new_confirm">Empezar otro</string>
+    <string name="quiz_draft_keep_saved">Conservar sesión</string>
 </resources>
