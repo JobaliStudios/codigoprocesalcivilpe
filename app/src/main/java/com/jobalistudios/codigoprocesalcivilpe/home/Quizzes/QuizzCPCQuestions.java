@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.ViewModelProvider;
@@ -140,8 +141,12 @@ public class QuizzCPCQuestions extends AppBaseActivity {
                 .setTitle(R.string.quiz_draft_exit_title)
                 .setMessage(R.string.quiz_draft_exit_message)
                 .setPositiveButton(R.string.quiz_draft_save_exit, (dialog, which) -> {
-                    saveDraft();
-                    finish();
+                    if (saveDraft()) {
+                        finish();
+                    } else {
+                        Toast.makeText(this, R.string.quiz_draft_save_error,
+                                Toast.LENGTH_LONG).show();
+                    }
                 })
                 .setNeutralButton(R.string.quiz_draft_discard, (dialog, which) -> {
                     draftStore.clear();
@@ -151,11 +156,11 @@ public class QuizzCPCQuestions extends AppBaseActivity {
                 .show();
     }
 
-    private void saveDraft() {
+    private boolean saveDraft() {
         if (viewModel.getConfig() == null || viewModel.getTotalQuestions() < 1) {
-            return;
+            return false;
         }
-        draftStore.save(viewModel.getConfig(), viewModel.getSessionQuestions(),
+        return draftStore.save(viewModel.getConfig(), viewModel.getSessionQuestions(),
                 viewModel.getSelectedAnswers(), viewModel.getCurrentQuestionIndex(),
                 Math.max(0L, System.currentTimeMillis() - startTimeMillis));
     }
