@@ -157,7 +157,7 @@ def validate_register(csv_text: str) -> list[str]:
             if not row["decision_juridica"]:
                 errors.append(f"{identifier}: falta evaluación jurídica documentada")
         if status in ("DECISION_APROBADA", "IMPLEMENTADO"):
-            if not re.search(r"https://|#\\d+", row["decision_juridica"]):
+            if not re.search(r"https://|#[0-9]+", row["decision_juridica"]):
                 errors.append(f"{identifier}: falta referencia rastreable de aprobación")
         if status == "IMPLEMENTADO" and not row["pr_correccion"].startswith(
                 "https://github.com/"):
