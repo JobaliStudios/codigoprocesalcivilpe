@@ -77,7 +77,10 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         btnStudyArticle = findViewById(R.id.btnStudyArticle);
         optionsContainer = findViewById(R.id.optionsContainer);
 
-        if (getIntent().getBooleanExtra(QuizSessionContract.EXTRA_RESUME_DRAFT, false)) {
+        boolean restoringActivity = savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_QUESTION_COUNT);
+        if (restoringActivity
+                || getIntent().getBooleanExtra(QuizSessionContract.EXTRA_RESUME_DRAFT, false)) {
             QuizDraftStore.Draft draft = draftStore.load();
             if (draft == null) {
                 finish();
