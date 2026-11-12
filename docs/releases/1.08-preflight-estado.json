@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "release": {
+    "name": "Código Procesal Civil PE",
+    "application_id": "com.jobalistudios.codigoprocesalcivilpe",
+    "current_public_version": "1.07",
+    "current_public_version_code": 12,
+    "candidate_version": "1.08",
+    "candidate_version_code": 13,
+    "platform": "Android",
+    "distribution": "Google Play"
+  },
+  "state": "BLOQUEADO_PARA_PUBLICACION",
+  "as_of": "2026-11-12",
+  "note": "Registro inicial de preflight. PENDIENTE no representa fallo de código; sin evidencia humana no hay permiso de subir, distribuir ni publicar. CI no transforma estados.",
+  "manual_tests": [
+    {
+      "id": "MAN-01",
+      "description": "Teléfono real: inicio sin espera artificial, con consentimiento previo",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-02",
+      "description": "Teléfono real: UMP/AdMob, cambios de consentimiento, anuncios",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-03",
+      "description": "Soporte, Acerca de, enlaces a fuentes oficiales y versión instalada",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-04",
+      "description": "Búsqueda por número y texto, filtros y resultados sin obsolescencia",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-05",
+      "description": "Favoritos, historial, notas, resaltados y lectura en voz alta",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-06",
+      "description": "Quiz: iniciar, responder, revisar errores y volver",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-07",
+      "description": "Tablet vertical: dos columnas y lector de ancho apropiado",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-08",
+      "description": "Tablet horizontal y ventanas redimensionables",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-09",
+      "description": "Plegable cerrado/abierto: contenido y estado",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-10",
+      "description": "Accesibilidad 150/200 % y TalkBack",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-11",
+      "description": "Actualización real desde Play 1.07 (12) a 1.08 (13), datos intactos",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-12",
+      "description": "Tema claro/oscuro y Centro de privacidad con borrado confirmado",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-13",
+      "description": "Guardar y reanudar quiz; descartar sin duplicar respuestas",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-14",
+      "description": "Valoraciones: tres sesiones, neutralidad, Ahora no, No volver a mostrar",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-15",
+      "description": "Métricas locales: apagadas por defecto, activar, contar y borrar",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-16",
+      "description": "Acerca de: aviso de corte 07/06/2025 y enlaces externos",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    },
+    {
+      "id": "MAN-17",
+      "description": "Android 16 / API 36: barras del sistema, gestos y lectura",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "verified_by": "",
+      "verified_at": ""
+    }
+  ],
+  "release_gates": [
+    {
+      "id": "LEGAL",
+      "description": "Evidencia oficial posterior al corte y análisis jurídico de salvedades materiales, sin afirmar certificación integral",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "PRIVACIDAD",
+      "description": "Política pública y seguridad de datos de Play coherentes con SDK de anuncios, UMP y datos locales",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "FICHA_PLAY",
+      "description": "Ficha, icono y capturas reales revisados; sin promesas de actualizaciones legislativas automáticas",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "QA_DISPOSITIVOS",
+      "description": "MAN-01 a MAN-17 ejecutados y aceptados con evidencias, o excepciones aprobadas",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "FIRMA",
+      "description": "AAB release 1.08 (13) firmado en entorno seguro, huellas/certificados contrastados fuera de Git",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "PRUEBA_INTERNA",
+      "description": "Prueba interna de Play con instalación/actualización real y conservación de datos",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "AUTORIZAR_SUBIDA_INTERNA",
+      "description": "Autorización explícita y separada del propietario para subir a pista interna",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    },
+    {
+      "id": "AUTORIZAR_PRODUCCION",
+      "description": "Autorización expresa y separada del propietario para publicar en producción",
+      "status": "PENDIENTE",
+      "evidence": [],
+      "approved_by": "",
+      "approved_at": ""
+    }
+  ]
+}
