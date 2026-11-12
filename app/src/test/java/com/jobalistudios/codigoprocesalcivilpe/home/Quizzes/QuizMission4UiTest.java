@@ -63,8 +63,8 @@ public class QuizMission4UiTest {
         controller.pause().resume();
         String summary = ((TextView) activity.findViewById(R.id.tvQuizMetricsSummary))
                 .getText().toString();
-        assertTrue(summary.contains("1 sesiones"));
-        assertTrue(summary.contains("5 preguntas"));
+        assertTrue(summary.contains("Sesiones: 1"));
+        assertTrue(summary.contains("Preguntas respondidas: 5"));
         assertTrue(summary.contains("80%"));
 
         optIn.performClick();
