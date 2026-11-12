@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionBank;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
@@ -18,6 +19,8 @@ import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
 import java.util.List;
 
 public class QuizzCPCStartScreen extends AppBaseActivity {
+    private static final String STATE_QUESTION_COUNT = "quiz_start_question_count";
+    private int selectedQuestionCount = 10;
     private TextView status;
     private List<QuestionModel> questions;
 
@@ -26,6 +29,16 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
         setContentView(R.layout.activity_quizz_cpcstart_gamified);
         questions = QuestionBank.getQuestions(this);
         status = findViewById(R.id.tvQuizStartStatus);
+        selectedQuestionCount = restoredCount(state == null ? 10 : state.getInt(STATE_QUESTION_COUNT, 10));
+        MaterialButtonToggleGroup sizeGroup = findViewById(R.id.quizQuestionCountGroup);
+        sizeGroup.check(selectedQuestionCount == 5 ? R.id.btnQuizCount5
+                : selectedQuestionCount == 20 ? R.id.btnQuizCount20 : R.id.btnQuizCount10);
+        sizeGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                selectedQuestionCount = checkedId == R.id.btnQuizCount5 ? 5
+                        : checkedId == R.id.btnQuizCount20 ? 20 : 10;
+            }
+        });
         findViewById(R.id.btnBack).setOnClickListener(view -> finish());
         findViewById(R.id.btnQuickReview).setOnClickListener(view -> start(QuizSessionConfig.quickReview()));
         findViewById(R.id.cardQuizAll).setOnClickListener(view -> start(QuizSessionConfig.all()));
@@ -36,12 +49,24 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
 
     @Override protected void onResume() { super.onResume(); bindCards(); }
 
+    @Override protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_QUESTION_COUNT, selectedQuestionCount);
+    }
+
+    private static int restoredCount(int count) {
+        return count == 5 || count == 20 ? count : 10;
+    }
+
     private void bindCards() {
         bindCard(R.id.cardQuizAll, R.string.quiz_mode_all_title, R.string.quiz_mode_all_subtitle);
-        int favorites = selector().select(QuizSessionConfig.favorites()).getQuestions().size();
+        QuizQuestionSelector available = selector();
+        int favorites = available.select(QuizSessionConfig.favorites()
+                .withQuestionCount(questions.size())).getQuestions().size();
         bindCard(R.id.cardQuizFavorites, R.string.quiz_mode_favorites_title,
                 favorites == 0 ? R.string.quiz_mode_favorites_subtitle : R.string.quiz_questions_available, favorites);
-        int errors = selector().select(QuizSessionConfig.previousErrors()).getQuestions().size();
+        int errors = available.select(QuizSessionConfig.previousErrors()
+                .withQuestionCount(questions.size())).getQuestions().size();
         bindCard(R.id.cardQuizErrors, R.string.quiz_mode_errors_title,
                 errors == 0 ? R.string.quiz_all_caught_up : R.string.quiz_errors_pending, errors);
         bindCard(R.id.cardQuizSection, R.string.quiz_mode_section_title, R.string.quiz_mode_section_subtitle);
@@ -55,9 +80,11 @@ public class QuizzCPCStartScreen extends AppBaseActivity {
     }
 
     private void start(QuizSessionConfig config) {
-        QuizSelection selection = selector().select(config);
+        QuizSessionConfig sized = config.withQuestionCount(selectedQuestionCount);
+        QuizSelection selection = selector().select(sized);
         if (!selection.isAvailable()) { showEmpty(selection.getEmptyReason()); return; }
-        startActivity(QuizSessionContract.createQuestionIntent(this, config));
+        status.setVisibility(View.GONE);
+        startActivity(QuizSessionContract.createQuestionIntent(this, sized));
     }
 
     private void showSections() {

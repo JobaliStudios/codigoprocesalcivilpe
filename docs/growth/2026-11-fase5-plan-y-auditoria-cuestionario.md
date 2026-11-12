@@ -98,8 +98,14 @@ Se propone separar **revisión detallada** y **nueva práctica** de errores, y p
 
 El cambio reutiliza el lector, los resultados y el almacén local; no incorpora un nuevo sistema de métricas, red, contenido normativo, anuncios ni dependencias. **Fusionado mediante PR #70**; las pruebas físicas y la aceptación final siguen siendo obligaciones previas a cualquier publicación. La Misión 3 continúa abierta.
 
-## Misión 3 — Lote 2: refuerzo por sección (PR pendiente)
+## Misión 3 — Lote 2: refuerzo por sección (fusionado, PR #71)
 
 La pantalla final puede sugerir la **sección con mayor cantidad de errores de la sesión** y ofrecer una práctica de esa sección con el selector existente. Los empates siguen el orden del CPC; en caso de sesión perfecta o artículos no resolubles no se muestra recomendación. Este cálculo es efímero y no crea historial nuevo ni una medición de rendimiento global. Ver [registro de Lote 2](2026-11-fase5-mision3-lote2-refuerzo-por-seccion.md).
 
-Sin alteraciones de las 120 preguntas, textos legales, anuncios, preferencias, versión candidata 1.08 ni Google Play. **Pendiente de CI, prueba física y decisión del propietario sobre la fusión.**
+Sin alteraciones de las 120 preguntas, textos legales, anuncios, preferencias, versión candidata 1.08 ni Google Play. **Fusionado en `main` mediante PR #71;** conserva pendientes las comprobaciones físicas previas al lanzamiento.
+
+## Misión 3 — Lote 3: personalizar sesiones (PR pendiente)
+
+El usuario podrá elegir **5, 10 o 20 preguntas** antes de empezar cualquiera de los modos existentes. La configuración inicial sigue siendo 10; la selección se conserva al recrear la pantalla y al repetir la ronda. Con pocas preguntas disponibles no se generan duplicados. Se corrige además la vista previa de preguntas disponibles en Favoritos y Errores, que anteriormente se limitaba artificialmente a diez.
+
+La funcionalidad, pruebas y criterios de aceptación se describen en [Misión 3 / Lote 3](2026-11-fase5-mision3-lote3-sesiones-personalizadas.md). No altera el banco de 120 preguntas, la normativa, los identificadores ni los datos permanentes de los estudiantes. **Pendiente de CI, revisión y fusión; sin publicación Google Play.**

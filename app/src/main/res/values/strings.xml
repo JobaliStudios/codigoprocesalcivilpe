@@ -919,7 +919,7 @@
     <string name="my_notes_article_note_label">Nota del artículo</string>
     <string name="quiz_gamified_title">Entrena tus conocimientos</string>
     <string name="quiz_gamified_question">¿Qué quieres practicar?</string>
-    <string name="quiz_quick_review_action">Repasar 10 preguntas</string>
+    <string name="quiz_quick_review_action">Repaso rápido</string>
     <string name="quiz_practice_modes">Modos de práctica</string>
     <string name="quiz_mode_all_title">Todo el Código</string>
     <string name="quiz_mode_all_subtitle">Practica de todo el Código</string>
@@ -959,4 +959,7 @@
         <item quantity="one">En esta sesión tuviste %1$d error en %2$s. Puedes practicar más preguntas de esta sección.</item>
         <item quantity="other">En esta sesión tuviste %1$d errores en %2$s. Puedes practicar más preguntas de esta sección.</item>
     </plurals>
+    <!-- Fase 5 / Misión 3, Lote 3: tamaño de práctica controlado por el estudiante -->
+    <string name="quiz_cpc_count_label">¿Cuántas preguntas quieres practicar?</string>
+    <string name="quiz_cpc_count_accessibility">Practicar %1$d preguntas por sesión</string>
 </resources>

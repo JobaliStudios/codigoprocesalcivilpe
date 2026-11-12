@@ -108,6 +108,18 @@ public class QuizQuestionSelectorTest {
         assertTrue(selection.isAvailable());
     }
 
+    @Test
+    public void requestingTwentyFromSmallPoolDoesNotDuplicateQuestions() {
+        QuizQuestionSelector smallPool = new QuizQuestionSelector(
+                Arrays.asList(error, favorite, general),
+                Collections.emptySet(), Collections.emptySet(),
+                new Random(0), q -> null);
+        QuizSelection selected = smallPool.select(
+                QuizSessionConfig.all().withQuestionCount(20));
+        assertEquals(3, selected.getQuestions().size());
+        assertEquals(3, new HashSet<>(selected.getQuestions()).size());
+    }
+
     private QuizQuestionSelector selector(
             Set<String> favorites,
             Set<String> errors,
