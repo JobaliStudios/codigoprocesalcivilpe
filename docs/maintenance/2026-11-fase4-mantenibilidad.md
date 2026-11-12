@@ -62,3 +62,25 @@ Facilitar cambios futuros, reducir el riesgo de regresiones y mejorar la separac
 - [ ] Android Lint, compilación debug y R8 sin fallos.
 - [ ] Revisión de PR y fusión aprobadas por el propietario.
 - [ ] Prueba manual: abrir un artículo, Aa 125 %, salir/reabrir, Restablecer, verificar preferencia y texto.
+
+## Ejecución de Misión 2 — Acciones Copiar y Compartir
+
+**Cambio acotado:** la lógica de acceso al portapapeles Android y construcción del `Intent.ACTION_CHOOSER` se trasladó desde `SectionContentActivity` a `ReaderArticleTransferController` (un único componente para las acciones de transferencia de texto).
+
+**Responsabilidad que permanece en el lector:** detectar el artículo visible inmediatamente antes de pulsar el botón; dar feedback con Snackbar; controlar la disponibilidad del artículo y abrir el chooser de Android.
+
+**Responsabilidad extraída:** construir el texto mediante el `ArticleShareFormatter` ya existente; copiar el artículo con la etiqueta de portapapeles actual; generar `ACTION_SEND` con `text/plain`, asunto y texto idénticos a la versión anterior.
+
+**Contratos protegidos:** 
+- Artículo `506-A`: numeración y título exactos al copiar.
+- Artículo `835`: compartir conserva íntegro el texto y la nota de derogación.
+- Copiar y Compartir producen el mismo contenido para un mismo artículo.
+- Desplazamiento `560 → 562`: Compartir utiliza el artículo visible en el momento de pulsar (regresión de la actividad).
+- Continúan vigentes todas las pruebas existentes de navegación, favoritos, historial, resaltados y acciones del lector.
+
+**Alcance explícitamente excluido:** no se toca `ArticleShareFormatter`, `articles.json`, los archivos de preferencias, XML de interfaz, anuncios, UMP, navegación, dependencias ni la versión 1.08/13.
+
+**Puerta de aceptación:**
+- [ ] CI `test`, `lint`, `assembleDebug`, `testReleaseUnitTest`, `minifyReleaseWithR8` verde.
+- [ ] Revisar PR y fusionar a `main`.
+- [ ] En dispositivo, copiar artículo 506-A y compartir el 835, comprobar texto completo y nota jurídica; cambiar de artículo por desplazamiento y volver a probar ambos botones.
