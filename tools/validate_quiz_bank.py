@@ -20,6 +20,7 @@ ARTICLE_RE = re.compile(r"\bart[ií]culo\s+(\d+)(?:\s*-\s*([a-z]))?", re.IGNOREC
 CANONICAL_NUMBER_RE = re.compile(r"^\d+(?:-[A-Z])?$")
 REQUIRED_FIELDS = {"questionText", "options", "correctAnswerIndex", "relatedArticle"}
 LEGACY_QUESTIONS_PATH = ROOT / "tools/quiz_bank_legacy_31.json"
+SECOND_BATCH_BASELINE_PATH = ROOT / "tools/quiz_bank_legacy_63.json"
 
 
 def normalized(value: str) -> str:
@@ -108,15 +109,16 @@ def validate_bank(questions: object, corpus: object) -> tuple[list[str], dict]:
     }
 
 
-def verify_legacy_questions(questions: object, baseline: object) -> list[str]:
-    """Conserva exactamente las 31 preguntas originales y sus IDs SHA-256 del repaso."""
+def verify_legacy_questions(
+        questions: object, baseline: object, expected_count: int = 31) -> list[str]:
+    """Conserva los IDs SHA-256 de todas las preguntas anteriores a un lote."""
     if not isinstance(questions, list) or not isinstance(baseline, list):
         return ["El banco o la línea base de preguntas no es una lista"]
-    if len(baseline) != 31:
-        return ["La línea base debe tener exactamente las 31 preguntas originales"]
+    if len(baseline) != expected_count:
+        return [f"La línea base debe tener exactamente {expected_count} preguntas"]
     if questions[:len(baseline)] != baseline:
-        return ["Las 31 preguntas originales han sido alteradas: se requiere una revisión jurídica "
-                "y una migración documentada de IDs de repaso antes de modificar la línea base"]
+        return [f"Las {expected_count} preguntas previas han sido alteradas; revisar "
+                "la compatibilidad de IDs de repaso antes de modificar la línea base"]
     return []
 
 
@@ -125,12 +127,14 @@ def main() -> int:
         questions = json.loads(QUESTIONS_PATH.read_text(encoding="utf-8"))
         corpus = json.loads(CORPUS_PATH.read_text(encoding="utf-8"))
         baseline = json.loads(LEGACY_QUESTIONS_PATH.read_text(encoding="utf-8"))
+        baseline_63 = json.loads(SECOND_BATCH_BASELINE_PATH.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, ValueError) as error:
         print(f"ERROR: no se pudo leer el banco/corpus: {error}", file=sys.stderr)
         return 2
 
     issues, stats = validate_bank(questions, corpus)
     issues.extend(verify_legacy_questions(questions, baseline))
+    issues.extend(verify_legacy_questions(questions, baseline_63, expected_count=63))
     if issues:
         print(f"Banco de preguntas inválido ({len(issues)} problemas):", file=sys.stderr)
         for issue in issues:
