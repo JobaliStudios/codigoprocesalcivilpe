@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuizAnswerResult;
@@ -45,10 +46,21 @@ public class QuizzCPCResultTest {
 
         MaterialCardView reviewCard = activity.findViewById(R.id.cardQuickReview);
         assertEquals(
-                activity.getString(R.string.quiz_cpc_review_errors),
+                activity.getString(R.string.quiz_cpc_review_practice_title),
                 ((TextView) activity.findViewById(R.id.tvQuickReviewTitle)).getText().toString()
         );
         assertEquals(View.VISIBLE, activity.findViewById(R.id.ivQuickReviewChevron).getVisibility());
+
+        MaterialButton detailsButton = activity.findViewById(R.id.btnReviewDetails);
+        assertEquals(View.VISIBLE, detailsButton.getVisibility());
+        detailsButton.performClick();
+        Intent detailsIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+        assertNotNull(detailsIntent);
+        assertEquals(QuizzCPCReviewErrors.class.getName(),
+                detailsIntent.getComponent().getClassName());
+        assertEquals(1, QuizSessionContract.getIncorrectAnswers(detailsIntent).size());
+        assertEquals(error.getQuestionText(),
+                QuizSessionContract.getIncorrectAnswers(detailsIntent).get(0).getQuestionText());
 
         reviewCard.performClick();
 
@@ -86,6 +98,7 @@ public class QuizzCPCResultTest {
                 ((TextView) activity.findViewById(R.id.tvQuickReview)).getText().toString()
         );
         assertFalse(reviewCard.isClickable());
+        assertEquals(View.GONE, activity.findViewById(R.id.btnReviewDetails).getVisibility());
         assertEquals(View.GONE, activity.findViewById(R.id.ivQuickReviewChevron).getVisibility());
         reviewCard.performClick();
         assertNull(Shadows.shadowOf(activity).getNextStartedActivity());

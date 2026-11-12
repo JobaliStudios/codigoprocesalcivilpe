@@ -111,10 +111,11 @@ public class QuizzCPCViewModel extends AndroidViewModel {
         ));
 
         currentAnswerPoints = getStats().recordAnswer(isCorrect);
-        if (isCorrect && config != null && config.getMode() == QuizPracticeMode.PREVIOUS_ERRORS) {
-            errorStore.resolve(currentQuestion);
-        } else if (!isCorrect) {
+        if (!isCorrect) {
             errorStore.recordIncorrect(currentQuestion);
+        } else if (errorStore.contains(currentQuestion)) {
+            // Un acierto consolida el aprendizaje en cualquier modo, sin borrar otros errores.
+            errorStore.resolve(currentQuestion);
         }
 
         return isCorrect;

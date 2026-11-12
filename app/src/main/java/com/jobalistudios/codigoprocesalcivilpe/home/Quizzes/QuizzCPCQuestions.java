@@ -22,6 +22,8 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel;
 import com.jobalistudios.codigoprocesalcivilpe.model.QuizAnswerResult;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
+import com.jobalistudios.codigoprocesalcivilpe.navigation.RelatedArticleNumberExtractor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
     private TextView tvQuizPoints;
     private MaterialCardView cardFeedback;
     private MaterialButton btnNext;
+    private MaterialButton btnStudyArticle;
     private LinearLayout optionsContainer;
 
     private static final String STATE_QUESTION_COUNT = "STATE_QUESTION_COUNT";
@@ -68,6 +71,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         tvQuizPoints = findViewById(R.id.tvQuizPoints);
         cardFeedback = findViewById(R.id.cardFeedback);
         btnNext = findViewById(R.id.btnNext);
+        btnStudyArticle = findViewById(R.id.btnStudyArticle);
         optionsContainer = findViewById(R.id.optionsContainer);
 
         startTimeMillis = savedInstanceState != null
@@ -118,6 +122,8 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         answered = false;
         btnNext.setEnabled(false);
         cardFeedback.setVisibility(View.GONE);
+        btnStudyArticle.setVisibility(View.GONE);
+        btnStudyArticle.setOnClickListener(null);
 
         tvQuestion.setText(currentQuestion.getQuestionText());
         tvArticle.setText(formatArticle(currentQuestion.getRelatedArticle()));
@@ -246,6 +252,7 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         }
 
         showAnswerFeedback(isCorrect, question);
+        configureStudyArticleAction(question);
         btnNext.setEnabled(true);
     }
 
@@ -265,6 +272,21 @@ public class QuizzCPCQuestions extends AppBaseActivity {
         tvAnswerFeedback.setTextColor(getColor(R.color.quiz_wrong));
         String correctAnswer = question.getOptions().get(question.getCorrectAnswerIndex());
         tvAnswerFeedback.setText(getString(R.string.quiz_feedback_wrong_answer, correctAnswer));
+    }
+
+    private void configureStudyArticleAction(QuestionModel question) {
+        String number = RelatedArticleNumberExtractor.extract(question.getRelatedArticle());
+        ArticleNavigationResolver.Target target = number == null
+                ? null : ArticleNavigationResolver.resolve(this, number);
+        if (target == null) {
+            btnStudyArticle.setVisibility(View.GONE);
+            btnStudyArticle.setOnClickListener(null);
+            return;
+        }
+        btnStudyArticle.setContentDescription(getString(
+                R.string.quiz_cpc_study_article_accessibility, target.getNumber()));
+        btnStudyArticle.setOnClickListener(v -> startActivity(target.createIntent(this)));
+        btnStudyArticle.setVisibility(View.VISIBLE);
     }
 
     private String formatArticle(String relatedArticle) {

@@ -330,6 +330,18 @@
                 app:backgroundTint="@color/quiz_transparent"
                 android:textColor="@color/quiz_text_secondary" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReviewDetails"
+                style="@style/App.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/quiz_cpc_review_details_button"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                app:icon="@drawable/baseline_article_24" />
+
             <TextView
                 android:id="@+id/tvQuickReviewTitle"
                 android:layout_width="wrap_content"

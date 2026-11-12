@@ -941,4 +941,14 @@
     <string name="quiz_feedback_wrong_answer">Incorrecto. Respuesta correcta: %1$s</string>
     <string name="quiz_points_obtained">Puntos obtenidos</string>
     <string name="quiz_section_with_count">%1$s\n%2$d preguntas disponibles</string>
+    <!-- Fase 5 / Misión 3: aprendizaje guiado, sin generar interpretaciones normativas nuevas -->
+    <string name="quiz_cpc_study_article">Consultar el artículo del CPC</string>
+    <string name="quiz_cpc_study_article_accessibility">Consultar el artículo %1$s del Código Procesal Civil</string>
+    <string name="quiz_cpc_review_details_button">Ver respuestas y artículos</string>
+    <string name="quiz_cpc_review_practice_title">Volver a practicar errores</string>
+    <string name="quiz_cpc_review_practice_card_description">Practicar de nuevo %1$d respuestas incorrectas</string>
+    <plurals name="quiz_cpc_review_practice_error_count">
+        <item quantity="one">Practica nuevamente la pregunta que fallaste en esta sesión.</item>
+        <item quantity="other">Practica nuevamente las %1$d preguntas que fallaste en esta sesión.</item>
+    </plurals>
 </resources>

@@ -183,6 +183,7 @@
 
                 <TextView
                     android:id="@+id/tvAnswerFeedback"
+                    android:accessibilityLiveRegion="polite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_l"
@@ -190,6 +191,18 @@
                     android:textSize="@dimen/text_body_l"
                     tools:text="Respuesta incorrecta. Según el Art. 24 del CPC, la competencia es facultativa." />
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStudyArticle"
+                style="@style/App.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/quiz_cpc_study_article"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                app:icon="@drawable/baseline_article_24" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnNext"

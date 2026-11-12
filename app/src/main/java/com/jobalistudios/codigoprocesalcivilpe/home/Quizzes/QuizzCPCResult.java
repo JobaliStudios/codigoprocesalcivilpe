@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.jobalistudios.codigoprocesalcivilpe.R;
@@ -68,6 +69,7 @@ public class QuizzCPCResult extends AppBaseActivity {
         tvRecommendation.setText(stats == null ? getRecommendation(percentage)
                 : getRecommendation(percentage) + "\n" + getString(R.string.quiz_streak_format, stats.getBestStreak()));
         configureReviewAction(incorrectAnswers);
+        configureDetailedReviewAction(incorrectAnswers);
 
         circularScore.setMax(100);
         circularScore.setProgress(percentage);
@@ -96,6 +98,18 @@ public class QuizzCPCResult extends AppBaseActivity {
         });
     }
 
+    private void configureDetailedReviewAction(ArrayList<QuizAnswerResult> incorrectAnswers) {
+        MaterialButton button = findViewById(R.id.btnReviewDetails);
+        if (incorrectAnswers.isEmpty()) {
+            button.setVisibility(View.GONE);
+            button.setOnClickListener(null);
+            return;
+        }
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(v -> startActivity(QuizSessionContract.createReviewIntent(
+                this, score, total, elapsedMillis, incorrectAnswers)));
+    }
+
     private void configureReviewAction(ArrayList<QuizAnswerResult> incorrectAnswers) {
         TextView title = findViewById(R.id.tvQuickReviewTitle);
         TextView summary = findViewById(R.id.tvQuickReview);
@@ -105,9 +119,9 @@ public class QuizzCPCResult extends AppBaseActivity {
 
         if (!incorrectAnswers.isEmpty()) {
             int errorCount = incorrectAnswers.size();
-            title.setText(R.string.quiz_cpc_review_errors);
+            title.setText(R.string.quiz_cpc_review_practice_title);
             summary.setText(getResources().getQuantityString(
-                    R.plurals.quiz_cpc_review_error_count,
+                    R.plurals.quiz_cpc_review_practice_error_count,
                     errorCount,
                     errorCount
             ));
@@ -117,7 +131,7 @@ public class QuizzCPCResult extends AppBaseActivity {
             card.setClickable(true);
             card.setFocusable(true);
             card.setContentDescription(getString(
-                    R.string.quiz_cpc_review_card_description,
+                    R.string.quiz_cpc_review_practice_card_description,
                     errorCount
             ));
             card.setOnClickListener(view -> startActivity(QuizSessionContract.createQuestionIntent(
