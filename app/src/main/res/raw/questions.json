@@ -1017,5 +1017,280 @@
     ],
     "correctAnswerIndex": 2,
     "relatedArticle": "Artículo 761"
+  },
+  {
+    "questionText": "¿Qué poder del Estado ejerce con exclusividad la potestad jurisdiccional en materia civil?",
+    "options": [
+      "El Poder Judicial",
+      "El Poder Ejecutivo",
+      "El Congreso de la República",
+      "Los gobiernos regionales"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 1"
+  },
+  {
+    "questionText": "¿Qué derecho corresponde al emplazado en un proceso civil según el artículo 2?",
+    "options": [
+      "El derecho a designar al juez",
+      "El derecho de contradicción",
+      "El derecho a evitar toda notificación",
+      "El derecho a modificar unilateralmente la demanda"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 2"
+  },
+  {
+    "questionText": "¿Qué puede hacer un juez civil sin delegar la competencia que la ley le atribuye?",
+    "options": [
+      "Transferir definitivamente su competencia a otro juez",
+      "Delegar toda la causa a una autoridad administrativa",
+      "Comisionar a otro la realización de actuaciones judiciales fuera de su ámbito territorial",
+      "Permitir que las partes elijan al juez superior"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 7"
+  },
+  {
+    "questionText": "¿Cuál de los siguientes figura entre los auxiliares de la jurisdicción civil?",
+    "options": [
+      "Un secretario de juzgado",
+      "El demandante",
+      "El demandado",
+      "El acreedor extrajudicial"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 54"
+  },
+  {
+    "questionText": "¿Con arreglo a qué se determina la representación procesal de una persona jurídica?",
+    "options": [
+      "Únicamente a la voluntad del juez",
+      "Solo a una autorización notarial extranjera",
+      "Exclusivamente al contrato con su abogado",
+      "A la Constitución, la ley o el respectivo estatuto"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 64"
+  },
+  {
+    "questionText": "¿Qué requisito debe cumplir la persona designada como apoderado judicial?",
+    "options": [
+      "Ser necesariamente abogado de la parte",
+      "Tener capacidad para comparecer por sí en un proceso",
+      "Ser pariente de primer grado del representado",
+      "Haber sido designado previamente por el demandado"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 70"
+  },
+  {
+    "questionText": "¿Qué efecto tienen los actos de un litisconsorte facultativo respecto de los demás?",
+    "options": [
+      "Obligan siempre a todos los demás litisconsortes",
+      "Anulan automáticamente la unidad del proceso",
+      "No favorecen ni perjudican a los demás, sin afectar la unidad del proceso",
+      "Sustituyen la sentencia respecto de todos"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 94"
+  },
+  {
+    "questionText": "¿Qué pueden producir los actos procesales de las partes según el artículo 129?",
+    "options": [
+      "La creación de normas generales",
+      "La constitución, modificación o extinción de derechos y cargas procesales",
+      "La supresión de la competencia judicial",
+      "El nombramiento automático de nuevos jueces"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 129"
+  },
+  {
+    "questionText": "¿Cuándo puede el juez habilitar días y horas para una actuación judicial?",
+    "options": [
+      "Siempre que una parte quiera evitar los plazos legales",
+      "Solo después de una sentencia firme",
+      "Únicamente por acuerdo de los abogados",
+      "Cuando se trate de actuaciones urgentes cuya demora pueda perjudicar a una parte, entre los supuestos legales"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 142"
+  },
+  {
+    "questionText": "¿Cuál es la finalidad del acto de notificación judicial?",
+    "options": [
+      "Poner en conocimiento de los interesados el contenido de las resoluciones judiciales",
+      "Sustituir la demanda por una resolución administrativa",
+      "Declarar fundada toda pretensión",
+      "Modificar los hechos controvertidos sin audiencia"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 155"
+  },
+  {
+    "questionText": "¿Quién debe dirigir personalmente la audiencia de pruebas, bajo sanción de nulidad?",
+    "options": [
+      "El secretario de juzgado",
+      "El perito designado",
+      "El juez",
+      "El abogado de la parte demandante"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 202"
+  },
+  {
+    "questionText": "¿Qué debe precisar quien fundamenta un medio impugnatorio?",
+    "options": [
+      "El presupuesto personal del magistrado",
+      "El agravio y el vicio o error que motiva la impugnación",
+      "El domicilio de todos los testigos",
+      "La fecha de inscripción de una persona jurídica"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 358"
+  },
+  {
+    "questionText": "Cuando varios obligados deben pagar una multa y no se precisa su proporción, ¿cómo se distribuye?",
+    "options": [
+      "Se imputa íntegramente al demandante",
+      "Se elimina automáticamente la multa",
+      "Se distribuye según el orden alfabético de los obligados",
+      "Se entiende impuesta en partes iguales"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 420"
+  },
+  {
+    "questionText": "¿Cómo se emplaza al demandado que se encuentra en su domicilio real dentro de la competencia territorial del juzgado?",
+    "options": [
+      "Mediante publicación obligatoria de edictos",
+      "Por cédula entregada en su domicilio real",
+      "Solo mediante llamada telefónica del abogado",
+      "Por resolución del Registro Público"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 431"
+  },
+  {
+    "questionText": "¿Cómo se sustancian las excepciones propuestas dentro del plazo procesal correspondiente?",
+    "options": [
+      "En cuaderno separado, sin suspender la tramitación del proceso principal",
+      "Siempre después de la sentencia definitiva",
+      "Solo mediante audiencia ante una notaría",
+      "En un nuevo proceso que anula automáticamente el principal"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 447"
+  },
+  {
+    "questionText": "¿Qué procede si el demandado fue notificado válidamente y deja vencer el plazo sin contestar la demanda?",
+    "options": [
+      "Se declara fundada automáticamente la pretensión",
+      "Se sustituye al demandado por el abogado de la otra parte",
+      "Se le declara rebelde",
+      "Se extingue de inmediato toda actuación judicial"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 458"
+  },
+  {
+    "questionText": "Tras notificarse el auto de saneamiento procesal, ¿en qué plazo pueden las partes proponer por escrito los puntos controvertidos?",
+    "options": [
+      "Un día",
+      "Tres días",
+      "Diez días",
+      "Treinta días"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 468"
+  },
+  {
+    "questionText": "En los procesos de separación de cuerpos o divorcio por causal regulados en el subcapítulo correspondiente, ¿cómo interviene el Ministerio Público?",
+    "options": [
+      "Como perito obligatorio",
+      "Como órgano que dicta sentencia",
+      "Como parte, sin emitir dictamen",
+      "Como árbitro designado por los cónyuges"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 481"
+  },
+  {
+    "questionText": "¿Qué disposición se aplica supletoriamente al proceso sumarísimo, con las modificaciones de su capítulo?",
+    "options": [
+      "El artículo 476 del Código Procesal Civil",
+      "El artículo 1 del Código Penal",
+      "La Ley General de Sociedades en todos sus extremos",
+      "Solo un reglamento interno del juzgado"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 548"
+  },
+  {
+    "questionText": "¿En qué supuesto admite el artículo 590 ejecutar el lanzamiento en un proceso de conocimiento o abreviado?",
+    "options": [
+      "Cuando el demandado lo pida sin demanda",
+      "Cuando exista cualquier medida cautelar",
+      "Cuando se haya presentado una denuncia policial",
+      "Cuando la restitución haya sido demandada acumulativamente, con la salvedad legal correspondiente"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 590"
+  },
+  {
+    "questionText": "¿Cuáles son características de toda medida cautelar según el artículo 612?",
+    "options": [
+      "Definitiva, irrevocable y autónoma",
+      "Provisoria, instrumental y variable",
+      "Inimpugnable, vitalicia y obligatoria",
+      "Administrativa, penal y sancionadora"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 612"
+  },
+  {
+    "questionText": "Para ejecutar una obligación de dar suma de dinero, además de ser cierta, expresa y exigible, ¿qué condición se requiere?",
+    "options": [
+      "Que la suma sea siempre futura e indeterminada",
+      "Que exista un acuerdo verbal con el juez",
+      "Que la obligación sea líquida o liquidable por operación aritmética",
+      "Que la cantidad sea fijada exclusivamente por el demandado"
+    ],
+    "correctAnswerIndex": 2,
+    "relatedArticle": "Artículo 689"
+  },
+  {
+    "questionText": "¿Qué regulación se aplica supletoriamente a la audiencia de actuación y declaración judicial en los procesos no contenciosos?",
+    "options": [
+      "La correspondiente a la audiencia de pruebas",
+      "La prevista para el recurso de casación exclusivamente",
+      "Las reglas de la audiencia de juicio penal",
+      "La conciliación administrativa obligatoria"
+    ],
+    "correctAnswerIndex": 0,
+    "relatedArticle": "Artículo 760"
+  },
+  {
+    "questionText": "¿Cómo se ejecutan las resoluciones finales de procesos no contenciosos que requieren inscripción?",
+    "options": [
+      "Mediante un aviso informal del solicitante",
+      "Por oficio o partes firmados por el juez, según corresponda",
+      "Únicamente por correo del abogado de la parte",
+      "Mediante decisión unilateral del registrador sin documento judicial"
+    ],
+    "correctAnswerIndex": 1,
+    "relatedArticle": "Artículo 762"
+  },
+  {
+    "questionText": "¿Para qué puede solicitarse la facción de inventario en los supuestos del artículo 763?",
+    "options": [
+      "Para determinar automáticamente quién es el propietario definitivo",
+      "Para sustituir todo proceso sucesorio",
+      "Para adjudicar bienes sin intervención judicial",
+      "Para individualizar y establecer la existencia de bienes que se pretende asegurar"
+    ],
+    "correctAnswerIndex": 3,
+    "relatedArticle": "Artículo 763"
   }
 ]
