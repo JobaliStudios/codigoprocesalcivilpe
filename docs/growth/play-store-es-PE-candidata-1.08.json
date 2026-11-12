@@ -1,0 +1,18 @@
+{
+  "status": "BORRADOR_NO_PUBLICADO",
+  "target_release": "1.08 (13)",
+  "application_id": "com.jobalistudios.codigoprocesalcivilpe",
+  "locale": "es-PE",
+  "title": "Código Procesal Civil PE",
+  "short_description": "Código Procesal Civil del Perú: artículos, búsqueda y cuestionarios.",
+  "short_description_variant_b": "Consulta el CPC del Perú sin conexión y repasa con 120 preguntas.",
+  "full_description": "Consulta y estudia el Código Procesal Civil del Perú desde tu teléfono, incluso sin conexión. Código Procesal Civil PE es una aplicación independiente de Jobali Studios que facilita el acceso y el estudio de normas procesales civiles.\n\nFUNCIONES PRINCIPALES\n• Consulta del texto jurídico organizado por secciones y artículos.\n• Búsqueda por número de artículo y palabras clave.\n• Favoritos, historial de lectura, notas y resaltados para organizar tu estudio.\n• Lectura en voz alta y opciones de visualización, incluidos los temas claro y oscuro.\n• Cuestionarios con 120 preguntas de práctica, sesiones de 5, 10 o 20 preguntas, repaso de errores y práctica por sección.\n• Guardado local de un cuestionario incompleto para retomarlo después.\n• Estadísticas personales de estudio opcionales y almacenadas solo en el dispositivo.\n\nFUENTES Y ALCANCE\nEl texto se basa en el Código Procesal Civil del Perú y toma como referencia el TUO publicado por el Diario Oficial El Peruano, con edición actualizada al 7 de junio de 2025. La revisión documental posterior no acredita la vigencia integral de cada artículo a noviembre de 2026. Las reformas legales posteriores deben verificarse en El Peruano y el SPIJ. Los textos de la app no se actualizan automáticamente: requieren instalar una nueva versión cuando el desarrollador publica una actualización.\n\nAVISO IMPORTANTE\nEsta aplicación es independiente. No representa, está afiliada ni cuenta con respaldo del Gobierno del Perú, el Poder Judicial o el Ministerio de Justicia. Es una herramienta de consulta y estudio, no una fuente oficial ni un servicio de asesoramiento jurídico. Para trámites o decisiones legales, contrasta la disposición con fuentes oficiales y solicita orientación profesional cuando corresponda.\n\nLa aplicación puede mostrar anuncios de Google. Consulta la política de privacidad desde la app o desde su ficha de Google Play.",
+  "release_notes_candidate": "Mejoras en búsqueda, lectura y navegación. Cuestionarios ampliados a 120 preguntas, práctica de 5, 10 o 20 preguntas, repaso dirigido y posibilidad de retomar sesiones. Valoraciones voluntarias y estadísticas locales opcionales. Mejor información sobre fuentes y alcance jurídico.",
+  "publication_note": "Aplicar solo al distribuir efectivamente la candidata 1.08 (13), tras validación jurídica, privacidad y aprobación del propietario. No pegar este texto en la ficha de 1.07.",
+  "reviewed_public_listing_on": "2026-11-12",
+  "public_listing_observations": [
+    "La ficha pública consultada describía actualizaciones legislativas automáticas; esa afirmación no refleja el funcionamiento de la app offline.",
+    "La ficha presentaba la actualización de 2025 de forma que podía interpretarse como vigencia integral, no certificada.",
+    "La ficha pública puede corresponder a 1.07 mientras el repositorio prepara 1.08; evitar publicar funciones aún no disponibles."
+  ]
+}
