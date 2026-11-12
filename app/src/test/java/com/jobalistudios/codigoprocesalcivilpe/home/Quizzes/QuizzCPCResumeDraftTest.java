@@ -44,6 +44,10 @@ public class QuizzCPCResumeDraftTest {
     }
 
     @After public void tearDown() {
+        android.app.Dialog dialog = org.robolectric.shadows.ShadowDialog.getLatestDialog();
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
         store.clear();
     }
 
