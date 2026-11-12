@@ -103,6 +103,22 @@
                 android:layout_marginTop="@dimen/space_s"
                 android:text="@string/about_sources_explanation" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
+                android:text="@string/about_legal_scope_title"
+                android:textColor="@color/colorOnSurface"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/aboutLegalScope"
+                style="@style/App.Text.Body.M"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:text="@string/about_legal_scope_body" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonElPeruano"
                 style="@style/App.Button.Outlined"
@@ -118,6 +134,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_s"
                 android:text="@string/about_source_spij" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonUpdatedNorms"
+                style="@style/App.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/about_source_updated_norms"
+                android:textAllCaps="false" />
 
             <TextView
                 style="@style/App.Text.Subtitle.M"
