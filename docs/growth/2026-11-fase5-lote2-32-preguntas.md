@@ -8,7 +8,7 @@
 ## Fuentes y límites del cotejo
 
 - **Fuente normativa primaria:** [El Peruano — TUO del Código Procesal Civil (edición compilada hasta el 7/06/2025)](https://diariooficial.elperuano.pe/Normas/obtenerDocumento?idNorma=120007). Se compararon los conceptos de los artículos escogidos con el texto de la edición oficial y los correspondientes artículos en `app/src/main/assets/articles.json`.
-- **Norma específica sobre representación en alimentos:** [Ley 32266, publicación 22/03/2025 en El Peruano](https://busquedas.elperuano.pe/), incorporó el inciso 9 del art. 561; incorporado en la edición del TUO citada.
+- **Norma específica sobre representación en alimentos:** [Ley 32266, publicación 22/03/2025 en El Peruano](https://spij.minjus.gob.pe/Normas/textos/220325T.pdf), incorporó el inciso 9 del art. 561; incorporado en la edición del TUO citada.
 - **Limitación temporal:** el PDF oficial disponible lleva portada **07/06/2025**. La búsqueda complementaria en normas publicadas y compilaciones de 2026 no equivale a un rastreo normativo exhaustivo hasta **12/11/2026**. Es necesaria la comprobación final de todas las modificatorias posteriores al PDF antes de publicar estos ejercicios como contenidos actualizados.
 - **Hallazgo jurídico independiente:** al contrastar el art. 551, la edición del PDF de El Peruano muestra «Esta resolución es impugnable», mientras `articles.json` y la compilación de LP Derecho 2026 dicen «inimpugnable». La pregunta 87 solo trata del plazo de **tres días**, coincidente en ambos textos. **No se modifica ningún artículo legal ni se resuelve aquí esa discrepancia**; elevarla a una revisión jurídica separada antes de publicar.
 
