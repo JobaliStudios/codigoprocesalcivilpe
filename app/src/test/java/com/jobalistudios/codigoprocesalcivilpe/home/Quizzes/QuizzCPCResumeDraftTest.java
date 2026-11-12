@@ -2,11 +2,13 @@ package com.jobalistudios.codigoprocesalcivilpe.home.Quizzes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.app.Application;
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -80,6 +82,26 @@ public class QuizzCPCResumeDraftTest {
         assertEquals(3, model.getTotalQuestions());
         assertEquals(5, model.getConfig().getRequestedQuestionCount());
         assertNotNull(store.load());
+    }
+
+    @Test public void completingTheRoundDeletesItsDraftAndStartsResult() {
+        Intent intent = new Intent(application, QuizzCPCQuestions.class)
+                .putExtra("QUESTION_COUNT", 1);
+        QuizzCPCQuestions quiz = Robolectric.buildActivity(
+                QuizzCPCQuestions.class, intent).setup().get();
+        assertNotNull(store.load());
+
+        LinearLayout options = quiz.findViewById(R.id.optionsContainer);
+        options.getChildAt(0).performClick();
+        assertNotNull(store.load());
+        assertEquals(1, store.load().getAnsweredCount());
+        quiz.findViewById(R.id.btnNext).performClick();
+
+        assertNull(store.load());
+        Intent result = Shadows.shadowOf(quiz).getNextStartedActivity();
+        assertNotNull(result);
+        assertEquals(QuizzCPCResult.class.getName(),
+                result.getComponent().getClassName());
     }
 
     @Test public void invalidDraftDoesNotLaunchAnEmptyQuiz() {
