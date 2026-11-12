@@ -27,6 +27,7 @@ public class LocalDataManagerTest {
         clear("reading_history");
         clear("app_settings");
         clear("quiz_error_review");
+        clear("quiz_session_draft");
         manager = new LocalDataManager(context);
     }
 
@@ -53,6 +54,15 @@ public class LocalDataManagerTest {
 
         assertTrue(new com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizErrorStore(context)
                 .getQuestionIds().isEmpty());
+    }
+
+    @Test
+    public void clearAllLocalData_deletesSavedQuizDraft() {
+        put("quiz_session_draft", "draft_v1", "session-stored");
+
+        manager.clearAllLocalData();
+
+        assertFalse(has("quiz_session_draft", "draft_v1"));
     }
 
     @Test
