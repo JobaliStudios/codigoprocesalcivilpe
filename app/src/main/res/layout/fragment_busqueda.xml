@@ -143,6 +143,7 @@
 
     <TextView
         android:id="@+id/textResultCount"
+        android:accessibilityLiveRegion="polite"
         style="@style/App.Text.Body.S"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

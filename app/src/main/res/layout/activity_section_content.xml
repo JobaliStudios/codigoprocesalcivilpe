@@ -251,8 +251,10 @@
             <TextView
                 android:id="@+id/textView2"
                 style="@style/App.Text.LegalBody"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="@dimen/max_reading_line_width"
                 android:layout_marginTop="@dimen/space_s"
                 android:clickable="true"
                 android:focusable="true"

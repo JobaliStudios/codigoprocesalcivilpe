@@ -55,7 +55,7 @@ public class AppActivityPolicyTest {
     }
 
     @Test
-    public void everyOwnActivity_isPortraitInManifest() throws Exception {
+    public void everyOwnActivity_isResizableWithoutManifestOrientationLock() throws Exception {
         PackageManager packageManager = ApplicationProvider.getApplicationContext()
                 .getPackageManager();
         for (Class<?> activityClass : OWN_ACTIVITIES) {
@@ -63,7 +63,7 @@ public class AppActivityPolicyTest {
                     new ComponentName(ApplicationProvider.getApplicationContext(), activityClass),
                     0
             );
-            assertEquals(activityClass.getName(), ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+            assertEquals(activityClass.getName(), ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED,
                     info.screenOrientation);
         }
     }
