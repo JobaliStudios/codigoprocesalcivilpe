@@ -1,8 +1,6 @@
 package com.jobalistudios.codigoprocesalcivilpe;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +32,6 @@ import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleLegalStatusResolver;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleSequenceResolver;
-import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleShareFormatter;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.VisibleArticleResolver;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
@@ -98,7 +95,7 @@ public class SectionContentActivity extends AppBaseActivity {
     private Article currentVisibleArticle;
     private Article preferredProgrammaticArticle;
     private ArticleSequenceResolver.Result currentSequence;
-    private ArticleShareFormatter articleShareFormatter;
+    private ReaderArticleTransferController articleTransferController;
     private FavoritesManager favoritesManager;
     private TextView currentArticleNumberView;
     private TextView currentArticleTitleView;
@@ -154,7 +151,7 @@ public class SectionContentActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
 
         applyKeepScreenOnPreference();
-        articleShareFormatter = new ArticleShareFormatter(getString(R.string.app_name));
+        articleTransferController = new ReaderArticleTransferController(this);
         favoritesManager = new FavoritesManager(this);
         installLogicalBackNavigation();
         String restoredArticleNumber = savedInstanceState == null
@@ -998,20 +995,10 @@ public class SectionContentActivity extends AppBaseActivity {
     private void copyCurrentArticle() {
         synchronizeCurrentVisibleArticle();
         Article article = currentVisibleArticle;
-        if (article == null) {
+        if (article == null || !articleTransferController.copy(article)) {
             showArticleUnavailableFeedback();
             return;
         }
-
-        ClipboardManager clipboard = getSystemService(ClipboardManager.class);
-        if (clipboard == null) {
-            showArticleUnavailableFeedback();
-            return;
-        }
-
-        String formattedArticle = articleShareFormatter.format(article);
-        String label = getString(R.string.article_clipboard_label, article.number);
-        clipboard.setPrimaryClip(ClipData.newPlainText(label, formattedArticle));
         showReadingSnackbar(getString(R.string.article_copy_success, article.number));
     }
 
@@ -1022,18 +1009,7 @@ public class SectionContentActivity extends AppBaseActivity {
             showArticleUnavailableFeedback();
             return;
         }
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(
-                Intent.EXTRA_SUBJECT,
-                getString(R.string.article_share_subject, article.number)
-        );
-        shareIntent.putExtra(Intent.EXTRA_TEXT, articleShareFormatter.format(article));
-        startActivity(Intent.createChooser(
-                shareIntent,
-                getString(R.string.article_share_chooser_title)
-        ));
+        startActivity(articleTransferController.createShareChooser(article));
     }
 
     private void showArticleUnavailableFeedback() {
