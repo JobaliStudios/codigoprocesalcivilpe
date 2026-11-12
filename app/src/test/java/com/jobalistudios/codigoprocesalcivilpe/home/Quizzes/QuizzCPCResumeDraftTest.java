@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import android.app.Application;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -82,6 +83,29 @@ public class QuizzCPCResumeDraftTest {
         assertEquals(3, model.getTotalQuestions());
         assertEquals(5, model.getConfig().getRequestedQuestionCount());
         assertNotNull(store.load());
+    }
+
+    @Test public void processRecreatedActivityUsesSavedOrderRatherThanReshuffling() {
+        int correct = selected.get(0).getCorrectAnswerIndex();
+        assertTrue(store.save(QuizSessionConfig.all().withQuestionCount(5), selected,
+                Arrays.asList(correct), 1, 2_000L));
+
+        Bundle priorState = new Bundle();
+        priorState.putInt("STATE_QUESTION_COUNT", 3);
+        priorState.putLong("STATE_START_TIME", System.currentTimeMillis() - 2_000L);
+        Intent originalIntent = QuizSessionContract.createQuestionIntent(
+                application, QuizSessionConfig.all().withQuestionCount(5));
+
+        QuizzCPCQuestions recreated = Robolectric.buildActivity(
+                QuizzCPCQuestions.class, originalIntent)
+                .create(priorState).start().resume().visible().get();
+        QuizzCPCViewModel model = new ViewModelProvider(recreated)
+                .get(QuizzCPCViewModel.class);
+        assertEquals(3, model.getTotalQuestions());
+        assertEquals(1, model.getCurrentQuestionIndex());
+        assertEquals(1, model.getStats().getCorrect());
+        assertEquals(selected.get(1).getQuestionText(),
+                model.getCurrentQuestionLiveData().getValue().getQuestionText());
     }
 
     @Test public void completingTheRoundDeletesItsDraftAndStartsResult() {
