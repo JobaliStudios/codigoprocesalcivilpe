@@ -67,3 +67,9 @@ Antes de agregar preguntas en la Misión 2:
 - [ ] Probar selección de Sección y de Favoritos; comprobar que las preguntas abren el artículo asociado.
 - [ ] Confirmar que no cambió el número de preguntas, sus textos ni la puntuación.
 - [ ] Verificar que la app funciona sin conexión durante la práctica.
+
+## Misión 2 — Primer lote de ampliación (en PR)
+
+Se han preparado **32 preguntas adicionales**, sin modificar las **31 originales**, para un total de **63 preguntas y 62 artículos distintos**. Están distribuidas por las cinco secciones que antes no tenían cobertura. Las preguntas nuevas se han cotejado con el TUO del CPC del Diario Oficial El Peruano actualizado al **7 de junio de 2025**, y los artículos 759 y 834 con la Ley N.° 32377. **No se certifica por ello la vigencia normativa hasta noviembre de 2026**. Para el inventario de artículos, fuentes, respuestas y comprobaciones pendientes, consultar [lote 1 — 32 preguntas](2026-11-fase5-lote1-32-preguntas.md).
+
+La meta de 120–200 preguntas requiere lotes adicionales, sin alterar las IDs de errores de preguntas originales ni publicar prematuramente la versión 1.08.
