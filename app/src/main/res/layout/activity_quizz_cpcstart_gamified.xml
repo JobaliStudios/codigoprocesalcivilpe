@@ -4,6 +4,53 @@
         <com.google.android.material.button.MaterialButton android:id="@+id/btnBack" style="@style/Widget.MaterialComponents.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/back" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_m" android:text="@string/quiz_gamified_title" android:textColor="@color/quiz_text_title" android:textSize="@dimen/text_title_l" android:textStyle="bold" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_s" android:text="@string/quiz_gamified_question" android:textColor="@color/quiz_text_secondary" android:textSize="@dimen/text_body_l" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_l"
+            android:text="@string/quiz_cpc_count_label"
+            android:textColor="@color/quiz_text_title"
+            android:textSize="@dimen/text_title_m"
+            android:textStyle="bold" />
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/quizQuestionCountGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_s"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:checkedButton="@id/btnQuizCount10">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnQuizCount5"
+                style="@style/App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/quiz_cpc_option_5"
+                android:textAllCaps="false" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnQuizCount10"
+                style="@style/App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/quiz_cpc_option_10"
+                android:textAllCaps="false" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnQuizCount20"
+                style="@style/App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/quiz_cpc_option_20"
+                android:textAllCaps="false" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
         <com.google.android.material.button.MaterialButton android:id="@+id/btnQuickReview" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_l" android:minHeight="@dimen/touch_target_min" android:text="@string/quiz_quick_review_action" android:textAllCaps="false" app:backgroundTint="@color/quiz_button_primary" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_xl" android:text="@string/quiz_practice_modes" android:textColor="@color/quiz_text_title" android:textSize="@dimen/text_title_m" android:textStyle="bold" />
         <com.google.android.material.card.MaterialCardView android:id="@+id/cardQuizAll" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_m" android:clickable="true" android:focusable="true" app:cardBackgroundColor="@color/quiz_card_surface" app:cardCornerRadius="@dimen/radius_l" app:strokeColor="@color/quiz_card_stroke"><include layout="@layout/item_quiz_practice_mode" /></com.google.android.material.card.MaterialCardView>
