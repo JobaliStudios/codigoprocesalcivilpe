@@ -981,7 +981,7 @@
     <string name="quiz_metrics_enable">Guardar mi progreso en este dispositivo</string>
     <string name="quiz_metrics_disabled">Opcional. Desactivado: no guardamos estadísticas de tus sesiones. Al desactivarlo, se eliminan los contadores anteriores.</string>
     <string name="quiz_metrics_empty">Activado. Tus estadísticas aparecerán aquí cuando completes una sesión.</string>
-    <string name="quiz_metrics_summary">%1$d sesiones completadas · %2$d preguntas respondidas · %3$d%% de aciertos acumulados. Solo en este dispositivo.</string>
+    <string name="quiz_metrics_summary">Sesiones: %1$d · Preguntas respondidas: %2$d · Aciertos acumulados: %3$d%%. Solo en este dispositivo.</string>
     <!-- Valoraciones: invitación neutral, no condicionada al resultado ni incentivada -->
     <string name="quiz_review_invite_title">Comparte tu opinión en Google Play</string>
     <string name="quiz_review_invite_detail">Tu valoración es voluntaria. Puedes continuar estudiando sin hacerlo; no hay premios ni ventajas por valorar.</string>
