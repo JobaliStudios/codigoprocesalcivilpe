@@ -1,7 +1,7 @@
 # Código Procesal Civil PE — Fase 5: crecimiento y aprendizaje
 
 **Inicio:** 12 de noviembre de 2026.  
-**Estado:** Misión 2 en ejecución, tercer lote de 25 preguntas pendiente de CI, revisión y fusión.  
+**Estado:** Misión 2 con objetivo mínimo de 120 preguntas integrado; Misión 3 en desarrollo sin publicación.  
 **Versión de desarrollo:** `1.08 (versionCode 13)`; **no publicar ni distribuir como actualización**.
 
 ## Objetivo
@@ -82,7 +82,7 @@ El segundo lote amplía el banco de **63 a 95 preguntas** y de **62 a 94 artícu
 
 Esta adición **no cambia** el corpus del CPC ni la versión candidata 1.08.
 
-## Misión 2 — Tercer lote de 25 preguntas (en PR, sin fusionar)
+## Misión 2 — Tercer lote de 25 preguntas (fusionado, PR #69)
 
 Se incorporan **25 preguntas nuevas**, de forma que la rama del Lote 3 pasa de **95 a 120 preguntas** y de **94 a 119 artículos distintos**. Se amplían las seis secciones del CPC (I: 3, II: 4, III: 6, IV: 4, V: 5 y VI: 3), con conceptos cotejados frente al TUO oficial compilado al 07/06/2025 y `assets/articles.json`; ver [registro editorial de Lote 3](2026-11-fase5-lote3-25-preguntas.md).
 
@@ -91,3 +91,9 @@ Se incorporan **25 preguntas nuevas**, de forma que la rama del Lote 3 pasa de *
 **Estado:** meta mínima **alcanzada en la rama de trabajo**, pero pendiente de CI, revisión jurídica temporal posterior a junio 2025, pruebas físicas, aceptación del propietario y fusión. No se modifica la versión candidata 1.08 ni se prepara actualización para Google Play.
 
 La Misión 2 podrá cerrarse tras la aceptación de este lote. Quedan **80 preguntas adicionales** si se decidiera perseguir la meta ampliada de 200; no son un requisito de cierre de la meta mínima.
+
+## Misión 3 — Lote 1: aprendizaje guiado y revisión de errores
+
+Se propone separar **revisión detallada** y **nueva práctica** de errores, y permitir la consulta directa del artículo CPC tras responder sin abandonar la sesión. Un acierto sobre una pregunta ya registrada en errores la resuelve en cualquier modo de práctica. El detalle, los límites jurídicos y las comprobaciones están en [Misión 3 / Lote 1](2026-11-fase5-mision3-aprendizaje-guiado-lote1.md).
+
+El cambio reutiliza el lector, los resultados y el almacén local; no incorpora un nuevo sistema de métricas, red, contenido normativo, anuncios ni dependencias. **Pendiente de CI, prueba física y decisión de fusión**; la Misión 3 no se considera terminada por este primer lote.
