@@ -22,6 +22,12 @@ jobs:
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Comprobar alcance histórico de Fase 4
+        if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'maintenance/fase4-')
+        run: python3 tools/check_phase4_scope.py
 
       - name: Validar archivos y credenciales versionados
         shell: pwsh
@@ -167,7 +173,7 @@ jobs:
 
   release-device-regression:
     name: Regresión instrumentada (emulador)
-    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'release/')
+    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'release/') || startsWith(github.head_ref, 'maintenance/fase4-'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -219,7 +225,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: fase2-candidata-android15-instrumentacion
+          name: regresion-android15-instrumentacion
           path: |
             emulator-instrumentation-failure.png
             app/build/outputs/androidTest-results/connected/
