@@ -104,3 +104,36 @@ Facilitar cambios futuros, reducir el riesgo de regresiones y mejorar la separac
 - [ ] PR revisado y fusionado en `main`.
 - [ ] Prueba manual: navegar desde Código Procesal Civil por las seis secciones, abrir títulos/capítulos/subcapítulos; abrir un artículo desde Búsqueda y desde Favoritos; volver al índice; verificar que ninguna ruta cambió.
 - [ ] Mantener la versión 1.08 sin publicar hasta autorización independiente.
+
+## Ejecución de Misión 4 — Persistencia conservadora de notas
+
+**Hallazgo de riesgo:** en `HighlightsManager`, una nota con `noteCiphertext` no descifrable podía convertirse en un `Highlight` temporal sin nota. Si después se añadía, editaba o eliminaba otro resaltado en el mismo bloque, la serialización posterior podía sobrescribir los datos cifrados originales. Un JSON malformado también podía ser sustituido por una lista nueva.
+
+**Corrección sin migración:**
+- El lector interno devuelve tanto los resaltados que puede interpretar como un indicador `safeToWrite`.
+- Si falla el descifrado, se desconoce `noteVersion`, hay registros inválidos o el JSON está malformado, el bloque **no se reescribe** al intentar añadir, editar, eliminar o migrar notas antiguas.
+- Los datos originales permanecen en `SharedPreferences` para una eventual recuperación; los demás bloques siguen funcionando normalmente.
+- Si el cifrado se puede volver a leer, las operaciones habituales continúan con su esquema de almacenamiento intacto.
+- **No se modifica** Android Keystore, el alias de la clave, el cifrado AES-GCM, `NoteCipher`, ni los nombres de las preferencias o atributos JSON.
+
+**Límite importante:** proteger el ciphertext contra sobrescritura no garantiza que pueda recuperarse una clave Android Keystore perdida o invalidada. Cuando un bloque no es legible, las modificaciones sobre él se omiten para proteger los datos originales; la UI actual no diferencia todavía ese estado de un guardado exitoso. No probar corrupción de notas sobre una instalación con datos reales.
+
+**Contratos existentes revisados:**
+- Favoritos: `codigoprocesalcivil_favorites` con `items`, `destination_id` y `addedAt`; se conservan y no se cambia su lógica.
+- Historial: `reading_history/recent_articles`, máximo 5 artículos distintos; se conserva su esquema.
+- Resaltados/notas: `codigoprocesalcivil_highlights`, clave estable por bloque y campos cifrados existentes; único módulo modificado en producción.
+- Caché jurídica: `ArticleRepository` mantiene el índice en memoria y lectura de `assets/articles.json`; no se ha cambiado el contenido jurídico ni la política de respaldo a strings.
+- Búsqueda: mantiene su ejecutor de segundo plano, debounce y favoritos.
+
+**Pruebas automatizadas añadidas:**
+- Descifrado fallido: añade/edita/elimina sin alterar los bytes almacenados; tras restaurar la versión compatible se recupera la nota.
+- Bloque mixto legacy + cifrado ilegible: la lectura no migra ni elimina entradas.
+- JSON y entradas inválidas: se preserva el bloque sin sobrescritura silenciosa.
+- Bloque sano: permite editar y eliminar y mantiene notas sin texto plano.
+- Regresión entre servicios: favoritos, historial y notas se reabren mediante nuevos gestores sin migración; limpiar el historial no borra favoritos ni notas; el contenido jurídico sigue consultable.
+
+**Criterios para cerrar Misión 4:**
+- [ ] CI de pruebas unitarias, Lint, debug y release con R8 en verde.
+- [ ] PR revisado y fusionado a `main`.
+- [ ] En teléfono, guardar una nota y un resaltado, cerrar/reabrir la aplicación, editar y borrar uno; verificar que favoritos, historial y búsqueda permanezcan funcionales.
+- [ ] No publicar una actualización 1.08 sin revisión del lanzamiento independiente.
