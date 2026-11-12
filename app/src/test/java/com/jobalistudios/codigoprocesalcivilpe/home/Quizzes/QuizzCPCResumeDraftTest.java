@@ -67,6 +67,19 @@ public class QuizzCPCResumeDraftTest {
         assertTrue(intent.getBooleanExtra(QuizSessionContract.EXTRA_RESUME_DRAFT, false));
     }
 
+    @Test public void startingAnotherModeCannotSilentlyOverwriteExistingDraft() {
+        int first = selected.get(0).getCorrectAnswerIndex();
+        assertTrue(store.save(QuizSessionConfig.all(), selected,
+                Arrays.asList(first), 1, 1_000L));
+        QuizzCPCStartScreen home = Robolectric.buildActivity(
+                QuizzCPCStartScreen.class).setup().get();
+        home.findViewById(R.id.cardQuizAll).performClick();
+
+        assertNull(Shadows.shadowOf(home).getNextStartedActivity());
+        assertNotNull(store.load());
+        assertEquals(1, store.load().getAnsweredCount());
+    }
+
     @Test public void resumedQuestionRestoresAnswersAndCorrectScore() {
         int first = selected.get(0).getCorrectAnswerIndex();
         assertTrue(store.save(QuizSessionConfig.all().withQuestionCount(5), selected,
