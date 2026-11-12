@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import android.app.Application;
 import android.content.Intent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -112,6 +113,26 @@ public class QuizMission4UiTest {
         assertEquals(View.GONE, result.findViewById(R.id.cardQuizRatingInvite).getVisibility());
         assertFalse(reviews.claimIfEligible(System.currentTimeMillis()
                 + 2 * QuizReviewPromptPolicy.COOLDOWN_MS));
+    }
+
+    @Test public void completingQuizUpdatesOnlyEnabledMetricsAndNotAgainOnResultOpen() {
+        metrics.setEnabled(true);
+        Intent questionIntent = new Intent(context, QuizzCPCQuestions.class)
+                .putExtra("QUESTION_COUNT", 1);
+        QuizzCPCQuestions questions = Robolectric.buildActivity(
+                QuizzCPCQuestions.class, questionIntent).setup().get();
+
+        LinearLayout options = questions.findViewById(R.id.optionsContainer);
+        options.getChildAt(0).performClick();
+        questions.findViewById(R.id.btnNext).performClick();
+        assertEquals(1L, metrics.snapshot().getSessions());
+        assertEquals(1L, metrics.snapshot().getAnswered());
+
+        Intent resultIntent = Shadows.shadowOf(questions).getNextStartedActivity();
+        assertNotNull(resultIntent);
+        Robolectric.buildActivity(QuizzCPCResult.class, resultIntent).setup().get();
+        assertEquals(1L, metrics.snapshot().getSessions());
+        assertFalse(reviews.claimIfEligible(System.currentTimeMillis()));
     }
 
     @Test public void noStatsIntentNeverTriggersAutomaticReview() {
