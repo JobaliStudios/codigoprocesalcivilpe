@@ -44,6 +44,7 @@ public final class LocalDataManager {
         clearHighlightsAndNotes();
         clearReadingHistory();
         new com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizErrorStore(appContext).clear();
+        new com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizDraftStore(appContext).clear();
         appContext.getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE)
                 .edit()
                 .clear()
