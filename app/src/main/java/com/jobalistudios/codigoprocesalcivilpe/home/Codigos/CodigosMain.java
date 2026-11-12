@@ -4,9 +4,6 @@ import com.jobalistudios.codigoprocesalcivilpe.AppBaseActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 
 import com.google.android.material.card.MaterialCardView;
@@ -25,30 +22,6 @@ public class CodigosMain extends AppBaseActivity {
             startActivity(new Intent(this, CodigoProcesalCivilMain.class));
         });
 
-        MaterialCardView cardCivil = findViewById(R.id.card_codigo_civil);
-        MaterialCardView cardPenal = findViewById(R.id.card_codigo_penal);
-        MaterialCardView cardProcesalPenal = findViewById(R.id.card_codigo_procesal_penal);
-
-        disableUnavailableCard(cardCivil);
-        disableUnavailableCard(cardPenal);
-        disableUnavailableCard(cardProcesalPenal);
-
-        MaterialCardView proximamenteHeader = findViewById(R.id.card_proximamente_header);
-        LinearLayout proximamenteContent = findViewById(R.id.layout_proximamente_content);
-        ImageView proximamenteChevron = findViewById(R.id.iv_proximamente_chevron);
-
-        proximamenteHeader.setOnClickListener(v -> {
-            boolean isCollapsed = proximamenteContent.getVisibility() == View.GONE;
-            proximamenteContent.setVisibility(isCollapsed ? View.VISIBLE : View.GONE);
-            proximamenteChevron.animate().rotation(isCollapsed ? 90f : 0f).setDuration(150).start();
-        });
-    }
-
-    private void disableUnavailableCard(MaterialCardView card) {
-        card.setClickable(false);
-        card.setFocusable(false);
-        card.setEnabled(false);
-        card.setAlpha(0.55f);
     }
 
 }
