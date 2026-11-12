@@ -38,6 +38,26 @@ class BankValidatorTests(unittest.TestCase):
         modified[0]["options"][1] = "Respuesta modificada"
         self.assertNotEqual([], verify_legacy_questions(modified, original))
 
+    def test_second_batch_63_question_baseline_is_preserved(self):
+        template, _ = valid_fixture()
+        prior = []
+        for index in range(63):
+            q = copy.deepcopy(template[0])
+            q["questionText"] = f"Pregunta del banco anterior {index + 1}"
+            prior.append(q)
+        next_batch = copy.deepcopy(prior)
+        extra = copy.deepcopy(template[0])
+        extra["questionText"] = "Pregunta nueva del lote 2"
+        next_batch.append(extra)
+        self.assertEqual([], verify_legacy_questions(
+            next_batch, prior, expected_count=63))
+        changed = copy.deepcopy(next_batch)
+        changed[62]["correctAnswerIndex"] = 2
+        self.assertNotEqual([], verify_legacy_questions(
+            changed, prior, expected_count=63))
+        self.assertNotEqual([], verify_legacy_questions(
+            next_batch, prior[:31], expected_count=63))
+
     def test_happy_path(self):
         questions, corpus = valid_fixture()
         errors, stats = validate_bank(questions, corpus)
