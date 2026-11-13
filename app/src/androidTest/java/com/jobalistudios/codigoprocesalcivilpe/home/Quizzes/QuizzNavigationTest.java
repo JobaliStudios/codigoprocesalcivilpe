@@ -46,8 +46,10 @@ public class QuizzNavigationTest {
             onView(withText(R.string.quiz_draft_exit_title)).check(matches(isDisplayed()));
             onView(withText(R.string.quiz_draft_discard)).perform(click());
 
-            onView(withId(R.id.btnQuickReview)).check(matches(isDisplayed()));
-            onView(withId(R.id.cardQuizAll)).check(matches(isDisplayed()));
+            onView(withId(R.id.btnQuickReview)).perform(scrollTo())
+                    .check(matches(isDisplayed()));
+            onView(withId(R.id.cardQuizAll)).perform(scrollTo())
+                    .check(matches(isDisplayed()));
         }
     }
 
