@@ -35,7 +35,7 @@ public final class ReaderTypography {
         articleText.setLineSpacing(0f,
                 ReadingPreferenceManager.getLineSpacing(context).multiplier);
         articleText.setBreakStrategy(android.graphics.text.LineBreaker.BREAK_STRATEGY_HIGH_QUALITY);
-        articleText.setHyphenationFrequency(android.graphics.text.LineBreaker.HYPHENATION_FREQUENCY_NORMAL);
+        articleText.setHyphenationFrequency(Layout.HYPHENATION_FREQUENCY_NORMAL);
         articleText.setJustificationMode(ReadingPreferenceManager.isJustifyEnabled(context)
                 ? android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD : android.graphics.text.LineBreaker.JUSTIFICATION_MODE_NONE);
 
