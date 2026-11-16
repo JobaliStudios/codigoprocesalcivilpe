@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
-            android:horizontalScrollBarEnabled="false">
+            android:scrollbars="none">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerThemeGroup"
             android:layout_width="match_parent"
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
-            android:horizontalScrollBarEnabled="false">
+            android:scrollbars="none">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerFontGroup"
             android:layout_width="match_parent"
@@ -211,7 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
-            android:horizontalScrollBarEnabled="false">
+            android:scrollbars="none">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerLineGroup"
             android:layout_width="match_parent"
@@ -263,7 +263,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
-            android:horizontalScrollBarEnabled="false">
+            android:scrollbars="none">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerMarginGroup"
             android:layout_width="match_parent"
