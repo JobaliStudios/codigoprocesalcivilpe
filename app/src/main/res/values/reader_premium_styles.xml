@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeOverlay.App.Reader" parent="ThemeOverlay.Material3" />
+
+    <style name="ThemeOverlay.App.Reader.Light" parent="ThemeOverlay.App.Reader">
+        <item name="android:colorBackground">@color/reader_light_background</item>
+        <item name="colorSurface">@color/reader_light_surface</item>
+        <item name="colorOnSurface">@color/reader_light_text</item>
+        <item name="colorOnSurfaceVariant">@color/reader_light_muted</item>
+        <item name="colorPrimary">@color/reader_light_primary</item>
+        <item name="colorPrimaryContainer">@color/reader_light_container</item>
+        <item name="colorOnPrimary">@color/reader_light_on_primary</item>
+        <item name="android:statusBarColor">@color/reader_light_background</item>
+        <item name="android:navigationBarColor">@color/reader_light_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Reader.Sepia" parent="ThemeOverlay.App.Reader">
+        <item name="android:colorBackground">@color/reader_sepia_background</item>
+        <item name="colorSurface">@color/reader_sepia_surface</item>
+        <item name="colorOnSurface">@color/reader_sepia_text</item>
+        <item name="colorOnSurfaceVariant">@color/reader_sepia_muted</item>
+        <item name="colorPrimary">@color/reader_sepia_primary</item>
+        <item name="colorPrimaryContainer">@color/reader_sepia_container</item>
+        <item name="colorOnPrimary">@color/reader_sepia_on_primary</item>
+        <item name="android:statusBarColor">@color/reader_sepia_background</item>
+        <item name="android:navigationBarColor">@color/reader_sepia_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Reader.Dark" parent="ThemeOverlay.App.Reader">
+        <item name="android:colorBackground">@color/reader_dark_background</item>
+        <item name="colorSurface">@color/reader_dark_surface</item>
+        <item name="colorOnSurface">@color/reader_dark_text</item>
+        <item name="colorOnSurfaceVariant">@color/reader_dark_muted</item>
+        <item name="colorPrimary">@color/reader_dark_primary</item>
+        <item name="colorPrimaryContainer">@color/reader_dark_container</item>
+        <item name="colorOnPrimary">@color/reader_dark_on_primary</item>
+        <item name="android:statusBarColor">@color/reader_dark_background</item>
+        <item name="android:navigationBarColor">@color/reader_dark_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="App.Reader.Sheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="shapeAppearanceOverlay">@style/App.Reader.Sheet.Shape</item>
+    </style>
+    <style name="App.Reader.Sheet.Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/reader_sheet_corner_radius</item>
+        <item name="cornerSizeTopRight">@dimen/reader_sheet_corner_radius</item>
+    </style>
+</resources>
