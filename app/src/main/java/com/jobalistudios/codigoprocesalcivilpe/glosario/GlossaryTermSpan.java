@@ -33,6 +33,8 @@ public final class GlossaryTermSpan extends ClickableSpan {
     @Override
     public void updateDrawState(@NonNull TextPaint paint) {
         paint.setColor(primaryColor);
-        paint.setUnderlineText(primaryColor, 1.0f);
+        paint.setUnderlineText(true);
+        paint.underlineColor = primaryColor;
+        paint.underlineThickness = 1.0f;
     }
 }
