@@ -49,27 +49,50 @@ public final class GlossaryMatcher {
                 }
             }
         }
-        all.sort(Comparator.comparingInt((Match m) -> m.end - m.start).reversed()
-                .thenComparingInt(m -> m.start).thenComparing(m -> m.term.getId()));
+        // Primero se considera la aparición más temprana de cada término;
+        // entre coincidencias que se cruzan, gana la expresión más larga.
+        all.sort(Comparator.comparingInt((Match m) -> m.start)
+                .thenComparing(Comparator.comparingInt(
+                        (Match m) -> m.end - m.start).reversed())
+                .thenComparing(m -> m.term.getId()));
+        List<Match> eligible = new ArrayList<>();
+        for (Match candidate : all) {
+            if (allowed.accept(candidate.start, candidate.end)) eligible.add(candidate);
+        }
         List<Match> accepted = new ArrayList<>();
         Set<String> selectedTerms = new HashSet<>();
-        for (Match match : all) {
-            if (selectedTerms.contains(match.term.getId())
-                    || !allowed.accept(match.start, match.end)) continue;
-            boolean collision = false;
-            for (Match chosen : accepted) {
-                if (match.start < chosen.end && chosen.start < match.end) {
-                    collision = true;
+        while (true) {
+            Match earliest = null;
+            for (Match candidate : eligible) {
+                if (!selectedTerms.contains(candidate.term.getId())
+                        && !overlaps(accepted, candidate)) {
+                    earliest = candidate;
                     break;
                 }
             }
-            if (!collision) {
-                accepted.add(match);
-                selectedTerms.add(match.term.getId());
+            if (earliest == null) break;
+            Match winner = earliest;
+            for (Match candidate : eligible) {
+                if (selectedTerms.contains(candidate.term.getId())
+                        || overlaps(accepted, candidate)
+                        || candidate.start >= earliest.end
+                        || candidate.end <= earliest.start) continue;
+                if (candidate.end - candidate.start > winner.end - winner.start) {
+                    winner = candidate;
+                }
             }
+            accepted.add(winner);
+            selectedTerms.add(winner.term.getId());
         }
         accepted.sort(Comparator.comparingInt(m -> m.start));
         return accepted;
+    }
+
+    private static boolean overlaps(List<Match> chosen, Match candidate) {
+        for (Match item : chosen) {
+            if (item.start < candidate.end && candidate.start < item.end) return true;
+        }
+        return false;
     }
 
     private static boolean wholeWord(String text, int start, int end) {
