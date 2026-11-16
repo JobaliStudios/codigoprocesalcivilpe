@@ -81,9 +81,8 @@ public class ArticleOfTheDaySelectorTest {
     @Test public void excerptUsesBodyOnlyAndCutsAtWordBoundary() {
         String text = "Artículo 55.- Encabezado\n" + String.join(" ",
                 Collections.nCopies(50,"palabra"));
-        String preview = ArticleOfTheDaySelector.Selection.class == null ? "" :
-                selector(SAMPLE,LIMA).select(Collections.singletonList(block(
-                        new Article("55","Encabezado",text,0)))).excerpt;
+        String preview = selector(SAMPLE,LIMA).select(Collections.singletonList(block(
+                new Article("55","Encabezado",text,0)))).excerpt;
         assertTrue(preview.startsWith("palabra "));
         assertFalse(preview.contains("Artículo 55"));
         assertTrue(preview.endsWith("…"));
