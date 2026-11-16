@@ -44,4 +44,17 @@ public class HomeDashboardNavigationTest {
         assertNotNull(navController.getCurrentDestination());
         assertEquals(R.id.navigation_favoritos, navController.getCurrentDestination().getId());
     }
+    @Test
+    public void quickAccessSearch_usesExistingSearchBottomDestination() {
+        controller = Robolectric.buildActivity(MainActivity.class)
+                .create().start().resume().visible();
+        MainActivity activity = controller.get();
+        NavHostFragment host = (NavHostFragment) activity.getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_activity_main);
+        assertNotNull(host);
+        activity.findViewById(R.id.buttonHomeSearch).performClick();
+        assertEquals(R.id.navigation_busqueda, host.getNavController()
+                .getCurrentDestination().getId());
+    }
+
 }
