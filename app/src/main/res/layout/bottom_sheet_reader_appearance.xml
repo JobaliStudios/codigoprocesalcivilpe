@@ -54,6 +54,12 @@
             android:layout_marginTop="@dimen/space_l"
             android:text="@string/reader_appearance_theme" />
 
+        <HorizontalScrollView
+            android:id="@+id/readerThemeGroupScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:horizontalScrollBarEnabled="false">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerThemeGroup"
             android:layout_width="match_parent"
@@ -107,6 +113,7 @@
                 android:text="@string/reader_theme_dark"
                 android:textAllCaps="false" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
+        </HorizontalScrollView>
 
         <TextView
             style="@style/App.Text.Title.M"
@@ -115,6 +122,12 @@
             android:layout_marginTop="@dimen/space_l"
             android:text="@string/reader_appearance_font" />
 
+        <HorizontalScrollView
+            android:id="@+id/readerFontGroupScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:horizontalScrollBarEnabled="false">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerFontGroup"
             android:layout_width="match_parent"
@@ -154,6 +167,7 @@
                 android:text="@string/reader_font_accessible"
                 android:textAllCaps="false" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
+        </HorizontalScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -192,6 +206,12 @@
             android:layout_marginTop="@dimen/space_s"
             android:text="@string/reader_appearance_lines" />
 
+        <HorizontalScrollView
+            android:id="@+id/readerLineGroupScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:horizontalScrollBarEnabled="false">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerLineGroup"
             android:layout_width="match_parent"
@@ -229,6 +249,7 @@
                 android:text="@string/reader_line_wide"
                 android:textAllCaps="false" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
+        </HorizontalScrollView>
 
         <TextView
             style="@style/App.Text.Title.M"
@@ -237,6 +258,12 @@
             android:layout_marginTop="@dimen/space_l"
             android:text="@string/reader_appearance_margins" />
 
+        <HorizontalScrollView
+            android:id="@+id/readerMarginGroupScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:horizontalScrollBarEnabled="false">
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/readerMarginGroup"
             android:layout_width="match_parent"
@@ -274,6 +301,7 @@
                 android:text="@string/reader_margin_wide"
                 android:textAllCaps="false" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
+        </HorizontalScrollView>
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/readerJustifySwitch"
