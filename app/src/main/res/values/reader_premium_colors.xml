@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="reader_light_background">#FFFFFF</color>
+    <color name="reader_light_surface">#FFFFFF</color>
+    <color name="reader_light_text">#2D2D2D</color>
+    <color name="reader_light_muted">#6D6D6D</color>
+    <color name="reader_light_primary">#6B081D</color>
+    <color name="reader_light_container">#FFF3F5</color>
+    <color name="reader_light_line">#336B081D</color>
+    <color name="reader_light_highlight">#FFF59D</color>
+    <color name="reader_light_on_primary">#FFFFFF</color>
+
+    <color name="reader_sepia_background">#F4ECD8</color>
+    <color name="reader_sepia_surface">#EFE5CC</color>
+    <color name="reader_sepia_text">#3B2F24</color>
+    <color name="reader_sepia_muted">#6B5B49</color>
+    <color name="reader_sepia_primary">#7A1B2B</color>
+    <color name="reader_sepia_container">#E9DDC0</color>
+    <color name="reader_sepia_line">#475A3C1E</color>
+    <color name="reader_sepia_highlight">#F2D98B</color>
+    <color name="reader_sepia_on_primary">#FFFFFF</color>
+
+    <color name="reader_dark_background">#141012</color>
+    <color name="reader_dark_surface">#1E181B</color>
+    <color name="reader_dark_text">#EDE3E5</color>
+    <color name="reader_dark_muted">#B5A6AA</color>
+    <color name="reader_dark_primary">#F2A9B7</color>
+    <color name="reader_dark_container">#2B1D21</color>
+    <color name="reader_dark_line">#47F2A9B7</color>
+    <color name="reader_dark_highlight">#4DFFD60A</color>
+    <color name="reader_dark_on_primary">#3A0A14</color>
+</resources>
