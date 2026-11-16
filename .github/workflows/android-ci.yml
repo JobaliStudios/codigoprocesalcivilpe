@@ -188,7 +188,7 @@ jobs:
 
   release-device-regression:
     name: Regresión instrumentada (emulador)
-    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'release/') || startsWith(github.head_ref, 'maintenance/fase4-'))
+    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'release/') || startsWith(github.head_ref, 'maintenance/fase4-') || startsWith(github.head_ref, 'feat/fase6-lector-premium-m5-'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
