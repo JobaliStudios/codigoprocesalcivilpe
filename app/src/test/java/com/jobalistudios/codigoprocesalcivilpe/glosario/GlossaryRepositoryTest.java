@@ -54,7 +54,7 @@ public class GlossaryRepositoryTest {
     @Test public void duplicateIdsDoNotEnablePartialData() {
         String valid = FIXTURE;
         String entry = valid.substring(valid.indexOf("{\"id\":"),
-                valid.lastIndexOf("]}") + 1);
+                valid.lastIndexOf("]}"));
         assertTrue(GlossaryRepository.parseJson(
                 "{\"version\":1,\"terms\":[" + entry + "," + entry + "]}").isEmpty());
     }
