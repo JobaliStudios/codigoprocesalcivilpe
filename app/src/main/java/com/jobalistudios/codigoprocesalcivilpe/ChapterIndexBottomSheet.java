@@ -152,6 +152,17 @@ public final class ChapterIndexBottomSheet extends BottomSheetDialogFragment {
     public void onStart() {
         super.onStart();
         if (!(getDialog() instanceof BottomSheetDialog)) return;
+        // La lista debe caber en la hoja junto a buscador, filtros y botones.
+        if (list != null) {
+            int screenHeight = getResources().getDisplayMetrics().heightPixels;
+            int minHeight = getResources().getDimensionPixelSize(
+                    R.dimen.reader_index_item_min_height) * 2;
+            int requested = getResources().getDimensionPixelSize(R.dimen.reader_index_list_height);
+            ViewGroup.LayoutParams listParams = list.getLayoutParams();
+            listParams.height = Math.max(minHeight, Math.min(requested,
+                    Math.round(screenHeight * 0.43f)));
+            list.setLayoutParams(listParams);
+        }
         View sheet = ((BottomSheetDialog) requireDialog())
                 .findViewById(com.google.android.material.R.id.design_bottom_sheet);
         if (sheet == null) return;
