@@ -424,7 +424,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
-            android:horizontalScrollBarEnabled="false">
+            android:scrollbars="none">
             <LinearLayout
             android:id="@+id/readerBottomActions"
             android:layout_width="match_parent"
