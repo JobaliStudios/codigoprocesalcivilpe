@@ -2,6 +2,28 @@
 
 Este archivo documenta los cambios relevantes de cada versión publicada de la aplicación.
 
+## [1.08] — Candidata, pendiente de publicación
+
+**Estado:** desarrollo y validación interna; no implica que esta actualización esté publicada.
+
+### Añadido
+- Lector premium offline: temas Claro, Sepia y Oscuro; tipografías Literata y Atkinson Hyperlegible incluidas localmente; ajustes de tamaño, interlineado, márgenes, justificación y modo enfoque.
+- Progreso por artículo, índice del capítulo con buscador y filtros, navegación Anterior/Siguiente y gesto horizontal opcional, desactivado por defecto.
+- Infraestructura opcional para glosario editorial, con validación de origen y revisión. El glosario distribuido está vacío hasta la aprobación expresa de definiciones.
+- Inicio con Continuar leyendo, Artículo del día determinista por fecha local y cuatro accesos rápidos.
+- Configuración reorganizada: apariencia de la app, preferencias de lectura y accesos a Soporte, Acerca de y Centro de privacidad.
+
+### Mejorado
+- Accesibilidad de controles del lector, hojas, Inicio y Configuración; controles desplazables o apilados con escala de texto del sistema al 200 % y etiquetas TalkBack para notas y ajustes.
+- Evita reconstruir todos los spans jurídicos al cambiar únicamente fuente, márgenes, interlineado o justificación.
+- Pruebas automáticas de navegación, datos locales, estilos, selector diario, glosario y formatos Gson ofuscados; pruebas instrumentadas de accesibilidad y rendimiento con el corpus real.
+
+**Sin cambios en los artículos ni en su contenido jurídico.** La compilación candidata se mantiene en versionName 1.08, versionCode 13, sin cambios de permisos, anuncios o conectividad. La validación manual, la revisión jurídica y la aprobación de lanzamiento siguen pendientes.
+
+## [1.07] — Pendiente de redacción del propietario
+
+La descripción y fecha definitiva de 1.07 serán proporcionadas por el propietario. No se atribuyen aquí cambios que aún no han sido documentados.
+
 ## [1.06] - 2026-08-11
 
 ### Corregido
