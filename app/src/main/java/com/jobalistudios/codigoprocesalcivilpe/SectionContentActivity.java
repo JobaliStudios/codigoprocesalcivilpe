@@ -232,6 +232,7 @@ public class SectionContentActivity extends AppBaseActivity {
         currentTextResId = textResId;
 
         setContentView(layoutResId);
+        ReaderAccessibilitySizing.adaptReaderBottomActions(findViewById(android.R.id.content));
 
         View backToIndex = findViewById(R.id.btnBackToIndex);
         com.jobalistudios.codigoprocesalcivilpe.navigation.LegalHierarchyRepository.Node leaf =
@@ -697,7 +698,8 @@ public class SectionContentActivity extends AppBaseActivity {
         if (articleNoteButton != null) {
             articleNoteButton.setSelected(hasQuickNote);
             articleNoteButton.setContentDescription(getString(
-                    R.string.article_note_content_description,
+                    hasQuickNote ? R.string.reader_note_existing_description
+                            : R.string.reader_note_new_description,
                     article.number
             ));
         }
