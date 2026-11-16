@@ -150,6 +150,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_l"
+                android:text="@string/reader_font_licenses_title" />
+
+            <TextView
+                style="@style/App.Text.Body.M"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                android:text="@string/reader_font_licenses_body" />
+
+            <TextView
+                style="@style/App.Text.Subtitle.M"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_l"
                 android:text="@string/about_privacy_title" />
 
             <TextView
