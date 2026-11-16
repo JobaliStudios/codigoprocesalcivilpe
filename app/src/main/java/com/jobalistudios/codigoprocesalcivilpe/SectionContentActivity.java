@@ -1141,7 +1141,8 @@ public class SectionContentActivity extends AppBaseActivity {
     }
 
     private void restoreArticleFraction(TextView contentView, Article article, float fraction) {
-        if (trackedScrollView == null || !isFinishing()) {
+        if (trackedScrollView == null || isFinishing()) return;
+        {
             Layout layout = contentView.getLayout();
             if (layout == null || contentView.length() == 0 || trackedScrollView == null) return;
             int startOffset = Math.min(article.offsetInBlock, contentView.length() - 1);
