@@ -26,6 +26,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.activity.OnBackPressedCallback;
@@ -50,6 +51,9 @@ import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
+import com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryRepository;
+import com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryTextDecorator;
+import com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryBottomSheet;
 import com.jobalistudios.codigoprocesalcivilpe.lectura.ArticleSpeechContent;
 import com.jobalistudios.codigoprocesalcivilpe.lectura.ArticleSpeechContentResolver;
 import com.jobalistudios.codigoprocesalcivilpe.lectura.ArticleTextToSpeechController;
@@ -199,6 +203,11 @@ public class SectionContentActivity extends AppBaseActivity {
         getSupportFragmentManager().setFragmentResultListener(
                 ChapterIndexBottomSheet.RESULT_KEY, this, (request, result) ->
                         handleChapterIndexResult(result));
+        getSupportFragmentManager().setFragmentResultListener(
+                GlossaryBottomSheet.RESULT_KEY, this, (request, result) -> {
+                    String articleNumber = result.getString(GlossaryBottomSheet.RESULT_ARTICLE);
+                    if (articleNumber != null) navigateToArticle(articleNumber, false);
+                });
         applyKeepScreenOnPreference();
         articleTransferController = new ReaderArticleTransferController(this);
         favoritesManager = new FavoritesManager(this);
@@ -1471,6 +1480,16 @@ public class SectionContentActivity extends AppBaseActivity {
         }
     }
 
+    private void openGlossaryTerm(@NonNull String termId) {
+        if (!ReadingPreferenceManager.isGlossaryEnabled(this)
+                || GlossaryRepository.find(this, termId) == null
+                || getSupportFragmentManager().isStateSaved()
+                || getSupportFragmentManager().findFragmentByTag(GlossaryBottomSheet.TAG)
+                != null) return;
+        GlossaryBottomSheet.newInstance(termId)
+                .show(getSupportFragmentManager(), GlossaryBottomSheet.TAG);
+    }
+
     private void renderContent(TextView contentView, @StringRes int textResId) {
         contentView.setText(buildText(textResId));
     }
@@ -1506,6 +1525,11 @@ public class SectionContentActivity extends AppBaseActivity {
                 this::openNormativeHistory
         );
         highlightController.applyHighlights(text);
+        if (block != null && ReadingPreferenceManager.isGlossaryEnabled(this)) {
+            // Empty glossary exits before traversing any article or existing span.
+            GlossaryTextDecorator.apply(text, block, GlossaryRepository.getTerms(this),
+                    ReaderAppearancePalette.from(this).primary, this::openGlossaryTerm);
+        }
         return text;
     }
 
