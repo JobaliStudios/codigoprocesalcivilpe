@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reader_open_chapter_index">Abrir índice del capítulo</string>
+    <string name="reader_chapter_position">Artículo %1$s · %2$d de %3$d</string>
+    <string name="reader_chapter_progress_accessibility">Artículo %1$d de %2$d</string>
+    <string name="reader_chapter_empty_position">Sin artículo seleccionado</string>
+    <string name="reader_index_subtitle">%1$d artículos · estás en el %2$s</string>
+    <string name="reader_index_subtitle_empty">%1$d artículos</string>
+    <string name="reader_index_search_hint">Buscar en este título</string>
+    <string name="reader_index_title">Índice del capítulo</string>
+    <string name="reader_index_all">Todos</string>
+    <string name="reader_index_favorites">Favoritos</string>
+    <string name="reader_index_notes">Con notas</string>
+    <string name="reader_index_highlights">Resaltados</string>
+    <string name="reader_index_reading">Leyendo · %1$d %%</string>
+    <string name="reader_index_no_results">No hay artículos que coincidan con los filtros.</string>
+    <string name="reader_index_other_chapter">Otro capítulo</string>
+    <string name="reader_index_go_to_article">Ir al artículo…</string>
+    <string name="reader_index_close">Cerrar índice</string>
+    <string name="reader_index_row_accessibility">Artículo %1$s. %2$s. %3$s</string>
+    <string name="reader_index_status_current">Leyendo</string>
+    <string name="reader_index_status_favorite">Favorito</string>
+    <string name="reader_index_status_note">Con nota</string>
+    <string name="reader_index_status_highlight">Con resaltado</string>
+    <string name="reader_index_status_none">Sin marcadores</string>
+    <string name="reader_action_more">Más opciones del artículo</string>
+    <string name="reader_action_listen_bottom">Escuchar artículo</string>
+    <string name="reader_action_next_short">Art. %1$s</string>
+    <string name="reader_action_next_end">Final del código</string>
+    <string name="reader_action_copy_menu">Copiar artículo</string>
+    <string name="reader_action_share_menu">Compartir artículo</string>
+    <string name="reader_swipe_navigation_title">Deslizar para cambiar de artículo</string>
+    <string name="reader_swipe_navigation_desc">Opcional: desliza horizontalmente para ir al artículo anterior o siguiente.</string>
+</resources>

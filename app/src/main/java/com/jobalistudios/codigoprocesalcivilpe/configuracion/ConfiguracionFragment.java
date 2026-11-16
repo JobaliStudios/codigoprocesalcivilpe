@@ -43,6 +43,7 @@ public class ConfiguracionFragment extends Fragment {
                 configuracionViewModel::setModoLectura);
 
         setupAppThemeSelector();
+        setupSwipeNavigationSwitch();
 
         binding.cardSoporte.setOnClickListener(v -> openEmailSupport());
 
@@ -92,6 +93,21 @@ public class ConfiguracionFragment extends Fragment {
     }
 
 
+    private void setupSwipeNavigationSwitch() {
+        refreshSwipeNavigationSwitch();
+        binding.switchSwipeNavigation.setOnCheckedChangeListener((button, enabled) ->
+                ReadingPreferenceManager.setSwipeNavigationEnabled(requireContext(), enabled));
+    }
+
+    private void refreshSwipeNavigationSwitch() {
+        if (binding == null) return;
+        binding.switchSwipeNavigation.setOnCheckedChangeListener(null);
+        binding.switchSwipeNavigation.setChecked(
+                ReadingPreferenceManager.isSwipeNavigationEnabled(requireContext()));
+        binding.switchSwipeNavigation.setOnCheckedChangeListener((button, enabled) ->
+                ReadingPreferenceManager.setSwipeNavigationEnabled(requireContext(), enabled));
+    }
+
     private void setupAppThemeSelector() {
         refreshAppThemeSelector();
     }
@@ -134,6 +150,7 @@ public class ConfiguracionFragment extends Fragment {
         if (binding == null) return;
         configuracionViewModel.refreshModoLectura();
         refreshAppThemeSelector();
+        refreshSwipeNavigationSwitch();
     }
 
     @Override

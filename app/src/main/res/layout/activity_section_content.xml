@@ -25,30 +25,103 @@
             android:orientation="vertical"
             android:padding="@dimen/space_m">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBackToIndex"
-                style="@style/App.Button.Outlined"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/readerCompactHeader"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/reader_back_to_index" />
+                android:minHeight="@dimen/reader_toolbar_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBackToIndex"
+                    android:layout_width="@dimen/reader_header_action_width"
+                    android:layout_height="@dimen/touch_target_min"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/reader_back_to_index"
+                    android:src="@drawable/baseline_arrow_back_24"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/readerBlockLabel"
+                        style="@style/App.Text.Body.S"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/readerArticlePosition"
+                        style="@style/App.Text.Body.M"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/colorOnSurface"/>
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnReaderChapterIndex"
+                    android:layout_width="@dimen/reader_header_action_width"
+                    android:layout_height="@dimen/touch_target_min"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/reader_open_chapter_index"
+                    android:src="@drawable/baseline_format_list_bulleted_24"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTamanoLetra"
+                    style="@style/App.Button.Text"
+                    android:layout_width="@dimen/reader_header_action_width"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/touch_target_min"
+                    android:contentDescription="@string/reader_appearance_title"
+                    android:text="@string/reading_action_font_size"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/sectionTitle"
-                style="@style/App.Text.Caption"
+                style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                tools:text="Título" />
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/sectionSubtitle"
-                style="@style/App.Text.Caption"
+                style="@style/App.Text.Body.S"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                tools:text="Subtítulo" />
+                android:visibility="gone"/>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/readerChapterProgress"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/reader_progress_height"
+                android:indeterminate="false"
+                android:max="1000"
+                android:progress="0"
+                android:contentDescription="@string/reader_chapter_empty_position"
+                app:trackThickness="@dimen/reader_progress_height"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/searchBarContainer"
+        app:layout_constraintTop_toBottomOf="@id/fixedCardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_l">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -207,18 +280,8 @@
                 android:gravity="end|center_vertical">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnTamanoLetra"
-                    style="@style/App.Button.Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/font_size_title"
-                    android:minHeight="@dimen/touch_target_min"
-                    android:text="@string/reading_action_font_size"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary" />
-
-                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCopyArticle"
+                    android:visibility="gone"
                     style="@style/App.Button.Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -232,22 +295,6 @@
                     app:iconPadding="@dimen/space_xs"
                     app:iconTint="@color/colorPrimary" />
             </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <ScrollView
-        android:id="@+id/scrollViewContent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/searchBarContainer"
-        app:layout_constraintTop_toBottomOf="@id/fixedCardView">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/space_l">
-
             <TextView
                 android:id="@+id/textView2"
                 style="@style/App.Text.LegalBody"
@@ -375,7 +422,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/reader_bottom_bar_height">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPreviousArticle"
@@ -385,7 +434,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/article_previous"
                 android:minHeight="@dimen/reading_action_height"
-                android:text="@string/article_previous"
+                android:text=""
                 app:icon="@drawable/baseline_chevron_left_24" />
 
             <com.google.android.material.button.MaterialButton
@@ -396,7 +445,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/article_favorite"
                 android:minHeight="@dimen/reading_action_height"
-                android:text="@string/article_favorite"
+                android:text=""
                 app:icon="@drawable/baseline_star_border_24" />
 
             <com.google.android.material.button.MaterialButton
@@ -407,11 +456,12 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/article_note"
                 android:minHeight="@dimen/reading_action_height"
-                android:text="@string/article_note"
+                android:text=""
                 app:icon="@drawable/baseline_note_24" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnShareArticle"
+                android:visibility="gone"
                 style="@style/App.Button.ReadingAction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -422,8 +472,28 @@
                 app:icon="@drawable/baseline_share_24" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnNextArticle"
+                android:id="@+id/btnBottomListenArticle"
                 style="@style/App.Button.ReadingAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="@dimen/reading_action_height"
+                android:contentDescription="@string/reader_action_listen_bottom"
+                app:icon="@drawable/baseline_volume_up_24" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReaderMoreArticle"
+                style="@style/App.Button.ReadingAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="@dimen/reading_action_height"
+                android:contentDescription="@string/reader_action_more"
+                app:icon="@drawable/baseline_more_horiz_24" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNextArticle"
+                style="@style/App.Button.Primary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

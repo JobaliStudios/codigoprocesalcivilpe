@@ -7,6 +7,8 @@ import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.ImageButton;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -134,7 +136,8 @@ public final class ReaderAppearancePalette {
             ((MaterialCardView) footer).setStrokeColor(p.divider);
         }
         int[] headingIds = {R.id.sectionTitle, R.id.sectionSubtitle,
-                R.id.currentArticleNumber, R.id.currentArticleTitle};
+                R.id.currentArticleNumber, R.id.currentArticleTitle,
+                R.id.readerBlockLabel, R.id.readerArticlePosition};
         for (int id : headingIds) {
             View v = activity.findViewById(id);
             if (v instanceof TextView) ((TextView) v).setTextColor(p.text);
@@ -142,7 +145,7 @@ public final class ReaderAppearancePalette {
         int[] primaryButtons = {R.id.btnTamanoLetra, R.id.btnCopyArticle,
                 R.id.btnPreviousArticle, R.id.btnFavoriteArticle,
                 R.id.btnArticleNote, R.id.btnShareArticle,
-                R.id.btnNextArticle};
+                R.id.btnBottomListenArticle, R.id.btnReaderMoreArticle};
         for (int id : primaryButtons) {
             View v = activity.findViewById(id);
             if (v instanceof MaterialButton) {
@@ -151,6 +154,24 @@ public final class ReaderAppearancePalette {
                 button.setIconTint(ColorStateList.valueOf(p.primary));
             }
         }
+        MaterialButton nextButton = activity.findViewById(R.id.btnNextArticle);
+        if (nextButton != null) {
+            nextButton.setTextColor(p.onPrimary);
+            nextButton.setIconTint(ColorStateList.valueOf(p.onPrimary));
+            nextButton.setBackgroundTintList(ColorStateList.valueOf(p.primary));
+        }
+        for (int id : new int[] {R.id.btnBackToIndex, R.id.btnReaderChapterIndex}) {
+            View view = activity.findViewById(id);
+            if (view instanceof ImageButton) {
+                ((ImageButton) view).setImageTintList(ColorStateList.valueOf(p.primary));
+            }
+        }
+        LinearProgressIndicator progress = activity.findViewById(R.id.readerChapterProgress);
+        if (progress != null) {
+            progress.setIndicatorColor(p.primary);
+            progress.setTrackColor(p.divider);
+        }
+
         View chips = activity.findViewById(R.id.relatedArticlesChipGroup);
         if (chips instanceof ChipGroup) {
             ChipGroup group = (ChipGroup) chips;

@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.view.GestureDetector;
 import android.view.ViewConfiguration;
+import android.view.VelocityTracker;
+import android.content.res.ColorStateList;
+import android.widget.PopupMenu;
 
 import androidx.core.view.ViewCompat;
 import android.view.ContextThemeWrapper;
@@ -32,6 +35,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.jobalistudios.codigoprocesalcivilpe.busqueda.GoToArticleBottomSheet;
 import com.jobalistudios.codigoprocesalcivilpe.anuncios.InterstitialAdCoordinator;
 import com.jobalistudios.codigoprocesalcivilpe.configuracion.ReadingPreferenceManager;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
@@ -39,6 +44,7 @@ import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleBlock;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleLegalStatusResolver;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleSequenceResolver;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ReaderChapterProgress;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.VisibleArticleResolver;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
@@ -62,6 +68,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Locale;
 
 
 public class SectionContentActivity extends AppBaseActivity {
@@ -114,6 +121,14 @@ public class SectionContentActivity extends AppBaseActivity {
     private TextView currentArticleTitleView;
     private Chip currentArticleStatusChip;
     private View readingBottomBar;
+    private LinearProgressIndicator chapterProgressIndicator;
+    private TextView chapterPositionView;
+    private TextView chapterBlockView;
+    private MaterialButton listenBottomButton;
+    private MaterialButton moreArticleButton;
+    private VelocityTracker swipeVelocityTracker;
+    private boolean swipeTracking;
+    private float swipeDownX, swipeDownY;
     private MaterialButton previousArticleButton;
     private MaterialButton favoriteArticleButton;
     private MaterialButton articleNoteButton;
@@ -181,6 +196,9 @@ public class SectionContentActivity extends AppBaseActivity {
                     applyReaderAppearance();
                 });
         setupFocusTapDetector();
+        getSupportFragmentManager().setFragmentResultListener(
+                ChapterIndexBottomSheet.RESULT_KEY, this, (request, result) ->
+                        handleChapterIndexResult(result));
         applyKeepScreenOnPreference();
         articleTransferController = new ReaderArticleTransferController(this);
         favoritesManager = new FavoritesManager(this);
@@ -236,6 +254,12 @@ public class SectionContentActivity extends AppBaseActivity {
         if (subtitleView != null && subtitleResId != 0) {
             subtitleView.setText(subtitleResId);
         }
+        TextView blockLabel = findViewById(R.id.readerBlockLabel);
+        if (blockLabel != null) {
+            String label = leaf == null ? (titleResId == 0 ? "" : getString(titleResId))
+                    : leaf.title;
+            blockLabel.setText(label.toUpperCase(Locale.ROOT));
+        }
 
         if (textResId == 0 || contentView == null) {
             finish();
@@ -257,6 +281,7 @@ public class SectionContentActivity extends AppBaseActivity {
         setupHeaderActions(contentView);
         setupArticleActions();
         setupInPageSearch(contentView, textResId);
+        setupReaderChapterIndex();
         applyReaderAppearanceColors();
         applyFocusVisualState();
 
@@ -306,6 +331,7 @@ public class SectionContentActivity extends AppBaseActivity {
     }
 
     private void tearDownCurrentDestination() {
+        releaseSwipeTracker();
         if (trackedContentView != null) {
             trackedContentView.removeCallbacks(updateVisibleArticle);
         }
@@ -545,6 +571,11 @@ public class SectionContentActivity extends AppBaseActivity {
         stopArticleSpeechButton = findViewById(R.id.btnStopArticleSpeech);
         relatedArticlesContainer = findViewById(R.id.relatedArticlesContainer);
         relatedArticlesChipGroup = findViewById(R.id.relatedArticlesChipGroup);
+        chapterProgressIndicator = findViewById(R.id.readerChapterProgress);
+        chapterPositionView = findViewById(R.id.readerArticlePosition);
+        chapterBlockView = findViewById(R.id.readerBlockLabel);
+        listenBottomButton = findViewById(R.id.btnBottomListenArticle);
+        moreArticleButton = findViewById(R.id.btnReaderMoreArticle);
 
         if (previousArticleButton != null) {
             previousArticleButton.setOnClickListener(view -> navigateRelativeArticle(false));
@@ -564,12 +595,19 @@ public class SectionContentActivity extends AppBaseActivity {
         if (nextArticleButton != null) {
             nextArticleButton.setOnClickListener(view -> navigateRelativeArticle(true));
         }
+        if (listenBottomButton != null) {
+            listenBottomButton.setOnClickListener(view -> playCurrentArticle());
+        }
+        if (moreArticleButton != null) {
+            moreArticleButton.setOnClickListener(this::showReaderMoreMenu);
+        }
         setupArticleSpeechActions();
         renderCurrentArticleState();
     }
 
     private void renderCurrentArticleState() {
         Article article = currentVisibleArticle;
+        renderChapterProgress(article);
         boolean available = article != null;
         boolean repealed = ArticleLegalStatusResolver.isRepealed(article);
         if (currentArticleNumberView != null) {
@@ -603,6 +641,13 @@ public class SectionContentActivity extends AppBaseActivity {
         setEnabled(nextArticleButton, hasNext);
         setEnabled(favoriteArticleButton, available);
         setEnabled(articleNoteButton, available);
+        setEnabled(listenBottomButton, available);
+        setEnabled(moreArticleButton, available);
+        if (nextArticleButton != null) {
+            nextArticleButton.setText(hasNext
+                    ? getString(R.string.reader_action_next_short, currentSequence.next.article.number)
+                    : getString(R.string.reader_action_next_end));
+        }
         if (copyArticleButton != null) {
             copyArticleButton.setEnabled(available);
         }
@@ -669,6 +714,107 @@ public class SectionContentActivity extends AppBaseActivity {
                     article.number
             ));
         }
+    }
+
+
+    private void renderChapterProgress(@Nullable Article article) {
+        ReaderChapterProgress progress = ReaderChapterProgress.of(
+                trackedArticleBlock, article == null ? null : article.number);
+        if (chapterProgressIndicator != null) {
+            chapterProgressIndicator.setProgressCompat(progress.progressOnScale(1000), false);
+            chapterProgressIndicator.setContentDescription(progress.position > 0
+                    ? getString(R.string.reader_chapter_progress_accessibility,
+                    progress.position, progress.total)
+                    : getString(R.string.reader_chapter_empty_position));
+        }
+        if (chapterPositionView != null) {
+            chapterPositionView.setText(progress.position > 0 && article != null
+                    ? getString(R.string.reader_chapter_position,
+                    article.number, progress.position, progress.total)
+                    : getString(R.string.reader_chapter_empty_position));
+        }
+    }
+
+    private void setupReaderChapterIndex() {
+        View open = findViewById(R.id.btnReaderChapterIndex);
+        if (open != null) {
+            open.setOnClickListener(v -> openChapterIndex());
+        }
+    }
+
+    private void openChapterIndex() {
+        if (trackedArticleBlock == null || trackedArticleBlock.articles.isEmpty()
+                || trackedContentView == null || getSupportFragmentManager().isStateSaved()
+                || getSupportFragmentManager().findFragmentByTag(ChapterIndexBottomSheet.TAG)
+                != null) return;
+        Article current = findCurrentlyVisibleArticle();
+        if (current == null) current = currentVisibleArticle;
+        String title = chapterBlockView == null ? "" : chapterBlockView.getText().toString();
+        int percentage = Math.round(100f
+                * getCurrentArticleVerticalFraction(trackedContentView, current));
+        ChapterIndexBottomSheet.newInstance(trackedArticleBlock.key,
+                current == null ? null : current.number, title, percentage)
+                .show(getSupportFragmentManager(), ChapterIndexBottomSheet.TAG);
+    }
+
+    private void handleChapterIndexResult(Bundle result) {
+        String action = result.getString(ChapterIndexBottomSheet.RESULT_ACTION, "");
+        switch (action) {
+            case ChapterIndexBottomSheet.ACTION_OPEN: {
+                String articleNumber = result.getString(ChapterIndexBottomSheet.RESULT_ARTICLE);
+                if (articleNumber == null) return;
+                Article found = findArticleInTrackedBlock(articleNumber);
+                if (found != null && trackedContentView != null) {
+                    stopArticleSpeech();
+                    InterstitialAdCoordinator.getInstance().recordNavigationWithoutInterruption();
+                    scrollToOffset(trackedContentView, found.offsetInBlock, found);
+                } else {
+                    navigateToArticle(articleNumber, false);
+                }
+                break;
+            }
+            case ChapterIndexBottomSheet.ACTION_OTHER_CHAPTER: {
+                View back = findViewById(R.id.btnBackToIndex);
+                if (back != null && back.getVisibility() == View.VISIBLE) {
+                    back.performClick();
+                } else {
+                    startActivity(com.jobalistudios.codigoprocesalcivilpe.navigation
+                            .SectionListActivity.createIntent(this,
+                            com.jobalistudios.codigoprocesalcivilpe.navigation
+                                    .LegalHierarchyRepository.ROOT_ID));
+                }
+                break;
+            }
+            case ChapterIndexBottomSheet.ACTION_GO_TO_ARTICLE: {
+                if (!getSupportFragmentManager().isStateSaved()
+                        && getSupportFragmentManager().findFragmentByTag(
+                        GoToArticleBottomSheet.TAG) == null) {
+                    GoToArticleBottomSheet.newInstance().show(
+                            getSupportFragmentManager(), GoToArticleBottomSheet.TAG);
+                }
+                break;
+            }
+            default:
+        }
+    }
+
+    /** Menú secundario sin eliminar las vistas históricas usadas por pruebas. */
+    private void showReaderMoreMenu(View anchor) {
+        PopupMenu menu = new PopupMenu(this, anchor);
+        menu.getMenu().add(0, 1, 0, R.string.reader_action_copy_menu);
+        menu.getMenu().add(0, 2, 1, R.string.reader_action_share_menu);
+        menu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == 1) {
+                copyCurrentArticle();
+                return true;
+            }
+            if (item.getItemId() == 2) {
+                shareCurrentArticle();
+                return true;
+            }
+            return false;
+        });
+        menu.show();
     }
 
     private void setEnabled(@Nullable MaterialButton button, boolean enabled) {
@@ -1208,13 +1354,88 @@ public class SectionContentActivity extends AppBaseActivity {
                 });
     }
 
+    /** Solo observa gestos que nacen en el área del artículo y que el usuario habilitó. */
+    private void beginSwipeTracker(MotionEvent event) {
+        releaseSwipeTracker();
+        if (!ReadingPreferenceManager.isSwipeNavigationEnabled(this)
+                || event.getPointerCount() != 1 || trackedContentView == null
+                || trackedContentView.hasSelection()) return;
+        ScrollView scroll = findViewById(R.id.scrollViewContent);
+        if (scroll == null || scroll.getVisibility() != View.VISIBLE) return;
+        int[] position = new int[2];
+        scroll.getLocationOnScreen(position);
+        float y = event.getRawY();
+        if (y < position[1] || y >= position[1] + scroll.getHeight()) return;
+        float width = getWindow().getDecorView().getWidth();
+        if (width <= 0) width = getResources().getDisplayMetrics().widthPixels;
+        float edge = getResources().getDimension(R.dimen.reader_nav_swipe_edge);
+        float x = event.getRawX();
+        if (x < edge || x > width - edge) return;
+        swipeTracking = true;
+        swipeDownX = x;
+        swipeDownY = y;
+        swipeVelocityTracker = VelocityTracker.obtain();
+        swipeVelocityTracker.addMovement(event);
+    }
+
+    private ReaderSwipeGesturePolicy.Direction finishSwipe(MotionEvent event) {
+        if (!swipeTracking || swipeVelocityTracker == null) {
+            releaseSwipeTracker();
+            return ReaderSwipeGesturePolicy.Direction.NONE;
+        }
+        swipeVelocityTracker.addMovement(event);
+        swipeVelocityTracker.computeCurrentVelocity(1000);
+        float velocityX = swipeVelocityTracker.getXVelocity();
+        float velocityY = swipeVelocityTracker.getYVelocity();
+        float width = getWindow().getDecorView().getWidth();
+        if (width <= 0) width = getResources().getDisplayMetrics().widthPixels;
+        ReaderSwipeGesturePolicy.Direction direction = ReaderSwipeGesturePolicy.classify(
+                swipeDownX, swipeDownY, event.getRawX(), event.getRawY(),
+                velocityX, velocityY, width,
+                getResources().getDimension(R.dimen.reader_nav_swipe_edge),
+                getResources().getDimension(R.dimen.reader_nav_swipe_min_distance),
+                Math.max(getResources().getDimension(R.dimen.reader_nav_swipe_min_velocity),
+                        ViewConfiguration.get(this).getScaledMinimumFlingVelocity()));
+        releaseSwipeTracker();
+        return direction;
+    }
+
+    private void releaseSwipeTracker() {
+        swipeTracking = false;
+        if (swipeVelocityTracker != null) {
+            swipeVelocityTracker.recycle();
+            swipeVelocityTracker = null;
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        // Observa el toque sin consumirlo: Highlights y selección conservan sus listeners.
+        // La selección, los enlaces y el desplazamiento vertical siguen recibiendo
+        // la secuencia de MotionEvent; nunca interceptamos ACTION_DOWN/MOVE.
+        int action = event.getActionMasked();
+        if (action == MotionEvent.ACTION_DOWN) {
+            beginSwipeTracker(event);
+        } else if (action == MotionEvent.ACTION_POINTER_DOWN
+                || action == MotionEvent.ACTION_CANCEL) {
+            releaseSwipeTracker();
+        } else if (swipeTracking && swipeVelocityTracker != null
+                && action == MotionEvent.ACTION_MOVE) {
+            swipeVelocityTracker.addMovement(event);
+        }
         if (focusModeActive && focusTapDetector != null) {
             focusTapDetector.onTouchEvent(event);
         }
-        return super.dispatchTouchEvent(event);
+        boolean handled = super.dispatchTouchEvent(event);
+        if (action == MotionEvent.ACTION_UP) {
+            ReaderSwipeGesturePolicy.Direction direction = finishSwipe(event);
+            if (direction != ReaderSwipeGesturePolicy.Direction.NONE
+                    && trackedContentView != null && !trackedContentView.hasSelection()
+                    && ReadingPreferenceManager.isSwipeNavigationEnabled(this)) {
+                navigateRelativeArticle(direction == ReaderSwipeGesturePolicy.Direction.NEXT);
+                return true;
+            }
+        }
+        return handled;
     }
 
     private void applyFocusVisualState() {
