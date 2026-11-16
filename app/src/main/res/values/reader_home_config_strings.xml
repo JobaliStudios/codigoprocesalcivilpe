@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="premium_home_offline">Disponible sin conexión</string>
+    <string name="premium_home_offline_verified">Disponible sin conexión · %1$s</string>
+    <string name="premium_home_reading_position">%1$s · %2$d de %3$d artículos</string>
+    <string name="premium_home_continue">Continuar</string>
+    <string name="premium_home_daily_label">ARTÍCULO DEL DÍA</string>
+    <string name="premium_home_daily_read">Leer artículo</string>
+    <string name="premium_home_daily_favorite_add">Añadir artículo %1$s a favoritos</string>
+    <string name="premium_home_daily_favorite_remove">Quitar artículo %1$s de favoritos</string>
+    <string name="premium_home_access_code">Consultar el Código</string>
+    <string name="premium_home_access_search">Buscar artículo</string>
+    <string name="premium_home_access_quiz">Cuestionarios</string>
+    <string name="premium_home_access_notes">Mis notas</string>
+    <string name="premium_home_recent_chip">Artículo %1$s, %2$s</string>
+    <string name="premium_home_daily_hint">Selección automática por fecha; no es una recomendación jurídica.</string>
+    <string name="premium_config_reading_group">Lectura</string>
+    <string name="premium_config_app_appearance">Apariencia de la app</string>
+    <string name="premium_config_reader_theme">Tema de lectura</string>
+    <string name="premium_config_reader_font">Fuente de lectura</string>
+    <string name="premium_config_reader_size">Tamaño de texto</string>
+    <string name="premium_config_open_appearance">Abrir apariencia de lectura</string>
+    <string name="premium_config_glossary">Términos del glosario</string>
+    <string name="premium_config_focus_default">Modo enfoque al abrir</string>
+    <string name="premium_config_reading_reset">Restablecer valores de lectura</string>
+    <string name="premium_config_app_card_info">Se aplica en todas las pantallas</string>
+    <string name="premium_config_reader_card_info">Ajustes locales para leer sin conexión</string>
+    <string name="premium_config_reader_font_size_value">%1$s · %2$d %%</string>
+</resources>
