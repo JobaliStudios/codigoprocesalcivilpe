@@ -1354,13 +1354,88 @@ public class SectionContentActivity extends AppBaseActivity {
                 });
     }
 
+    /** Solo observa gestos que nacen en el área del artículo y que el usuario habilitó. */
+    private void beginSwipeTracker(MotionEvent event) {
+        releaseSwipeTracker();
+        if (!ReadingPreferenceManager.isSwipeNavigationEnabled(this)
+                || event.getPointerCount() != 1 || trackedContentView == null
+                || trackedContentView.hasSelection()) return;
+        ScrollView scroll = findViewById(R.id.scrollViewContent);
+        if (scroll == null || scroll.getVisibility() != View.VISIBLE) return;
+        int[] position = new int[2];
+        scroll.getLocationOnScreen(position);
+        float y = event.getRawY();
+        if (y < position[1] || y >= position[1] + scroll.getHeight()) return;
+        float width = getWindow().getDecorView().getWidth();
+        if (width <= 0) width = getResources().getDisplayMetrics().widthPixels;
+        float edge = getResources().getDimension(R.dimen.reader_nav_swipe_edge);
+        float x = event.getRawX();
+        if (x < edge || x > width - edge) return;
+        swipeTracking = true;
+        swipeDownX = x;
+        swipeDownY = y;
+        swipeVelocityTracker = VelocityTracker.obtain();
+        swipeVelocityTracker.addMovement(event);
+    }
+
+    private ReaderSwipeGesturePolicy.Direction finishSwipe(MotionEvent event) {
+        if (!swipeTracking || swipeVelocityTracker == null) {
+            releaseSwipeTracker();
+            return ReaderSwipeGesturePolicy.Direction.NONE;
+        }
+        swipeVelocityTracker.addMovement(event);
+        swipeVelocityTracker.computeCurrentVelocity(1000);
+        float velocityX = swipeVelocityTracker.getXVelocity();
+        float velocityY = swipeVelocityTracker.getYVelocity();
+        float width = getWindow().getDecorView().getWidth();
+        if (width <= 0) width = getResources().getDisplayMetrics().widthPixels;
+        ReaderSwipeGesturePolicy.Direction direction = ReaderSwipeGesturePolicy.classify(
+                swipeDownX, swipeDownY, event.getRawX(), event.getRawY(),
+                velocityX, velocityY, width,
+                getResources().getDimension(R.dimen.reader_nav_swipe_edge),
+                getResources().getDimension(R.dimen.reader_nav_swipe_min_distance),
+                Math.max(getResources().getDimension(R.dimen.reader_nav_swipe_min_velocity),
+                        ViewConfiguration.get(this).getScaledMinimumFlingVelocity()));
+        releaseSwipeTracker();
+        return direction;
+    }
+
+    private void releaseSwipeTracker() {
+        swipeTracking = false;
+        if (swipeVelocityTracker != null) {
+            swipeVelocityTracker.recycle();
+            swipeVelocityTracker = null;
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        // Observa el toque sin consumirlo: Highlights y selección conservan sus listeners.
+        // La selección, los enlaces y el desplazamiento vertical siguen recibiendo
+        // la secuencia de MotionEvent; nunca interceptamos ACTION_DOWN/MOVE.
+        int action = event.getActionMasked();
+        if (action == MotionEvent.ACTION_DOWN) {
+            beginSwipeTracker(event);
+        } else if (action == MotionEvent.ACTION_POINTER_DOWN
+                || action == MotionEvent.ACTION_CANCEL) {
+            releaseSwipeTracker();
+        } else if (swipeTracking && swipeVelocityTracker != null
+                && action == MotionEvent.ACTION_MOVE) {
+            swipeVelocityTracker.addMovement(event);
+        }
         if (focusModeActive && focusTapDetector != null) {
             focusTapDetector.onTouchEvent(event);
         }
-        return super.dispatchTouchEvent(event);
+        boolean handled = super.dispatchTouchEvent(event);
+        if (action == MotionEvent.ACTION_UP) {
+            ReaderSwipeGesturePolicy.Direction direction = finishSwipe(event);
+            if (direction != ReaderSwipeGesturePolicy.Direction.NONE
+                    && trackedContentView != null && !trackedContentView.hasSelection()
+                    && ReadingPreferenceManager.isSwipeNavigationEnabled(this)) {
+                navigateRelativeArticle(direction == ReaderSwipeGesturePolicy.Direction.NEXT);
+                return true;
+            }
+        }
+        return handled;
     }
 
     private void applyFocusVisualState() {
