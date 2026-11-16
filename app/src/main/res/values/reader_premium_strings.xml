@@ -32,4 +32,6 @@
     <string name="reader_appearance_done">Listo</string>
     <string name="reader_focus_exit">Modo enfoque · toca para salir</string>
     <string name="reader_focus_show_controls">Mostrar controles</string>
+    <string name="reader_font_licenses_title">Tipografías de lectura</string>
+    <string name="reader_font_licenses_body">Literata y Atkinson Hyperlegible se distribuyen dentro de la app bajo la licencia SIL Open Font License 1.1 (OFL). Avisos y licencias: docs/licenses del proyecto.</string>
 </resources>
