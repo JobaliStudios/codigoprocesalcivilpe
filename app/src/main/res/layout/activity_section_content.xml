@@ -434,6 +434,35 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
+    <!-- El modo enfoque conserva las acciones existentes, pero las oculta temporalmente. -->
+    <View
+        android:id="@+id/focusProgressLine"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/reader_focus_progress_height"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/focusExitPill"
+        style="@style/App.Text.Body.M"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_xl"
+        android:background="@drawable/bg_icon_container"
+        android:contentDescription="@string/reader_focus_exit"
+        android:gravity="center"
+        android:minHeight="@dimen/touch_target_min"
+        android:paddingHorizontal="@dimen/space_xl"
+        android:text="@string/reader_focus_exit"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabBuscar"
         style="@style/IMAGEBOTONBUSQUEDA"

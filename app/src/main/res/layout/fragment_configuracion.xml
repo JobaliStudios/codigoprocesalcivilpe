@@ -119,52 +119,53 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="@dimen/list_card_icon_size"
-                            android:layout_height="@dimen/list_card_icon_size"
-                            android:layout_marginEnd="@dimen/space_m"
-                            android:background="@drawable/bg_icon_container"
-                            android:gravity="center">
-
-                            <ImageView
-                                android:layout_width="@dimen/list_card_small_icon"
-                                android:layout_height="@dimen/list_card_small_icon"
-                                android:contentDescription="@null"
-                                android:src="@drawable/baseline_settings_24"
-                                app:tint="@color/colorPrimary" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            style="@style/App.Text.Title.M"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:text="@string/reader_app_theme_title" />
 
-                            <TextView
-                                style="@style/App.Text.Title.M"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/config_dark_mode_title"
-                                android:textColor="@color/colorOnSurface" />
-
-                            <TextView
-                                style="@style/App.Text.Body.S"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/space_xs"
-                                android:text="@string/config_dark_mode_desc" />
-                        </LinearLayout>
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/switch_modo_oscuro"
+                        <com.google.android.material.button.MaterialButtonToggleGroup
+                            android:id="@+id/appThemeToggle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_s"
                             android:saveEnabled="false"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/config_dark_mode_title"
-                            android:minHeight="@dimen/touch_target_min" />
+                            app:singleSelection="true"
+                            app:selectionRequired="true">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/themeSystem"
+                                style="@style/App.Button.Outlined"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:minHeight="@dimen/touch_target_min"
+                                android:saveEnabled="false"
+                                android:text="@string/reader_theme_system" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/themeLight"
+                                style="@style/App.Button.Outlined"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:minHeight="@dimen/touch_target_min"
+                                android:saveEnabled="false"
+                                android:text="@string/reader_theme_light" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/themeDark"
+                                style="@style/App.Button.Outlined"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:minHeight="@dimen/touch_target_min"
+                                android:saveEnabled="false"
+                                android:text="@string/reader_theme_dark" />
+                        </com.google.android.material.button.MaterialButtonToggleGroup>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

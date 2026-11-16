@@ -51,7 +51,7 @@ public final class SectionTextFormatter {
 
     public static void applyArticleTitleFormatting(Context context, SpannableString spannable) {
         String fullText = spannable.toString();
-        int colorArticulo = ContextCompat.getColor(context, R.color.article_title_color);
+        int colorArticulo = ReaderAppearancePalette.from(context).primary;
 
         Pattern articlePattern = Pattern.compile(
                 "^Artículo\\s+\\d+(?:(?:\\s*-\\s*|\\s+)[A-Z])?\\s*\\.\\s*-\\s*[^\\n]+",
@@ -82,11 +82,12 @@ public final class SectionTextFormatter {
             SpannableString spannable,
             ReaderTypography typography
     ) {
-        int backgroundColor = ContextCompat.getColor(context, R.color.legal_update_background);
-        int borderColor = ContextCompat.getColor(context, R.color.legal_update_border);
-        int titleColor = ContextCompat.getColor(context, R.color.legal_update_title);
-        int summaryColor = ContextCompat.getColor(context, R.color.legal_update_summary);
-        int textColor = ContextCompat.getColor(context, R.color.legal_update_text);
+        ReaderAppearancePalette colors = ReaderAppearancePalette.from(context);
+        int backgroundColor = colors.container;
+        int borderColor = colors.primary;
+        int titleColor = colors.primary;
+        int summaryColor = colors.primary;
+        int textColor = colors.text;
         float borderWidth = context.getResources().getDimension(R.dimen.stroke_width_thin);
         int horizontalPadding = context.getResources().getDimensionPixelSize(R.dimen.space_m);
         int verticalPadding = context.getResources().getDimensionPixelSize(R.dimen.space_s);
@@ -182,7 +183,7 @@ public final class SectionTextFormatter {
             List<ResolvedArticleCrossReference> references,
             ArticleCrossReferenceSpan.Listener listener
     ) {
-        int linkColor = ContextCompat.getColor(context, R.color.colorPrimary);
+        int linkColor = ReaderAppearancePalette.from(context).primary;
         for (ResolvedArticleCrossReference resolved : references) {
             int start = resolved.reference.start;
             int end = resolved.reference.end;

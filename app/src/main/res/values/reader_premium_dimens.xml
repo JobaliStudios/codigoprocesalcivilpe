@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="reader_toolbar_height">56dp</dimen>
+    <dimen name="reader_progress_height">3dp</dimen>
+    <dimen name="reader_focus_progress_height">2dp</dimen>
+    <dimen name="reader_bottom_bar_height">88dp</dimen>
+    <dimen name="reader_sheet_corner_radius">28dp</dimen>
+    <dimen name="reader_sheet_max_width">640dp</dimen>
+    <dimen name="reader_body_text_size">18sp</dimen>
+    <dimen name="reader_focus_body_text_size">21sp</dimen>
+    <dimen name="reader_heading_text_size">24sp</dimen>
+    <dimen name="reader_touch_target_min">@dimen/touch_target_min</dimen>
+    <dimen name="reader_preview_padding">20dp</dimen>
+    <dimen name="reader_sheet_padding">24dp</dimen>
+    <dimen name="reader_margin_narrow">16dp</dimen>
+    <dimen name="reader_margin_normal">24dp</dimen>
+    <dimen name="reader_margin_wide">40dp</dimen>
+</resources>

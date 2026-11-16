@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reader_app_theme_title">Apariencia de la app</string>
+    <string name="reader_theme_system">Sistema</string>
+    <string name="reader_theme_light">Claro</string>
+    <string name="reader_theme_sepia">Sepia</string>
+    <string name="reader_theme_dark">Oscuro</string>
+    <string name="reader_appearance_title">Apariencia de lectura</string>
+    <string name="reader_appearance_preview_title">Vista previa</string>
+    <string name="reader_appearance_preview_text">Toda persona tiene derecho a la tutela jurisdiccional efectiva…</string>
+    <string name="reader_appearance_theme">Tema de lectura</string>
+    <string name="reader_theme_auto">Como la app</string>
+    <string name="reader_appearance_font">Fuente</string>
+    <string name="reader_font_sans">Sans</string>
+    <string name="reader_font_serif">Serif</string>
+    <string name="reader_font_accessible">Accesible</string>
+    <string name="reader_appearance_size">Tamaño de texto</string>
+    <string name="reader_appearance_size_value">%1$d %%</string>
+    <string name="reader_appearance_lines">Interlineado</string>
+    <string name="reader_line_compact">Compacto</string>
+    <string name="reader_line_normal">Normal</string>
+    <string name="reader_line_wide">Amplio</string>
+    <string name="reader_appearance_margins">Márgenes</string>
+    <string name="reader_margin_narrow">Estrecho</string>
+    <string name="reader_margin_normal">Normal</string>
+    <string name="reader_margin_wide">Ancho</string>
+    <string name="reader_appearance_justify">Justificar texto</string>
+    <string name="reader_appearance_focus">Modo enfoque</string>
+    <string name="reader_appearance_focus_hint">Oculta las barras mientras lees</string>
+    <string name="reader_appearance_keep_awake">Mantener pantalla encendida</string>
+    <string name="reader_appearance_reset">Restablecer</string>
+    <string name="reader_appearance_done">Listo</string>
+    <string name="reader_focus_exit">Modo enfoque · toca para salir</string>
+    <string name="reader_focus_show_controls">Mostrar controles</string>
+    <string name="reader_font_licenses_title">Tipografías de lectura</string>
+    <string name="reader_font_licenses_body">Literata y Atkinson Hyperlegible se distribuyen dentro de la app bajo la licencia SIL Open Font License 1.1 (OFL). Avisos y licencias: docs/licenses del proyecto.</string>
+</resources>

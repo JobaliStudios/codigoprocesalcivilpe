@@ -42,7 +42,7 @@ public class ConfiguracionFragment extends Fragment {
         setupSwitchObserver(binding.switchModoLectura, configuracionViewModel.getModoLectura(),
                 configuracionViewModel::setModoLectura);
 
-        setupDarkModeSwitch();
+        setupAppThemeSelector();
 
         binding.cardSoporte.setOnClickListener(v -> openEmailSupport());
 
@@ -92,21 +92,39 @@ public class ConfiguracionFragment extends Fragment {
     }
 
 
-    private void setupDarkModeSwitch() {
-        refreshDarkModeSwitch();
+    private void setupAppThemeSelector() {
+        refreshAppThemeSelector();
     }
 
-    private void refreshDarkModeSwitch() {
+    private void refreshAppThemeSelector() {
         if (binding == null) return;
-        // Los interruptores no guardan su estado de vista: la fuente persistente
-        // es app_settings. Evita que Android restaure el valor oscuro previo durante
-        // la recreación de Activity y dispare el listener que lo vuelve a escribir.
-        // Actualizar la vista sin disparar el listener ni guardar de nuevo el valor antiguo.
-        binding.switchModoOscuro.setOnCheckedChangeListener(null);
-        binding.switchModoOscuro.setChecked(ThemePreferenceManager.isDarkModeEnabled(requireContext()));
-        binding.switchModoOscuro.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            ThemePreferenceManager.setDarkModeEnabled(requireContext(), isChecked);
-            ThemePreferenceManager.applySavedTheme(requireContext());
+
+        // La preferencia persistida es la única fuente de verdad después de recreaciones
+        // por DayNight. No se permite restaurar un estado anterior de las vistas.
+        binding.appThemeToggle.clearOnButtonCheckedListeners();
+        AppThemeMode mode = ThemePreferenceManager.getAppThemeMode(requireContext());
+        int checkedId;
+        switch (mode) {
+            case DARK:
+                checkedId = R.id.themeDark;
+                break;
+            case LIGHT:
+                checkedId = R.id.themeLight;
+                break;
+            case SYSTEM:
+            default:
+                checkedId = R.id.themeSystem;
+        }
+        binding.appThemeToggle.check(checkedId);
+        binding.appThemeToggle.addOnButtonCheckedListener((group, buttonId, isChecked) -> {
+            if (!isChecked) return;
+            AppThemeMode selected = buttonId == R.id.themeDark ? AppThemeMode.DARK
+                    : buttonId == R.id.themeLight ? AppThemeMode.LIGHT
+                    : AppThemeMode.SYSTEM;
+            if (selected != ThemePreferenceManager.getAppThemeMode(requireContext())) {
+                ThemePreferenceManager.setAppThemeMode(requireContext(), selected);
+                ThemePreferenceManager.applySavedTheme(requireContext());
+            }
         });
     }
 
@@ -115,7 +133,7 @@ public class ConfiguracionFragment extends Fragment {
         super.onResume();
         if (binding == null) return;
         configuracionViewModel.refreshModoLectura();
-        refreshDarkModeSwitch();
+        refreshAppThemeSelector();
     }
 
     @Override

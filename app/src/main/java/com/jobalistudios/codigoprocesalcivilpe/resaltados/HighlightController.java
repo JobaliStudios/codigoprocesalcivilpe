@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.ReaderAppearancePalette;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistorySpan;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
@@ -340,15 +341,26 @@ public class HighlightController {
     }
 
     private int colorFor(String tag) {
+        boolean darkReader = ReaderAppearancePalette.from(context).theme
+                == ReaderAppearancePalette.ResolvedTheme.DARK;
+        int color;
         switch (tag) {
             case "orange":
-                return ContextCompat.getColor(context, R.color.highlight_orange);
+                color = darkReader ? R.color.reader_dark_user_highlight_orange
+                        : R.color.highlight_orange;
+                break;
             case "green":
-                return ContextCompat.getColor(context, R.color.highlight_green);
+                color = darkReader ? R.color.reader_dark_user_highlight_green
+                        : R.color.highlight_green;
+                break;
             case "blue":
-                return ContextCompat.getColor(context, R.color.highlight_blue);
+                color = darkReader ? R.color.reader_dark_user_highlight_blue
+                        : R.color.highlight_blue;
+                break;
             default:
-                return ContextCompat.getColor(context, R.color.highlight_yellow);
+                color = darkReader ? R.color.reader_dark_user_highlight_yellow
+                        : R.color.highlight_yellow;
         }
+        return ContextCompat.getColor(context, color);
     }
 }
