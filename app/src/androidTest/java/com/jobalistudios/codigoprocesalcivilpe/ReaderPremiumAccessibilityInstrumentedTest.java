@@ -45,6 +45,10 @@ public final class ReaderPremiumAccessibilityInstrumentedTest {
     @Test
     public void inicioBusquedaYConfiguracionHaveAccessibleActions() {
         try (ActivityScenario<MainActivity> ignored = ActivityScenario.launch(MainActivity.class)) {
+            onView(withId(R.id.cardArticleOfTheDay)).perform(scrollTo())
+                    .check(matches(isDisplayed()));
+            onView(withId(R.id.buttonHomeNotes)).perform(scrollTo())
+                    .check(matches(isDisplayed()));
             onView(withId(R.id.buttonHomeSearch)).perform(scrollTo(), click());
             onView(withId(R.id.searchView)).check(matches(isDisplayed()));
 
@@ -55,11 +59,8 @@ public final class ReaderPremiumAccessibilityInstrumentedTest {
             Espresso.pressBack();
             onView(withId(R.id.buttonReadingReset)).perform(scrollTo(), click());
 
-            onView(withId(R.id.navigation_home)).perform(click());
-            onView(withId(R.id.cardArticleOfTheDay)).perform(scrollTo())
-                    .check(matches(isDisplayed()));
-            onView(withId(R.id.buttonHomeNotes)).perform(scrollTo())
-                    .check(matches(isDisplayed()));
+            // El regreso a Inicio queda validado por MainNavigationInstrumentedTest;
+            // esta prueba se centra en las acciones accesibles de Inicio y Ajustes.
         }
     }
 
