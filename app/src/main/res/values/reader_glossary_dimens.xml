@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="glossary_sheet_vertical_margin">12dp</dimen>
+    <dimen name="glossary_sheet_max_content_height">520dp</dimen>
+    <dimen name="glossary_list_min_height">220dp</dimen>
+    <dimen name="glossary_sheet_padding">20dp</dimen>
+</resources>

@@ -44,3 +44,11 @@
 -keep,allowoptimization,allowobfuscation class com.jobalistudios.codigoprocesalcivilpe.model.QuestionModel {
     <fields>;
 }
+
+# Gson: glosario editorial offline. Mantener metadatos @SerializedName bajo R8.
+-keep,allowoptimization,allowobfuscation class com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryRepository$GlossaryFile {
+    <fields>;
+}
+-keep,allowoptimization,allowobfuscation class com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryRepository$Term {
+    <fields>;
+}
