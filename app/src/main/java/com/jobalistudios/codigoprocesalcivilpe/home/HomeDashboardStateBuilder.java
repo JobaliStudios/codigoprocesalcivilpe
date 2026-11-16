@@ -8,12 +8,16 @@ import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteDestinationMapp
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoriteItem;
 import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
 import com.jobalistudios.codigoprocesalcivilpe.historial.ReadingHistoryManager;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ReaderChapterProgress;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
 import com.jobalistudios.codigoprocesalcivilpe.historial.RecentArticle;
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.time.Clock;
 
 /** Lee las fuentes locales existentes y prepara los datos visibles del dashboard. */
 public final class HomeDashboardStateBuilder {
@@ -23,9 +27,15 @@ public final class HomeDashboardStateBuilder {
     private final Context appContext;
     private final ReadingHistoryManager readingHistoryManager;
     private final FavoritesManager favoritesManager;
+    private final ArticleOfTheDaySelector dailySelector;
 
     public HomeDashboardStateBuilder(@NonNull Context context) {
+        this(context, Clock.systemDefaultZone());
+    }
+
+    HomeDashboardStateBuilder(@NonNull Context context, @NonNull Clock clock) {
         appContext = context.getApplicationContext();
+        dailySelector = new ArticleOfTheDaySelector(clock);
         readingHistoryManager = new ReadingHistoryManager(appContext);
         favoritesManager = new FavoritesManager(appContext);
     }
@@ -43,10 +53,26 @@ public final class HomeDashboardStateBuilder {
             recentlyViewed.add(validHistory.get(index));
         }
 
+        ArticleOfTheDaySelector.Selection daily =
+                dailySelector.select(ArticleRepository.getBlocks(appContext).values());
+        ReaderChapterProgress progress = ReaderChapterProgress.of(null, null);
+        if (continueReading != null) {
+            List<ArticleRepository.Location> locations = ArticleRepository.findArticle(
+                    appContext, continueReading.number);
+            if (!locations.isEmpty()) {
+                progress = ReaderChapterProgress.of(
+                        locations.get(0).block, continueReading.number);
+            }
+        }
         return new HomeDashboardState(
                 continueReading,
                 recentlyViewed,
-                resolveRecentFavorites(favoritesManager.getAll())
+                resolveRecentFavorites(favoritesManager.getAll()),
+                daily,
+                daily != null && favoritesManager.isFavorite(
+                        ArticleFavorites.itemForArticle(daily.article).getId()),
+                progress.position,
+                progress.total
         );
     }
 

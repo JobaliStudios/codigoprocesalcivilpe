@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.AppearanceBottomSheet;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
 import com.jobalistudios.codigoprocesalcivilpe.privacidad.PrivacyCenterActivity;
 
@@ -44,6 +45,7 @@ public class ConfiguracionFragment extends Fragment {
 
         setupAppThemeSelector();
         setupSwipeNavigationSwitch();
+        setupReadingControls();
 
         binding.cardSoporte.setOnClickListener(v -> openEmailSupport());
 
@@ -54,6 +56,86 @@ public class ConfiguracionFragment extends Fragment {
                 new Intent(requireContext(), PrivacyCenterActivity.class)));
 
         return root;
+    }
+
+
+    private void setupReadingControls() {
+        binding.configReaderThemeRow.setOnClickListener(v -> openReadingAppearance());
+        binding.configReaderFontRow.setOnClickListener(v -> openReadingAppearance());
+        binding.configReaderSizeRow.setOnClickListener(v -> openReadingAppearance());
+
+        // No guardamos estado de switches en la jerarquía: las preferencias son
+        // la fuente de verdad tras reinicios, cambios del tema o restauraciones.
+        refreshReadingControls();
+        binding.switchJustify.setOnCheckedChangeListener((button, checked) ->
+                ReadingPreferenceManager.setJustifyEnabled(requireContext(), checked));
+        binding.switchGlossary.setOnCheckedChangeListener((button, checked) ->
+                ReadingPreferenceManager.setGlossaryEnabled(requireContext(), checked));
+        binding.switchFocus.setOnCheckedChangeListener((button, checked) ->
+                ReadingPreferenceManager.setFocusDefaultEnabled(requireContext(), checked));
+
+        binding.buttonReadingReset.setOnClickListener(v -> {
+            ReadingPreferenceManager.resetReadingPreferences(requireContext());
+            configuracionViewModel.refreshModoLectura();
+            refreshReadingControls();
+            refreshSwipeNavigationSwitch();
+        });
+        getParentFragmentManager().setFragmentResultListener(
+                AppearanceBottomSheet.RESULT_KEY, this, (key, result) -> {
+                    if (binding != null) {
+                        configuracionViewModel.refreshModoLectura();
+                        refreshReadingControls();
+                    }
+                });
+    }
+
+    private void openReadingAppearance() {
+        if (getParentFragmentManager().isStateSaved()
+                || getParentFragmentManager().findFragmentByTag("readerAppearance") != null) {
+            return;
+        }
+        new AppearanceBottomSheet().show(getParentFragmentManager(), "readerAppearance");
+    }
+
+    private void refreshReadingControls() {
+        if (binding == null) return;
+        binding.switchJustify.setOnCheckedChangeListener(null);
+        binding.switchGlossary.setOnCheckedChangeListener(null);
+        binding.switchFocus.setOnCheckedChangeListener(null);
+        binding.switchJustify.setChecked(
+                ReadingPreferenceManager.isJustifyEnabled(requireContext()));
+        binding.switchGlossary.setChecked(
+                ReadingPreferenceManager.isGlossaryEnabled(requireContext()));
+        binding.switchFocus.setChecked(
+                ReadingPreferenceManager.isFocusDefaultEnabled(requireContext()));
+        binding.switchJustify.setOnCheckedChangeListener((button, checked) ->
+                ReadingPreferenceManager.setJustifyEnabled(requireContext(), checked));
+        binding.switchGlossary.setOnCheckedChangeListener((button, checked) ->
+                ReadingPreferenceManager.setGlossaryEnabled(requireContext(), checked));
+        binding.switchFocus.setOnCheckedChangeListener((button, checked) ->
+                ReadingPreferenceManager.setFocusDefaultEnabled(requireContext(), checked));
+
+        int theme;
+        switch (ReadingPreferenceManager.getReaderTheme(requireContext())) {
+            case LIGHT: theme = R.string.reader_theme_light; break;
+            case SEPIA: theme = R.string.reader_theme_sepia; break;
+            case DARK: theme = R.string.reader_theme_dark; break;
+            case AUTO:
+            default: theme = R.string.reader_theme_auto;
+        }
+        binding.readerThemeValue.setText(theme);
+
+        int font;
+        switch (ReadingPreferenceManager.getReaderFont(requireContext())) {
+            case SERIF: font = R.string.reader_font_serif; break;
+            case ACCESSIBLE: font = R.string.reader_font_accessible; break;
+            case SANS:
+            default: font = R.string.reader_font_sans;
+        }
+        binding.readerFontValue.setText(font);
+        binding.readerSizeValue.setText(getString(R.string.reader_appearance_size_value,
+                Math.round(ReadingPreferenceManager.getContentFontScale(
+                        requireContext()) * 100f)));
     }
 
     private void openEmailSupport() {
@@ -151,6 +233,7 @@ public class ConfiguracionFragment extends Fragment {
         configuracionViewModel.refreshModoLectura();
         refreshAppThemeSelector();
         refreshSwipeNavigationSwitch();
+        refreshReadingControls();
     }
 
     @Override

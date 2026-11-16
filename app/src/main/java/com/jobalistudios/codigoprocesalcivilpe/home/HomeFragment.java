@@ -6,6 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.content.res.ColorStateList;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.jobalistudios.codigoprocesalcivilpe.apuntes.MyNotesActivity;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.ArticleFavorites;
+import com.jobalistudios.codigoprocesalcivilpe.favoritos.FavoritesManager;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.ArticleRepository;
+import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +54,13 @@ public class HomeFragment extends Fragment {
     private void configureActions() {
         binding.buttonConsultarCodigo.setOnClickListener(view -> openCode());
         binding.buttonExploreCode.setOnClickListener(view -> openCode());
+        binding.buttonHomeCode.setOnClickListener(view -> openCode());
+        binding.buttonHomeSearch.setOnClickListener(view ->
+                Navigation.findNavController(view).navigate(R.id.navigation_busqueda));
+        binding.buttonHomeQuiz.setOnClickListener(view -> startActivity(
+                new Intent(requireContext(), QuizzCPCStartScreen.class)));
+        binding.buttonHomeNotes.setOnClickListener(view -> startActivity(
+                new Intent(requireContext(), MyNotesActivity.class)));
         binding.buttonPracticeQuiz.setOnClickListener(view -> startActivity(
                 new Intent(requireContext(), QuizzCPCStartScreen.class)));
         binding.buttonViewAllFavorites.setOnClickListener(view ->
@@ -61,6 +76,7 @@ public class HomeFragment extends Fragment {
             return;
         }
         renderReadingHistory(state);
+        renderDailyArticle(state);
         renderRecentFavorites(state.recentFavorites);
     }
 
@@ -76,12 +92,19 @@ public class HomeFragment extends Fragment {
 
         if (state.continueReading != null) {
             bindContinueReading(state.continueReading);
+            if (state.continueTotal > 0) {
+                binding.continueReadingProgressLabel.setText(getString(
+                        R.string.premium_home_reading_position,
+                        getString(R.string.article_number_format, state.continueReading.number),
+                        state.continuePosition, state.continueTotal));
+                binding.continueReadingProgress.setMax(state.continueTotal);
+                binding.continueReadingProgress.setProgressCompat(state.continuePosition, false);
+                binding.continueReadingProgress.setContentDescription(getString(
+                        R.string.reader_chapter_progress_accessibility,
+                        state.continuePosition, state.continueTotal));
+            }
         }
-        bindArticleRows(
-                binding.recentArticlesContainer,
-                state.recentlyViewed,
-                false
-        );
+        bindRecentChips(state.recentlyViewed);
     }
 
     private void bindContinueReading(HomeDashboardState.ArticleEntry article) {
@@ -93,6 +116,52 @@ public class HomeFragment extends Fragment {
                 accessibleArticleLabel(article)
         ));
         binding.cardContinueReading.setOnClickListener(view -> openArticle(article.number));
+        binding.buttonContinueReading.setOnClickListener(view -> openArticle(article.number));
+    }
+
+
+    private void renderDailyArticle(HomeDashboardState state) {
+        boolean hasDaily = state.articleOfTheDay != null;
+        binding.cardArticleOfTheDay.setVisibility(hasDaily ? View.VISIBLE : View.GONE);
+        if (!hasDaily) return;
+        ArticleOfTheDaySelector.Selection selection = state.articleOfTheDay;
+        Article article = selection.article;
+        binding.dailyDateLabel.setText(selection.dateLabel);
+        binding.dailyArticleNumber.setText(getString(R.string.article_number_format, article.number));
+        bindOptionalTitle(binding.dailyArticleTitle, article.title);
+        binding.dailyArticleExcerpt.setText(selection.excerpt);
+        binding.dailyArticleExcerpt.setVisibility(selection.excerpt.isEmpty() ? View.GONE : View.VISIBLE);
+        binding.buttonDailyRead.setOnClickListener(v -> openArticle(article.number));
+        binding.cardArticleOfTheDay.setContentDescription(getString(
+                R.string.premium_home_daily_label) + ", "
+                + accessibleArticleLabel(new HomeDashboardState.ArticleEntry(
+                article.number, article.title)));
+        binding.buttonDailyFavorite.setSelected(state.articleOfTheDayIsFavorite);
+        binding.buttonDailyFavorite.setImageResource(state.articleOfTheDayIsFavorite
+                ? R.drawable.baseline_star_24 : R.drawable.baseline_star_border_24);
+        binding.buttonDailyFavorite.setContentDescription(getString(
+                state.articleOfTheDayIsFavorite
+                        ? R.string.premium_home_daily_favorite_remove
+                        : R.string.premium_home_daily_favorite_add, article.number));
+        binding.buttonDailyFavorite.setOnClickListener(view -> {
+            new FavoritesManager(requireContext()).toggle(ArticleFavorites.itemForArticle(article));
+            renderDashboard(stateBuilder.build());
+        });
+    }
+
+    private void bindRecentChips(List<HomeDashboardState.ArticleEntry> recent) {
+        binding.recentArticlesContainer.removeAllViews();
+        for (HomeDashboardState.ArticleEntry item : recent) {
+            Chip chip = new Chip(requireContext());
+            chip.setText(getString(R.string.article_number_format, item.number));
+            chip.setCheckable(false);
+            chip.setEnsureMinTouchTargetSize(true);
+            chip.setMinHeight(getResources().getDimensionPixelSize(R.dimen.touch_target_min));
+            chip.setContentDescription(getString(R.string.premium_home_recent_chip,
+                    item.number, item.title));
+            chip.setOnClickListener(v -> openArticle(item.number));
+            binding.recentArticlesContainer.addView(chip);
+        }
     }
 
     private void renderRecentFavorites(List<HomeDashboardState.ArticleEntry> favorites) {

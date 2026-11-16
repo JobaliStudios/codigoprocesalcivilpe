@@ -39,6 +39,10 @@ public class AdaptiveLayoutsTest {
         assertNull(home.findViewById(R.id.home_left_pane));
         assertNull(search.findViewById(R.id.search_filters_pane));
         assertNotNull(home.findViewById(R.id.button_consultar_codigo));
+        assertNotNull(home.findViewById(R.id.cardArticleOfTheDay));
+        assertNotNull(home.findViewById(R.id.continueReadingProgress));
+        assertNotNull(home.findViewById(R.id.homeQuickAccessGrid));
+        assertNotNull(home.findViewById(R.id.buttonHomeNotes));
         assertNotNull(search.findViewById(R.id.recyclerResultados));
     }
 
@@ -55,6 +59,10 @@ public class AdaptiveLayoutsTest {
         assertNotNull(home.findViewById(R.id.button_consultar_codigo));
         assertNotNull(home.findViewById(R.id.favorite_articles_container));
         assertNotNull(home.findViewById(R.id.button_practice_quiz));
+        assertNotNull(home.findViewById(R.id.cardArticleOfTheDay));
+        assertNotNull(home.findViewById(R.id.buttonHomeSearch));
+        assertNotNull(home.findViewById(R.id.continueReadingProgress));
+        assertNotNull(home.findViewById(R.id.buttonHomeNotes));
 
         View search = inflate(R.layout.fragment_busqueda);
         View filters = search.findViewById(R.id.search_filters_pane);
