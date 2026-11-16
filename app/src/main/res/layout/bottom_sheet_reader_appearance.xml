@@ -183,7 +183,7 @@
             app:valueFrom="85"
             app:valueTo="160"
             app:stepSize="5"
-            android:value="100" />
+            app:value="100" />
 
         <TextView
             style="@style/App.Text.Title.M"
