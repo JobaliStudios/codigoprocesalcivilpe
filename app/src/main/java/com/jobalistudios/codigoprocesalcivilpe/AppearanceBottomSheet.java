@@ -104,7 +104,7 @@ public final class AppearanceBottomSheet extends BottomSheetDialogFragment {
 
         Slider scale = view.findViewById(R.id.fontScaleSlider);
         scale.addOnChangeListener((slider, value, fromUser) -> {
-            if (!fromUser || updating) return;
+            if (updating) return;
             ReadingPreferenceManager.setContentFontScale(requireContext(), value / 100f);
             changed(view);
         });
