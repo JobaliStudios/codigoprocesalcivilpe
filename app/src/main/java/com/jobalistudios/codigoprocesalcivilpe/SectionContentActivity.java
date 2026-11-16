@@ -102,6 +102,7 @@ public class SectionContentActivity extends AppBaseActivity {
     private boolean lastFocusDefaultPreference;
     private GestureDetector focusTapDetector;
     private String lastAppearanceSignature;
+    private String lastSpanRenderSignature;
     private static final int MAX_RELATED_ARTICLES = 6;
 
     private final Deque<Intent> logicalArticleHistory = new ArrayDeque<>();
@@ -222,6 +223,7 @@ public class SectionContentActivity extends AppBaseActivity {
     private void renderDestination(Intent intent, @Nullable String restoredArticleNumber) {
         tearDownCurrentDestination();
         setIntent(intent);
+        lastSpanRenderSignature = null;
 
         int layoutResId = intent.getIntExtra(EXTRA_LAYOUT_RES_ID, R.layout.activity_section_content);
         int textResId = intent.getIntExtra(EXTRA_TEXT_RES_ID, 0);
@@ -1247,7 +1249,8 @@ public class SectionContentActivity extends AppBaseActivity {
                 + ReadingPreferenceManager.getMargins(this) + ":"
                 + ReadingPreferenceManager.getContentFontScale(this) + ":"
                 + ReadingPreferenceManager.isJustifyEnabled(this) + ":"
-                + focusModeActive;
+                + focusModeActive + ":"
+                + ReadingPreferenceManager.isGlossaryEnabled(this);
     }
 
     private void applyReaderAppearance() {
@@ -1276,14 +1279,28 @@ public class SectionContentActivity extends AppBaseActivity {
         appliedContentFontScale = scale;
         contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, readerTypography.getBodySizePx());
         ReaderTypography.applyReadingOptions(this, contentView);
-        if (highlightController != null && currentTextResId != 0) {
-            refreshContent(contentView, currentTextResId);
-            if (anchor != null) {
-                final Article anchorForRestore = findArticleInTrackedBlock(anchor.number);
-                if (anchorForRestore != null) {
-                    contentView.post(() -> restoreArticleFraction(contentView,
-                            anchorForRestore, progress));
-                }
+        // Solo reconstruir spans cuando cambia la paleta, su tamaño físico
+        // (callouts) o la disponibilidad del glosario. Cambios de fuente,
+        // márgenes, interlineado y justificación afectan únicamente a TextView.
+        String nextSpanSignature = currentSpanRenderSignature();
+        if (highlightController != null && currentTextResId != 0
+                && ReaderRenderPolicy.needsRebuild(lastSpanRenderSignature,
+                nextSpanSignature)) {
+            android.os.Trace.beginSection("CPC:formatearSpansJurídicos");
+            try {
+                refreshContent(contentView, currentTextResId);
+                lastSpanRenderSignature = nextSpanSignature;
+            } finally {
+                android.os.Trace.endSection();
+            }
+        }
+        // Mantener la fracción del artículo incluso al cambiar SOLO el
+        // interlineado/fuente/margen, que también refluye los párrafos.
+        if (anchor != null) {
+            final Article anchorForRestore = findArticleInTrackedBlock(anchor.number);
+            if (anchorForRestore != null) {
+                contentView.post(() -> restoreArticleFraction(contentView,
+                        anchorForRestore, progress));
             }
         }
         lastAppearanceSignature = appearanceSignature();
@@ -1490,8 +1507,18 @@ public class SectionContentActivity extends AppBaseActivity {
                 .show(getSupportFragmentManager(), GlossaryBottomSheet.TAG);
     }
 
+    private String currentSpanRenderSignature() {
+        ReaderTypography typography = readerTypography == null
+                ? ReaderTypography.create(baseContentTextSizePx, 1f)
+                : readerTypography;
+        return ReaderRenderPolicy.spanSignature(
+                ReaderAppearancePalette.from(this).theme, typography.getBodySizePx(),
+                ReadingPreferenceManager.isGlossaryEnabled(this));
+    }
+
     private void renderContent(TextView contentView, @StringRes int textResId) {
         contentView.setText(buildText(textResId));
+        lastSpanRenderSignature = currentSpanRenderSignature();
     }
 
     /** Texto base con formato de artículos y los resaltados guardados del usuario. */
