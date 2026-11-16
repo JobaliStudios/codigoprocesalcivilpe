@@ -180,10 +180,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/reader_appearance_size"
-            app:valueFrom="85"
-            app:valueTo="160"
-            app:stepSize="5"
-            app:value="100" />
+            android:valueFrom="85"
+            android:valueTo="160"
+            android:stepSize="5"
+            android:value="100" />
 
         <TextView
             style="@style/App.Text.Title.M"
