@@ -39,7 +39,7 @@ public class ArticleOfTheDaySelectorTest {
         assertEquals("2026-11-16",first.localDate);
         assertEquals(first.article.number,again.article.number);
         assertEquals(first.article.title,again.article.title);
-        assertTrue(first.excerpt.length() <= 181);
+        assertTrue(first.excerpt.length() <= 180);
     }
 
     @Test public void updatesAtLocalMidnightAndObservesTimezone() {
@@ -86,7 +86,7 @@ public class ArticleOfTheDaySelectorTest {
         assertTrue(preview.startsWith("palabra "));
         assertFalse(preview.contains("Artículo 55"));
         assertTrue(preview.endsWith("…"));
-        assertTrue(preview.length() <= 181);
+        assertTrue(preview.length() <= 180);
         assertFalse(preview.endsWith("palab…"));
     }
 
