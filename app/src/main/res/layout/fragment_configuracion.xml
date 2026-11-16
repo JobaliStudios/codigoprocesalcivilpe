@@ -113,6 +113,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/stroke_width_thin"
                         android:layout_marginVertical="@dimen/space_m"
+                        android:background="@color/colorDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                style="@style/App.Text.Body.M"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/reader_swipe_navigation_title"/>
+                            <TextView
+                                style="@style/App.Text.Body.S"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_xs"
+                                android:text="@string/reader_swipe_navigation_desc"/>
+                        </LinearLayout>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchSwipeNavigation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_s"
+                            android:contentDescription="@string/reader_swipe_navigation_title"
+                            android:minHeight="@dimen/touch_target_min"
+                            android:saveEnabled="false"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/stroke_width_thin"
+                        android:layout_marginVertical="@dimen/space_m"
                         android:alpha="0.2"
                         android:background="@color/colorDivider" />
 
