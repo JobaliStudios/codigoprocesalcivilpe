@@ -14,11 +14,13 @@ import android.content.Intent;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.accessibility.AccessibilityChecks;
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.jobalistudios.codigoprocesalcivilpe.navigation.ArticleNavigationResolver;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,9 +30,16 @@ import org.junit.runner.RunWith;
  */
 @RunWith(AndroidJUnit4.class)
 public final class ReaderPremiumAccessibilityInstrumentedTest {
-    @BeforeClass
-    public static void configureAccessibilityChecks() {
+    @Before
+    public void configureAccessibilityChecks() {
         AccessibilityChecks.enable().setRunChecksFromRootView(false);
+    }
+
+    @After
+    public void restoreOtherInstrumentedTests() {
+        // Esta validación es global en Espresso: no debe contaminar el flujo
+        // del cuestionario ni las pruebas existentes de otras pantallas.
+        AccessibilityChecks.disable();
     }
 
     @Test
@@ -42,12 +51,15 @@ public final class ReaderPremiumAccessibilityInstrumentedTest {
             onView(withId(R.id.navigation_configuracion)).perform(click());
             onView(withId(R.id.cardAppAppearance)).check(matches(isDisplayed()));
             onView(withId(R.id.configReaderThemeRow)).perform(scrollTo(), click());
-            onView(withId(R.id.appearanceDone)).perform(scrollTo(), click());
+            onView(withId(R.id.readerAuto)).perform(click());
+            Espresso.pressBack();
             onView(withId(R.id.buttonReadingReset)).perform(scrollTo(), click());
 
             onView(withId(R.id.navigation_home)).perform(click());
-            onView(withId(R.id.buttonHomeNotes)).check(matches(isDisplayed()));
-            onView(withId(R.id.cardArticleOfTheDay)).check(matches(isDisplayed()));
+            onView(withId(R.id.cardArticleOfTheDay)).perform(scrollTo())
+                    .check(matches(isDisplayed()));
+            onView(withId(R.id.buttonHomeNotes)).perform(scrollTo())
+                    .check(matches(isDisplayed()));
         }
     }
 
@@ -61,7 +73,8 @@ public final class ReaderPremiumAccessibilityInstrumentedTest {
         try (ActivityScenario<SectionContentActivity> ignored =
                      ActivityScenario.launch(intent)) {
             onView(withId(R.id.btnTamanoLetra)).perform(click());
-            onView(withId(R.id.appearanceDone)).perform(scrollTo(), click());
+            onView(withId(R.id.readerAuto)).perform(click());
+            Espresso.pressBack();
             onView(withId(R.id.btnReaderChapterIndex)).perform(click());
             onView(withId(R.id.chapterIndexSearch)).check(matches(isDisplayed()));
             onView(withId(R.id.chapterIndexClose)).perform(click());
