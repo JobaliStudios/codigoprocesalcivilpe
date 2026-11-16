@@ -8,6 +8,11 @@ import android.text.Layout;
 import android.text.SpannableString;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.MotionEvent;
+import android.view.GestureDetector;
+import android.view.ViewConfiguration;
+
+import androidx.core.view.ViewCompat;
 import android.view.ContextThemeWrapper;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -78,6 +83,11 @@ public class SectionContentActivity extends AppBaseActivity {
 
     private static final long HISTORY_SCROLL_SETTLE_DELAY_MS = 350L;
     private static final String STATE_CURRENT_ARTICLE_NUMBER = "currentArticleNumber";
+    private static final String STATE_FOCUS_MODE = "readerFocusMode";
+    private boolean focusModeActive;
+    private boolean focusControlsVisible;
+    private GestureDetector focusTapDetector;
+    private String lastAppearanceSignature;
     private static final int MAX_RELATED_ARTICLES = 6;
 
     private final Deque<Intent> logicalArticleHistory = new ArrayDeque<>();
@@ -148,8 +158,19 @@ public class SectionContentActivity extends AppBaseActivity {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ReaderAppearancePalette.applyOverlayBeforeCreate(this);
         super.onCreate(savedInstanceState);
 
+        focusModeActive = savedInstanceState == null
+                ? ReadingPreferenceManager.isFocusDefaultEnabled(this)
+                : savedInstanceState.getBoolean(STATE_FOCUS_MODE,
+                ReadingPreferenceManager.isFocusDefaultEnabled(this));
+        focusControlsVisible = false;
+        getSupportFragmentManager().setFragmentResultListener(
+                AppearanceBottomSheet.RESULT_KEY, this, (requestKey, result) -> {
+                    applyReaderAppearance();
+                });
+        setupFocusTapDetector();
         applyKeepScreenOnPreference();
         articleTransferController = new ReaderArticleTransferController(this);
         favoritesManager = new FavoritesManager(this);
@@ -211,7 +232,8 @@ public class SectionContentActivity extends AppBaseActivity {
             return;
         }
 
-        baseContentTextSizePx = contentView.getTextSize();
+        baseContentTextSizePx = getResources().getDimension(focusModeActive
+                ? R.dimen.reader_focus_body_text_size : R.dimen.reader_body_text_size);
         applyFontScale(contentView, ReadingPreferenceManager.getContentFontScale(this));
 
         String blockKey = getResources().getResourceEntryName(textResId);
@@ -225,6 +247,8 @@ public class SectionContentActivity extends AppBaseActivity {
         setupHeaderActions(contentView);
         setupArticleActions();
         setupInPageSearch(contentView, textResId);
+        applyReaderAppearanceColors();
+        applyFocusVisualState();
 
         Article restoredArticle = findArticleInTrackedBlock(restoredArticleNumber);
         int scrollToOffset = restoredArticle != null
@@ -253,6 +277,12 @@ public class SectionContentActivity extends AppBaseActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+                if (focusModeActive) {
+                    focusModeActive = false;
+                    focusControlsVisible = false;
+                    applyReaderAppearance();
+                    return;
+                }
                 Intent previous = logicalArticleHistory.pollLast();
                 if (previous != null) {
                     stopArticleSpeech();
@@ -292,10 +322,9 @@ public class SectionContentActivity extends AppBaseActivity {
     protected void onResume() {
         super.onResume();
         applyKeepScreenOnPreference();
-        float savedFontScale = ReadingPreferenceManager.getContentFontScale(this);
         if (trackedContentView != null
-                && Math.abs(appliedContentFontScale - savedFontScale) > 0.001f) {
-            applyFontScale(trackedContentView, savedFontScale);
+                && !appearanceSignature().equals(lastAppearanceSignature)) {
+            applyReaderAppearance();
         }
         renderCurrentArticleState();
     }
@@ -308,6 +337,7 @@ public class SectionContentActivity extends AppBaseActivity {
         if (article != null) {
             outState.putString(STATE_CURRENT_ARTICLE_NUMBER, article.number);
         }
+        outState.putBoolean(STATE_FOCUS_MODE, focusModeActive);
         super.onSaveInstanceState(outState);
     }
 
@@ -1033,37 +1063,165 @@ public class SectionContentActivity extends AppBaseActivity {
         snackbar.show();
     }
 
-    /** Acciones secundarias compactas del encabezado: Aa y Copiar. */
+    /** Aa abre los ajustes globales y su cambio se refleja sin abandonar el artículo. */
     private void setupHeaderActions(TextView contentView) {
-        MaterialButton fontSizeButton = findViewById(R.id.btnTamanoLetra);
-        if (fontSizeButton != null) {
-            fontSizeButton.setOnClickListener(v -> showFontSizeDialog(contentView));
+        MaterialButton appearanceButton = findViewById(R.id.btnTamanoLetra);
+        if (appearanceButton != null) {
+            appearanceButton.setOnClickListener(v -> {
+                if (getSupportFragmentManager().findFragmentByTag("readerAppearance") == null) {
+                    new AppearanceBottomSheet().show(getSupportFragmentManager(), "readerAppearance");
+                }
+            });
         }
     }
 
+    private String appearanceSignature() {
+        return ReadingPreferenceManager.getReaderTheme(this) + ":"
+                + ReadingPreferenceManager.getReaderFont(this) + ":"
+                + ReadingPreferenceManager.getLineSpacing(this) + ":"
+                + ReadingPreferenceManager.getMargins(this) + ":"
+                + ReadingPreferenceManager.getContentFontScale(this) + ":"
+                + ReadingPreferenceManager.isJustifyEnabled(this) + ":"
+                + focusModeActive;
+    }
+
+    private void applyReaderAppearance() {
+        applyKeepScreenOnPreference();
+        if (trackedContentView != null) {
+            baseContentTextSizePx = getResources().getDimension(focusModeActive
+                    ? R.dimen.reader_focus_body_text_size : R.dimen.reader_body_text_size);
+            applyFontScale(trackedContentView,
+                    ReadingPreferenceManager.getContentFontScale(this));
+        }
+        applyReaderAppearanceColors();
+        applyFocusVisualState();
+    }
+
+    private void applyReaderAppearanceColors() {
+        // La hoja puede abrirse más de una vez; no aplicar overlays sobre el resto de la app.
+        ReaderAppearancePalette.applyReaderColors(this);
+    }
+
+    /** Ajusta solo los parámetros de dibujo. Todos los spans se recomponen desde la fuente legal. */
     private void applyFontScale(TextView contentView, float scale) {
         Article anchor = currentVisibleArticle != null
-                ? currentVisibleArticle
-                : findCurrentlyVisibleArticle();
+                ? currentVisibleArticle : findCurrentlyVisibleArticle();
+        final float progress = getCurrentArticleVerticalFraction(contentView, anchor);
         readerTypography = ReaderTypography.create(baseContentTextSizePx, scale);
         appliedContentFontScale = scale;
         contentView.setTextSize(TypedValue.COMPLEX_UNIT_PX, readerTypography.getBodySizePx());
-        contentView.setLineSpacing(readerTypography.getLineSpacingExtraPx(), 1f);
+        ReaderTypography.applyReadingOptions(this, contentView);
         if (highlightController != null && currentTextResId != 0) {
             refreshContent(contentView, currentTextResId);
             if (anchor != null) {
-                Article restored = findArticleInTrackedBlock(anchor.number);
-                if (restored != null) {
-                    scrollToOffset(contentView, restored.offsetInBlock, restored);
+                final Article anchorForRestore = findArticleInTrackedBlock(anchor.number);
+                if (anchorForRestore != null) {
+                    contentView.post(() -> restoreArticleFraction(contentView,
+                            anchorForRestore, progress));
                 }
             }
         }
+        lastAppearanceSignature = appearanceSignature();
         scheduleVisibleArticleRegistration();
     }
 
-    /** El diálogo conserva la preferencia Aa y delega el render al lector activo. */
-    private void showFontSizeDialog(TextView contentView) {
-        ReaderFontSizeDialog.show(this, scale -> applyFontScale(contentView, scale));
+    /** Fracción de desplazamiento dentro del artículo; funciona aunque cambie el interlineado. */
+    private float getCurrentArticleVerticalFraction(TextView contentView, @Nullable Article article) {
+        if (article == null || trackedScrollView == null) return 0f;
+        Layout layout = contentView.getLayout();
+        if (layout == null || contentView.getText().length() == 0) return 0f;
+        int begin = contentView.getTop() + layout.getLineTop(layout.getLineForOffset(
+                Math.min(article.offsetInBlock, contentView.length() - 1)));
+        int endOffset = Math.min(contentView.length() - 1,
+                article.offsetInBlock + article.text.length());
+        int end = contentView.getTop() + layout.getLineTop(layout.getLineForOffset(endOffset));
+        if (end <= begin) return 0f;
+        return Math.max(0f, Math.min(1f, (trackedScrollView.getScrollY() - begin)
+                / (float) (end - begin)));
+    }
+
+    private void restoreArticleFraction(TextView contentView, Article article, float fraction) {
+        if (trackedScrollView == null || !isFinishing()) {
+            Layout layout = contentView.getLayout();
+            if (layout == null || contentView.length() == 0 || trackedScrollView == null) return;
+            int startOffset = Math.min(article.offsetInBlock, contentView.length() - 1);
+            int endOffset = Math.min(contentView.length() - 1,
+                    article.offsetInBlock + article.text.length());
+            int begin = contentView.getTop() + layout.getLineTop(layout.getLineForOffset(startOffset));
+            int end = contentView.getTop() + layout.getLineTop(layout.getLineForOffset(endOffset));
+            preferredProgrammaticArticle = article;
+            trackedScrollView.scrollTo(0, Math.max(0,
+                    begin + Math.round(Math.max(0, end - begin) * fraction)));
+            scheduleVisibleArticleRegistration();
+        }
+    }
+
+    private void setupFocusTapDetector() {
+        focusTapDetector = new GestureDetector(this,
+                new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onSingleTapConfirmed(MotionEvent e) {
+                        if (!focusModeActive || trackedContentView == null
+                                || trackedContentView.hasSelection()) return false;
+                        View scroll = findViewById(R.id.scrollViewContent);
+                        if (scroll == null) return false;
+                        int[] location = new int[2];
+                        scroll.getLocationOnScreen(location);
+                        float y = e.getRawY();
+                        if (y < location[1] || y > location[1] + scroll.getHeight()) {
+                            return false;
+                        }
+                        float width = getResources().getDisplayMetrics().widthPixels;
+                        if (e.getRawX() < width / 3f || e.getRawX() > width * 2f / 3f) {
+                            return false;
+                        }
+                        focusControlsVisible = !focusControlsVisible;
+                        applyFocusVisualState();
+                        return false;
+                    }
+                });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        // Observa el toque sin consumirlo: Highlights y selección conservan sus listeners.
+        if (focusModeActive && focusTapDetector != null) {
+            focusTapDetector.onTouchEvent(event);
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+    private void applyFocusVisualState() {
+        View header = findViewById(R.id.fixedCardView);
+        View bottom = findViewById(R.id.readingBottomBar);
+        View search = findViewById(R.id.fabBuscar);
+        View focusLine = findViewById(R.id.focusProgressLine);
+        View focusPill = findViewById(R.id.focusExitPill);
+        boolean hideBars = focusModeActive && !focusControlsVisible;
+        if (header != null) header.setVisibility(hideBars ? View.GONE : View.VISIBLE);
+        if (bottom != null) bottom.setVisibility(hideBars ? View.GONE : View.VISIBLE);
+        if (search != null) search.setVisibility(hideBars ? View.GONE : View.VISIBLE);
+        if (focusLine != null) {
+            focusLine.setVisibility(focusModeActive ? View.VISIBLE : View.GONE);
+            focusLine.setBackgroundColor(ReaderAppearancePalette.from(this).primary);
+        }
+        if (focusPill != null) {
+            focusPill.setVisibility(hideBars ? View.VISIBLE : View.GONE);
+            focusPill.setOnClickListener(v -> {
+                focusModeActive = false;
+                focusControlsVisible = false;
+                applyReaderAppearance();
+            });
+        }
+        TextView article = findViewById(R.id.textView2);
+        if (article != null && focusModeActive) {
+            ViewCompat.addAccessibilityAction(article,
+                    getString(R.string.reader_focus_show_controls), (view, args) -> {
+                        focusControlsVisible = true;
+                        applyFocusVisualState();
+                        return true;
+                    });
+        }
     }
 
     private void renderContent(TextView contentView, @StringRes int textResId) {
