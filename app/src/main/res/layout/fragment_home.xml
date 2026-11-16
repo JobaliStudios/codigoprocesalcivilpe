@@ -88,7 +88,7 @@
         android:orientation="vertical" android:padding="@dimen/space_l">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:gravity="center_vertical" android:orientation="horizontal">
-            <TextView style="@style/App.Text.Body.S" android:layout_width="0dp"
+            <TextView android:id="@+id/dailyArticleLabel" style="@style/App.Text.Body.S" android:layout_width="0dp"
                 android:layout_height="wrap_content" android:layout_weight="1"
                 android:text="@string/premium_home_daily_label" android:textStyle="bold"
                 android:textColor="@color/colorPrimary"/>
@@ -117,7 +117,7 @@
 <LinearLayout android:id="@+id/homeQuickAccessGrid"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/space_xl" android:orientation="vertical">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    <LinearLayout android:id="@+id/homeGridRowOne" android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="horizontal">
         <com.google.android.material.button.MaterialButton android:id="@+id/buttonHomeCode"
             style="@style/App.Button.Outlined" android:layout_width="0dp" android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             android:text="@string/premium_home_access_search" android:textAllCaps="false"
             app:icon="@drawable/baseline_search_24"/>
     </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    <LinearLayout android:id="@+id/homeGridRowTwo" android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_s" android:orientation="horizontal">
         <com.google.android.material.button.MaterialButton android:id="@+id/buttonHomeQuiz"
             style="@style/App.Button.Outlined" android:layout_width="0dp" android:layout_height="wrap_content"
