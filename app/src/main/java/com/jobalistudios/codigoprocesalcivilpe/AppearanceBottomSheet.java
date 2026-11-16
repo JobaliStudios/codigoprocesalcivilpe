@@ -197,8 +197,8 @@ public final class AppearanceBottomSheet extends BottomSheetDialogFragment {
         body.setLineSpacing(0f,
                 ReadingPreferenceManager.getLineSpacing(requireContext()).multiplier);
         body.setJustificationMode(ReadingPreferenceManager.isJustifyEnabled(requireContext())
-                ? android.text.Layout.JUSTIFICATION_MODE_INTER_WORD
-                : android.text.Layout.JUSTIFICATION_MODE_NONE);
+                ? android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+                : android.graphics.text.LineBreaker.JUSTIFICATION_MODE_NONE);
         body.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources()
                 .getDimension(R.dimen.reader_body_text_size)
                 * ReadingPreferenceManager.getContentFontScale(requireContext()));
