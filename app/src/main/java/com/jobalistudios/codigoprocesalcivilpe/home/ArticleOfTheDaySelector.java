@@ -59,8 +59,9 @@ public final class ArticleOfTheDaySelector {
                 ? articleText.substring(firstLineEnd + 1) : articleText;
         body = body.replaceAll("\\s+", " ").trim();
         if (body.length() <= MAX_EXCERPT_CHARS) return body;
-        int boundary = body.lastIndexOf(' ', MAX_EXCERPT_CHARS);
-        return body.substring(0, boundary > 0 ? boundary : MAX_EXCERPT_CHARS).trim() + "…";
+        int allowed = MAX_EXCERPT_CHARS - 1; // deja sitio al carácter de elipsis
+        int boundary = body.lastIndexOf(' ', allowed);
+        return body.substring(0, boundary > 0 ? boundary : allowed).trim() + "…";
     }
 
     public static final class Selection {
