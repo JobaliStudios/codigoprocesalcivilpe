@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="glossary_label">GLOSARIO</string>
+    <string name="glossary_editorial_warning">Definición editorial: no forma parte del texto legal.\nFuente: %1$s · Revisada: %2$s</string>
+    <string name="glossary_reviewed_by">Revisión: %1$s</string>
+    <string name="glossary_appears_in">Aparece en</string>
+    <string name="glossary_related_terms">Términos relacionados</string>
+    <string name="glossary_copy_definition">Copiar definición</string>
+    <string name="glossary_browse_all">Ver todo el glosario</string>
+    <string name="glossary_browse_title">Glosario</string>
+    <string name="glossary_search_hint">Buscar términos</string>
+    <string name="glossary_no_results">No hay términos que coincidan.</string>
+    <string name="glossary_close">Cerrar glosario</string>
+    <string name="glossary_copied">Definición copiada</string>
+    <string name="glossary_article_label">Art. %1$s</string>
+    <string name="glossary_missing_article">Este artículo no está disponible.</string>
+    <string name="glossary_term_accessibility">Ver término del glosario: %1$s</string>
+</resources>
