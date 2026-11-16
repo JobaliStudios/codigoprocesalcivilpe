@@ -61,6 +61,19 @@ public class GsonReleaseContractTest {
     }
 
     @Test
+    public void glossaryDtosDeclareStableJsonNamesUnderR8() throws Exception {
+        String prefix = "com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryRepository$";
+        assertJsonName(prefix + "GlossaryFile", "version", "version");
+        assertJsonName(prefix + "GlossaryFile", "terms", "terms");
+        for (String field : new String[] {
+                "id", "term", "aliases", "definition", "articles", "related",
+                "source", "reviewedBy", "reviewedAt"
+        }) {
+            assertJsonName(prefix + "Term", field, field);
+        }
+    }
+
+    @Test
     public void questionModelDeclaresStableJsonNames() throws Exception {
         assertJsonName(QuestionModel.class, "questionText", "questionText");
         assertJsonName(QuestionModel.class, "options", "options");
