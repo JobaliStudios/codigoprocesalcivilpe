@@ -57,4 +57,19 @@ public class ReaderAppearancePaletteTest {
                     ColorUtils.calculateContrast(colors.text, colors.surface) >= 4.5d);
         }
     }
+    @Test public void fourSavedHighlightColorsRemainReadableWithDarkReader() {
+        ReadingPreferenceManager.setReaderTheme(context,
+                ReadingPreferenceManager.ReaderTheme.DARK);
+        ReaderAppearancePalette colors = ReaderAppearancePalette.from(context);
+        for (int id : new int[] {
+                R.color.reader_dark_user_highlight_yellow,
+                R.color.reader_dark_user_highlight_orange,
+                R.color.reader_dark_user_highlight_green,
+                R.color.reader_dark_user_highlight_blue}) {
+            int overlay = androidx.core.content.ContextCompat.getColor(context, id);
+            int composite = ColorUtils.compositeColors(overlay, colors.background);
+            assertTrue("Highlight " + id,
+                    ColorUtils.calculateContrast(colors.text, composite) >= 4.5d);
+        }
+    }
 }
