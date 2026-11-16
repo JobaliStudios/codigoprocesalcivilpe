@@ -25,6 +25,7 @@ import com.jobalistudios.codigoprocesalcivilpe.ReaderAppearancePalette;
 import com.jobalistudios.codigoprocesalcivilpe.contenido.Article;
 import com.jobalistudios.codigoprocesalcivilpe.normativa.NormativeHistorySpan;
 import com.jobalistudios.codigoprocesalcivilpe.referencias.ArticleCrossReferenceSpan;
+import com.jobalistudios.codigoprocesalcivilpe.glosario.GlossaryTermSpan;
 
 import java.util.List;
 import java.util.UUID;
@@ -203,7 +204,18 @@ public class HighlightController {
     /** Prioridad compartida del lector: referencia cruzada antes que detalle normativo. */
     static boolean openPriorityInteractiveSpanAt(Spanned text, int offset, View widget) {
         return openArticleReferenceAt(text, offset, widget)
-                || openNormativeHistoryAt(text, offset, widget);
+                || openNormativeHistoryAt(text, offset, widget)
+                || openGlossaryAt(text, offset, widget);
+    }
+
+    /** El glosario nunca sobreescribe las referencias cruzadas ni la anotación normativa. */
+    static boolean openGlossaryAt(Spanned text, int offset, View widget) {
+        if (offset < 0 || offset >= text.length()) return false;
+        GlossaryTermSpan[] matches = text.getSpans(
+                offset, offset + 1, GlossaryTermSpan.class);
+        if (matches.length == 0) return false;
+        matches[0].onClick(widget);
+        return true;
     }
 
     /** Retorna true si el tap fue consumido por el callout normativo. */
