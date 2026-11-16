@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
+import android.text.Spanned;
+import android.text.style.ClickableSpan;
 import android.text.SpannableString;
 import android.util.TypedValue;
 import android.view.View;
@@ -86,6 +88,7 @@ public class SectionContentActivity extends AppBaseActivity {
     private static final String STATE_FOCUS_MODE = "readerFocusMode";
     private boolean focusModeActive;
     private boolean focusControlsVisible;
+    private boolean lastFocusDefaultPreference;
     private GestureDetector focusTapDetector;
     private String lastAppearanceSignature;
     private static final int MAX_RELATED_ARTICLES = 6;
@@ -166,8 +169,15 @@ public class SectionContentActivity extends AppBaseActivity {
                 : savedInstanceState.getBoolean(STATE_FOCUS_MODE,
                 ReadingPreferenceManager.isFocusDefaultEnabled(this));
         focusControlsVisible = false;
+        lastFocusDefaultPreference = ReadingPreferenceManager.isFocusDefaultEnabled(this);
         getSupportFragmentManager().setFragmentResultListener(
                 AppearanceBottomSheet.RESULT_KEY, this, (requestKey, result) -> {
+                    boolean newDefault = ReadingPreferenceManager.isFocusDefaultEnabled(this);
+                    if (newDefault != lastFocusDefaultPreference) {
+                        focusModeActive = newDefault;
+                        focusControlsVisible = false;
+                        lastFocusDefaultPreference = newDefault;
+                    }
                     applyReaderAppearance();
                 });
         setupFocusTapDetector();
@@ -1142,8 +1152,7 @@ public class SectionContentActivity extends AppBaseActivity {
 
     private void restoreArticleFraction(TextView contentView, Article article, float fraction) {
         if (trackedScrollView == null || isFinishing()) return;
-        {
-            Layout layout = contentView.getLayout();
+        Layout layout = contentView.getLayout();
             if (layout == null || contentView.length() == 0 || trackedScrollView == null) return;
             int startOffset = Math.min(article.offsetInBlock, contentView.length() - 1);
             int endOffset = Math.min(contentView.length() - 1,
@@ -1154,7 +1163,6 @@ public class SectionContentActivity extends AppBaseActivity {
             trackedScrollView.scrollTo(0, Math.max(0,
                     begin + Math.round(Math.max(0, end - begin) * fraction)));
             scheduleVisibleArticleRegistration();
-        }
     }
 
     private void setupFocusTapDetector() {
@@ -1175,6 +1183,23 @@ public class SectionContentActivity extends AppBaseActivity {
                         float width = getResources().getDisplayMetrics().widthPixels;
                         if (e.getRawX() < width / 3f || e.getRawX() > width * 2f / 3f) {
                             return false;
+                        }
+                        // Prioridad a enlaces, notas y resaltados: el gesto no los activa dos veces.
+                        if (trackedContentView.getText() instanceof Spanned) {
+                            int[] textPosition = new int[2];
+                            trackedContentView.getLocationOnScreen(textPosition);
+                            int offset = trackedContentView.getOffsetForPosition(
+                                    e.getRawX() - textPosition[0],
+                                    e.getRawY() - textPosition[1]);
+                            Spanned spans = (Spanned) trackedContentView.getText();
+                            int end = Math.min(spans.length(), offset + 1);
+                            if (offset >= 0 && offset < spans.length()
+                                    && (spans.getSpans(offset, end, ClickableSpan.class).length > 0
+                                    || spans.getSpans(offset, end,
+                                    com.jobalistudios.codigoprocesalcivilpe.resaltados
+                                            .HighlightController.UserHighlightSpan.class).length > 0)) {
+                                return false;
+                            }
                         }
                         focusControlsVisible = !focusControlsVisible;
                         applyFocusVisualState();
