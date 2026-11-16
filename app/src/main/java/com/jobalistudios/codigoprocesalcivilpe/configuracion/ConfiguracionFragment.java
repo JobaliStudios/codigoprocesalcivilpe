@@ -21,6 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.jobalistudios.codigoprocesalcivilpe.R;
 import com.jobalistudios.codigoprocesalcivilpe.AppearanceBottomSheet;
+import com.jobalistudios.codigoprocesalcivilpe.ReaderAccessibilitySizing;
+import androidx.core.view.ViewCompat;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentConfiguracionBinding;
 import com.jobalistudios.codigoprocesalcivilpe.privacidad.PrivacyCenterActivity;
 
@@ -43,6 +45,8 @@ public class ConfiguracionFragment extends Fragment {
         setupSwitchObserver(binding.switchModoLectura, configuracionViewModel.getModoLectura(),
                 configuracionViewModel::setModoLectura);
 
+        ReaderAccessibilitySizing.adaptSegmentedGroup(root, R.id.appThemeToggle);
+        ViewCompat.setAccessibilityHeading(binding.configTitle, true);
         setupAppThemeSelector();
         setupSwipeNavigationSwitch();
         setupReadingControls();
@@ -136,6 +140,12 @@ public class ConfiguracionFragment extends Fragment {
         binding.readerSizeValue.setText(getString(R.string.reader_appearance_size_value,
                 Math.round(ReadingPreferenceManager.getContentFontScale(
                         requireContext()) * 100f)));
+        binding.configReaderThemeRow.setContentDescription(getString(
+                R.string.reader_a11y_reader_theme_row, binding.readerThemeValue.getText()));
+        binding.configReaderFontRow.setContentDescription(getString(
+                R.string.reader_a11y_reader_font_row, binding.readerFontValue.getText()));
+        binding.configReaderSizeRow.setContentDescription(getString(
+                R.string.reader_a11y_reader_size_row, binding.readerSizeValue.getText()));
     }
 
     private void openEmailSupport() {
