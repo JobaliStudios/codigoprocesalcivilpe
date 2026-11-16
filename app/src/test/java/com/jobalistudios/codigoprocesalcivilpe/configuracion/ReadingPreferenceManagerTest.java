@@ -1,5 +1,6 @@
 package com.jobalistudios.codigoprocesalcivilpe.configuracion;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -27,6 +28,52 @@ public class ReadingPreferenceManagerTest {
                 .edit()
                 .clear()
                 .commit();
+    }
+
+    @Test
+    public void premiumSettingsHaveSafeDefaults() {
+        assertEquals(ReadingPreferenceManager.ReaderTheme.AUTO,
+                ReadingPreferenceManager.getReaderTheme(application));
+        assertEquals(ReadingPreferenceManager.ReaderFont.SANS,
+                ReadingPreferenceManager.getReaderFont(application));
+        assertEquals(ReadingPreferenceManager.LineSpacing.NORMAL,
+                ReadingPreferenceManager.getLineSpacing(application));
+        assertEquals(ReadingPreferenceManager.Margins.NORMAL,
+                ReadingPreferenceManager.getMargins(application));
+        assertFalse(ReadingPreferenceManager.isJustifyEnabled(application));
+        assertFalse(ReadingPreferenceManager.isFocusDefaultEnabled(application));
+        assertFalse(ReadingPreferenceManager.isSwipeNavigationEnabled(application));
+        assertTrue(ReadingPreferenceManager.isGlossaryEnabled(application));
+        assertEquals(1f, ReadingPreferenceManager.getContentFontScale(application), 0.0001f);
+    }
+
+    @Test
+    public void premiumSettingsPersistAndResetWithoutErasingUnrelatedData() {
+        application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit()
+                .putString("app_theme_mode", "DARK").commit();
+        ReadingPreferenceManager.setReaderTheme(application,
+                ReadingPreferenceManager.ReaderTheme.SEPIA);
+        ReadingPreferenceManager.setReaderFont(application,
+                ReadingPreferenceManager.ReaderFont.ACCESSIBLE);
+        ReadingPreferenceManager.setLineSpacing(application,
+                ReadingPreferenceManager.LineSpacing.WIDE);
+        ReadingPreferenceManager.setMargins(application,
+                ReadingPreferenceManager.Margins.NARROW);
+        ReadingPreferenceManager.setContentFontScale(application, 1.37f);
+        ReadingPreferenceManager.setJustifyEnabled(application, true);
+        ReadingPreferenceManager.setFocusDefaultEnabled(application, true);
+        ReadingPreferenceManager.setSwipeNavigationEnabled(application, true);
+        ReadingPreferenceManager.setGlossaryEnabled(application, false);
+        ReadingPreferenceManager.setKeepScreenOnEnabled(application, true);
+        assertEquals(ReadingPreferenceManager.ReaderTheme.SEPIA,
+                ReadingPreferenceManager.getReaderTheme(application));
+        assertEquals(1.35f, ReadingPreferenceManager.getContentFontScale(application), 0.0001f);
+
+        ReadingPreferenceManager.resetReadingPreferences(application);
+        premiumSettingsHaveSafeDefaults();
+        assertFalse(ReadingPreferenceManager.isKeepScreenOnEnabled(application));
+        assertEquals("DARK", application.getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE).getString("app_theme_mode", ""));
     }
 
     @Test
