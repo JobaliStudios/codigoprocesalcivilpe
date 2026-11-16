@@ -34,10 +34,10 @@ public final class ReaderTypography {
         articleText.setTypeface(ReaderAppearancePalette.getBodyTypeface(context));
         articleText.setLineSpacing(0f,
                 ReadingPreferenceManager.getLineSpacing(context).multiplier);
-        articleText.setBreakStrategy(Layout.BREAK_STRATEGY_HIGH_QUALITY);
-        articleText.setHyphenationFrequency(Layout.HYPHENATION_FREQUENCY_NORMAL);
+        articleText.setBreakStrategy(android.graphics.text.LineBreaker.BREAK_STRATEGY_HIGH_QUALITY);
+        articleText.setHyphenationFrequency(android.graphics.text.LineBreaker.HYPHENATION_FREQUENCY_NORMAL);
         articleText.setJustificationMode(ReadingPreferenceManager.isJustifyEnabled(context)
-                ? Layout.JUSTIFICATION_MODE_INTER_WORD : Layout.JUSTIFICATION_MODE_NONE);
+                ? android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD : android.graphics.text.LineBreaker.JUSTIFICATION_MODE_NONE);
 
         int marginResource;
         switch (ReadingPreferenceManager.getMargins(context)) {
