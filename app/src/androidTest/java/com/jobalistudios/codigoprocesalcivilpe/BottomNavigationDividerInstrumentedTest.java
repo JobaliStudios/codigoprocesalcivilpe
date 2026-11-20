@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 public class BottomNavigationDividerInstrumentedTest {
 
     @Test
-    public void twoDpDividerRendersExactPrototypeColorAndKeepsThemeInsetsStable() {
+    public void oneDpDividerRendersExactPrototypeColorAndKeepsThemeInsetsStable() {
         int previous = AppCompatDelegate.getDefaultNightMode();
         try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
             for (int mode : new int[] {
@@ -44,7 +44,7 @@ public class BottomNavigationDividerInstrumentedTest {
 
                     int thickness = activity.getResources().getDimensionPixelSize(
                             R.dimen.bottom_nav_divider_height);
-                    assertTrue("Divider must occupy at least two physical pixels", thickness >= 2);
+                    assertTrue("A 1dp divider must occupy at least one physical pixel", thickness >= 1);
 
                     Drawable background = bar.getBackground();
                     assertNotNull(background);
@@ -68,7 +68,7 @@ public class BottomNavigationDividerInstrumentedTest {
                                 dividerColor, bitmap.getPixel(width / 2, y));
                     }
                     for (int y = thickness; y < thickness + 4; y++) {
-                        assertEquals("Divider extends below 2dp at row " + y,
+                        assertEquals("Divider extends below 1dp at row " + y,
                                 surfaceColor, bitmap.getPixel(width / 2, y));
                     }
                     bitmap.recycle();
