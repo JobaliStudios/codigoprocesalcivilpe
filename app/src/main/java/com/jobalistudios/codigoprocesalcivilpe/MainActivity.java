@@ -40,6 +40,10 @@ public class MainActivity extends AppBaseActivity {
         // La tipografía sans-serif del prototipo prevalece sobre fuentes de tema/OEM.
         binding.navView.setItemTextAppearanceInactive(R.style.App_BottomNav_Label_Inactive);
         binding.navView.setItemTextAppearanceActive(R.style.App_BottomNav_Label_Active);
+        // La barra normal es compacta; solo gana altura cuando Android usa letra grande.
+        // No altera el manejo de insets ni el area tactil de los cuatro destinos.
+        binding.navView.setMinimumHeight(
+                BottomNavigationSizing.minimumHeightPx(getResources()));
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,
