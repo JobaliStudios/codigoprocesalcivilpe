@@ -6,6 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
+
+import org.robolectric.annotation.Config;
 
 import androidx.core.content.ContextCompat;
 import androidx.navigation.fragment.NavHostFragment;
@@ -55,6 +58,8 @@ public class MainActivityBottomNavigationTest {
             assertEquals(labels[i], bar.getMenu().getItem(i).getTitle().toString());
         }
 
+        assertEquals("Buscar", activity.getString(R.string.title_busqueda));
+        assertEquals("Ajustes", activity.getString(R.string.title_configuracion));
         assertTrue(bar.isItemActiveIndicatorEnabled());
         assertEquals(activity.getResources().getDimensionPixelSize(
                 R.dimen.bottom_nav_indicator_width), bar.getItemActiveIndicatorWidth());
@@ -82,6 +87,27 @@ public class MainActivityBottomNavigationTest {
         assertEquals(guinda, labels.getColorForState(new int[]{checked}, 0));
         assertEquals(neutral, labels.getDefaultColor());
         assertEquals(soft, pill.getColorForState(new int[]{checked}, 0));
+        assertEquals(Color.WHITE, ContextCompat.getColor(activity, R.color.bottom_nav_surface));
+        assertEquals(Color.rgb(107, 8, 29), guinda);
+        assertEquals(Color.rgb(237, 225, 228), soft);
+        assertEquals(Color.rgb(225, 206, 210),
+                ContextCompat.getColor(activity, R.color.bottom_nav_top_divider));
+    }
+
+    @Test
+    @Config(qualifiers = "night")
+    public void darkPrototypePaletteKeepsReadableLabelsAndSoftPill() {
+        MainActivity activity = launch();
+        BottomNavigationView bar = activity.findViewById(R.id.nav_view);
+        int checked = android.R.attr.state_checked;
+        assertNotNull(bar.getItemIconTintList());
+        assertNotNull(bar.getItemActiveIndicatorColor());
+        assertEquals(ContextCompat.getColor(activity, R.color.bottom_nav_active_tint),
+                bar.getItemIconTintList().getColorForState(new int[]{checked}, 0));
+        assertEquals(ContextCompat.getColor(activity, R.color.bottom_nav_indicator_fill),
+                bar.getItemActiveIndicatorColor().getColorForState(new int[]{checked}, 0));
+        assertEquals(Color.rgb(24, 20, 22),
+                ContextCompat.getColor(activity, R.color.bottom_nav_surface));
     }
 
     @Test
