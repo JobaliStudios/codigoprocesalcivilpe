@@ -78,7 +78,9 @@ public class BottomNavigationThemeInsetsInstrumentedTest {
                     AppCompatDelegate.MODE_NIGHT_NO
             };
             for (int nightMode : modes) {
-                AppCompatDelegate.setDefaultNightMode(nightMode);
+                // DayNight recreates activities: trigger it on the Android main thread.
+                scenario.onActivity(activity ->
+                        AppCompatDelegate.setDefaultNightMode(nightMode));
                 scenario.recreate();
                 InstrumentationRegistry.getInstrumentation().waitForIdleSync();
                 scenario.onActivity(activity -> {
@@ -91,7 +93,8 @@ public class BottomNavigationThemeInsetsInstrumentedTest {
                 });
             }
         } finally {
-            AppCompatDelegate.setDefaultNightMode(previousNightMode);
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
+                    AppCompatDelegate.setDefaultNightMode(previousNightMode));
         }
     }
 }
