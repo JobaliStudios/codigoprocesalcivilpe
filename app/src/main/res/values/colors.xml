@@ -16,9 +16,11 @@
     <color name="colorDivider">#33000000</color>
 
     <!-- Bottom navigation: shared brand roles; inherit Day/Night semantic colors. -->
-    <color name="bottom_nav_active_tint">@color/colorPrimary</color>
-    <color name="bottom_nav_inactive_tint">@color/colorOnSurfaceVariant</color>
-    <color name="bottom_nav_indicator_fill">@color/colorPrimaryContainer</color>
+    <color name="bottom_nav_surface">#FFFFFF</color>
+    <color name="bottom_nav_top_divider">#E1CED2</color>
+    <color name="bottom_nav_active_tint">#6B081D</color>
+    <color name="bottom_nav_inactive_tint">#6D6D6D</color>
+    <color name="bottom_nav_indicator_fill">#EDE1E4</color>
 
     <!-- Legacy aliases -->
     <color name="primary_dark">@color/colorPrimary</color>
