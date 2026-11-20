@@ -58,6 +58,10 @@ public final class AppearanceBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle state) {
         super.onViewCreated(view, state);
+        for (int groupId : new int[] {R.id.readerThemeGroup, R.id.readerFontGroup,
+                R.id.readerLineGroup, R.id.readerMarginGroup}) {
+            ReaderAccessibilitySizing.adaptSegmentedGroup(view, groupId);
+        }
         refreshFromPreferences(view);
 
         onSelected(view, R.id.readerThemeGroup, (selected) -> {

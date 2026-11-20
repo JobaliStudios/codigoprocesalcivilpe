@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="reader_large_text_action_min_width">88dp</dimen>
+    <dimen name="reader_large_text_next_min_width">132dp</dimen>
+    <dimen name="reader_large_text_home_action_min_height">112dp</dimen>
+</resources>

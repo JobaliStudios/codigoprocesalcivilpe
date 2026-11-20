@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.jobalistudios.codigoprocesalcivilpe.R;
+import com.jobalistudios.codigoprocesalcivilpe.ReaderAccessibilitySizing;
+import androidx.core.view.ViewCompat;
 import com.jobalistudios.codigoprocesalcivilpe.databinding.FragmentHomeBinding;
 import com.jobalistudios.codigoprocesalcivilpe.home.Codigos.CodigoProcesalCivilMain;
 import com.jobalistudios.codigoprocesalcivilpe.home.Quizzes.QuizzCPCStartScreen;
@@ -41,6 +43,8 @@ public class HomeFragment extends Fragment {
     ) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         stateBuilder = new HomeDashboardStateBuilder(requireContext());
+        ReaderAccessibilitySizing.adaptHomeQuickAccess(binding.getRoot());
+        ViewCompat.setAccessibilityHeading(binding.dailyArticleLabel, true);
         configureActions();
         return binding.getRoot();
     }

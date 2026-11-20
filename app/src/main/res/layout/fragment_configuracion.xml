@@ -31,6 +31,12 @@
                     <TextView style="@style/App.Text.Body.S" android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_xs"
                         android:text="@string/premium_config_app_card_info"/>
+                    <HorizontalScrollView
+                        android:id="@+id/appThemeToggleScroll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true"
+                        android:scrollbars="none">
                     <com.google.android.material.button.MaterialButtonToggleGroup
                         android:id="@+id/appThemeToggle" android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:layout_marginTop="@dimen/space_m"
@@ -52,6 +58,7 @@
                             android:minHeight="@dimen/touch_target_min" android:saveEnabled="false"
                             android:text="@string/reader_theme_dark"/>
                     </com.google.android.material.button.MaterialButtonToggleGroup>
+                    </HorizontalScrollView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView android:id="@+id/card_preferencias"

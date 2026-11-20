@@ -7,6 +7,7 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -27,6 +28,10 @@ public class QuizzNavigationTest {
             onView(withId(R.id.tvQuestion)).check(matches(isDisplayed()));
 
             pressBack();
+            // La pantalla de preguntas pide confirmación: descartar el
+            // borrador antes de regresar a Inicio del cuestionario.
+            onView(withText(R.string.quiz_draft_discard))
+                    .check(matches(isDisplayed())).perform(click());
 
             onView(withId(R.id.btnQuickReview)).check(matches(isDisplayed()));
             onView(withId(R.id.cardQuizAll)).check(matches(isDisplayed()));

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reader_note_existing_description">Editar nota guardada del artículo %1$s</string>
+    <string name="reader_note_new_description">Agregar nota al artículo %1$s</string>
+    <string name="reader_a11y_app_theme_group">Apariencia de la app. Desliza para ver todas las opciones si es necesario.</string>
+    <string name="reader_a11y_reader_theme_row">Tema de lectura: %1$s. Abrir ajustes de lectura</string>
+    <string name="reader_a11y_reader_font_row">Fuente de lectura: %1$s. Abrir ajustes de lectura</string>
+    <string name="reader_a11y_reader_size_row">Tamaño del texto: %1$s. Abrir ajustes de lectura</string>
+</resources>
