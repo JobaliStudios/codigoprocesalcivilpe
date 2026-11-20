@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 
 import org.robolectric.annotation.Config;
@@ -108,6 +110,31 @@ public class MainActivityBottomNavigationTest {
                 bar.getItemActiveIndicatorColor().getColorForState(new int[]{checked}, 0));
         assertEquals(Color.rgb(24, 20, 22),
                 ContextCompat.getColor(activity, R.color.bottom_nav_surface));
+    }
+
+    @Test
+    public void compactHeightTracksSystemFontScaleWithoutMovingSystemInsets() {
+        MainActivity activity = launch();
+        BottomNavigationView bar = activity.findViewById(R.id.nav_view);
+        Resources resources = activity.getResources();
+        int base = resources.getDimensionPixelSize(R.dimen.bottom_nav_min_height);
+        int extra = resources.getDimensionPixelSize(
+                R.dimen.bottom_nav_font_scale_extra_height);
+
+        assertEquals(BottomNavigationSizing.minimumHeightPx(resources), bar.getMinimumHeight());
+        assertEquals(resources.getDimensionPixelSize(
+                        R.dimen.bottom_nav_indicator_label_gap),
+                bar.getActiveIndicatorLabelPadding());
+
+        Configuration standard = new Configuration(resources.getConfiguration());
+        standard.fontScale = 1f;
+        Resources normal = activity.createConfigurationContext(standard).getResources();
+        assertEquals(base, BottomNavigationSizing.minimumHeightPx(normal));
+
+        Configuration large = new Configuration(resources.getConfiguration());
+        large.fontScale = 2f;
+        Resources scaled = activity.createConfigurationContext(large).getResources();
+        assertEquals(base + extra, BottomNavigationSizing.minimumHeightPx(scaled));
     }
 
     @Test
