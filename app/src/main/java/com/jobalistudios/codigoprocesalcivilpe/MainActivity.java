@@ -37,6 +37,9 @@ public class MainActivity extends AppBaseActivity {
         // Presentación únicamente: mantiene los mismos cuatro destinos y NavigationUI.
         binding.navView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
         binding.navView.setItemHorizontalTranslationEnabled(false);
+        // La tipografía sans-serif del prototipo prevalece sobre fuentes de tema/OEM.
+        binding.navView.setItemTextAppearanceInactive(R.style.App_BottomNav_Label_Inactive);
+        binding.navView.setItemTextAppearanceActive(R.style.App_BottomNav_Label_Active);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,

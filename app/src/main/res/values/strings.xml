@@ -683,12 +683,12 @@
     <!-- Short labels are exclusive to the bottom navigation menu. -->
     <string name="bottom_nav_label_search">Buscar</string>
     <string name="bottom_nav_label_settings">Ajustes</string>
-    <string name="title_busqueda">Búsqueda</string>
+    <string name="title_busqueda">Buscar</string>
     <string name="busqueda_search_error_title">No se pudo completar la búsqueda</string>
     <string name="busqueda_search_error_body">Ocurrió un problema al consultar los artículos. Inténtalo nuevamente.</string>
     <string name="busqueda_loading_description">Buscando artículos</string>
     <string name="title_favoritos">Favoritos</string>
-    <string name="title_configuracion">Configuración</string>
+    <string name="title_configuracion">Ajustes</string>
     <string name="config_title">Ajusta la app a tu medida</string>
     <string name="config_subtitle">Personaliza la experiencia y mantén a la mano tus herramientas favoritas.</string>
     <string name="config_icon_notifications">Ícono de notificaciones</string>

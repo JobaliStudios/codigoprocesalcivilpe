@@ -13,6 +13,13 @@
     <color name="colorOutline">#66DCA5B0</color>
     <color name="colorDivider">#33FFFFFF</color>
 
+    <!-- Night equivalents of the prototype bottom bar; other views are unchanged. -->
+    <color name="bottom_nav_surface">#181416</color>
+    <color name="bottom_nav_top_divider">#503B41</color>
+    <color name="bottom_nav_active_tint">#F2A9B7</color>
+    <color name="bottom_nav_inactive_tint">#B8B0B1</color>
+    <color name="bottom_nav_indicator_fill">#443238</color>
+
     <color name="primary_dark">@color/colorPrimary</color>
     <color name="primary_light">@color/colorPrimaryContainer</color>
     <color name="secondary">@color/colorSecondary</color>
