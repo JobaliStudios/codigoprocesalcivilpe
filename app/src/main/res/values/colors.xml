@@ -15,6 +15,11 @@
     <color name="colorOutline">#336B081D</color>
     <color name="colorDivider">#33000000</color>
 
+    <!-- Bottom navigation: shared brand roles; inherit Day/Night semantic colors. -->
+    <color name="bottom_nav_active_tint">@color/colorPrimary</color>
+    <color name="bottom_nav_inactive_tint">@color/colorOnSurfaceVariant</color>
+    <color name="bottom_nav_indicator_fill">@color/colorPrimaryContainer</color>
+
     <!-- Legacy aliases -->
     <color name="primary_dark">@color/colorPrimary</color>
     <color name="primary_light">@color/colorPrimaryContainer</color>
