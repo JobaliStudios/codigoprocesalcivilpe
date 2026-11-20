@@ -32,6 +32,11 @@ public class BottomNavigationThemeInsetsInstrumentedTest {
     @Test
     public void repeatedSystemInsetsApplyOnlyToOuterContentNotToBottomBar() {
         try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            final int[] originalHeight = {0};
+            scenario.onActivity(activity -> {
+                originalHeight[0] = bar(activity).getHeight();
+                assertTrue(originalHeight[0] > 0);
+            });
             // Device nav bar can be the gesture area or classic three-button area.
             for (int bottom : new int[]{24, 48, 24, 0, 48}) {
                 scenario.onActivity(activity -> {
@@ -46,6 +51,10 @@ public class BottomNavigationThemeInsetsInstrumentedTest {
                     assertEquals("Bottom nav must not duplicate the inset", 0,
                             bar(activity).getPaddingBottom());
                 });
+                InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+                scenario.onActivity(activity -> assertEquals(
+                        "Bottom nav height changed when system bar inset changed",
+                        originalHeight[0], bar(activity).getHeight()));
             }
         }
     }
