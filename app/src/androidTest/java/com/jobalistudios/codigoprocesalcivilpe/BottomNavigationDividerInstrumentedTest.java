@@ -42,7 +42,11 @@ public class BottomNavigationDividerInstrumentedTest {
                     assertNotNull(bar);
                     assertEquals("No duplicate navigation inset", 0, bar.getPaddingBottom());
 
-                    int thickness = activity.getResources().getDimensionPixelSize(
+                    // A LayerDrawable's android:top inset is parsed with pixel-offset
+                    // truncation, not the rounded pixel-size used for view dimensions.
+                    // At fractional densities (e.g. 2.75 px/dp), 1dp is 2 physical
+                    // pixels here, while getDimensionPixelSize would wrongly expect 3.
+                    int thickness = activity.getResources().getDimensionPixelOffset(
                             R.dimen.bottom_nav_divider_height);
                     assertTrue("A 1dp divider must occupy at least one physical pixel", thickness >= 1);
 
