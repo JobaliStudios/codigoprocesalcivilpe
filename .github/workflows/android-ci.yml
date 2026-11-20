@@ -188,7 +188,7 @@ jobs:
 
   release-device-regression:
     name: Regresión instrumentada (emulador)
-    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'release/') || startsWith(github.head_ref, 'maintenance/fase4-') || startsWith(github.head_ref, 'feat/fase6-lector-premium-m5-'))
+    if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'release/') || startsWith(github.head_ref, 'maintenance/fase4-') || startsWith(github.head_ref, 'feat/fase6-lector-premium-m5-') || startsWith(github.head_ref, 'fix/bottom-nav-icon-label-spacing-'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
