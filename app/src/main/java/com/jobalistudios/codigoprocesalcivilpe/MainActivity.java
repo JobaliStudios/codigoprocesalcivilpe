@@ -7,6 +7,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.navigation.NavigationBarView;
+
 import com.jobalistudios.codigoprocesalcivilpe.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppBaseActivity {
@@ -31,6 +33,10 @@ public class MainActivity extends AppBaseActivity {
 
     private void setupNavigation() {
         setSupportActionBar(binding.toolbar);
+
+        // Presentación únicamente: mantiene los mismos cuatro destinos y NavigationUI.
+        binding.navView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
+        binding.navView.setItemHorizontalTranslationEnabled(false);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,
