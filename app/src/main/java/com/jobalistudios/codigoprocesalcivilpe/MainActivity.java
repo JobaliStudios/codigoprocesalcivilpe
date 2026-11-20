@@ -44,6 +44,9 @@ public class MainActivity extends AppBaseActivity {
         // No altera el manejo de insets ni el area tactil de los cuatro destinos.
         binding.navView.setMinimumHeight(
                 BottomNavigationSizing.minimumHeightPx(getResources()));
+        // SystemBarInsets ya protege el contenedor; evita el inset duplicado
+        // aplicado por defecto dentro de Material BottomNavigationView.
+        BottomNavigationInsets.keepBarPaddingStable(binding.navView);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,
