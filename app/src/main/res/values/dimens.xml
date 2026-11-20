@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Material3 bottom navigation. System bar inset is handled by SystemBarInsets. -->
-    <dimen name="bottom_nav_min_height">60dp</dimen>
+    <dimen name="bottom_nav_min_height">74dp</dimen>
     <dimen name="bottom_nav_icon_size">24dp</dimen>
     <dimen name="bottom_nav_indicator_width">56dp</dimen>
     <dimen name="bottom_nav_indicator_height">32dp</dimen>
@@ -12,6 +12,8 @@
     <dimen name="bottom_nav_item_padding_bottom">4dp</dimen>
     <dimen name="bottom_nav_label_size">12sp</dimen>
     <dimen name="bottom_nav_indicator_label_gap">2dp</dimen>
+    <!-- Visual spacing after centering icon+label as a group, not Material's top/bottom anchors. -->
+    <dimen name="bottom_nav_visual_gap">4dp</dimen>
     <dimen name="bottom_nav_font_scale_extra_height">16dp</dimen>
 
     <!-- Typography tokens -->
