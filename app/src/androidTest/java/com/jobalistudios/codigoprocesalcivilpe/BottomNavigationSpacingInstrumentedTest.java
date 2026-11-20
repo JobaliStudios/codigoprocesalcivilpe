@@ -47,8 +47,8 @@ public class BottomNavigationSpacingInstrumentedTest {
                     assertNotNull(icon);
                     assertNotNull(labels);
 
-                    // Both children use the same FrameLayout parent/item coordinate space.
-                    int spacing = labels.getTop() - icon.getBottom();
+                    // Use visual Y, including the prototype's translationY centering.
+                    float spacing = labels.getY() - (icon.getY() + icon.getHeight());
                     assertTrue("Icon/label overlap in tab " + i + ": " + spacing + " px",
                             spacing >= 0);
                     assertTrue("Excessive icon/label gap in tab " + i + ": "
