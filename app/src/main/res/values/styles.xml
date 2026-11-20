@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Material 1.12 configures its capsule via an indicator style, not layout attributes. -->
+    <style name="App.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:width">@dimen/bottom_nav_indicator_width</item>
+        <item name="android:height">@dimen/bottom_nav_indicator_height</item>
+        <item name="android:color">@color/bottom_nav_indicator_colors</item>
+    </style>
+
+    <!-- One centered line for every destination; checked color is supplied by the selector. -->
+    <style name="App.BottomNav.Label.Inactive" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/bottom_nav_label_size</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="App.BottomNav.Label.Active" parent="App.BottomNav.Label.Inactive">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="App.Text.Title.L" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">@dimen/text_title_l</item>
         <item name="android:lineHeight">@dimen/line_height_title</item>
