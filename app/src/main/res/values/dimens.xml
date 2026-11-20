@@ -10,7 +10,7 @@
     <dimen name="bottom_nav_indicator_height">32dp</dimen>
     <dimen name="bottom_nav_item_padding_top">4dp</dimen>
     <dimen name="bottom_nav_item_padding_bottom">4dp</dimen>
-    <dimen name="bottom_nav_label_size">11sp</dimen>
+    <dimen name="bottom_nav_label_size">12sp</dimen>
 
     <!-- Typography tokens -->
     <dimen name="text_title_l">24sp</dimen>
