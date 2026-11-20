@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/bottom_nav_home_icon"
+        android:icon="@drawable/bottom_nav_house_prototype_24"
         android:title="@string/title_home" />
 
     <item
@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_configuracion"
-        android:icon="@drawable/baseline_settings_24"
+        android:icon="@drawable/bottom_nav_sliders_prototype_24"
         android:title="@string/bottom_nav_label_settings" />
 
 </menu>
