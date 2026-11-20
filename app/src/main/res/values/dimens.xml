@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Material3 bottom navigation. System bar inset is handled by SystemBarInsets. -->
+    <dimen name="bottom_nav_divider_height">2dp</dimen>
     <dimen name="bottom_nav_min_height">74dp</dimen>
     <dimen name="bottom_nav_icon_size">24dp</dimen>
     <dimen name="bottom_nav_indicator_width">56dp</dimen>
